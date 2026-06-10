@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "nanobanana": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/home/user/levi/node_modules/@justmpm/nanobanana/dist/index.js"
+      ],
+      "env": {
+        "GEMINI_API_KEY": "PLACEHOLDER"
+      }
+    }
+  }
+}
