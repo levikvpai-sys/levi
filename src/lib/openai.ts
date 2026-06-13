@@ -1,8 +1,22 @@
 import OpenAI from "openai";
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  organization: process.env.OPENAI_ORG_ID,
+let _client: OpenAI | null = null;
+
+function getClient(): OpenAI {
+  if (!_client) {
+    _client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+      organization: process.env.OPENAI_ORG_ID,
+    });
+  }
+  return _client;
+}
+
+export const openai = new Proxy({} as OpenAI, {
+  get(_target, prop) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (getClient() as any)[prop];
+  },
 });
 
 export const DEFAULT_MODEL = "gpt-4o";
