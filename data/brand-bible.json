@@ -1,0 +1,159 @@
+{
+  "brand_name": "HIPPO FLOAT",
+  "brand_voice": "Confident, aspirational, sun-soaked luxury — the brand speaks like a premium lifestyle magazine come to life",
+  "brand_tier": "premium luxury beach lifestyle",
+  "brand_statement": "HIPPO FLOAT exists at the intersection of effortless luxury and the perfect summer day. We don't sell floats — we sell the feeling of having arrived.",
+  "brand_promise": "Every float is a first-class seat in the most beautiful place on earth",
+  "target_audience": {
+    "primary": {
+      "segment": "Luxury Lifestyle Enthusiasts",
+      "age_range": "25-45",
+      "gender": "All, slight female skew",
+      "income": "$100k+ household",
+      "psychographics": [
+        "Travels to Ibiza, Mykonos, Tulum, Bali",
+        "Stays at 5-star resorts",
+        "Documents life aesthetically on Instagram",
+        "Values quality over quantity",
+        "Aspires to effortless elegance"
+      ],
+      "platforms": ["Instagram", "TikTok", "Pinterest"]
+    },
+    "secondary": {
+      "segment": "Beach & Pool Culture",
+      "age_range": "20-35",
+      "psychographics": [
+        "Poolside is their office",
+        "Beach club regulars",
+        "Content creators",
+        "Aesthetic-first buyers"
+      ],
+      "platforms": ["TikTok", "Instagram Reels"]
+    }
+  },
+  "tone_keywords": [
+    "effortless luxury",
+    "sun-soaked",
+    "aspirational",
+    "premium",
+    "cinematic",
+    "editorial",
+    "Mediterranean",
+    "Riviera",
+    "golden hour",
+    "elevated",
+    "timeless",
+    "iconic"
+  ],
+  "forbidden_tone": [
+    "cheap",
+    "discount",
+    "generic",
+    "AI-looking",
+    "cartoon",
+    "plastic-looking",
+    "budget",
+    "sale",
+    "affordable",
+    "kids toy",
+    "inflatable toy",
+    "basic"
+  ],
+  "color_palette": {
+    "primary": "#0A1628",
+    "primary_name": "Deep Navy",
+    "secondary": "#FFFFFF",
+    "secondary_name": "Pure White",
+    "accent": "#C9A84C",
+    "accent_name": "Champagne Gold",
+    "ocean": "#1B6CA8",
+    "ocean_name": "Mediterranean Blue",
+    "sand": "#F5E6C8",
+    "sand_name": "Golden Sand",
+    "coral": "#E8816A",
+    "coral_name": "Sunset Coral",
+    "neutral_dark": "#1A1A2E",
+    "neutral_light": "#F8F9FA"
+  },
+  "typography_style": {
+    "headline": "Bold serif or high-contrast sans — think Vogue, not startup",
+    "body": "Clean, airy — generous line height, confident spacing",
+    "accent": "Italic serif for emotional moments",
+    "hierarchy": "Headlines dominate, body whispers, product name anchors"
+  },
+  "photography_style": {
+    "lighting": "Golden hour magic — warm, directional, cinematic. Never flat, never harsh flash",
+    "composition": "Rule of thirds, negative space, leading lines toward the float",
+    "models": "Sun-kissed, effortlessly glamorous — looks like they live there, not posing",
+    "environment": "Crystal-clear water required — teal, turquoise, Mediterranean blue",
+    "mood": "You're supposed to be there right now — immediate aspiration, zero friction",
+    "color_grade": "Warm highlights, cool midtones, rich shadows — editorial not Instagram filter",
+    "skin_tones": "Sun-kissed, glowing, diverse but unified by lifestyle",
+    "wardrobe": "Minimal luxury — designer swimwear, no logos competing with HIPPO FLOAT"
+  },
+  "video_style": {
+    "pacing": "Slow reveal builds to confident cut — Mediterranean rhythm",
+    "cuts": "Motivated cuts on music, never random",
+    "music_mood": "Deep house, ambient electronic, or cinematic orchestral — never pop",
+    "camera_movement": "Smooth drone, slow push-in, gentle pan — always intentional",
+    "edit_style": "Premium commercial — every frame could be a print ad",
+    "duration": {
+      "tiktok": "7-15 seconds hook + 15-30 seconds total",
+      "instagram_reel": "15-30 seconds",
+      "instagram_story": "10-15 seconds",
+      "youtube": "30-90 seconds",
+      "brand_film": "60-180 seconds"
+    }
+  },
+  "approved_environments": [
+    "Infinity pool at luxury resort (Bali, Mykonos, Santorini)",
+    "Mediterranean sea — crystal clear turquoise water",
+    "Private villa pool — white stone, minimal architecture",
+    "Maldives — overwater bungalow setting",
+    "Ibiza beach club — golden hour",
+    "Miami Beach — Art Deco luxury hotel pool",
+    "French Riviera — Cap d'Antibes style",
+    "Tulum — cenote or infinity pool with jungle",
+    "Amalfi Coast — cliffside pool"
+  ],
+  "brand_copywriting": {
+    "hero_lines": [
+      "Float Like Royalty",
+      "Your throne awaits",
+      "This is what summer feels like",
+      "Effortless. Luxury. Float.",
+      "The ocean is your living room",
+      "Float into your best life"
+    ],
+    "product_descriptors": [
+      "The Float",
+      "Your personal float sanctuary",
+      "Luxury reimagined at water level",
+      "Where luxury meets the water"
+    ],
+    "call_to_action": [
+      "Shop the Float",
+      "Claim your float",
+      "Float season starts now",
+      "Reserve yours"
+    ]
+  },
+  "social_media_guidelines": {
+    "instagram": {
+      "caption_style": "1-2 sentences max on first line, then line breaks, emojis sparingly and only premium ones (🌊 ☀️ 💛 🤍)",
+      "hashtag_strategy": "5-10 targeted hashtags in comment or below fold",
+      "posting_frequency": "4-5x per week",
+      "story_frequency": "Daily"
+    },
+    "tiktok": {
+      "caption_style": "Hook in first 3 words, conversational, trend-aware but premium",
+      "hashtag_strategy": "3-5 relevant hashtags max",
+      "posting_frequency": "1x daily minimum"
+    }
+  },
+  "language_support": {
+    "primary": "English",
+    "secondary": "Hebrew (עברית)",
+    "note": "Product targets global luxury market with strong Israeli customer base"
+  }
+}

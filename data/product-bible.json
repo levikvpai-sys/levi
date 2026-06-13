@@ -1,0 +1,174 @@
+{
+  "brand": "hippo float",
+  "brand_logo_note": "Logo written lowercase: 'hippo float' — the second 'o' in 'hippo' has a distinctive wave/line through it",
+  "collection": "Summer Collection 2026",
+  "retailer": "Walgreens (Flash Sales)",
+  "main_tagline": "STAY WHERE YOU FLOAT",
+
+  "anchor_system": {
+    "name": "2-in-1 Carry Bag & Anchor",
+    "description": "Every Hippo Float product includes a waterproof dry bag that doubles as an anchor when filled with water or sand underwater",
+    "components": {
+      "dry_bag": "Waterproof bag — matches float color (or green for CHILL). Serves as anchor weight underwater",
+      "rope": "Royal blue twisted nylon rope connecting float to anchor bag",
+      "buoy": "Small bright yellow sphere marker — floats at water surface level on the rope",
+      "carabiner": "Metal clip for secure attachment between rope and float/bag"
+    },
+    "mechanics": "Rope runs: float → down through water → yellow buoy (at surface) → continues down → anchor bag (fully submerged underwater)",
+    "strict_rules": [
+      "Anchor bag ALWAYS appears UNDERWATER — never above water surface",
+      "Yellow buoy ALWAYS visible at or near water surface on the rope",
+      "Blue rope ALWAYS visibly connecting float to anchor system",
+      "Rope must appear taut or naturally slack but ALWAYS CONNECTED",
+      "Anchor bag must show 'hippo' logo text",
+      "Never show anchor bag floating on surface",
+      "Never show rope disconnected from float or bag",
+      "Never remove yellow buoy from composition",
+      "Carabiner clips visible at connection points"
+    ]
+  },
+
+  "products": {
+    "JOY": {
+      "full_name": "hippo float Joy",
+      "style_code": "HFJOY",
+      "shape": "Luxury recliner / lounger — reclined backrest with elevated headrest, ergonomic pool chair shape, semi-reclined at approximately 30-40 degree angle",
+      "shape_description": "Like a premium inflatable pool chair/chaise lounge. Has a distinct backrest that reclines, giving it an L-shape or chaise lounge profile when viewed from the side",
+      "colors": [
+        {"name": "pink", "hex": "#FF69B4", "sku": "850077236112"},
+        {"name": "blue", "hex": "#4FC3F7", "sku": "850077236129"},
+        {"name": "flower print orange", "hex": "#FF8C00", "pattern": "orange with floral/flower pattern", "sku": "850077236143"},
+        {"name": "citrus print green", "hex": "#7FBA00", "pattern": "green with citrus/lemon pattern", "sku": "850077236136"}
+      ],
+      "pricing": {
+        "unit_cost": 19.99,
+        "retail": 39.99,
+        "msrp": 89.99,
+        "margin": "50.6%",
+        "case_qty": 10
+      },
+      "taglines": [
+        "Float Your Way to Paradise",
+        "Effortless comfort. Endless escape.",
+        "Designed to Indulge",
+        "Built to Stay",
+        "Escape Beautifully"
+      ],
+      "campaign_keywords": ["luxury lounger", "paradise", "effortless", "comfort", "drift-free recliner"]
+    },
+
+    "CHILL": {
+      "full_name": "hippo float Chill",
+      "style_code": "HFCHILL",
+      "shape": "U-shaped horseshoe ring float — you sit IN the center hole with legs dangling through, arms resting on the ring sides",
+      "shape_description": "Like a life preserver ring but U-shaped/open at front. Has a mesh or fabric sling/seat in the center where you sit. The ring wraps around your back and sides while you face outward",
+      "colors": [
+        {"name": "pink", "hex": "#FF69B4", "sku": "850077263037"},
+        {"name": "orange", "hex": "#FF6600", "sku": "850077263013"},
+        {"name": "blue", "hex": "#4FC3F7", "sku": "850077263020"},
+        {"name": "flower print orange", "hex": "#FF8C00", "pattern": "orange with floral pattern", "sku": "850077263044"},
+        {"name": "citrus print green", "hex": "#7FBA00", "pattern": "green with citrus pattern", "sku": "850077263051"}
+      ],
+      "anchor_bag_color": "green (regardless of float color)",
+      "pricing": {
+        "unit_cost": 14.99,
+        "retail": 29.99,
+        "msrp": 69.99,
+        "margin": "50%",
+        "case_qty": 10
+      },
+      "taglines": [
+        "Designed to Lounge. Built to Stay Put.",
+        "Float The Party. Lose The Drift.",
+        "Float Together. Stay in Place.",
+        "Stay Anchored. Stay Social.",
+        "Max Energy Zero Drift"
+      ],
+      "features": ["Stay Anchored", "Stay Social", "Max Energy Zero Drift", "Portable Everywhere"],
+      "campaign_keywords": ["social float", "ring float", "stay anchored", "party float", "zero drift"]
+    },
+
+    "FUN": {
+      "full_name": "hippo float Fun",
+      "style_code": "HFFUN",
+      "shape": "Large elongated cylindrical tube — like an oversized pool noodle but much thicker and with oval cross-section. Torpedo/log shaped",
+      "shape_description": "A long oval-cylinder inflatable. You can straddle it like a log, lie across it, or hug it while floating. Think of a very large, thick pool noodle with oval cross-section",
+      "colors": [
+        {"name": "pink", "hex": "#FF69B4", "sku": "850077263150"},
+        {"name": "blue", "hex": "#4FC3F7", "sku": "850077263167"},
+        {"name": "green", "hex": "#7FBA00", "sku": "850077263174"},
+        {"name": "flower print orange", "hex": "#FF8C00", "pattern": "orange with floral pattern", "sku": "850077263181"}
+      ],
+      "pricing": {
+        "unit_cost": 12.50,
+        "retail": 24.99,
+        "msrp": 49.99,
+        "margin": "50%",
+        "case_qty": 20
+      },
+      "taglines": [
+        "Float Together. Stay in Place.",
+        "HAVE SOME FUN",
+        "Float The Party. Lose The Drift."
+      ],
+      "campaign_keywords": ["fun float", "torpedo float", "pool noodle premium", "social", "colorful", "carry bag"]
+    },
+
+    "VIBES": {
+      "full_name": "hippo float Vibes",
+      "style_code": "HFVIBES",
+      "shape": "Flat rectangular mat/raft with circular texture drainage holes across the top surface",
+      "shape_description": "A wide flat inflatable mat — like a premium pool lilo/air mattress but with distinctive circular holes/texture dots covering the entire top surface. Very flat and rectangular, you lie flat on top of it",
+      "colors": [
+        {"name": "pink", "hex": "#FF69B4", "sku": "850077263068"},
+        {"name": "orange", "hex": "#FF6600", "sku": "850077263082"},
+        {"name": "flower print orange", "hex": "#FF8C00", "pattern": "orange with floral pattern", "sku": "850077263099"},
+        {"name": "blue", "hex": "#4FC3F7", "sku": "850077263075"},
+        {"name": "citrus print green", "hex": "#7FBA00", "pattern": "green with citrus pattern", "sku": "850077263105"}
+      ],
+      "pricing": {
+        "unit_cost": 14.99,
+        "retail": 29.99,
+        "msrp": 69.99,
+        "margin": "51.7%",
+        "case_qty": 10
+      },
+      "taglines": [
+        "Summer in Full Bloom",
+        "Bold color. Pure comfort.",
+        "Stay Where You Float"
+      ],
+      "campaign_keywords": ["pool mat", "flat float", "vibrant", "summer vibes", "bold color", "comfort"]
+    }
+  },
+
+  "universal_visual_rules": {
+    "logo": "'hippo' text always visible on float surface in contrasting color (white on colored floats)",
+    "logo_note": "Do not alter the logo — the distinctive wave in the 'o' must be preserved",
+    "forbidden_changes": [
+      "Do NOT change any float's shape or silhouette",
+      "Do NOT mix up shapes between product lines (JOY ≠ CHILL ≠ FUN ≠ VIBES)",
+      "Do NOT alter 'hippo' logo",
+      "Do NOT change rope color from blue",
+      "Do NOT change buoy color from yellow",
+      "Do NOT remove the anchor system when float is in water",
+      "Do NOT show anchor bag above water line",
+      "Do NOT show rope disconnected",
+      "Do NOT invent accessories not on real product",
+      "Do NOT change product colors without authorization"
+    ]
+  },
+
+  "photography_requirements": {
+    "signature_shot": "Half-underwater split shot — showing float on surface with people/person, and anchor bag visible below water line with rope and yellow buoy",
+    "environments": [
+      "Crystal clear tropical beach water (turquoise/cyan)",
+      "Luxury swimming pool (turquoise water, white/stone surrounds)",
+      "Tropical lagoon with rock formations",
+      "White sand beach shoreline"
+    ],
+    "models": "Attractive diverse individuals and couples, beach-ready, relaxed and joyful",
+    "lighting": "Natural golden/bright sunlight, no dark or moody lighting",
+    "mood": "Fun luxury, social, aspirational, sun-soaked joy"
+  }
+}
