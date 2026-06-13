@@ -74,6 +74,7 @@ export default function NewCampaignPage() {
   const [generating, setGenerating] = useState(false);
   const [currentAgentStep, setCurrentAgentStep] = useState(0);
   const [done, setDone] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const totalSteps = 4;
   const progress = (step / totalSteps) * 100;
@@ -96,16 +97,63 @@ export default function NewCampaignPage() {
 
   const handleGenerate = async () => {
     setGenerating(true);
+    setApiError(null);
     setCurrentAgentStep(0);
 
-    for (let i = 0; i < AGENT_STEPS.length; i++) {
-      setCurrentAgentStep(i);
-      await new Promise((r) => setTimeout(r, 1200 + Math.random() * 800));
+    const response = await fetch("/api/campaign/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: form.name,
+        product: `hippo float ${form.product}`,
+        productColor: form.color || undefined,
+        platforms: form.platforms,
+        style: form.style,
+        objective: form.objective,
+        keyMessage: form.keyMessage || undefined,
+      }),
+    });
+
+    const json = await response.json();
+
+    if (!response.ok || !json.success) {
+      setApiError(json.error ?? "Campaign generation failed. Check your OPENAI_API_KEY.");
+      setGenerating(false);
+      return;
+    }
+
+    const result = json.data;
+    // Advance step indicators based on what succeeded
+    const completedSteps = [
+      result.validation?.product_guardian != null,
+      result.validation?.brand_director != null,
+      (result.scripts?.length ?? 0) > 0,
+      (result.prompts?.length ?? 0) > 0,
+      result.captions != null,
+      (result.qa_reports?.length ?? 0) > 0,
+    ];
+    for (let i = 0; i < completedSteps.length; i++) {
+      if (completedSteps[i]) setCurrentAgentStep(i + 1);
     }
 
     setGenerating(false);
     setDone(true);
   };
+
+  if (apiError) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <div className="max-w-lg w-full space-y-4 text-center">
+          <p className="text-4xl">⚠️</p>
+          <h2 className="text-xl font-bold">Generation Failed</h2>
+          <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg p-4">{apiError}</p>
+          <button onClick={() => setApiError(null)} className="text-sm text-sky-400 hover:underline">
+            ← Try again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (generating || done) {
     return (

@@ -1,5 +1,5 @@
 import { generateCompletion, generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
-import { PRODUCT_RULES_TEXT } from "@/brand/product-bible";
+import { PRODUCT_RULES_TEXT, PRODUCT_SHAPES_REFERENCE, ANCHOR_SYSTEM_RULES_TEXT, getPromptShapeText } from "@/brand/product-bible";
 import { BRAND_VOICE_TEXT } from "@/brand/brand-bible";
 import { UNIVERSAL_NEGATIVE_PROMPT, promptEngine } from "@/brand/prompt-templates";
 import type { Script } from "./script-studio";
@@ -40,21 +40,18 @@ ${PRODUCT_RULES_TEXT}
 ${BRAND_VOICE_TEXT}
 
 ## THE 4 HIPPO FLOAT PRODUCTS — EXACT SHAPE DESCRIPTIONS FOR PROMPTS:
+${PRODUCT_SHAPES_REFERENCE}
 
-### JOY — Use exactly:
-"hippo float Joy luxury inflatable pool lounger recliner — semi-reclined chaise lounge shape with elevated backrest and headrest, [COLOR] colored with 'hippo' logo"
-
-### CHILL — Use exactly:
-"hippo float Chill U-shaped horseshoe ring float — [COLOR] inflatable ring with open center, person sits in center opening with arms resting on the ring, 'hippo' logo on ring surface"
-
-### FUN — Use exactly:
-"hippo float Fun large inflatable cylinder torpedo tube — [COLOR] elongated oval inflatable, person straddling or hugging it, 'hippo' logo visible"
-
-### VIBES — Use exactly:
-"hippo float Vibes flat rectangular inflatable mat — [COLOR] wide flat float with circular texture drainage holes across entire surface, person lying flat on top, 'hippo' logo at top"
+### EXACT PROMPT SHAPE TEXT PER PRODUCT (use verbatim, replace [COLOR]):
+- JOY: "hippo float Joy luxury inflatable pool recliner/lounger — semi-reclined chaise lounge shape with elevated backrest and headrest, approximately 30-40 degree reclined angle, [COLOR] colored, 'hippo' logo visible on surface"
+- CHILL: "hippo float Chill U-shaped horseshoe ring float — [COLOR] inflatable U/horseshoe ring shape, person sitting in center opening with arms resting on both sides of the ring, legs dangling through, 'hippo' logo on ring surface, GREEN anchor bag underwater"
+- FUN: "hippo float Fun large inflatable cylindrical torpedo tube — [COLOR] elongated oval cylinder shape like a giant premium pool noodle, person straddling it or leaning on it, 'hippo' logo visible on side"
+- VIBES: "hippo float Vibes flat rectangular inflatable mat — [COLOR] wide flat float with distinctive circular drainage holes/texture dots covering entire top surface, person lying flat on top, 'hippo' logo at top of mat"
 
 ## ANCHOR SYSTEM — ALWAYS INCLUDE WHEN IN WATER:
-"blue twisted nylon rope connected from float going underwater, small bright yellow buoy sphere at water surface level on rope, hippo float waterproof dry bag anchor fully submerged underwater hanging below float, rope visibly taut"
+${ANCHOR_SYSTEM_RULES_TEXT}
+
+In prompts use: "blue twisted nylon rope connected from float going underwater, small bright yellow buoy sphere at water surface level on rope, hippo float waterproof dry bag anchor fully submerged underwater hanging below float, rope visibly taut"
 
 ## CAMERA LANGUAGE TOOLKIT:
 - Wide establishing: "cinematic wide shot, 24mm lens, horizon line composition"

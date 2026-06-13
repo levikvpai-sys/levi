@@ -1,5 +1,5 @@
 import { generateCompletion, generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
-import { PRODUCT_RULES_TEXT } from "@/brand/product-bible";
+import { PRODUCT_RULES_TEXT, PRODUCT_SHAPES_REFERENCE, ANCHOR_SYSTEM_RULES_TEXT } from "@/brand/product-bible";
 
 export interface ProductValidationResult {
   passed: boolean;
@@ -17,60 +17,32 @@ Your ONLY job is to protect the accuracy and integrity of Hippo Float products i
 
 ${PRODUCT_RULES_TEXT}
 
-## THE 4 HIPPO FLOAT PRODUCT LINES:
-
-### 1. HIPPO FLOAT JOY (HFJOY) — Luxury Recliner/Lounger
-- Shape: Semi-reclined pool chair/chaise lounge with elevated backrest and headrest
-- NOT a flat mat, NOT a ring — it has a distinct L/chaise shape
-- Colors: Pink, Blue, Flower Print Orange, Citrus Print Green
-- MSRP $89.99
-
-### 2. HIPPO FLOAT CHILL (HFCHILL) — U-Shape Ring Float
-- Shape: U-shaped horseshoe ring — person sits IN the center hole, legs dangling
-- Has mesh/fabric seat in center opening
-- Colors: Pink, Orange, Blue, Flower Print Orange, Citrus Print Green
-- Anchor bag is always GREEN regardless of float color
-- MSRP $69.99
-
-### 3. HIPPO FLOAT FUN (HFFUN) — Cylindrical Torpedo Tube
-- Shape: Large elongated oval cylinder — like a giant premium pool noodle
-- You straddle or hug it, not lie flat on it
-- Colors: Pink, Blue, Green, Flower Print Orange
-- MSRP $49.99
-
-### 4. HIPPO FLOAT VIBES (HFVIBES) — Flat Mat with Texture
-- Shape: Wide flat rectangular mat with circular drainage holes/texture dots across surface
-- You lie FLAT on top — it's a mat, not a chair or ring
-- Colors: Pink, Orange, Flower Print Orange, Blue, Citrus Print Green
-- MSRP $69.99
-
-## UNIVERSAL ANCHOR SYSTEM (ALL PRODUCTS):
-- 2-in-1 Carry Bag & Anchor — waterproof dry bag fills with water/sand = anchor weight
-- Blue twisted nylon rope connects float to anchor bag
-- Small bright yellow buoy sphere marks rope at water surface
-- Carabiner clips at connection points
-- Anchor bag ALWAYS underwater — NEVER on surface
-- Yellow buoy ALWAYS at water surface level on the rope
-
 ## YOUR VALIDATION CHECKLIST:
 For every creative brief or prompt, check:
-1. Is the product shape described correctly for the specific product line?
-2. Is the anchor system correctly depicted (bag underwater, rope visible, yellow buoy present)?
-3. Are the colors accurate and not changed?
-4. Is the 'hippo' logo preserved?
-5. Are there any invented accessories or modifications?
-6. Is the product mixed up with another product line?
-7. Are physical connections physically possible and accurate?
+1. Is the correct product LINE specified (Joy/Chill/Fun/Vibes)?
+2. Is the product SHAPE described correctly for the specific line?
+   - Joy = reclined chaise lounge (NOT flat, NOT ring)
+   - Chill = U-shaped horseshoe ring (person sits IN center hole)
+   - Fun = elongated cylinder tube (straddle/hug it)
+   - Vibes = flat rectangular mat with circular texture holes
+3. Is the anchor system correctly depicted?
+   - Bag UNDERWATER (never on surface)
+   - Blue rope visible and connected
+   - Yellow buoy at water surface level
+4. Are the colors accurate and from the approved list for that product line?
+5. Is the 'hippo' logo preserved exactly?
+6. Are there any invented accessories not on the real product?
+7. For Chill: is the anchor bag correctly GREEN (not matching float color)?
+8. Are physical rope connections physically possible?
 
-## OUTPUT FORMAT:
-Always respond with a JSON object:
+## OUTPUT FORMAT — STRICT JSON:
 {
   "passed": boolean,
-  "score": 1-10,
-  "violations": ["list of rule violations"],
-  "warnings": ["list of potential issues"],
-  "corrections": ["specific corrections to apply"],
-  "approved_concept": "corrected version of the concept if fixable"
+  "score": number (1-10),
+  "violations": ["exact description of each rule violation"],
+  "warnings": ["potential issues that should be watched"],
+  "corrections": ["specific text corrections to apply"],
+  "approved_concept": "corrected version of the concept if fixable, null if not"
 }`,
 ]);
 

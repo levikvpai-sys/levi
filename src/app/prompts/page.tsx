@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import type { ShotPrompt } from "@/agents/prompt-director";
 
 const PRODUCTS = [
   { id: "JOY", label: "Joy", shape: "Luxury Lounger", emoji: "🛋️" },
@@ -28,77 +29,72 @@ const STYLES = [
   { id: "LIFESTYLE_BEACH", label: "Lifestyle Beach", emoji: "🏖️" },
 ];
 
-const SHOT_TYPES = [
-  { id: "underwater_split", label: "Underwater Split Shot", emoji: "🌊", desc: "Signature shot — above and below water" },
-  { id: "aerial_45", label: "Aerial 45°", emoji: "🚁", desc: "Drone overhead lifestyle shot" },
-  { id: "lifestyle_medium", label: "Lifestyle Medium", emoji: "👤", desc: "Person enjoying the float" },
-  { id: "product_hero", label: "Product Hero", emoji: "⭐", desc: "Clean product shot no people" },
-  { id: "close_detail", label: "Close Detail", emoji: "🔍", desc: "Anchor system / logo detail" },
-  { id: "social_tiktok", label: "Social / TikTok", emoji: "📱", desc: "9:16 vertical, hook composition" },
-];
-
-const MOCK_PROMPTS = [
-  {
-    shot_number: 1,
-    shot_name: "Signature Underwater Split",
-    full_prompt: "Cinematic luxury lifestyle shot, DRAMATIC UNDERWATER SPLIT SHOT — waterline bisects frame exactly in half. ABOVE WATER: attractive female model in white premium swimwear lying back on hippo float Joy luxury inflatable pool lounger recliner (pink, semi-reclined chaise lounge shape with backrest), completely relaxed, sunglasses on, crystal clear turquoise tropical water surrounding the float, palm trees and white sand beach in background, 'hippo' logo clearly visible on float surface. BELOW WATER: blue twisted nylon rope descending from float through perfect turquoise water, small bright yellow buoy sphere at waterline on rope, hippo float waterproof dry bag anchor (pink matching float) fully submerged hanging stationary on sandy bottom, rope taut. Shot on ARRI Alexa Mini LF look, 35mm anamorphic lens, warm golden hour sunlight, premium commercial luxury aesthetic, photorealistic, ultra high resolution, no AI artifacts, exact product geometry preserved.",
-    negative_prompt: "wrong product shape, flat mat instead of lounger, anchor bag above water, floating anchor bag, disconnected rope, missing yellow buoy, altered logo, invented accessories, cartoon style, cheap looking, blurry, low quality, stock photo aesthetic",
-    camera_specs: "ARRI Alexa Mini LF look, 35mm anamorphic lens, 2.39:1",
-    lighting: "Golden hour — warm directional sun, soft wrap, long shadows",
-    motion_notes: "Static or very slow push in — let the water movement do the work",
-    continuity_notes: "Pink product, same model, same golden hour throughout sequence",
-    generation_tool: "midjourney" as const,
-  },
-  {
-    shot_number: 2,
-    shot_name: "Aerial Lifestyle",
-    full_prompt: "Aerial drone shot, 45-degree angle downward, hippo float Joy luxury inflatable pool lounger (pink, reclined chaise shape with backrest and headrest), model in white swimwear lying relaxed on float in crystal clear turquoise water, blue twisted rope visible going underwater, yellow buoy at surface, anchor bag visible below surface, white sand beach visible through water, tropical setting, shot on DJI Inspire 3 look, 24mm wide lens, bright natural tropical sunlight, vivid saturated colors, birds eye luxury lifestyle, photorealistic, product shape exactly preserved — semi-reclined chaise lounge not flat mat.",
-    negative_prompt: "wrong product shape, flat mat, disconnected anchor, missing rope, wrong color, poor composition",
-    camera_specs: "Drone aerial, DJI Inspire 3, 24mm wide",
-    lighting: "Bright natural midday tropical sun",
-    motion_notes: "Slow orbital drone movement",
-    continuity_notes: "Match pink product and model from shot 1",
-    generation_tool: "kling" as const,
-  },
-];
+const TOOL_BADGE: Record<string, string> = {
+  midjourney: "text-violet-400 border-violet-500/30 bg-violet-500/10",
+  dalle3: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+  kling: "text-sky-400 border-sky-500/30 bg-sky-500/10",
+  runway: "text-orange-400 border-orange-500/30 bg-orange-500/10",
+  sora: "text-pink-400 border-pink-500/30 bg-pink-500/10",
+};
 
 export default function PromptsPage() {
   const [product, setProduct] = useState("JOY");
   const [color, setColor] = useState("Pink");
   const [style, setStyle] = useState("CINEMATIC_LUXURY");
-  const [shotType, setShotType] = useState("underwater_split");
   const [concept, setConcept] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [prompts, setPrompts] = useState<typeof MOCK_PROMPTS | null>(null);
-  const [copied, setCopied] = useState<number | null>(null);
+  const [shotPrompt, setShotPrompt] = useState<ShotPrompt | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<"prompt" | "negative" | null>(null);
 
   const handleGenerate = async () => {
+    if (!concept.trim()) return;
     setGenerating(true);
-    await new Promise((r) => setTimeout(r, 2000));
-    setPrompts(MOCK_PROMPTS);
+    setError(null);
+    setShotPrompt(null);
+
+    const response = await fetch("/api/agents/prompt-director", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product: `hippo float ${product.charAt(0) + product.slice(1).toLowerCase()}`,
+        color,
+        concept,
+        style,
+      }),
+    });
+
+    const json = await response.json();
+
+    if (!response.ok || !json.success) {
+      setError(json.error ?? "Failed to generate prompt. Check your OPENAI_API_KEY.");
+      setGenerating(false);
+      return;
+    }
+
+    setShotPrompt(json.data as ShotPrompt);
     setGenerating(false);
   };
 
-  const copyPrompt = (index: number, text: string) => {
+  const copyText = (text: string, key: "prompt" | "negative") => {
     navigator.clipboard.writeText(text);
-    setCopied(index);
+    setCopied(key);
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const TOOL_COLORS: Record<string, string> = {
-    midjourney: "text-violet-400",
-    dalle3: "text-emerald-400",
-    kling: "text-sky-400",
-    runway: "text-orange-400",
-    sora: "text-pink-400",
-  };
+  const selectedProductSpec = PRODUCTS.find((p) => p.id === product);
 
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors text-sm">← Dashboard</Link>
+            <Link
+              href="/"
+              className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+            >
+              ← Dashboard
+            </Link>
             <span className="text-border">/</span>
             <span className="text-sm font-medium">📷 Prompt Studio</span>
           </div>
@@ -109,21 +105,36 @@ export default function PromptsPage() {
       <main className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-          {/* Left: Controls (2/5) */}
+          {/* ── Left: Controls (2/5) ── */}
           <div className="lg:col-span-2 space-y-5">
             <div>
               <h2 className="text-xl font-bold mb-1">Prompt Studio</h2>
-              <p className="text-sm text-muted-foreground">Hollywood-quality AI prompts for any generation tool</p>
+              <p className="text-sm text-muted-foreground">
+                Hollywood-quality AI prompts — enforces all product rules automatically
+              </p>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Product</label>
               <div className="grid grid-cols-2 gap-2">
                 {PRODUCTS.map((p) => (
-                  <button key={p.id} onClick={() => { setProduct(p.id); setColor(COLORS[p.id][0]); }}
-                    className={`p-2 rounded-lg border text-left text-sm transition-all ${product === p.id ? "border-sky-500 bg-sky-500/10" : "border-border"}`}>
-                    <span>{p.emoji}</span> <span className="font-medium">Joy → {p.label}</span>
-                    <p className="text-xs text-muted-foreground mt-0.5">{p.shape}</p>
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      setProduct(p.id);
+                      setColor(COLORS[p.id][0]);
+                    }}
+                    className={`p-3 rounded-lg border text-left transition-all ${
+                      product === p.id
+                        ? "border-sky-500 bg-sky-500/10"
+                        : "border-border hover:border-border/80"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="text-base">{p.emoji}</span>
+                      <span className="font-medium text-sm">{p.label}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{p.shape}</p>
                   </button>
                 ))}
               </div>
@@ -131,10 +142,17 @@ export default function PromptsPage() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Color</label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {COLORS[product]?.map((c) => (
-                  <button key={c} onClick={() => setColor(c)}
-                    className={`px-2.5 py-1 rounded-full text-xs border transition-all ${color === c ? "border-sky-500 bg-sky-500/20 text-sky-400" : "border-border text-muted-foreground"}`}>
+                  <button
+                    key={c}
+                    onClick={() => setColor(c)}
+                    className={`px-2.5 py-1 rounded-full text-xs border transition-all ${
+                      color === c
+                        ? "border-sky-500 bg-sky-500/20 text-sky-400"
+                        : "border-border text-muted-foreground hover:border-border/80"
+                    }`}
+                  >
                     {c}
                   </button>
                 ))}
@@ -145,8 +163,15 @@ export default function PromptsPage() {
               <label className="text-sm font-medium">Style</label>
               <div className="grid grid-cols-2 gap-2">
                 {STYLES.map((s) => (
-                  <button key={s.id} onClick={() => setStyle(s.id)}
-                    className={`flex items-center gap-1.5 p-2 rounded-lg border text-sm transition-all ${style === s.id ? "border-sky-500 bg-sky-500/10 text-sky-400" : "border-border text-muted-foreground"}`}>
+                  <button
+                    key={s.id}
+                    onClick={() => setStyle(s.id)}
+                    className={`flex items-center gap-1.5 p-2.5 rounded-lg border text-sm transition-all ${
+                      style === s.id
+                        ? "border-sky-500 bg-sky-500/10 text-sky-400"
+                        : "border-border text-muted-foreground hover:border-border/80"
+                    }`}
+                  >
                     <span>{s.emoji}</span> {s.label}
                   </button>
                 ))}
@@ -154,48 +179,66 @@ export default function PromptsPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Shot Type</label>
-              <div className="space-y-1.5">
-                {SHOT_TYPES.map((s) => (
-                  <button key={s.id} onClick={() => setShotType(s.id)}
-                    className={`w-full flex items-center gap-2 p-2.5 rounded-lg border text-sm transition-all ${shotType === s.id ? "border-sky-500 bg-sky-500/10" : "border-border"}`}>
-                    <span>{s.emoji}</span>
-                    <div className="text-left">
-                      <p className="font-medium text-xs">{s.label}</p>
-                      <p className="text-xs text-muted-foreground">{s.desc}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Additional context <span className="text-muted-foreground font-normal">(optional)</span></label>
+              <label className="text-sm font-medium">Scene Description</label>
               <Textarea
-                placeholder="e.g. couple on floats, sunset lighting, Mykonos setting, celebratory mood..."
+                placeholder={`Describe the shot. Example: Woman floating on ${selectedProductSpec?.label ?? "Joy"} in crystal clear water at a luxury resort pool, anchor system visible underwater, golden hour light...`}
                 value={concept}
                 onChange={(e) => setConcept(e.target.value)}
-                className="h-20"
+                className="h-28"
               />
             </div>
 
-            <Button className="w-full gap-2" onClick={handleGenerate} disabled={generating}>
+            <Button
+              className="w-full gap-2"
+              onClick={handleGenerate}
+              disabled={generating || !concept.trim()}
+            >
               {generating ? (
-                <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Generating...</>
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Prompt Director building...
+                </>
               ) : (
-                <><span>📷</span> Generate Prompts</>
+                <><span>📷</span> Generate Prompt</>
               )}
             </Button>
+
+            {error && (
+              <div className="p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
+            <Card className="glass-card border-amber-500/20">
+              <CardContent className="p-4">
+                <p className="text-xs text-amber-400 font-medium mb-2">
+                  Product rules enforced automatically:
+                </p>
+                <ul className="space-y-1 text-xs text-muted-foreground">
+                  <li>✓ Correct shape for {selectedProductSpec?.label} ({selectedProductSpec?.shape})</li>
+                  <li>✓ Anchor bag always underwater</li>
+                  <li>✓ Blue rope always visible</li>
+                  <li>✓ Yellow buoy at water surface</li>
+                  <li>✓ hippo logo preserved</li>
+                  <li>✓ {color} color specified</li>
+                  {product === "CHILL" && (
+                    <li className="text-emerald-400">✓ Green anchor bag (Chill rule)</li>
+                  )}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Right: Output (3/5) */}
+          {/* ── Right: Output (3/5) ── */}
           <div className="lg:col-span-3 space-y-4">
-            {!prompts && !generating && (
+            {!shotPrompt && !generating && !error && (
               <div className="h-full flex items-center justify-center border border-dashed border-border/50 rounded-xl min-h-[500px]">
                 <div className="text-center text-muted-foreground">
                   <p className="text-4xl mb-3">📷</p>
-                  <p className="font-medium">Your prompts will appear here</p>
-                  <p className="text-sm mt-1">Configure options and click Generate</p>
+                  <p className="font-medium">Your prompt will appear here</p>
+                  <p className="text-sm mt-1">
+                    Prompt Director enforces all product rules automatically
+                  </p>
                 </div>
               </div>
             )}
@@ -204,63 +247,125 @@ export default function PromptsPage() {
               <div className="h-full flex items-center justify-center min-h-[500px]">
                 <div className="text-center space-y-3">
                   <div className="text-4xl animate-pulse">🎞️</div>
-                  <p className="font-medium">Prompt Director is building your shots...</p>
-                  <p className="text-sm text-muted-foreground">Applying product rules, camera specs, lighting</p>
+                  <p className="font-medium">Prompt Director building your shot...</p>
+                  <p className="text-sm text-muted-foreground">
+                    Applying product shape rules, anchor system, camera specs, lighting
+                  </p>
                 </div>
               </div>
             )}
 
-            {prompts && (
+            {shotPrompt && (
               <div className="space-y-4 animate-fade-in">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold">hippo float {product.charAt(0) + product.slice(1).toLowerCase()} — {color} — {style.replace(/_/g, " ")}</h3>
-                  <Badge variant="success">{prompts.length} shots</Badge>
+                  <h3 className="font-bold">
+                    {shotPrompt.shot_name ?? `Shot ${shotPrompt.shot_number}`}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    {shotPrompt.generation_tool && (
+                      <span
+                        className={`text-xs font-medium px-2 py-0.5 rounded-full border ${
+                          TOOL_BADGE[shotPrompt.generation_tool] ?? "text-muted-foreground"
+                        }`}
+                      >
+                        {shotPrompt.generation_tool}
+                      </span>
+                    )}
+                    <Badge variant="success">Ready</Badge>
+                  </div>
                 </div>
 
-                {prompts.map((shot, i) => (
-                  <Card key={i} className="glass-card">
-                    <CardContent className="p-4 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="default" className="text-xs">Shot {shot.shot_number}</Badge>
-                          <span className="text-sm font-medium">{shot.shot_name}</span>
-                        </div>
-                        <span className={`text-xs font-medium ${TOOL_COLORS[shot.generation_tool]}`}>
-                          {shot.generation_tool}
-                        </span>
-                      </div>
+                {/* Main prompt */}
+                <Card className="glass-card">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
+                        Generation Prompt
+                      </p>
+                      <button
+                        onClick={() => copyText(shotPrompt.full_prompt, "prompt")}
+                        className="text-xs px-3 py-1 rounded bg-sky-500 text-white hover:bg-sky-400 transition-colors"
+                      >
+                        {copied === "prompt" ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                    <p className="text-sm text-foreground/80 leading-relaxed font-mono bg-background/60 rounded-lg p-3">
+                      {shotPrompt.full_prompt}
+                    </p>
+                  </CardContent>
+                </Card>
 
-                      <div className="bg-background/50 rounded-lg p-3 relative group">
-                        <p className="text-xs text-muted-foreground leading-relaxed font-mono">{shot.full_prompt}</p>
+                {/* Negative prompt */}
+                {shotPrompt.negative_prompt && (
+                  <Card className="glass-card border-red-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-xs text-red-400 uppercase tracking-wide font-medium">
+                          Negative Prompt
+                        </p>
                         <button
-                          onClick={() => copyPrompt(i, shot.full_prompt)}
-                          className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-sky-500 text-white text-xs px-2 py-1 rounded"
+                          onClick={() => copyText(shotPrompt.negative_prompt!, "negative")}
+                          className="text-xs px-3 py-1 rounded bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors border border-red-500/30"
                         >
-                          {copied === i ? "Copied!" : "Copy"}
+                          {copied === "negative" ? "Copied!" : "Copy"}
                         </button>
                       </div>
-
-                      <div className="grid grid-cols-3 gap-2 text-xs">
-                        <div>
-                          <p className="text-muted-foreground">Camera</p>
-                          <p className="text-foreground/80">{shot.camera_specs}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground">Lighting</p>
-                          <p className="text-foreground/80">{shot.lighting}</p>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground">Motion</p>
-                          <p className="text-foreground/80">{shot.motion_notes}</p>
-                        </div>
-                      </div>
-
-                      <div className="border-t border-border/50 pt-2">
-                        <p className="text-xs text-red-400/80"><span className="font-medium">Negative: </span>{shot.negative_prompt}</p>
-                      </div>
+                      <p className="text-xs text-muted-foreground font-mono leading-relaxed">
+                        {shotPrompt.negative_prompt}
+                      </p>
                     </CardContent>
                   </Card>
-                ))}
+                )}
+
+                {/* Technical specs */}
+                <Card className="glass-card">
+                  <CardContent className="p-4">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-3">
+                      Technical Specs
+                    </p>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+                      {shotPrompt.camera_specs && (
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-0.5">Camera</p>
+                          <p className="text-foreground/80">{shotPrompt.camera_specs}</p>
+                        </div>
+                      )}
+                      {shotPrompt.lighting && (
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-0.5">Lighting</p>
+                          <p className="text-foreground/80">{shotPrompt.lighting}</p>
+                        </div>
+                      )}
+                      {shotPrompt.motion_notes && (
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-0.5">Motion</p>
+                          <p className="text-foreground/80">{shotPrompt.motion_notes}</p>
+                        </div>
+                      )}
+                      {shotPrompt.continuity_notes && (
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-0.5">Continuity</p>
+                          <p className="text-foreground/80">{shotPrompt.continuity_notes}</p>
+                        </div>
+                      )}
+                    </div>
+                    {(shotPrompt.product_rules_applied ?? []).length > 0 && (
+                      <div className="mt-3 pt-3 border-t border-border/50">
+                        <p className="text-xs text-muted-foreground mb-2">Rules enforced:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {shotPrompt.product_rules_applied.map((rule) => (
+                            <span
+                              key={rule}
+                              className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5"
+                            >
+                              ✓ {rule}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             )}
           </div>
