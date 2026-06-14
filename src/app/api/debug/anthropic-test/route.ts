@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { CLAUDE_OPUS } from "@/lib/claude";
 
 export const maxDuration = 60;
 
@@ -17,7 +18,7 @@ export async function GET() {
   try {
     const client = new Anthropic({ apiKey });
     const response = await client.messages.create({
-      model: "claude-3-5-sonnet-latest",
+      model: CLAUDE_OPUS,
       max_tokens: 16,
       messages: [{ role: "user", content: "Say OK" }],
     });
