@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import type { Script } from "@/agents/script-studio";
 import type { PostPackage } from "@/agents/social-agent";
+import type { PromptPackage } from "@/agents/prompt-director";
 
 const PRODUCTS = [
   { id: "Joy", label: "hippo float Joy", shape: "Luxury Lounger/Recliner", msrp: "$89.99", emoji: "🛋️" },
@@ -56,6 +57,7 @@ interface CampaignResult {
   title: string;
   product: string;
   script: Script | null;
+  prompts: PromptPackage | null;
   captions: PostPackage | null;
   status: "success" | "partial" | "failed";
   errors: string[];
@@ -156,11 +158,12 @@ export default function NewCampaignPage() {
           <div className="text-5xl animate-pulse">🎬</div>
           <h2 className="text-2xl font-bold">Generating Campaign</h2>
           <p className="text-muted-foreground text-sm">
-            Script Studio + Social Agent working in parallel...
+            Multi-agent pipeline working on your campaign...
           </p>
           <div className="space-y-3 text-left">
             {[
               { emoji: "🎬", name: "Script Studio", desc: "Writing Hollywood-quality script..." },
+              { emoji: "🎥", name: "Prompt Director", desc: "Building AI image & video prompts..." },
               { emoji: "📱", name: "Social Agent", desc: "Crafting platform-optimized captions..." },
             ].map((a) => (
               <div key={a.name} className="flex items-center gap-3 p-3 rounded-lg border border-sky-500/50 bg-sky-500/5">
@@ -179,7 +182,7 @@ export default function NewCampaignPage() {
   }
 
   if (result) {
-    const { script, captions } = result;
+    const { script, prompts, captions } = result;
     return (
       <div className="min-h-screen bg-background">
         <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -293,6 +296,92 @@ export default function NewCampaignPage() {
                     </CardContent>
                   </Card>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* AI Generation Prompts */}
+          {prompts && prompts.shots && prompts.shots.length > 0 && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold">🎥 AI Generation Prompts</h2>
+                <Badge variant="outline">{prompts.shots.length} shots</Badge>
+              </div>
+
+              {prompts.color_grade_direction && (
+                <Card className="glass-card">
+                  <CardContent className="p-4">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Color Grade</p>
+                    <p className="text-sm text-foreground/80">{prompts.color_grade_direction}</p>
+                  </CardContent>
+                </Card>
+              )}
+
+              <div className="space-y-3">
+                {prompts.shots.map((shot, i) => (
+                  <Card key={i} className="glass-card border-purple-500/20">
+                    <CardContent className="p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-xs text-purple-400 font-bold">SHOT {shot.shot_number}</span>
+                          {shot.shot_name && <span className="text-sm font-medium">{shot.shot_name}</span>}
+                          {shot.generation_tool && (
+                            <Badge variant="secondary" className="text-xs uppercase">{shot.generation_tool}</Badge>
+                          )}
+                          {shot.duration_seconds ? (
+                            <Badge variant="outline" className="text-xs">{shot.duration_seconds}s</Badge>
+                          ) : null}
+                        </div>
+                        <button
+                          onClick={() => copyText(shot.full_prompt, `prompt-${i}`)}
+                          className="text-xs px-3 py-1 rounded bg-purple-500 text-white hover:bg-purple-400 transition-colors shrink-0"
+                        >
+                          {copied === `prompt-${i}` ? "Copied!" : "Copy Prompt"}
+                        </button>
+                      </div>
+
+                      <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Prompt</p>
+                        <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-wrap font-mono bg-background/60 rounded-lg p-3">
+                          {shot.full_prompt}
+                        </p>
+                      </div>
+
+                      {shot.negative_prompt && (
+                        <div>
+                          <div className="flex items-center justify-between mb-1">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Negative Prompt</p>
+                            <button
+                              onClick={() => copyText(shot.negative_prompt, `neg-${i}`)}
+                              className="text-xs text-purple-400 hover:underline"
+                            >
+                              {copied === `neg-${i}` ? "Copied!" : "Copy"}
+                            </button>
+                          </div>
+                          <p className="text-xs text-red-300/80 leading-relaxed whitespace-pre-wrap font-mono bg-background/40 rounded-lg p-2">
+                            {shot.negative_prompt}
+                          </p>
+                        </div>
+                      )}
+
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                        {shot.camera_specs && <span>📷 {shot.camera_specs}</span>}
+                        {shot.lens && <span>🔭 {shot.lens}</span>}
+                        {shot.lighting && <span>💡 {shot.lighting}</span>}
+                      </div>
+
+                      {shot.product_rules_applied && shot.product_rules_applied.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {shot.product_rules_applied.map((rule, r) => (
+                            <Badge key={r} variant="outline" className="text-[10px] text-emerald-400 border-emerald-500/30">
+                              ✓ {rule}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
           )}
@@ -553,18 +642,22 @@ export default function NewCampaignPage() {
 
             <Card className="glass-card border-sky-500/20">
               <CardContent className="p-4">
-                <p className="text-sm font-medium mb-3">Will run these agents in parallel:</p>
-                <div className="flex gap-6">
+                <p className="text-sm font-medium mb-3">Will run these AI agents:</p>
+                <div className="flex flex-wrap gap-6">
                   <div className="flex items-center gap-2 text-sm">
                     <span>🎬</span>
                     <span className="text-muted-foreground">Script Studio</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span>🎥</span>
+                    <span className="text-muted-foreground">Prompt Director</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <span>📱</span>
                     <span className="text-muted-foreground">Social Agent</span>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">Estimated time: 20-30 seconds</p>
+                <p className="text-xs text-muted-foreground mt-2">Estimated time: 30-45 seconds</p>
               </CardContent>
             </Card>
           </div>

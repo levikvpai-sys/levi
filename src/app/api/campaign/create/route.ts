@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { scriptStudio, type ScriptBrief } from "@/agents/script-studio";
+import { scriptStudio, type ScriptBrief, type Script } from "@/agents/script-studio";
 import { socialAgent } from "@/agents/social-agent";
+import { promptDirector, type PromptPackage } from "@/agents/prompt-director";
 import type { Platform } from "@/types";
 
 export const maxDuration = 60;
@@ -18,6 +19,7 @@ async function saveCampaignToDb(data: {
   style: string;
   objective: string;
   script: Record<string, unknown> | null;
+  prompts: Record<string, unknown> | null;
   captions: Record<string, unknown> | null;
 }) {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return;
@@ -29,7 +31,7 @@ async function saveCampaignToDb(data: {
         name: data.title,
         objective: data.objective,
         platform: data.platforms,
-        content_type: ["video_script", "social_post"],
+        content_type: ["video_script", "image_prompt", "social_post"],
         brief: data.objective,
         product: data.product,
         product_color: data.productColor,
@@ -51,6 +53,23 @@ async function saveCampaignToDb(data: {
         metadata: data.script,
         status: "draft",
       });
+    }
+
+    if (data.prompts && Array.isArray((data.prompts as { shots?: unknown[] }).shots)) {
+      const shots = (data.prompts as { shots: { full_prompt: string }[] }).shots;
+      await Promise.all(
+        shots.map((shot, i) =>
+          supabaseAdmin.from("campaign_outputs").insert({
+            campaign_id: campaign.id,
+            agent_type: "prompt_director",
+            content_type: "image_prompt",
+            platform: data.platforms[0],
+            content: shot.full_prompt,
+            metadata: { ...shot, shot_index: i },
+            status: "draft",
+          })
+        )
+      );
     }
 
     if (data.captions && Array.isArray((data.captions as { posts?: unknown[] }).posts)) {
@@ -98,6 +117,7 @@ export async function POST(request: NextRequest) {
 
     const agentErrors: string[] = [];
     const primaryPlatform = (platforms as Platform[])[0];
+    const color = productColor || "Blue";
 
     const scriptBrief: ScriptBrief = {
       product,
@@ -109,6 +129,7 @@ export async function POST(request: NextRequest) {
       target_audience: targetAudience,
     };
 
+    // Script Studio and Social Agent run in parallel.
     const [script, captions] = await Promise.all([
       scriptStudio.writeScript(scriptBrief).catch((e: unknown) => {
         const msg = `Script Studio: ${e instanceof Error ? e.message : String(e)}`;
@@ -126,16 +147,32 @@ export async function POST(request: NextRequest) {
         }),
     ]);
 
-    const status =
-      script && captions ? "success" : script || captions ? "partial" : "failed";
+    // Prompt Director depends on the script — it turns each scene into a
+    // production-ready AI image/video generation prompt. This is the core
+    // deliverable of the system, so it must always run when a script exists.
+    let prompts: PromptPackage | null = null;
+    if (script) {
+      prompts = await promptDirector
+        .scriptToPrompts(script as Script, product, color)
+        .catch((e: unknown) => {
+          const msg = `Prompt Director: ${e instanceof Error ? e.message : String(e)}`;
+          agentErrors.push(msg);
+          console.error("[campaign/create]", msg);
+          return null;
+        });
+    }
 
-    const data = { title, product, productColor, platforms, script, captions, status, errors: agentErrors };
+    const anySuccess = Boolean(script || captions || prompts);
+    const allSuccess = Boolean(script && captions && prompts);
+    const status = allSuccess ? "success" : anySuccess ? "partial" : "failed";
+
+    const data = { title, product, productColor, platforms, script, prompts, captions, status, errors: agentErrors };
 
     if (status === "failed") {
       return fail(
         agentErrors.length > 0
           ? agentErrors.join(" | ")
-          : "Both agents failed with no error details — check ANTHROPIC_API_KEY in Vercel environment variables.",
+          : "All agents failed with no error details — check ANTHROPIC_API_KEY in Vercel environment variables.",
         data
       );
     }
@@ -149,6 +186,7 @@ export async function POST(request: NextRequest) {
       style,
       objective,
       script: script as Record<string, unknown> | null,
+      prompts: prompts as Record<string, unknown> | null,
       captions: captions as Record<string, unknown> | null,
     });
 
