@@ -105,14 +105,15 @@ const config: Config = {
         ring: "hsl(var(--ring))",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Cal Sans", "Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "monospace"],
+        sans: ["var(--font-sans)", "Space Grotesk", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "Space Mono", "monospace"],
+        display: ["var(--font-sans)", "Space Grotesk", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "var(--radius)",
+        sm: "0px",
+        DEFAULT: "var(--radius)",
       },
       backgroundImage: {
         "hippo-gradient":

@@ -1,275 +1,281 @@
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { AgentCard } from "@/components/agent-card";
 
 const AGENTS = [
-  {
-    name: "Product Guardian",
-    role: "Product Accuracy",
-    description: "Enforces all Hippo Float product rules — shapes, colors, anchor system, logo integrity.",
-    icon: "🛡️",
-    colorClass: "bg-red-500/20 text-red-400",
-    status: "idle" as const,
-  },
-  {
-    name: "Brand Director",
-    role: "Brand Standards",
-    description: "Ensures every output looks, sounds, and feels like premium luxury beach lifestyle.",
-    icon: "🎨",
-    colorClass: "bg-purple-500/20 text-purple-400",
-    status: "idle" as const,
-  },
-  {
-    name: "Script Studio",
-    role: "Hollywood Screenwriter",
-    description: "Writes cinematic commercial scripts — from TikTok hooks to 3-minute brand films.",
-    icon: "🎬",
-    colorClass: "bg-amber-500/20 text-amber-400",
-    status: "idle" as const,
-  },
-  {
-    name: "Prompt Director",
-    role: "Cinematic Prompts",
-    description: "Converts scripts into Hollywood-quality AI generation prompts for images and video.",
-    icon: "📷",
-    colorClass: "bg-sky-500/20 text-sky-400",
-    status: "idle" as const,
-  },
-  {
-    name: "Social Agent",
-    role: "Social Media Copy",
-    description: "Writes platform-optimized captions, hashtags, and CTAs for TikTok, Instagram, YouTube.",
-    icon: "📱",
-    colorClass: "bg-emerald-500/20 text-emerald-400",
-    status: "idle" as const,
-  },
-  {
-    name: "QA Critic",
-    role: "Quality Control",
-    description: "Reviews all content before publishing — catches product errors and brand violations.",
-    icon: "✅",
-    colorClass: "bg-orange-500/20 text-orange-400",
-    status: "idle" as const,
-  },
+  { name: "Product Guardian", role: "Product Accuracy", desc: "Enforces shapes, colors, anchor system, logo integrity across all 4 product lines." },
+  { name: "Brand Director",   role: "Brand Standards",  desc: "Ensures every output looks and sounds like premium luxury beach lifestyle." },
+  { name: "Script Studio",    role: "Hollywood Scripts", desc: "Cinematic commercial scripts — TikTok hooks to 3-minute brand films." },
+  { name: "Prompt Director",  role: "Cinematic Prompts", desc: "Converts scripts into locked AI generation prompts — product shape cannot deviate." },
+  { name: "Social Agent",     role: "Social Copy",       desc: "Platform-optimized captions, hashtags, and CTAs for TikTok, Instagram, YouTube." },
+  { name: "QA Critic",        role: "Quality Control",   desc: "Reviews all outputs before publish — catches product errors and brand violations." },
 ];
 
 const PRODUCTS = [
-  { name: "Joy", style: "HFJOY", shape: "Luxury Lounger", msrp: "$89.99", colors: ["Pink", "Blue", "Flower Orange", "Citrus Green"] },
-  { name: "Chill", style: "HFCHILL", shape: "U-Ring Float", msrp: "$69.99", colors: ["Pink", "Orange", "Blue", "Flower Orange", "Citrus Green"] },
-  { name: "Fun", style: "HFFUN", shape: "Cylinder Tube", msrp: "$49.99", colors: ["Pink", "Blue", "Green", "Flower Orange"] },
-  { name: "Vibes", style: "HFVIBES", shape: "Flat Mat", msrp: "$69.99", colors: ["Pink", "Orange", "Flower Orange", "Blue", "Citrus Green"] },
-];
-
-const STATS = [
-  { label: "Product Lines", value: "4", sublabel: "Joy · Chill · Fun · Vibes", icon: "🏄" },
-  { label: "AI Agents", value: "6", sublabel: "Product to Publish", icon: "🤖" },
-  { label: "Platforms", value: "5", sublabel: "TikTok · IG · YT · FB · Pinterest", icon: "📡" },
-  { label: "Brand Score", value: "A+", sublabel: "Premium Luxury Tier", icon: "⭐" },
+  { code: "HFJOY",   name: "Joy",   shape: "Luxury Recliner",  price: "$89.99", colors: 4, tag: "Float Your Way to Paradise" },
+  { code: "HFCHILL", name: "Chill", shape: "U-Ring Float",     price: "$69.99", colors: 5, tag: "Float Together. Stay in Place." },
+  { code: "HFFUN",   name: "Fun",   shape: "Cylinder Tube",    price: "$49.99", colors: 4, tag: "Have Some Fun." },
+  { code: "HFVIBES", name: "Vibes", shape: "Flat Mat",         price: "$69.99", colors: 5, tag: "Summer in Full Bloom." },
 ];
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">L</span>
-            </div>
-            <div>
-              <span className="font-bold text-foreground tracking-tight">LEVI</span>
-              <span className="text-muted-foreground text-sm ml-2">Brand AI System</span>
-            </div>
+    <div className="min-h-screen bg-background text-foreground grid-bg">
+
+      {/* ── Header ── */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <span className="font-mono text-sm font-bold tracking-widest text-foreground">LEVI</span>
+            <span className="text-border">|</span>
+            <span className="label-mono">Brand AI System</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="gold">hippo float</Badge>
-            <Badge variant="outline">Summer 2026</Badge>
+          <div className="flex items-center gap-6">
+            <span className="label-mono hidden md:block">hippo float · Summer 2026</span>
+            <div className="flex items-center gap-2">
+              <span className="status-dot ready" />
+              <span className="label-mono">System Ready</span>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      {/* ── Hero ── */}
+      <section className="min-h-screen flex flex-col justify-end pb-16 pt-24 px-6">
+        <div className="max-w-7xl mx-auto w-full space-y-10">
 
-        {/* Hero */}
-        <div className="text-center space-y-3 py-6">
-          <h1 className="text-4xl font-bold">
-            <span className="gradient-text">hippo float</span>
-          </h1>
-          <p className="text-xl text-muted-foreground">Brand AI Creative System</p>
-          <p className="text-sm text-muted-foreground/70 max-w-xl mx-auto">
-            6 specialized AI agents working together — from product validation to Hollywood scripts to social publishing
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3">
+            <span className="status-dot ready" />
+            <span className="label-mono">6 agents online · 4 product lines · 5 platforms</span>
+          </div>
+
+          {/* Main headline */}
+          <div>
+            <h1 className="display-xl text-foreground">
+              Brand AI
+            </h1>
+            <h1 className="display-xl text-foreground">
+              Creative
+            </h1>
+            <h1 className="display-xl" style={{ color: "#00d4ff" }}>
+              System
+            </h1>
+          </div>
+
+          {/* Subline */}
+          <p className="text-muted-foreground text-lg font-light max-w-xl leading-relaxed">
+            6 specialized AI agents — from product validation to Hollywood scripts to
+            platform-ready social content. Product accuracy enforced at every step.
           </p>
-          <div className="flex items-center justify-center gap-3 pt-2">
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3">
             <Link href="/campaign/new">
-              <Button size="lg" className="gap-2">
-                <span>🚀</span> New Campaign
-              </Button>
+              <button className="h-11 px-8 bg-[#00d4ff] text-background text-sm font-mono font-bold tracking-wider uppercase hover:bg-[#00d4ff]/90 transition-colors">
+                Launch Campaign
+              </button>
             </Link>
             <Link href="/scripts">
-              <Button variant="outline" size="lg" className="gap-2">
-                <span>🎬</span> Script Studio
-              </Button>
+              <button className="h-11 px-8 border border-border text-foreground text-sm font-mono tracking-wider uppercase hover:border-[#00d4ff]/50 hover:text-[#00d4ff] transition-colors">
+                Script Studio
+              </button>
             </Link>
             <Link href="/prompts">
-              <Button variant="outline" size="lg" className="gap-2">
-                <span>📷</span> Prompt Studio
-              </Button>
+              <button className="h-11 px-8 border border-border text-foreground text-sm font-mono tracking-wider uppercase hover:border-[#00d4ff]/50 hover:text-[#00d4ff] transition-colors">
+                Prompt Studio
+              </button>
             </Link>
           </div>
-        </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {STATS.map((stat) => (
-            <Card key={stat.label} className="glass-card">
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-3xl font-bold gradient-text">{stat.value}</p>
-                    <p className="text-sm font-medium text-foreground mt-1">{stat.label}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{stat.sublabel}</p>
-                  </div>
-                  <span className="text-2xl">{stat.icon}</span>
+          {/* Metrics row */}
+          <div className="pt-4 border-t border-border">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { value: "6", label: "AI Agents" },
+                { value: "4", label: "Product Lines" },
+                { value: "5", label: "Platforms" },
+                { value: "∞", label: "Token Accuracy" },
+              ].map((m) => (
+                <div key={m.label}>
+                  <div className="font-mono text-3xl font-bold" style={{ color: "#00d4ff" }}>{m.value}</div>
+                  <div className="label-mono mt-1">{m.label}</div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Agent Grid */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">AI Agent System</h2>
-            <Badge variant="outline" className="text-xs">All agents ready</Badge>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {AGENTS.map((agent) => (
-              <AgentCard key={agent.name} {...agent} />
+        </div>
+      </section>
+
+      {/* ── System Modules ── */}
+      <section className="border-t border-border px-6 py-16">
+        <div className="max-w-7xl mx-auto space-y-8">
+
+          <div className="flex items-center justify-between">
+            <span className="label-mono">System Modules</span>
+            <span className="label-mono text-[#00d4ff]">All 6 Ready</span>
+          </div>
+
+          <div className="space-y-0">
+            {AGENTS.map((agent, i) => (
+              <div
+                key={agent.name}
+                className="group flex items-start gap-6 py-5 border-t border-border hover:bg-white/[0.02] transition-colors px-2 -mx-2"
+              >
+                {/* Index */}
+                <span className="font-mono text-xs text-muted-foreground/40 w-6 shrink-0 pt-0.5">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Status dot */}
+                <span className="status-dot ready mt-1.5 shrink-0" />
+
+                {/* Name + Role */}
+                <div className="w-48 shrink-0">
+                  <div className="text-sm font-medium text-foreground">{agent.name}</div>
+                  <div className="label-mono mt-0.5">{agent.role}</div>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm text-muted-foreground font-light leading-relaxed flex-1 hidden md:block">
+                  {agent.desc}
+                </p>
+
+                {/* Status badge */}
+                <div className="shrink-0 font-mono text-xs text-[#00d4ff] tracking-widest">
+                  READY
+                </div>
+              </div>
             ))}
+            <div className="border-t border-border" />
           </div>
         </div>
+      </section>
 
-        {/* Products Grid */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Product Lines — Summer Collection 2026</h2>
-            <Badge variant="gold">STAY WHERE YOU FLOAT</Badge>
+      {/* ── Collection 2026 ── */}
+      <section className="border-t border-border px-6 py-16">
+        <div className="max-w-7xl mx-auto space-y-8">
+
+          <div className="flex items-center justify-between">
+            <span className="label-mono">Collection 2026</span>
+            <span className="label-mono">STAY WHERE YOU FLOAT</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
             {PRODUCTS.map((product) => (
-              <Card key={product.name} className="glass-card hover:border-sky-500/30 transition-colors group">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-base">
-                        hippo float{" "}
-                        <span className="gradient-text-gold">{product.name}</span>
-                      </CardTitle>
-                      <p className="text-xs text-muted-foreground mt-1">{product.shape}</p>
-                    </div>
-                    <Badge variant="outline" className="text-xs">{product.style}</Badge>
+              <div key={product.code} className="bg-background p-6 space-y-5 hover:bg-white/[0.02] transition-colors group">
+
+                {/* Code */}
+                <div className="font-mono text-xs text-muted-foreground/40 tracking-widest">
+                  {product.code}
+                </div>
+
+                {/* Name */}
+                <div>
+                  <div className="display-lg font-light" style={{ color: "#00d4ff" }}>
+                    {product.name}
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex flex-wrap gap-1">
-                    {product.colors.map((color) => (
-                      <span key={color} className="text-xs bg-secondary rounded-full px-2 py-0.5 text-muted-foreground">
-                        {color}
-                      </span>
-                    ))}
+                  <div className="label-mono mt-1">{product.shape}</div>
+                </div>
+
+                {/* Tagline */}
+                <p className="text-xs text-muted-foreground font-light leading-relaxed italic">
+                  &ldquo;{product.tag}&rdquo;
+                </p>
+
+                {/* Specs */}
+                <div className="space-y-2 border-t border-border pt-4">
+                  <div className="flex justify-between">
+                    <span className="label-mono">MSRP</span>
+                    <span className="font-mono text-sm text-foreground">{product.price}</span>
                   </div>
-                  <div className="flex items-center justify-between pt-1 border-t border-border/50">
-                    <span className="text-xs text-muted-foreground">MSRP</span>
-                    <span className="text-sm font-bold gradient-text-gold">{product.msrp}</span>
+                  <div className="flex justify-between">
+                    <span className="label-mono">Colorways</span>
+                    <span className="font-mono text-sm text-foreground">{product.colors}</span>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Anchor System Highlight */}
-        <Card className="glass-card border-sky-500/30 glow-blue">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-4">
-              <div className="text-4xl">⚓</div>
-              <div className="flex-1">
-                <h3 className="font-bold text-lg mb-1">
-                  2-in-1 Carry Bag & Anchor System
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  The core innovation across all Hippo Float products — waterproof dry bag fills with water/sand to anchor the float.
-                  This is what makes every Hippo Float drift-free.
-                </p>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-blue-400 font-bold">━</span>
-                    <span className="text-muted-foreground">Blue twisted nylon rope</span>
+      {/* ── Anchor System ── */}
+      <section className="border-t border-border px-6 py-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <div className="space-y-6">
+              <span className="label-mono">Core Technology</span>
+              <h2 className="display-lg text-foreground">
+                2-in-1 Carry Bag<br />& Anchor System
+              </h2>
+              <p className="text-muted-foreground font-light leading-relaxed text-sm max-w-md">
+                A waterproof dry bag that becomes the anchor — fills with water or
+                sand when submerged. Connected by a royal blue rope with a yellow
+                buoy at the surface. This is what makes every Hippo Float drift-free.
+              </p>
+              <p className="font-mono text-xs text-[#00d4ff] tracking-widest uppercase">
+                Enforced in every AI prompt — always
+              </p>
+            </div>
+
+            {/* System diagram */}
+            <div className="border border-border p-8 space-y-0 font-mono text-sm">
+              <div className="label-mono mb-6">Anchor System — Rope Path</div>
+
+              <div className="space-y-1">
+                <div className="flex items-center gap-3 py-3 border-t border-border">
+                  <span className="text-muted-foreground/40 w-4 text-xs">01</span>
+                  <span className="w-3 h-3 rounded-sm bg-[#00d4ff]/20 border border-[#00d4ff]/40 shrink-0" />
+                  <span className="text-foreground">Float — surface level</span>
+                </div>
+                <div className="flex items-center gap-3 py-3 border-t border-border">
+                  <span className="text-muted-foreground/40 w-4 text-xs">02</span>
+                  <div className="w-3 flex justify-center shrink-0">
+                    <div className="w-0.5 h-3 bg-blue-400" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-yellow-400 font-bold">●</span>
-                    <span className="text-muted-foreground">Yellow buoy at surface</span>
+                  <span className="text-blue-400">Blue rope — always visible</span>
+                </div>
+                <div className="flex items-center gap-3 py-3 border-t border-border">
+                  <span className="text-muted-foreground/40 w-4 text-xs">03</span>
+                  <span className="w-3 h-3 rounded-full bg-yellow-400/80 shrink-0" />
+                  <span className="text-yellow-400">Yellow buoy — at waterline</span>
+                </div>
+                <div className="flex items-center gap-3 py-3 border-t border-border">
+                  <span className="text-muted-foreground/40 w-4 text-xs">04</span>
+                  <div className="w-3 flex justify-center shrink-0">
+                    <div className="w-0.5 h-3 bg-blue-400" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sky-400 font-bold">▼</span>
-                    <span className="text-muted-foreground">Anchor bag underwater</span>
+                  <span className="text-blue-400">Rope continues underwater</span>
+                </div>
+                <div className="flex items-center gap-3 py-3 border-t border-border">
+                  <span className="text-muted-foreground/40 w-4 text-xs">05</span>
+                  <span className="w-3 h-3 bg-muted border border-border shrink-0" />
+                  <span className="text-muted-foreground">Anchor bag — fully submerged</span>
+                </div>
+                <div className="border-t border-border pt-4 mt-2">
+                  <div className="flex items-center gap-2 text-xs text-red-400/70 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400/70" />
+                    FORBIDDEN: anchor bag above water surface
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground/60 mt-3 font-medium">
-                  RULE: In ALL creative content — anchor bag must appear UNDERWATER. Yellow buoy at surface. Blue rope always visible.
-                </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Link href="/campaign/new" className="block">
-            <Card className="glass-card hover:border-sky-500/30 transition-all hover:glow-blue cursor-pointer h-full">
-              <CardContent className="p-6 flex flex-col gap-3">
-                <span className="text-3xl">🚀</span>
-                <div>
-                  <h3 className="font-semibold">Create Campaign</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Launch a full multi-platform campaign — scripts, prompts, captions in one flow
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link href="/scripts" className="block">
-            <Card className="glass-card hover:border-amber-500/30 transition-all cursor-pointer h-full">
-              <CardContent className="p-6 flex flex-col gap-3">
-                <span className="text-3xl">🎬</span>
-                <div>
-                  <h3 className="font-semibold">Script Studio</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Write Hollywood-quality commercial scripts for any platform and style
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link href="/prompts" className="block">
-            <Card className="glass-card hover:border-purple-500/30 transition-all cursor-pointer h-full">
-              <CardContent className="p-6 flex flex-col gap-3">
-                <span className="text-3xl">📷</span>
-                <div>
-                  <h3 className="font-semibold">Prompt Studio</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Generate cinematic prompts for Midjourney, DALL-E, Kling, Runway, Sora
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+          </div>
         </div>
+      </section>
 
-      </main>
+      {/* ── Footer ── */}
+      <footer className="border-t border-border px-6 py-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <span className="font-mono text-xs text-muted-foreground/40">LEVI · Brand AI Creative System · hippo float Summer 2026</span>
+          <div className="flex items-center gap-6">
+            <Link href="/campaign/new" className="label-mono hover:text-foreground transition-colors">Campaign</Link>
+            <Link href="/scripts" className="label-mono hover:text-foreground transition-colors">Scripts</Link>
+            <Link href="/prompts" className="label-mono hover:text-foreground transition-colors">Prompts</Link>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }
