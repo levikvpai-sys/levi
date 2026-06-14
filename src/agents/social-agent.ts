@@ -1,4 +1,4 @@
-import { generateCompletion, generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
+import { generateStructuredOutput, createSystemPrompt, FAST_MODEL } from "@/lib/openai";
 import { BRAND_VOICE_TEXT } from "@/brand/brand-bible";
 import type { Platform } from "@/types";
 
@@ -104,6 +104,7 @@ INCLUDE PRICE: ${brief.include_price ? "yes" : "no"}
 Write a complete Caption JSON object with hook, main text, hashtags, CTA, and full assembled post text.`;
 
     return await generateStructuredOutput<Caption>(prompt, {
+      model: FAST_MODEL,
       system: SOCIAL_AGENT_SYSTEM,
       temperature: 0.8,
       max_tokens: 800,
@@ -133,6 +134,7 @@ Also include:
 Return complete JSON PostPackage.`;
 
     return await generateStructuredOutput<PostPackage>(prompt, {
+      model: FAST_MODEL,
       system: SOCIAL_AGENT_SYSTEM,
       temperature: 0.8,
       max_tokens: 2000,
@@ -173,6 +175,7 @@ ORIGINAL: ${JSON.stringify(caption)}
 Return translated JSON Caption object.`;
 
     return await generateStructuredOutput<Caption>(prompt, {
+      model: FAST_MODEL,
       system: SOCIAL_AGENT_SYSTEM,
       temperature: 0.6,
       max_tokens: 800,
@@ -187,6 +190,7 @@ Mix: branded (#hippofloat #hippofloatjoy), lifestyle (#beachlife #poolluxury #su
 Return as JSON array of strings (include the # symbol).`;
 
     const result = await generateStructuredOutput<string[]>(prompt, {
+      model: FAST_MODEL,
       system: SOCIAL_AGENT_SYSTEM,
       temperature: 0.7,
       max_tokens: 200,

@@ -27,26 +27,16 @@ export interface CompletionOptions {
   temperature?: number;
   max_tokens?: number;
   system?: string;
-  stream?: boolean;
 }
 
 export async function generateCompletion(
   prompt: string,
   options: CompletionOptions = {}
 ): Promise<string> {
-  const {
-    model = DEFAULT_MODEL,
-    temperature = 0.7,
-    max_tokens = 2000,
-    system,
-  } = options;
+  const { model = DEFAULT_MODEL, temperature = 0.7, max_tokens = 2000, system } = options;
 
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [];
-
-  if (system) {
-    messages.push({ role: "system", content: system });
-  }
-
+  if (system) messages.push({ role: "system", content: system });
   messages.push({ role: "user", content: prompt });
 
   const response = await openai.chat.completions.create({
@@ -56,78 +46,37 @@ export async function generateCompletion(
     messages,
   });
 
-  return response.choices[0]?.message?.content || "";
+  return response.choices[0]?.message?.content ?? "";
 }
 
+// Forces valid JSON every time using OpenAI's JSON mode
 export async function generateStructuredOutput<T>(
   prompt: string,
   options: CompletionOptions = {}
 ): Promise<T> {
-  const content = await generateCompletion(prompt, {
-    ...options,
-    temperature: options.temperature ?? 0.3,
-  });
-
-  // Try to parse JSON from the response
-  try {
-    // Look for JSON in the response
-    const jsonMatch = content.match(/```json\n?([\s\S]*?)\n?```/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[1]) as T;
-    }
-    // Try direct parse
-    return JSON.parse(content) as T;
-  } catch {
-    // Return as-is if not JSON
-    return content as unknown as T;
-  }
-}
-
-export async function streamCompletion(
-  prompt: string,
-  options: CompletionOptions = {}
-): Promise<ReadableStream> {
-  const {
-    model = DEFAULT_MODEL,
-    temperature = 0.7,
-    max_tokens = 2000,
-    system,
-  } = options;
+  const { model = DEFAULT_MODEL, temperature = 0.3, max_tokens = 3000, system } = options;
 
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [];
-
   if (system) {
-    messages.push({ role: "system", content: system });
+    messages.push({
+      role: "system",
+      content: system + "\n\nYou MUST respond with valid JSON only. No markdown, no explanation, just the JSON object.",
+    });
   }
+  messages.push({ role: "user", content: prompt + "\n\nRespond with valid JSON only." });
 
-  messages.push({ role: "user", content: prompt });
-
-  const stream = await openai.chat.completions.create({
+  const response = await openai.chat.completions.create({
     model,
     temperature,
     max_tokens,
     messages,
-    stream: true,
+    response_format: { type: "json_object" },
   });
 
-  return new ReadableStream({
-    async start(controller) {
-      for await (const chunk of stream) {
-        const text = chunk.choices[0]?.delta?.content || "";
-        if (text) {
-          controller.enqueue(new TextEncoder().encode(text));
-        }
-      }
-      controller.close();
-    },
-  });
+  const content = response.choices[0]?.message?.content ?? "{}";
+  return JSON.parse(content) as T;
 }
 
 export function createSystemPrompt(parts: string[]): string {
   return parts.filter(Boolean).join("\n\n");
-}
-
-export function estimateTokens(text: string): number {
-  // Rough estimate: ~4 characters per token
-  return Math.ceil(text.length / 4);
 }

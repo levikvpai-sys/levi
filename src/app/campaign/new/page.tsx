@@ -5,9 +5,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import type { Script } from "@/agents/script-studio";
+import type { PostPackage } from "@/agents/social-agent";
 
 const PRODUCTS = [
   { id: "Joy", label: "hippo float Joy", shape: "Luxury Lounger/Recliner", msrp: "$89.99", emoji: "🛋️" },
@@ -50,14 +52,14 @@ interface FormData {
   tone: string;
 }
 
-const AGENT_STEPS = [
-  { name: "Product Guardian", emoji: "🛡️", desc: "Validating concept against product rules..." },
-  { name: "Brand Director", emoji: "🎨", desc: "Refining brief for premium brand alignment..." },
-  { name: "Script Studio", emoji: "🎬", desc: "Writing Hollywood-quality scripts..." },
-  { name: "Prompt Director", emoji: "📷", desc: "Building cinematic shot prompts..." },
-  { name: "Social Agent", emoji: "📱", desc: "Crafting platform-optimized captions..." },
-  { name: "QA Critic", emoji: "✅", desc: "Reviewing all outputs for quality..." },
-];
+interface CampaignResult {
+  title: string;
+  product: string;
+  script: Script | null;
+  captions: PostPackage | null;
+  status: "success" | "partial" | "failed";
+  errors: string[];
+}
 
 export default function NewCampaignPage() {
   const [step, setStep] = useState(1);
@@ -72,9 +74,9 @@ export default function NewCampaignPage() {
     tone: "",
   });
   const [generating, setGenerating] = useState(false);
-  const [currentAgentStep, setCurrentAgentStep] = useState(0);
-  const [done, setDone] = useState(false);
+  const [result, setResult] = useState<CampaignResult | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
 
   const totalSteps = 4;
   const progress = (step / totalSteps) * 100;
@@ -95,10 +97,16 @@ export default function NewCampaignPage() {
     return true;
   };
 
+  const copyText = (text: string, key: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(key);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
   const handleGenerate = async () => {
     setGenerating(true);
     setApiError(null);
-    setCurrentAgentStep(0);
+    setResult(null);
 
     const response = await fetch("/api/campaign/create", {
       method: "POST",
@@ -122,22 +130,8 @@ export default function NewCampaignPage() {
       return;
     }
 
-    const result = json.data;
-    // Advance step indicators based on what succeeded
-    const completedSteps = [
-      result.validation?.product_guardian != null,
-      result.validation?.brand_director != null,
-      (result.scripts?.length ?? 0) > 0,
-      (result.prompts?.length ?? 0) > 0,
-      result.captions != null,
-      (result.qa_reports?.length ?? 0) > 0,
-    ];
-    for (let i = 0; i < completedSteps.length; i++) {
-      if (completedSteps[i]) setCurrentAgentStep(i + 1);
-    }
-
+    setResult(json.data as CampaignResult);
     setGenerating(false);
-    setDone(true);
   };
 
   if (apiError) {
@@ -155,73 +149,205 @@ export default function NewCampaignPage() {
     );
   }
 
-  if (generating || done) {
+  if (generating) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <div className="max-w-lg w-full space-y-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-2">
-              {done ? "Campaign Ready" : "Generating Campaign"}
-            </h2>
-            <p className="text-muted-foreground text-sm">
-              {done
-                ? `${form.name} has been created successfully`
-                : "AI agents working in sequence..."}
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            {AGENT_STEPS.map((agentStep, i) => {
-              const isDone = done || i < currentAgentStep;
-              const isActive = !done && i === currentAgentStep;
-              const isPending = !done && i > currentAgentStep;
-              return (
-                <div
-                  key={agentStep.name}
-                  className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
-                    isActive
-                      ? "border-sky-500/50 bg-sky-500/5 glow-blue"
-                      : isDone
-                      ? "border-emerald-500/30 bg-emerald-500/5"
-                      : "border-border/30 opacity-40"
-                  }`}
-                >
-                  <span className="text-xl">{agentStep.emoji}</span>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">{agentStep.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {isActive ? agentStep.desc : isDone ? "Complete" : "Waiting..."}
-                    </p>
-                  </div>
-                  {isDone && <span className="text-emerald-400 text-sm">✓</span>}
-                  {isActive && (
-                    <div className="w-4 h-4 border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
-                  )}
+        <div className="max-w-lg w-full space-y-6 text-center">
+          <div className="text-5xl animate-pulse">🎬</div>
+          <h2 className="text-2xl font-bold">Generating Campaign</h2>
+          <p className="text-muted-foreground text-sm">
+            Script Studio + Social Agent working in parallel...
+          </p>
+          <div className="space-y-3 text-left">
+            {[
+              { emoji: "🎬", name: "Script Studio", desc: "Writing Hollywood-quality script..." },
+              { emoji: "📱", name: "Social Agent", desc: "Crafting platform-optimized captions..." },
+            ].map((a) => (
+              <div key={a.name} className="flex items-center gap-3 p-3 rounded-lg border border-sky-500/50 bg-sky-500/5">
+                <span className="text-xl">{a.emoji}</span>
+                <div className="flex-1">
+                  <p className="text-sm font-medium">{a.name}</p>
+                  <p className="text-xs text-muted-foreground">{a.desc}</p>
                 </div>
-              );
-            })}
+                <div className="w-4 h-4 border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
+              </div>
+            ))}
           </div>
+        </div>
+      </div>
+    );
+  }
 
-          {!done && (
-            <Progress value={(currentAgentStep / AGENT_STEPS.length) * 100} className="h-1" />
-          )}
-
-          {done && (
-            <div className="flex gap-3">
-              <Link href="/" className="flex-1">
-                <Button variant="outline" className="w-full">Back to Dashboard</Button>
+  if (result) {
+    const { script, captions } = result;
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+          <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                ← Dashboard
               </Link>
-              <Button className="flex-1" onClick={() => {
-                setDone(false);
-                setGenerating(false);
-                setStep(1);
-                setForm({ name: "", product: "", color: "", style: "", platforms: [], objective: "", keyMessage: "", tone: "" });
-              }}>
-                New Campaign
-              </Button>
+              <span className="text-border">/</span>
+              <span className="text-sm font-medium">{result.title}</span>
+            </div>
+            <Badge variant="success">Campaign Ready</Badge>
+          </div>
+        </header>
+
+        <main className="max-w-4xl mx-auto px-6 py-8 space-y-6">
+          {result.errors.length > 0 && (
+            <div className="p-3 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-400 text-sm">
+              Partial results — some agents failed: {result.errors.join("; ")}
             </div>
           )}
-        </div>
+
+          {/* Script */}
+          {script && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold">🎬 Script: {script.title}</h2>
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline">{script.platform}</Badge>
+                  <Badge variant="outline">{script.total_duration_seconds}s</Badge>
+                </div>
+              </div>
+
+              <Card className="glass-card border-sky-500/20">
+                <CardContent className="p-4 space-y-3">
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Hook</p>
+                    <p className="text-sm font-medium text-sky-400">{script.hook}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Concept</p>
+                    <p className="text-sm text-foreground/80">{script.concept}</p>
+                  </div>
+                  {script.emotional_arc && (
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Emotional Arc</p>
+                      <p className="text-sm text-foreground/80">{script.emotional_arc}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {script.beat_sheet && script.beat_sheet.length > 0 && (
+                <Card className="glass-card">
+                  <CardContent className="p-4">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-3">Beat Sheet</p>
+                    <div className="space-y-2">
+                      {script.beat_sheet.map((beat, i) => (
+                        <div key={i} className="flex items-start gap-2 text-sm">
+                          <span className="text-sky-400 font-bold shrink-0">{i + 1}.</span>
+                          <span className="text-foreground/80">{beat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {script.scenes && script.scenes.length > 0 && (
+                <Card className="glass-card">
+                  <CardContent className="p-4">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-3">
+                      Scenes ({script.scenes.length})
+                    </p>
+                    <div className="space-y-4">
+                      {script.scenes.map((scene, i) => (
+                        <div key={i} className="border-l-2 border-sky-500/30 pl-3 space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-sky-400 font-bold">SCENE {scene.scene_number}</span>
+                            <span className="text-xs text-muted-foreground">{scene.shot_type}</span>
+                            <span className="text-xs text-muted-foreground">{scene.duration_seconds}s</span>
+                          </div>
+                          <p className="text-sm text-foreground/80">{scene.visual}</p>
+                          {scene.audio && (
+                            <p className="text-xs text-muted-foreground italic">{scene.audio}</p>
+                          )}
+                          {scene.on_screen_text && (
+                            <p className="text-xs text-amber-400">&quot;{scene.on_screen_text}&quot;</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {script.music_direction && (
+                  <Card className="glass-card">
+                    <CardContent className="p-4">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2">Music</p>
+                      <p className="text-sm text-foreground/80">{script.music_direction}</p>
+                    </CardContent>
+                  </Card>
+                )}
+                {script.cta && (
+                  <Card className="glass-card border-emerald-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-2">CTA</p>
+                      <p className="text-sm text-emerald-400 font-medium">{script.cta}</p>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Captions */}
+          {captions && captions.posts && captions.posts.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="text-lg font-bold">📱 Social Media Captions</h2>
+              <div className="space-y-3">
+                {captions.posts.map((post, i) => (
+                  <Card key={i} className="glass-card">
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">
+                            {post.platform === "tiktok" ? "🎵" : post.platform === "instagram" ? "📸" : post.platform === "youtube" ? "▶️" : "📘"}
+                          </span>
+                          <span className="text-sm font-medium capitalize">{post.platform}</span>
+                        </div>
+                        <button
+                          onClick={() => copyText(post.full_post, `post-${i}`)}
+                          className="text-xs px-3 py-1 rounded bg-sky-500 text-white hover:bg-sky-400 transition-colors"
+                        >
+                          {copied === `post-${i}` ? "Copied!" : "Copy"}
+                        </button>
+                      </div>
+                      {post.hook_line && (
+                        <p className="text-xs text-sky-400 font-medium mb-2">Hook: {post.hook_line}</p>
+                      )}
+                      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap font-mono bg-background/60 rounded-lg p-3">
+                        {post.full_post}
+                      </p>
+                      {post.cta && (
+                        <p className="text-xs text-emerald-400 mt-2">CTA: {post.cta}</p>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-3 pt-4">
+            <Link href="/" className="flex-1">
+              <Button variant="outline" className="w-full">Back to Dashboard</Button>
+            </Link>
+            <Button className="flex-1" onClick={() => {
+              setResult(null);
+              setStep(1);
+              setForm({ name: "", product: "", color: "", style: "", platforms: [], objective: "", keyMessage: "", tone: "" });
+            }}>
+              New Campaign
+            </Button>
+          </div>
+        </main>
       </div>
     );
   }
@@ -427,15 +553,18 @@ export default function NewCampaignPage() {
 
             <Card className="glass-card border-sky-500/20">
               <CardContent className="p-4">
-                <p className="text-sm font-medium mb-3">Will run these agents:</p>
-                <div className="grid grid-cols-3 gap-2">
-                  {AGENT_STEPS.map((a) => (
-                    <div key={a.name} className="flex items-center gap-2 text-xs">
-                      <span>{a.emoji}</span>
-                      <span className="text-muted-foreground">{a.name}</span>
-                    </div>
-                  ))}
+                <p className="text-sm font-medium mb-3">Will run these agents in parallel:</p>
+                <div className="flex gap-6">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span>🎬</span>
+                    <span className="text-muted-foreground">Script Studio</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span>📱</span>
+                    <span className="text-muted-foreground">Social Agent</span>
+                  </div>
                 </div>
+                <p className="text-xs text-muted-foreground mt-2">Estimated time: 20-30 seconds</p>
               </CardContent>
             </Card>
           </div>

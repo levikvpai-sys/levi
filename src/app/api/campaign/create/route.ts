@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { orchestrator } from "@/agents";
+import { scriptStudio, type ScriptBrief } from "@/agents/script-studio";
+import { socialAgent } from "@/agents/social-agent";
 import type { Platform } from "@/types";
+
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,19 +17,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await orchestrator.createCampaign({
-      title,
+    const errors: string[] = [];
+
+    // Script Studio: write one script for the first platform (fastest path)
+    const primaryPlatform = (platforms as Platform[])[0];
+    const scriptBrief: ScriptBrief = {
       product,
-      productColor,
-      platforms: platforms as Platform[],
+      platform: primaryPlatform,
       style,
       objective,
       tone,
-      keyMessage,
-      targetAudience,
-    });
+      key_message: keyMessage,
+      target_audience: targetAudience,
+    };
 
-    return NextResponse.json({ success: true, data: result });
+    const [script, captions] = await Promise.all([
+      scriptStudio.writeScript(scriptBrief).catch((e: unknown) => {
+        errors.push(`Script Studio: ${String(e)}`);
+        return null;
+      }),
+      socialAgent.buildPostPackage(product, objective, platforms as Platform[]).catch((e: unknown) => {
+        errors.push(`Social Agent: ${String(e)}`);
+        return null;
+      }),
+    ]);
+
+    const status = script && captions ? "success" : script || captions ? "partial" : "failed";
+
+    return NextResponse.json({
+      success: status !== "failed",
+      data: { title, product, productColor, platforms, script, captions, status, errors },
+    });
   } catch (error) {
     console.error("Campaign create API error:", error);
     return NextResponse.json(
