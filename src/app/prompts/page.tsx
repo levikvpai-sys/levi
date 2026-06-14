@@ -70,7 +70,7 @@ export default function PromptsPage() {
     const json = await response.json();
 
     if (!response.ok || !json.success) {
-      setError(json.error ?? "Failed to generate prompt. Check your OPENAI_API_KEY.");
+      setError(json.error ?? "Failed to generate prompt. Make sure ANTHROPIC_API_KEY is set in your Vercel environment variables.");
       setGenerating(false);
       return;
     }
@@ -94,7 +94,7 @@ export default function PromptsPage() {
     const json = await res.json();
 
     if (!res.ok || !json.success) {
-      setImageError(json.error ?? "Image generation failed. Check OPENAI_API_KEY.");
+      setImageError(json.error ?? "Image generation failed. Make sure OPENAI_API_KEY is set in your Vercel environment variables.");
       setGeneratingImage(false);
       return;
     }

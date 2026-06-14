@@ -125,7 +125,7 @@ export default function NewCampaignPage() {
     const json = await response.json();
 
     if (!response.ok || !json.success) {
-      setApiError(json.error ?? "Campaign generation failed. Check your OPENAI_API_KEY.");
+      setApiError(json.error ?? "Campaign generation failed. Make sure ANTHROPIC_API_KEY is set in your Vercel environment variables.");
       setGenerating(false);
       return;
     }

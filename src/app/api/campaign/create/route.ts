@@ -110,10 +110,18 @@ export async function POST(request: NextRequest) {
 
     const result = { title, product, productColor, platforms, script, captions, status, errors };
 
+    if (status === "failed") {
+      console.error("Campaign failed — agent errors:", errors);
+      return NextResponse.json(
+        { success: false, error: errors.join(" | "), data: result },
+        { status: 500 }
+      );
+    }
+
     // Fire and forget — never blocks the response
     saveCampaignToDb({ title, product, productColor, platforms, style, objective, script: script as Record<string, unknown> | null, captions: captions as Record<string, unknown> | null });
 
-    return NextResponse.json({ success: status !== "failed", data: result });
+    return NextResponse.json({ success: true, data: result });
   } catch (error) {
     console.error("Campaign create API error:", error);
     return NextResponse.json(

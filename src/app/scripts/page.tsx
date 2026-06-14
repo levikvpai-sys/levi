@@ -55,7 +55,7 @@ export default function ScriptsPage() {
     const json = await response.json();
 
     if (!response.ok || !json.success) {
-      setError(json.error ?? "Failed to generate script. Check your OPENAI_API_KEY.");
+      setError(json.error ?? "Failed to generate script. Make sure ANTHROPIC_API_KEY is set in your Vercel environment variables.");
       setGenerating(false);
       return;
     }
