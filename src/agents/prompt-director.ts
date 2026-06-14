@@ -1,4 +1,4 @@
-import { generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
+import { claudeStructured, createSystemPrompt, CLAUDE_SONNET } from "@/lib/claude";
 import {
   ANCHOR_SYSTEM_RULES_TEXT,
   getPromptShapeText,
@@ -125,7 +125,8 @@ BUILD THE full_prompt by:
 
 Return a JSON ShotPrompt. The negative_prompt must include: "${productNegative}"`;
 
-    const shot = await generateStructuredOutput<ShotPrompt>(userPrompt, {
+    const shot = await claudeStructured<ShotPrompt>(userPrompt, {
+      model: CLAUDE_SONNET,
       system: PROMPT_DIRECTOR_SYSTEM,
       temperature: 0.4,
       max_tokens: 1200,
@@ -178,7 +179,8 @@ For EACH scene, build a ShotPrompt where:
 
 Return complete JSON PromptPackage with all shots.`;
 
-    const pkg = await generateStructuredOutput<PromptPackage>(userPrompt, {
+    const pkg = await claudeStructured<PromptPackage>(userPrompt, {
+      model: CLAUDE_SONNET,
       system: PROMPT_DIRECTOR_SYSTEM,
       temperature: 0.4,
       max_tokens: 4000,
@@ -227,7 +229,8 @@ negative_prompt must include: "${shapeNegative}, ${ANCHOR_NEGATIVE}"
 
 Return JSON array of ShotPrompt objects.`;
 
-    const shots = await generateStructuredOutput<ShotPrompt[]>(userPrompt, {
+    const shots = await claudeStructured<ShotPrompt[]>(userPrompt, {
+      model: CLAUDE_SONNET,
       system: PROMPT_DIRECTOR_SYSTEM,
       temperature: 0.4,
       max_tokens: 4000,

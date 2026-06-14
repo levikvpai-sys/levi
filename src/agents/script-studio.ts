@@ -1,4 +1,4 @@
-import { generateCompletion, generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
+import { claudeStructured, claudeCompletion, createSystemPrompt, CLAUDE_OPUS } from "@/lib/claude";
 import { BRAND_VOICE_TEXT } from "@/brand/brand-bible";
 import { PRODUCT_RULES_TEXT } from "@/brand/product-bible";
 import type { Platform } from "@/types";
@@ -113,7 +113,8 @@ Write a COMPLETE script with:
 
 Return as JSON Script object.`;
 
-    return await generateStructuredOutput<Script>(prompt, {
+    return await claudeStructured<Script>(prompt, {
+      model: CLAUDE_OPUS,
       system: SCRIPT_SYSTEM,
       temperature: 0.8,
       max_tokens: 2500,
@@ -131,7 +132,7 @@ Each hook must:
 
 Format as JSON array: [{"text": "hook text", "visual": "what camera shows", "why_it_works": "explanation"}]`;
 
-    return await generateStructuredOutput<string[]>(prompt, {
+    return await claudeStructured<string[]>(prompt, {
       system: SCRIPT_SYSTEM,
       temperature: 0.9,
       max_tokens: 1000,
@@ -171,7 +172,8 @@ FEEDBACK: ${feedback}
 
 Rewrite the script incorporating the feedback while maintaining brand standards. Return complete revised Script JSON.`;
 
-    return await generateStructuredOutput<Script>(prompt, {
+    return await claudeStructured<Script>(prompt, {
+      model: CLAUDE_OPUS,
       system: SCRIPT_SYSTEM,
       temperature: 0.7,
       max_tokens: 2500,

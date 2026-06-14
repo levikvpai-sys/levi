@@ -80,3 +80,18 @@ export async function generateStructuredOutput<T>(
 export function createSystemPrompt(parts: string[]): string {
   return parts.filter(Boolean).join("\n\n");
 }
+
+// DALL-E 3 image generation — landscape HD by default
+export async function generateImage(
+  prompt: string,
+  size: "1024x1024" | "1792x1024" | "1024x1792" = "1792x1024"
+): Promise<string> {
+  const response = await openai.images.generate({
+    model: "dall-e-3",
+    prompt,
+    size,
+    quality: "hd",
+    n: 1,
+  });
+  return response.data?.[0]?.url ?? "";
+}

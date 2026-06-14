@@ -46,6 +46,9 @@ export default function PromptsPage() {
   const [shotPrompt, setShotPrompt] = useState<ShotPrompt | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<"prompt" | "negative" | null>(null);
+  const [generatingImage, setGeneratingImage] = useState(false);
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     if (!concept.trim()) return;
@@ -73,7 +76,31 @@ export default function PromptsPage() {
     }
 
     setShotPrompt(json.data as ShotPrompt);
+    setGeneratedImageUrl(null);
+    setImageError(null);
     setGenerating(false);
+  };
+
+  const handleGenerateImage = async () => {
+    if (!shotPrompt?.full_prompt) return;
+    setGeneratingImage(true);
+    setImageError(null);
+
+    const res = await fetch("/api/agents/generate-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: shotPrompt.full_prompt, size: "1792x1024" }),
+    });
+    const json = await res.json();
+
+    if (!res.ok || !json.success) {
+      setImageError(json.error ?? "Image generation failed. Check OPENAI_API_KEY.");
+      setGeneratingImage(false);
+      return;
+    }
+
+    setGeneratedImageUrl(json.url);
+    setGeneratingImage(false);
   };
 
   const copyText = (text: string, key: "prompt" | "negative") => {
@@ -294,6 +321,63 @@ export default function PromptsPage() {
                     </p>
                   </CardContent>
                 </Card>
+
+                {/* DALL-E 3 Generate Image */}
+                <div className="space-y-3">
+                  <button
+                    onClick={handleGenerateImage}
+                    disabled={generatingImage}
+                    className="w-full h-11 bg-[#00d4ff] text-background font-mono text-sm font-bold tracking-wider uppercase hover:bg-[#00d4ff]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {generatingImage ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin" />
+                        Generating with DALL-E 3...
+                      </>
+                    ) : (
+                      "Generate Image with DALL-E 3"
+                    )}
+                  </button>
+
+                  {imageError && (
+                    <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 p-3 rounded-sm">
+                      {imageError}
+                    </p>
+                  )}
+
+                  {generatedImageUrl && (
+                    <div className="relative border border-border rounded-sm overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={generatedImageUrl}
+                        alt="DALL-E 3 generated Hippo Float"
+                        className="w-full"
+                      />
+                      <div className="absolute top-3 right-3 flex gap-2">
+                        <a
+                          href={generatedImageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-background/80 backdrop-blur text-foreground text-xs font-mono hover:bg-background transition-colors border border-border"
+                        >
+                          Open Full Size
+                        </a>
+                        <a
+                          href={generatedImageUrl}
+                          download="hippo-float-dalle3.jpg"
+                          className="px-3 py-1.5 bg-[#00d4ff] text-background text-xs font-mono font-bold hover:bg-[#00d4ff]/90 transition-colors"
+                        >
+                          Download
+                        </a>
+                      </div>
+                      <div className="absolute bottom-3 left-3">
+                        <span className="px-2 py-1 bg-background/80 backdrop-blur text-xs font-mono text-[#00d4ff] border border-[#00d4ff]/30">
+                          DALL-E 3 HD · 1792×1024
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 {/* Negative prompt */}
                 {shotPrompt.negative_prompt && (
