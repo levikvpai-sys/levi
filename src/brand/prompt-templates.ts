@@ -34,12 +34,10 @@ export interface ShotPrompt {
 }
 
 const PRODUCT_DESCRIPTIONS: Record<ProductLine, string> = {
-  JOY: "hippo float Joy inflatable luxury pool lounger/recliner chair — ergonomic reclined backrest, elevated headrest, semi-reclined chaise lounge shape, 'hippo' logo visible on surface",
-  CHILL:
-    "hippo float Chill U-shaped horseshoe ring float — person sitting in center opening with arms on ring sides, 'hippo' logo on ring surface",
-  FUN: "hippo float Fun large cylindrical torpedo tube inflatable — elongated oval cylinder, person straddling or hugging it, 'hippo' logo visible",
-  VIBES:
-    "hippo float Vibes flat rectangular mat float — wide flat surface with distinctive circular texture/drainage holes across top, person lying flat on it, 'hippo' logo at top",
+  JOY: "hippo float Joy luxury inflatable pool recliner/lounger — EXACT SHAPE: semi-reclined chaise lounge with raised backrest at 30-40 degree angle, like a zero-gravity beach chair on water. Clear L-profile from the side: flat seat transitions to elevated curved backrest with integrated headrest rising 12-18 inches above seat. NEVER flat, NEVER a ring — always a reclining chair shape. White 'hippo' logo on backrest.",
+  CHILL: "hippo float Chill U-shaped horseshoe ring float — EXACT SHAPE: open horseshoe ring from above, like a circular life ring with front third removed. Ring tube ~8 inches diameter. Person sits INSIDE the U-opening in mesh seat sling, arms on ring sides, legs dangling below water. NEVER a full circle — always U-shaped/open-front. White 'hippo' logo on ring. GREEN anchor bag always.",
+  FUN: "hippo float Fun large inflatable cylindrical torpedo tube — EXACT SHAPE: elongated oval-cylinder ~5-6 feet long, 14-16 inches diameter, rounded sealed end caps. Person straddles lengthwise or lies across it. NEVER flat, NEVER a ring, NEVER a chair — always a thick inflatable tube. White 'hippo' logo on cylinder side.",
+  VIBES: "hippo float Vibes flat rectangular inflatable mat — EXACT SHAPE: large flat rectangle ~68x30 inches, 4-5 inches thick. DEFINING: rows of raised circular texture dots covering ENTIRE top surface in uniform grid pattern, each ~2 inches diameter. Completely FLAT — no backrest, no raised edges. Person lies flat on top. NEVER a chair, NEVER a ring — always a flat mat. White 'hippo' logo at top end.",
 };
 
 const ANCHOR_SYSTEM_PROMPT =
@@ -176,7 +174,7 @@ export class PromptEngine {
 }
 
 export const UNIVERSAL_NEGATIVE_PROMPT =
-  "wrong product shape, modified product geometry, missing rope, disconnected anchor, anchor bag above water, floating anchor bag, wrong logo, altered text, extra accessories not on product, cartoon style, illustration, painting, AI artifacts, plastic looking, cheap quality, distorted proportions, blurry, low quality, watermark, multiple products unless intentional, mismatched colors, unrealistic water, generic stock photo look";
+  "wrong product shape, modified product shape, altered product geometry, shape distortion, wrong float type, mixing product lines, flat when should be reclined, ring when should be tube, tube when should be mat, mat when should be chair, missing rope, disconnected anchor rope, anchor bag above water surface, anchor bag floating at surface, floating anchor bag, wrong logo text, altered hippo logo, missing logo, extra accessories, invented product features, cartoon, illustration, painting, drawing, render, CGI look, plastic toy look, cheap quality, AI artifacts, distorted human proportions, blurry, low resolution, watermark, generic stock photo, washed out colors, unrealistic water, missing yellow buoy, yellow buoy wrong color, blue rope wrong color";
 
 export const SCRIPT_STYLES = {
   CINEMATIC_LUXURY: {

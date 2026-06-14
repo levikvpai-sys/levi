@@ -1,6 +1,12 @@
-import { generateCompletion, generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
-import { PRODUCT_RULES_TEXT, PRODUCT_SHAPES_REFERENCE, ANCHOR_SYSTEM_RULES_TEXT, getPromptShapeText } from "@/brand/product-bible";
-import { BRAND_VOICE_TEXT } from "@/brand/brand-bible";
+import { generateStructuredOutput, createSystemPrompt } from "@/lib/openai";
+import {
+  ANCHOR_SYSTEM_RULES_TEXT,
+  getPromptShapeText,
+  getShapeNegative,
+  detectProductLine,
+  getColorDescription,
+  PRODUCT_SHAPES_REFERENCE,
+} from "@/brand/product-bible";
 import { UNIVERSAL_NEGATIVE_PROMPT, promptEngine } from "@/brand/prompt-templates";
 import type { Script } from "./script-studio";
 
@@ -30,109 +36,169 @@ export interface PromptPackage {
   color_grade_direction: string;
 }
 
+// Locked anchor system text — used verbatim in every water shot
+const ANCHOR_LOCKED =
+  "blue twisted nylon rope connecting float to anchor bag going underwater, small bright yellow buoy sphere at water surface level on rope, hippo float waterproof dry bag anchor FULLY SUBMERGED underwater below float, rope visibly taut";
+
+// Locked negative additions for the anchor system
+const ANCHOR_NEGATIVE =
+  "anchor bag above water surface, anchor bag visible at surface level, rope disconnected, missing rope, missing yellow buoy, yellow buoy wrong color, anchor bag floating";
+
 const PROMPT_DIRECTOR_SYSTEM = createSystemPrompt([
-  `You are the Cinematic Prompt Director AI for Hippo Float — a visual storytelling expert who translates scripts and concepts into precise AI generation prompts that produce Hollywood-quality results.
+  `You are the Cinematic Prompt Director AI for Hippo Float.
+You think like a Director of Photography on a luxury commercial shoot.
 
-You think like a Director of Photography (DP) on a luxury commercial shoot.
+YOUR ONLY JOB: Add the creative scene layer around a LOCKED product description.
+The product shape text is always provided verbatim — you MUST copy it exactly into the full_prompt. Do NOT rephrase, summarize, or change it. It is the ground truth.
 
-${PRODUCT_RULES_TEXT}
-
-${BRAND_VOICE_TEXT}
-
-## THE 4 HIPPO FLOAT PRODUCTS — EXACT SHAPE DESCRIPTIONS FOR PROMPTS:
 ${PRODUCT_SHAPES_REFERENCE}
 
-### EXACT PROMPT SHAPE TEXT PER PRODUCT (use verbatim, replace [COLOR]):
-- JOY: "hippo float Joy luxury inflatable pool recliner/lounger — semi-reclined chaise lounge shape with elevated backrest and headrest, approximately 30-40 degree reclined angle, [COLOR] colored, 'hippo' logo visible on surface"
-- CHILL: "hippo float Chill U-shaped horseshoe ring float — [COLOR] inflatable U/horseshoe ring shape, person sitting in center opening with arms resting on both sides of the ring, legs dangling through, 'hippo' logo on ring surface, GREEN anchor bag underwater"
-- FUN: "hippo float Fun large inflatable cylindrical torpedo tube — [COLOR] elongated oval cylinder shape like a giant premium pool noodle, person straddling it or leaning on it, 'hippo' logo visible on side"
-- VIBES: "hippo float Vibes flat rectangular inflatable mat — [COLOR] wide flat float with distinctive circular drainage holes/texture dots covering entire top surface, person lying flat on top, 'hippo' logo at top of mat"
-
-## ANCHOR SYSTEM — ALWAYS INCLUDE WHEN IN WATER:
-${ANCHOR_SYSTEM_RULES_TEXT}
-
-In prompts use: "blue twisted nylon rope connected from float going underwater, small bright yellow buoy sphere at water surface level on rope, hippo float waterproof dry bag anchor fully submerged underwater hanging below float, rope visibly taut"
-
-## CAMERA LANGUAGE TOOLKIT:
+## CAMERA LANGUAGE:
 - Wide establishing: "cinematic wide shot, 24mm lens, horizon line composition"
-- Product hero: "medium hero shot, 50mm lens, product center frame, shallow depth of field"
-- Lifestyle: "35mm handheld-feel stabilized, intimate lifestyle framing"
+- Product hero: "medium hero shot, 50mm lens, product center frame, shallow depth of field f/1.8"
+- Lifestyle intimate: "35mm handheld-feel stabilized, intimate lifestyle framing"
 - Aerial: "drone aerial shot, 24mm wide, bird's eye or 45-degree angle"
-- Underwater split: "split underwater/surface shot, waterline bisects frame, above and below water simultaneously"
-- Close detail: "85mm macro detail shot, razor-thin depth of field, bokeh background"
+- Underwater split: "split underwater/surface shot, waterline bisects frame exactly, above and below water simultaneously visible"
+- Close detail: "85mm macro detail shot, razor-thin depth of field f/1.4, smooth bokeh background"
 
 ## CAMERA LOOKS:
-- Premium: "ARRI Alexa Mini LF cinematic look, 2.39:1 anamorphic"
-- Social: "Sony Venice look, spherical lens, social-optimized 9:16"
-- Natural: "RED Komodo look, natural color science"
+- Premium: "ARRI Alexa Mini LF cinematic look, 2.39:1 anamorphic widescreen"
+- Social: "Sony Venice look, spherical 9:16 vertical format"
+- Natural: "RED Komodo look, natural color science, organic feel"
 
 ## LIGHTING PRESETS:
-- Golden hour: "warm golden hour sunlight, 5600K directional sun, soft wrap, warm highlights, long shadows"
-- Tropical noon: "bright natural tropical sunlight, 6500K, crystal clear visibility, no harsh shadows (softbox cloud)"
-- Sunset: "dramatic sunset, orange-pink sky, warm 3200K, backlit silhouette potential"
-- Pool luxury: "luxury resort pool lighting, soft reflected light from turquoise water, even and flattering"
+- Golden hour: "warm golden hour sunlight 5600K, directional side lighting, long shadows, sun-kissed skin, warm highlights"
+- Tropical noon: "bright tropical daylight 6500K, even soft light, crystal clear water visibility, soft cloud diffusion"
+- Sunset: "dramatic sunset orange-pink sky 3200K, backlit potential, warm reflections on water"
+- Pool luxury: "luxury resort soft pool light, turquoise water reflected light, even flattering fill"
 
-## ENVIRONMENTS (Hippo Float approved):
-- "crystal clear turquoise tropical beach water, white sand bottom visible, palm trees background"
-- "luxury resort infinity pool, white stone surround, tropical garden backdrop, mountain or ocean view"
-- "tropical lagoon with rock formations, crystal clear blue-green water, lush vegetation"
-- "pristine white sand beach shoreline, gentle turquoise waves, cloudless blue sky"
+## APPROVED ENVIRONMENTS:
+- "crystal clear turquoise tropical beach water, white sand visible below, palm trees in background"
+- "luxury infinity pool overlooking ocean, white stone surround, tropical garden, 5-star resort"
+- "tropical lagoon with natural rock formations, crystal clear blue-green water, lush palm vegetation"
+- "pristine white sand beach, gentle turquoise waves, cloudless Mediterranean blue sky"
+
+## SUBJECT DIRECTION:
+- "attractive fit model in premium designer swimwear, sun-kissed skin, relaxed natural expression"
+- "group of friends, diverse, premium swimwear, genuine laughter, candid lifestyle moment"
+- "product-only hero shot, no people, pure product beauty shot"
 
 ## OUTPUT FORMAT:
-Return JSON PromptPackage with all shots fully detailed.`,
+Return JSON ShotPrompt or PromptPackage. CRITICAL: the full_prompt field MUST include the exact locked product description text provided to you — do not alter it.`,
 ]);
 
 export class PromptDirectorAgent {
-  async scriptToPrompts(
-    script: Script,
-    product: string,
-    color: string
-  ): Promise<PromptPackage> {
-    const prompt = `Convert this Hippo Float ${product} script into a complete shot prompt package for AI image/video generation.
-
-PRODUCT: ${product}
-COLOR: ${color}
-SCRIPT: ${JSON.stringify(script, null, 2)}
-
-For each scene in the script, generate a complete ShotPrompt with:
-- Full cinematic image/video generation prompt (Hollywood quality)
-- Proper camera specs and lens
-- Lighting direction
-- Motion notes
-- Continuity rules to maintain across shots
-- Which AI tool to use (kling/runway for video, dalle3/midjourney for images)
-- Product accuracy checklist applied
-
-Return complete JSON PromptPackage.`;
-
-    return await generateStructuredOutput<PromptPackage>(prompt, {
-      system: PROMPT_DIRECTOR_SYSTEM,
-      temperature: 0.5,
-      max_tokens: 3000,
-    });
-  }
-
   async buildSingleImagePrompt(
     product: string,
     color: string,
     concept: string,
     style: string
   ): Promise<ShotPrompt> {
-    const prompt = `Build a single Hollywood-quality AI image generation prompt for:
+    const productLine = detectProductLine(product);
+    const colorDesc = getColorDescription(color);
+    const lockedShapeText = getPromptShapeText(productLine, color);
+    const shapeNegative = getShapeNegative(productLine);
+    const productNegative = `${shapeNegative}, ${ANCHOR_NEGATIVE}, ${UNIVERSAL_NEGATIVE_PROMPT}`;
 
-PRODUCT: ${product} (${color})
-CONCEPT: ${concept}
-STYLE: ${style}
+    const userPrompt = `Build a Hollywood-quality AI image prompt for this Hippo Float shot.
 
-Create a complete ShotPrompt with maximum detail for photorealistic commercial quality.
-The prompt must enforce all product rules and include the anchor system if in water.
-Return JSON ShotPrompt object.`;
+══ LOCKED PRODUCT SHAPE TEXT (copy verbatim into full_prompt — do not change) ══
+${lockedShapeText}
+══ END LOCKED TEXT ══
 
-    return await generateStructuredOutput<ShotPrompt>(prompt, {
+══ LOCKED ANCHOR SYSTEM (include verbatim in full_prompt for all water shots) ══
+${ANCHOR_LOCKED}
+══ END LOCKED ══
+
+CREATIVE BRIEF:
+- Color: ${colorDesc}
+- Concept/Scene: ${concept}
+- Style: ${style}
+
+BUILD THE full_prompt by:
+1. Start with the exact locked product shape text above
+2. Add: the model/subject description
+3. Add: the scene environment (crystal clear water, resort, beach, etc.)
+4. Add: the locked anchor system text
+5. Add: camera specs, lens, lighting, style modifier
+6. End with quality anchors: "photorealistic, commercial photography quality, 8K, sharp product detail, exact product geometry preserved, no AI shape distortion"
+
+Return a JSON ShotPrompt. The negative_prompt must include: "${productNegative}"`;
+
+    const shot = await generateStructuredOutput<ShotPrompt>(userPrompt, {
       system: PROMPT_DIRECTOR_SYSTEM,
-      temperature: 0.5,
-      max_tokens: 1000,
+      temperature: 0.4,
+      max_tokens: 1200,
     });
+
+    // Safety net: if AI didn't include the locked shape text, inject it
+    if (!shot.full_prompt.includes("hippo float")) {
+      shot.full_prompt = `${lockedShapeText}, ${ANCHOR_LOCKED}, ${shot.full_prompt}`;
+    }
+    if (!shot.negative_prompt || shot.negative_prompt.length < 20) {
+      shot.negative_prompt = productNegative;
+    }
+    shot.product_rules_applied = shot.product_rules_applied ?? [];
+    if (!shot.product_rules_applied.includes("shape locked")) {
+      shot.product_rules_applied.push("shape locked", "anchor system", "color verified");
+    }
+
+    return shot;
+  }
+
+  async scriptToPrompts(
+    script: Script,
+    product: string,
+    color: string
+  ): Promise<PromptPackage> {
+    const productLine = detectProductLine(product);
+    const colorDesc = getColorDescription(color);
+    const lockedShapeText = getPromptShapeText(productLine, color);
+    const shapeNegative = getShapeNegative(productLine);
+
+    const userPrompt = `Convert this Hippo Float script into a complete shot prompt package.
+
+══ LOCKED PRODUCT SHAPE TEXT (must appear verbatim in every shot's full_prompt) ══
+${lockedShapeText}
+══ END LOCKED ══
+
+══ LOCKED ANCHOR SYSTEM (include in every water shot) ══
+${ANCHOR_LOCKED}
+══ END LOCKED ══
+
+PRODUCT: ${product} (${colorDesc})
+SCRIPT:
+${JSON.stringify(script, null, 2)}
+
+For EACH scene, build a ShotPrompt where:
+- full_prompt STARTS with the locked product shape text, then adds scene/lighting/camera
+- negative_prompt includes: "${shapeNegative}, ${ANCHOR_NEGATIVE}"
+- generation_tool: use kling or runway for video scenes, midjourney for hero stills, dalle3 for product shots
+- Maintain visual continuity — same product, same color, same lighting style across all shots
+
+Return complete JSON PromptPackage with all shots.`;
+
+    const pkg = await generateStructuredOutput<PromptPackage>(userPrompt, {
+      system: PROMPT_DIRECTOR_SYSTEM,
+      temperature: 0.4,
+      max_tokens: 4000,
+    });
+
+    // Safety net: ensure every shot has the locked shape text
+    if (pkg.shots) {
+      pkg.shots = pkg.shots.map((shot) => {
+        if (!shot.full_prompt.includes("hippo float")) {
+          shot.full_prompt = `${lockedShapeText}, ${ANCHOR_LOCKED}, ${shot.full_prompt}`;
+        }
+        shot.product_rules_applied = shot.product_rules_applied ?? [];
+        if (!shot.product_rules_applied.includes("shape locked")) {
+          shot.product_rules_applied.push("shape locked", "anchor system", "color verified");
+        }
+        return shot;
+      });
+    }
+
+    return pkg;
   }
 
   async buildVideoPromptSequence(
@@ -141,34 +207,61 @@ Return JSON ShotPrompt object.`;
     sceneDescriptions: string[],
     platform: string
   ): Promise<ShotPrompt[]> {
-    const prompt = `Build a complete video prompt sequence for ${platform} for Hippo Float ${product} (${color}).
+    const productLine = detectProductLine(product);
+    const colorDesc = getColorDescription(color);
+    const lockedShapeText = getPromptShapeText(productLine, color);
+    const shapeNegative = getShapeNegative(productLine);
 
-SCENES: ${sceneDescriptions.map((s, i) => `${i + 1}. ${s}`).join("\n")}
+    const userPrompt = `Build a ${platform} video prompt sequence for Hippo Float ${product} (${colorDesc}).
 
-For each scene create a ShotPrompt optimized for AI video generation (Kling/Runway/Sora).
-Ensure visual continuity — same product, same color, same lighting across all shots.
+══ LOCKED SHAPE TEXT (verbatim in each shot) ══
+${lockedShapeText}
+══ END ══
+
+SCENES:
+${sceneDescriptions.map((s, i) => `${i + 1}. ${s}`).join("\n")}
+
+For each scene, build a ShotPrompt optimized for AI video (Kling/Runway).
+All shots must maintain visual continuity — same product color, same lighting, same location.
+negative_prompt must include: "${shapeNegative}, ${ANCHOR_NEGATIVE}"
+
 Return JSON array of ShotPrompt objects.`;
 
-    return await generateStructuredOutput<ShotPrompt[]>(prompt, {
+    const shots = await generateStructuredOutput<ShotPrompt[]>(userPrompt, {
       system: PROMPT_DIRECTOR_SYSTEM,
-      temperature: 0.5,
-      max_tokens: 3000,
+      temperature: 0.4,
+      max_tokens: 4000,
+    });
+
+    return (Array.isArray(shots) ? shots : []).map((shot) => {
+      if (!shot.full_prompt.includes("hippo float")) {
+        shot.full_prompt = `${lockedShapeText}, ${ANCHOR_LOCKED}, ${shot.full_prompt}`;
+      }
+      return shot;
     });
   }
 
   async buildSignatureShot(product: string, color: string): Promise<ShotPrompt> {
-    const concept = `Signature hero shot — the iconic underwater split shot showing the ${product} on surface with person enjoying it, and the anchor system visible underwater. This is Hippo Float's most distinctive shot.`;
-
-    return await this.buildSingleImagePrompt(product, color, concept, "CINEMATIC_LUXURY");
+    return this.buildSingleImagePrompt(
+      product,
+      color,
+      "Signature underwater split shot — above waterline: model relaxing on float, below waterline: anchor system fully visible with blue rope, yellow buoy, submerged anchor bag. The most iconic Hippo Float shot.",
+      "CINEMATIC_LUXURY"
+    );
   }
 
-  getNegativePrompt(): string {
-    return UNIVERSAL_NEGATIVE_PROMPT;
+  getNegativePrompt(product?: string): string {
+    if (product) {
+      const line = detectProductLine(product);
+      return `${getShapeNegative(line)}, ${ANCHOR_NEGATIVE}, ${UNIVERSAL_NEGATIVE_PROMPT}`;
+    }
+    return `${ANCHOR_NEGATIVE}, ${UNIVERSAL_NEGATIVE_PROMPT}`;
   }
 
   buildQuickPrompt(product: string, color: string, environment: string): string {
+    const line = detectProductLine(product);
     return promptEngine.buildImagePrompt({
-      product: product as "JOY" | "CHILL" | "FUN" | "VIBES",
+      product: line,
       color,
       style: "LIFESTYLE_BEACH",
       environment,

@@ -118,7 +118,7 @@ export const PRODUCTS: Record<ProductLine, ProductSpec> = {
       "Premium inflatable PVC construction",
     ],
     prompt_shape_text:
-      "hippo float Joy luxury inflatable pool recliner/lounger — semi-reclined chaise lounge shape with elevated backrest and headrest, approximately 30-40 degree reclined angle, [COLOR] colored, 'hippo' logo visible on surface",
+      "hippo float Joy [COLOR] luxury inflatable pool recliner/lounger — EXACT SHAPE: semi-reclined chaise lounge with raised backrest at 30-40 degree angle from horizontal, like a premium zero-gravity beach chair floating on water. Clear L-profile when viewed from the side: flat seat section transitions into a curved elevated backrest with integrated headrest, backrest rises 12-18 inches above the seat surface. The float is NEVER flat — it has a distinct reclining angle always visible. Glossy inflatable PVC material with visible seam lines. White 'hippo' text logo on the backrest surface. NOT a ring, NOT a flat mat, NOT a tube — always a reclining chair shape.",
   },
 
   CHILL: {
@@ -166,7 +166,7 @@ export const PRODUCTS: Record<ProductLine, ProductSpec> = {
       "Mesh seat for all-day comfort",
     ],
     prompt_shape_text:
-      "hippo float Chill U-shaped horseshoe ring float — [COLOR] inflatable U/horseshoe ring shape, person sitting in center opening with arms resting on both sides of the ring, legs dangling through, 'hippo' logo on ring surface, green anchor bag underwater",
+      "hippo float Chill [COLOR] U-shaped horseshoe ring float — EXACT SHAPE: open horseshoe ring when viewed from above, like a circular life ring with the front third removed creating a large entrance gap. Ring tube is approximately 8 inches in diameter. Person seated INSIDE the U-opening: sitting in a mesh fabric seat sling in the center, arms resting on both sides of the ring tube, legs hanging below the water surface through the open front. From above it is clearly U-shaped — NOT a full donut/circle, NOT a ring with the person on top. White 'hippo' text logo on the ring tube surface. CRITICAL: the anchor bag for Chill is always GREEN, never [COLOR].",
   },
 
   FUN: {
@@ -207,7 +207,7 @@ export const PRODUCTS: Record<ProductLine, ProductSpec> = {
       "Social float — great for groups",
     ],
     prompt_shape_text:
-      "hippo float Fun large inflatable cylindrical torpedo tube — [COLOR] elongated oval cylinder shape like a giant premium pool noodle, person straddling it or leaning on it, 'hippo' logo visible on side",
+      "hippo float Fun [COLOR] large inflatable cylindrical torpedo tube — EXACT SHAPE: elongated oval-cylinder, approximately 5-6 feet long and 14-16 inches in diameter. Oval cross-section slightly wider than tall. Both ends are smooth rounded sealed caps. Person either straddles it lengthwise like riding a horse, lies across it perpendicular, or holds it from the front for support. It is purely an inflatable cylinder/tube — NOT flat, NOT a ring, NOT a chair, NOT a donut. White 'hippo' text logo printed on the side of the cylinder.",
   },
 
   VIBES: {
@@ -254,7 +254,7 @@ export const PRODUCTS: Record<ProductLine, ProductSpec> = {
       "2-in-1 anchor bag keeps mat in place",
     ],
     prompt_shape_text:
-      "hippo float Vibes flat rectangular inflatable mat — [COLOR] wide flat float with distinctive circular drainage holes/texture dots covering entire top surface, person lying flat on top, 'hippo' logo at top of mat",
+      "hippo float Vibes [COLOR] flat rectangular inflatable mat — EXACT SHAPE: large flat rectangle approximately 68 inches long by 30 inches wide, only 4-5 inches thick at edges. DEFINING FEATURE: rows of raised circular texture dots covering the ENTIRE top surface, each circle approximately 2 inches in diameter in a uniform grid pattern, like a giant rubber mat with circular drainage holes. Completely FLAT — no backrest, no raised edges, no curvature whatsoever. Person lies horizontally completely flat on top. White 'hippo' text logo at the top end of the mat. NOT a chair, NOT a ring, NOT a tube, NOT curved in any way — always a flat rectangle.",
   },
 };
 
@@ -311,16 +311,53 @@ PRODUCTS & COLORS:
 - Vibes (HFVIBES, $69.99 MSRP): Pink, Orange, Flower Print Orange, Blue, Citrus Print Green
 `.trim();
 
+// Per-product what-it-is-NOT (for negative prompts and shape locking)
+export const PRODUCT_SHAPE_NEGATIVES: Record<ProductLine, string> = {
+  JOY: "wrong shape, flat mat, ring float, donut float, pool noodle, tube float, fully flat, no backrest, incorrect recliner angle, flat lounger without backrest elevation",
+  CHILL: "wrong shape, full circle ring, donut float, flat mat, recliner chair, tube float, person sitting on top of ring instead of inside it, anchor bag not green",
+  FUN: "wrong shape, flat mat, ring float, donut float, recliner chair, short tube, thin pool noodle shape, inflatable chair, person lying flat on mat",
+  VIBES: "wrong shape, recliner chair, ring float, tube float, raised edges, curved mat, no circular texture dots on surface, backrest visible",
+};
+
+// Color-specific prompt descriptions (for pattern colors)
+export const COLOR_DESCRIPTIONS: Record<string, string> = {
+  "pink": "solid vibrant hot pink (#FF69B4)",
+  "blue": "solid sky/aqua blue (#4FC3F7)",
+  "orange": "solid bright orange (#FF6600)",
+  "green": "solid lime/grass green (#7FBA00)",
+  "flower print orange": "orange base with large tropical flower print in pink, white, and yellow floral pattern",
+  "citrus print green": "green base with lemon/citrus slice print pattern in yellow and white, tropical citrus fruit design",
+};
+
+export function getColorDescription(colorName: string): string {
+  const key = colorName.toLowerCase();
+  return COLOR_DESCRIPTIONS[key] || colorName;
+}
+
 export function getProductSpec(line: ProductLine): ProductSpec {
   return PRODUCTS[line];
 }
 
 export function getPromptShapeText(line: ProductLine, color: string): string {
-  return PRODUCTS[line].prompt_shape_text.replace(/\[COLOR\]/g, color);
+  const colorDesc = getColorDescription(color);
+  return PRODUCTS[line].prompt_shape_text.replace(/\[COLOR\]/g, colorDesc);
+}
+
+export function getShapeNegative(line: ProductLine): string {
+  return PRODUCT_SHAPE_NEGATIVES[line];
 }
 
 export function getAllColors(line: ProductLine): ProductColor[] {
   return PRODUCTS[line].colors;
+}
+
+export function detectProductLine(productStr: string): ProductLine {
+  const s = productStr.toLowerCase();
+  if (s.includes("joy")) return "JOY";
+  if (s.includes("chill")) return "CHILL";
+  if (s.includes("fun")) return "FUN";
+  if (s.includes("vibes")) return "VIBES";
+  return "JOY";
 }
 
 export default PRODUCTS;
