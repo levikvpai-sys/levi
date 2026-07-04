@@ -27,6 +27,7 @@ hold the whole piece.
 | Hook Specialist | the first 3s that stop the scroll | `hook-researcher` | `references/hooks.md` |
 | Screenwriter | **characters**, structure, beats, dialogue | `script-architect` | `references/script-structure.md` |
 | Emotion / performance | how characters **feel** & show it (face, body) | `emotion-director` | `references/emotions.md` |
+| Movement / physicality | walking/gait, gesture, romance/intimacy, blocking | `movement-director` | `references/movement.md` |
 | Colorist | palette, grade, mood, lighting | `film-colorist` | `references/cinematography-color.md` |
 | Camera / framing | shot sizes, angles, composition | `camera-director` | `references/camera-angles.md` |
 | Camera movement | dolly, crane, tracking, orbit, drone | `camera-movement` | `references/camera-movement.md` |
@@ -37,10 +38,18 @@ hold the whole piece.
 |---|---|---|---|
 | Dance | there's dance/choreography | `dance-choreographer` | `references/dance.md` |
 | Combat | there's fighting/martial arts/action | `combat-choreographer` | `references/combat.md` |
-| Vehicles | there are cars/driving/chases | `vehicle-cinematographer` | `references/vehicles.md` |
+| Transport | any vehicle — car/bike/train/plane/boat, in motion | `vehicle-cinematographer` | `references/vehicles.md` |
+| VFX / effects | superhero powers, explosions, magic, sci-fi, destruction | `vfx-director` | `references/vfx.md` |
+| Period / design | any era/year — wardrobe, sets, props, "place + year" | `period-designer` | `references/period-design.md` |
 | Advertising | it's an ad/commercial/product video | `ad-director` | `references/advertising.md` |
 
-**10 specialists total.** Your job is a **precision, production-ready script** — nothing
+### Capstone (run LAST, for AI generation)
+
+| Expert | Does | Subagent | Reference |
+|---|---|---|---|
+| Prompt Engineer | fuses all outputs into hyper-realistic image/video prompts that don't look "AI" | `prompt-engineer` | `references/prompt-engineering.md` |
+
+**14 specialists total.** Your job is a **precision, production-ready script** — nothing
 vague, nothing generic. Every character earns our care; every emotion is felt; every
 line earns its place; every shot has intent.
 
@@ -80,20 +89,25 @@ deep, focused research + generation in its own domain simultaneously, then you f
 results. Send them in a single message (multiple Agent tool calls at once) so they run
 concurrently.
 
-**Select which specialists to dispatch** from the intake — don't run all 10 on every job:
+**Select which specialists to dispatch** from the intake — don't run all 14 on every job:
 - Almost always: `hook-researcher`, `script-architect`, `emotion-director`, `film-colorist`,
-  `camera-director`, and usually `camera-movement`.
+  `camera-director`, and usually `camera-movement` + `movement-director`.
 - Add domain specialists that fit the content: `dance-choreographer` (dance),
-  `combat-choreographer` (fights/action), `vehicle-cinematographer` (cars/driving),
+  `combat-choreographer` (fights/action), `vehicle-cinematographer` (any vehicle/transport),
+  `vfx-director` (effects/superhero/magic), `period-designer` (any era, or "place + year"),
   `ad-director` (it's an ad — often the lead agent for commercials).
 
 Pass each agent the full brief. Two dispatch orders both work:
 1. **Parallel-all** (fastest): send the selected agents at once with the brief; reconcile.
 2. **Hook-first** (tightest): run `hook-researcher` + `script-architect` first so the
-   characters, chosen hook, and beats exist, then pass those beats to the visual
-   specialists (`film-colorist`, `camera-director`, `camera-movement`, and any domain
-   agent) so their look/shots/choreography map to real beats. Prefer this when coherence
-   matters most.
+   characters, chosen hook, and beats exist, then pass those beats to the visual/domain
+   specialists (`film-colorist`, `camera-director`, `camera-movement`, `movement-director`,
+   `vfx-director`, `period-designer`, and any choreo/transport agent) so their
+   look/shots/choreography map to real beats. Prefer this when coherence matters most.
+
+Then **always finish with the capstone**: once the specialists return and you've fused the
+script, dispatch `prompt-engineer` LAST with the assembled per-shot details to produce the
+final hyper-realistic image/video prompts (see Phase 6).
 
 For a quick job you can skip the agents and work inline from the reference files —
 but when the user wants maximum precision, dispatch the specialists.
@@ -120,14 +134,25 @@ For each beat/scene, specify:
 - **Shot**: size + angle (see `references/camera-angles.md`) + **movement** (see
   `references/camera-movement.md`).
 - **Color/light**: palette + mood + grade note (see `references/cinematography-color.md`).
+- **Movement** (if relevant): gait, gesture, romance/intimacy, blocking (`references/movement.md`).
 - **Choreography** (if relevant): dance moves / fight techniques / vehicle rigs from the
   domain reference, tied to each beat and written prompt-ready.
+- **Effects** (if relevant): VFX/superhero/magic per beat (`references/vfx.md`).
+- **Period/design** (if relevant): era wardrobe/sets/props (`references/period-design.md`).
 - **Sound/beat**: music energy, SFX, silence, cut rhythm.
 This turns a script into a **shooting script** someone can actually execute (or
 that you can feed to an AI video generator with precise prompts).
 
 ### Phase 5 — Pressure-test
 Run the quality checklist below. Kill any weak line. Re-hook if the open is soft.
+
+### Phase 6 — Prompt capstone (for AI generation)
+When the output is for an AI generator (image/video, e.g. higgsfield), finish by dispatching
+`prompt-engineer` LAST with the fused per-shot details. It assembles every layer (emotion +
+movement/choreo + framing + camera move + color/light + period + VFX) into dense, ordered,
+**hyper-realistic** prompts — with real lens/film-stock/EXIF vocabulary and an imperfection
+layer — so the result reads as real footage, not "AI," plus negative prompts. See
+`references/prompt-engineering.md`.
 
 ---
 
@@ -195,10 +220,14 @@ dialogue) plus a beat sheet and a shot list — see `references/script-structure
 | Palette, grade, mood, lighting | `references/cinematography-color.md` |
 | Shots, angles, composition | `references/camera-angles.md` |
 | Camera movement (dolly, crane, tracking, orbit, drone) | `references/camera-movement.md` |
+| Movement (walking/gait, gesture, romance/intimacy, blocking) | `references/movement.md` |
 | Dance styles & moves | `references/dance.md` |
 | Combat / martial-arts choreography | `references/combat.md` |
-| Cars / driving / chase cinematography | `references/vehicles.md` |
+| Transport (all vehicles — car/bike/train/plane/boat, in motion) | `references/vehicles.md` |
+| VFX / effects (superhero, explosions, magic, sci-fi) | `references/vfx.md` |
+| Period & design (any era/year, wardrobe, sets, "place + year") | `references/period-design.md` |
 | Ads / commercials A→Z | `references/advertising.md` |
+| Prompt engineering (hyper-realistic image/video prompts) | `references/prompt-engineering.md` |
 
 Read the file(s) relevant to the current phase — don't dump all of them at once.
 Each is a dense, practical toolkit, not background reading.

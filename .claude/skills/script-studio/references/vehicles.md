@@ -40,6 +40,33 @@ A precise catalog of how to shoot people in/on/around vehicles. Descriptions are
 - **Reflections & light streaks** across the body sell premium; night city lights raking the
   paint is the luxury-ad staple.
 
+## All transport types (every vehicle in the world) — and how to shoot each in motion
+Cars are above; the same principles extend to every vehicle. For each: the hero angles + the
+best way to shoot it *in motion*.
+
+- **Motorcycle / scooter** — rider POV (bar-mounted), frame-mounted steadicam (forward/back, ~2ft
+  above the seat), low chase from an insert car, drone follow, and the classic lean-into-corner low
+  tracking shot; wheel/exhaust detail + motion blur = speed. Aggressive, visceral, close to the road.
+- **Bicycle** — rider POV, wheel-spoke detail, side tracking (drone or e-bike rig), low front-wheel
+  mount; standing-on-pedals climb, the downhill blur; light, human, kinetic.
+- **Train / subway** — exterior side tracking (parallel road/drone) for the long reveal, front-of-
+  engine mount, low trackside pass (camera near the rails, train roars past lens), interior corridor
+  travel, window-seat parallax (world streaking by). Scale, momentum, romance/nostalgia.
+- **Aircraft (plane / jet / helicopter)** — air-to-air from a camera ship or chase plane, wing/tail
+  mounts, cockpit POV, low fast fly-by past a static camera, belly/top drone pass, contrail reveals;
+  banking turns and the ground rushing below sell speed and freedom. Epic scale.
+- **Boat / ship / jet-ski** — bow mount facing back at the driver, low water-level tracking (spray on
+  lens), drone orbit and pull-back reveal on open water, wake/spray detail; wide for scale, low for speed.
+- **Bus / truck / big rig** — low front three-quarter for mass and power, wheel-level pass, cab
+  interior, drone follow on the open highway; weight and scale are the story.
+- **Horse / chariot / carriage** — low tracking alongside for the gallop, hooves/dust detail, rider
+  POV, wide crane for the landscape charge (ties to `period-design.md`).
+
+**Universal "in motion" toolkit:** (1) mount ON the vehicle for immersion/POV; (2) chase from
+ANOTHER vehicle/drone for the exterior beauty and speed; (3) low + wide lens near the ground/water
+for aggression and velocity; (4) aerial tracking/orbit for scope; (5) a static low pass where the
+vehicle roars past the lens; (6) detail inserts (wheels, spray, contrails) + motion blur for speed.
+
 ## Prompt-ready notation
-`SUBJECT: <driver/car> | RIG: <mount/rig> | SHOT: <size·angle> | MOVE: <parallax/orbit/tracking> | MOOD: <speed/luxury/tension>`
-e.g. `SUBJECT: driver | RIG: hood mount | SHOT: MCU through windshield | MOVE: subtle handheld | MOOD: focused, night city lights raking the glass.`
+`VEHICLE: <type> | SUBJECT: <driver/rider/vehicle> | RIG: <mount/chase/drone> | SHOT: <size·angle> | MOVE: <parallax/orbit/tracking/fly-by> | MOOD: <speed/luxury/scale/tension>`
+e.g. `VEHICLE: motorcycle | SUBJECT: rider leaning into a corner | RIG: low insert-car chase | SHOT: WS low angle | MOVE: tracking + slight orbit | MOOD: visceral speed, sparks, wet asphalt.`
