@@ -55,6 +55,24 @@ the limitation**, don't fight it:
 - **Video specifics**: keep hero action clear and central; keep crowd motion simple and shallow;
   fewer clearly-moving people = fewer artifacts.
 
+## Product prompts (keeping a specific object/product exact)
+When the subject is a **specific product or object that must stay accurate**, the #1 failure is
+the model distorting its shape, logo, or features. The fix is the **locked-text method**:
+
+1. **Locked description** — write an EXACT verbatim description of the object's geometry and
+   defining features, and **copy it into every prompt unchanged** (never rephrase or summarize).
+   Put it at the FRONT of the prompt — it's ground truth.
+2. **Layered negative prompt** — stack: object negatives (wrong shape / distorted geometry /
+   altered logo / invented features) + universal negatives (cartoon, render, CGI look, AI
+   artifacts, distorted proportions, blurry, watermark) + shot-specific negatives.
+3. **Safety-net check** — after assembling, verify the locked description is present verbatim;
+   prepend it if a rewrite dropped it.
+4. **Quality anchors** — end with `photorealistic, exact geometry preserved, no shape distortion,
+   logo readable, sharp detail`.
+5. **Continuity** — reuse the same locked description + color + lighting across a sequence.
+6. **Use the project's own references if present** — if the working project supplies canonical
+   product descriptions or a brand style, use those verbatim rather than inventing geometry.
+
 ## Image vs. video prompts
 - **Image**: a single decisive moment — nail composition, light, and detail; one clear focus.
 - **Video**: add **motion** (subject action beat-by-beat), **camera movement**, **timing/pacing**,

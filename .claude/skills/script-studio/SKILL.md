@@ -53,6 +53,14 @@ hold the whole piece.
 vague, nothing generic. Every character earns our care; every emotion is felt; every
 line earns its place; every shot has intent.
 
+> ⚠️ **DISPATCH ONLY WHAT FITS.** Never fire all 14 agents by reflex. Read the brief and
+> dispatch ONLY the specialists the content actually needs — a talking-head tip video needs
+> hook + script + emotion + colorist + camera (maybe 5), NOT combat/dance/vehicles/VFX/period.
+> A dance reel skips combat & vehicles. A car ad skips dance & combat. Running an irrelevant
+> agent wastes time and muddies the result. When unsure whether a domain specialist applies,
+> leave it out. Only `prompt-engineer` is always-last-when-generating (skip it if the output
+> isn't for an AI generator).
+
 ---
 
 ## Language
