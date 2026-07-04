@@ -34,6 +34,11 @@ shot/image — assembled, ordered, and pushed to maximum realism, plus negative 
 - One clear focus/action per prompt; don't overload.
 - Keep character/wardrobe/lighting descriptors **consistent across shots** so a sequence looks
   like one shoot.
+- **Crowds / many people**: never ask for 20 sharp faces — put 1–3 heroes sharp in the
+  foreground and push the crowd soft (shallow DoF, bokeh, motion blur, backs of heads,
+  silhouettes); minimize overlap; load the negative prompt against deformed/duplicated faces,
+  extra limbs, fused bodies; use a master image + image-to-video (I2V, denoise ~0.3–0.5) to keep
+  identities stable. See the crowd section in the reference.
 - Video prompts add motion, camera move, timing, and physics — describe the change over the clip.
 - Provide an iteration note: which axis to tweak first if the result is weak (usually light/detail).
 

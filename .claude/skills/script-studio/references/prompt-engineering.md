@@ -30,6 +30,31 @@ Models are trained on real photos with EXIF data — speak the language of a rea
 - **Avoid** the tells: plastic skin, perfect symmetry, over-smooth, over-saturated, "8k hyperreal
   render," extra fingers — push these to the **negative prompt**.
 
+## Crowds & many characters (staying real with lots of people)
+Rendering many people is the #1 source of AI distortion — warped/duplicated faces, merged
+limbs, extra fingers. Multiple faces at full detail is still a frontier, so **compose around
+the limitation**, don't fight it:
+- **Depth-of-field is your best friend** — put the 1–3 hero subjects **sharp in the foreground**
+  and push the crowd **soft** (shallow DoF, bokeh, `background crowd out of focus`). Blur hides
+  what the model can't render cleanly. This single move fixes most crowd shots.
+- **Layer the frame** — hero (sharp) / midground (slightly soft) / crowd (very soft or motion-
+  blurred). Never ask for 20 equally-detailed faces.
+- **Let the crowd read as a crowd** — backs of heads, silhouettes, turned-away bodies, partial
+  figures at the edges; a crowd is a *texture/mass*, not 20 portraits.
+- **Minimize overlap & interaction** — motion and detail degrade where bodies overlap; stage
+  clear spacing so limbs don't merge.
+- **Motion blur / long-exposure feel** on moving crowds (`crowd in motion blur`) both looks
+  cinematic and masks artifacts.
+- **Load the negative prompt hard**: `deformed faces, duplicated faces, extra limbs, extra
+  fingers, fused bodies, warped hands, cloned people, distorted background people`.
+- **Consistency workflow**: generate a clean **master image** of the hero(s), then use
+  **image-to-video (I2V)** or img2img (denoise ~0.3–0.5) to keep identity stable across shots —
+  the 2026 industry standard for multi-character/brand consistency. Never re-roll identity per shot.
+- **"Forensic accuracy" for the heroes** — for the faces that MUST be sharp, describe precise
+  features and add `no beautification, no smoothing, natural asymmetry, real skin texture`.
+- **Video specifics**: keep hero action clear and central; keep crowd motion simple and shallow;
+  fewer clearly-moving people = fewer artifacts.
+
 ## Image vs. video prompts
 - **Image**: a single decisive moment — nail composition, light, and detail; one clear focus.
 - **Video**: add **motion** (subject action beat-by-beat), **camera movement**, **timing/pacing**,
