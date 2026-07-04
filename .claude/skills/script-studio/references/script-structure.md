@@ -1,7 +1,8 @@
 # The Screenwriter — Structure, Beats & Dialogue
 
 Structure is what makes a script feel *inevitable* instead of random. Pick the
-framework by length, then fill it with lines that carry emotion and "crackers."
+framework by length, populate it with vivid characters, and fill it with lines that
+carry emotion — including at least one quotable signature line.
 
 ---
 
@@ -26,7 +27,7 @@ The workhorse for social video. Five moves:
 3. **ESCALATION / VALUE (the body)** — deliver the goods in rising steps. Each
    step earns the next second. Use open loops and re-hooks. This is 60–70% of runtime.
 4. **PAYOFF / TURN (near end)** — the reveal, the result, the punchline, the
-   transformation. Pays back the hook's promise. This is the "cracker."
+   transformation. Pays back the hook's promise. This is often the signature moment.
 5. **CTA / BUTTON (last 1–3s)** — one clear ask ("follow for part 2," "save this")
    or a resonant final image/line that loops back to the hook.
 
@@ -90,24 +91,49 @@ hope→despair). If nothing shifts, cut or combine.
 
 ---
 
-## Dialogue & "Crackers"
+## Characters (the people who carry the story)
 
-"Crackers" = the lines and turns people quote, screenshot, and rewatch. Engineer them.
+Story is character under pressure. Build every character with precision — a script
+lives or dies on whether we believe and care about the people in it.
+
+For each meaningful character, define:
+- **Want (external goal)** — what they're consciously chasing in the story.
+- **Need (internal truth)** — what they actually must learn/heal; often the opposite
+  of the want. The arc is the gap between want and need closing.
+- **Flaw / wound** — the lie they believe or the scar that drives them; the obstacle
+  inside. This is what makes them human and what the story pressures.
+- **Stakes** — what they lose if they fail (external + emotional).
+- **Arc** — who they are at the start → who they become by the Final Image. Show the
+  change, don't state it. (Flat/unchanging characters can work for a hero-in-motion.)
+- **Voice** — how they speak: rhythm, vocabulary, verbal tics. You should know who's
+  talking with the names covered.
+- **Backstory (iceberg)** — know far more than you show; reveal only what pressure surfaces.
+- **Visual / casting note** — look, wardrobe, physicality, energy (feeds the DP & colorist).
+
+Support roles exist to test, mirror, or pressure the hero: the **mentor** (theme-carrier),
+the **antagonist** (embodies the opposing value — as strong as the hero), the **ally/foil**,
+the **B-story** relationship that carries the lesson. Give even a one-line character a want.
+
+**Character-first hook**: for short-form, a vivid character or point of view *is* the hook —
+a specific person in a specific situation stops the scroll faster than a generic voice.
+
+## Dialogue & signature lines
+
+Dialogue is action — a character's strategy to get what they want. Make it sharp:
 
 - **Subtext over on-the-nose.** Characters rarely say exactly what they mean; the
   gap is where drama lives.
 - **Every character wants something** in every scene — dialogue is strategy toward it.
-- **Give each character a distinct voice** — rhythm, vocabulary, verbal tics. You
-  should know who's speaking with the names covered.
-- **Compress.** Cut every word the meaning survives without. Real speech trimmed of
-  filler.
+- **Compress.** Cut every word the meaning survives without. Real speech trimmed of filler.
 - **The turn/button**: end scenes and beats on a strong line — a twist, a punchline,
   a gut-punch, or an unanswered question.
 - **Specificity is charisma.** Concrete nouns and precise detail feel true; generic
   lines feel fake.
-- **Rule of three & callback**: set up a phrase/image early, pay it off later — the
-  callback lands as a "cracker."
+- **Rule of three & callback**: set up a phrase/image early, pay it off later.
 - **Say it once, hard.** Don't repeat the theme five times; state it powerfully once.
+- **Signature line (the "money line")**: engineer at least one quotable, screenshot-worthy
+  line or turn per piece — the line the audience repeats. It comes from character + specificity,
+  not from cleverness for its own sake.
 
 ---
 
