@@ -26,6 +26,7 @@ hold the whole piece.
 |---|---|---|---|
 | Hook Specialist | the first 3s that stop the scroll | `hook-researcher` | `references/hooks.md` |
 | Screenwriter | **characters**, structure, beats, dialogue | `script-architect` | `references/script-structure.md` |
+| Emotion / performance | how characters **feel** & show it (face, body) | `emotion-director` | `references/emotions.md` |
 | Colorist | palette, grade, mood, lighting | `film-colorist` | `references/cinematography-color.md` |
 | Camera / framing | shot sizes, angles, composition | `camera-director` | `references/camera-angles.md` |
 | Camera movement | dolly, crane, tracking, orbit, drone | `camera-movement` | `references/camera-movement.md` |
@@ -39,9 +40,9 @@ hold the whole piece.
 | Vehicles | there are cars/driving/chases | `vehicle-cinematographer` | `references/vehicles.md` |
 | Advertising | it's an ad/commercial/product video | `ad-director` | `references/advertising.md` |
 
-**9 specialists total.** Your job is a **precision, production-ready script** — nothing
-vague, nothing generic. Every character earns our care; every line earns its place;
-every shot has intent.
+**10 specialists total.** Your job is a **precision, production-ready script** — nothing
+vague, nothing generic. Every character earns our care; every emotion is felt; every
+line earns its place; every shot has intent.
 
 ---
 
@@ -79,9 +80,9 @@ deep, focused research + generation in its own domain simultaneously, then you f
 results. Send them in a single message (multiple Agent tool calls at once) so they run
 concurrently.
 
-**Select which specialists to dispatch** from the intake — don't run all 9 on every job:
-- Almost always: `hook-researcher`, `script-architect`, `film-colorist`, `camera-director`,
-  and usually `camera-movement`.
+**Select which specialists to dispatch** from the intake — don't run all 10 on every job:
+- Almost always: `hook-researcher`, `script-architect`, `emotion-director`, `film-colorist`,
+  `camera-director`, and usually `camera-movement`.
 - Add domain specialists that fit the content: `dance-choreographer` (dance),
   `combat-choreographer` (fights/action), `vehicle-cinematographer` (cars/driving),
   `ad-director` (it's an ad — often the lead agent for commercials).
@@ -105,7 +106,9 @@ say *why*. The hook is the single highest-leverage line in the whole script.
 ### Phase 3 — Characters & structure
 First build the **characters** — for each, define want, need, flaw/wound, stakes, arc,
 and voice (see `references/script-structure.md`). Story is character under pressure; a
-vivid, specific character is itself a hook. Then pick the structure that fits the length:
+vivid, specific character is itself a hook. Map each character's **emotional arc** and how
+they *show* each feeling — face, body, voice (see `references/emotions.md`); name the
+emotion + intensity + its cause, not just "sad." Then pick the structure that fits the length:
 - Short-form → the **Micro-Beat** structure (Hook → Context → Escalation →
   Payoff → CTA).
 - Long-form / film → **Save the Cat 15 beats** or the **8-sequence** method.
@@ -144,8 +147,8 @@ HOOK (0–3s): <the chosen hook, verbatim>
   ↳ shot: <size · angle · movement> | look: <palette · grade>
 
 ── BEAT SHEET ──
-[00:00] HOOK      | LINE/VO: "…"        | SHOT: … | COLOR: … | SFX/MUSIC: …
-[00:03] SETUP     | LINE/VO: "…"        | SHOT: … | COLOR: … | …
+[00:00] HOOK      | LINE/VO: "…" | EMOTION: … | SHOT: … | COLOR: … | SFX/MUSIC: …
+[00:03] SETUP     | LINE/VO: "…" | EMOTION: … | SHOT: … | COLOR: … | …
 [00:xx] ESCALATE  | …
 [00:xx] PAYOFF    | …
 [00:xx] CTA       | …
@@ -168,6 +171,8 @@ dialogue) plus a beat sheet and a shot list — see `references/script-structure
 - [ ] **No wasted words.** Every line advances story, emotion, or the promise.
 - [ ] **Characters have depth** — each key character has a clear want, need, flaw, and
       arc; we understand and care about them.
+- [ ] **Emotion is felt, not stated** — each emotional beat has a named feeling + intensity
+      + cause, shown in the body (face, posture, breath); the peak is earned.
 - [ ] **A clear "one thing"** the viewer remembers.
 - [ ] **At least one signature line** — a line/turn/reveal worth quoting or re-watching.
 - [ ] **Escalation**, not a flat line — tension/curiosity rises to the payoff.
@@ -186,6 +191,7 @@ dialogue) plus a beat sheet and a shot list — see `references/script-structure
 |---|---|
 | The opening / stopping the scroll | `references/hooks.md` |
 | Characters, beats, dialogue, structure, formatting | `references/script-structure.md` |
+| Emotions & performance (feelings, face/body, animals) | `references/emotions.md` |
 | Palette, grade, mood, lighting | `references/cinematography-color.md` |
 | Shots, angles, composition | `references/camera-angles.md` |
 | Camera movement (dolly, crane, tracking, orbit, drone) | `references/camera-movement.md` |
