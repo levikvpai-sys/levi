@@ -25,8 +25,21 @@ When this skill is active you operate as four stacked experts working in concert
 4. **The Director of Photography** — camera angles, shot sizes, movement, and
    composition that make people *feel* something. → `references/camera-angles.md`
 
+Each of the four experts is also backed by a **dispatchable research subagent** in
+`.claude/agents/` — use them for deep, parallel, per-project research (see
+Phase 1 below for how to dispatch them):
+
+| Expert | Subagent | Reference |
+|---|---|---|
+| Hook Specialist | `hook-researcher` | `references/hooks.md` |
+| Screenwriter | `script-architect` | `references/script-structure.md` |
+| Cinematographer/Colorist | `film-colorist` | `references/cinematography-color.md` |
+| Director of Photography | `camera-director` | `references/camera-angles.md` |
+
 Your job is to produce a **precision, production-ready script** — nothing vague,
-nothing generic. Every line earns its place; every shot has intent.
+nothing generic. Every line earns its place; every shot has intent. You are the
+**orchestrator**: dispatch the specialists, then fuse their output into ONE coherent
+script (the specialists research their domain; only you hold the whole piece).
 
 ---
 
@@ -57,15 +70,26 @@ your assumptions):
 - **Assets/constraints**: talent, location, budget, whether it's AI-generated
   (e.g. via the higgsfield tools), animation, or live action.
 
-### Phase 1 — Research (do it, don't guess)
-The user explicitly wants *fresh, real-world* research every time. When the topic
-is trend-sensitive (hooks, what's going viral now, a specific niche, a reference
-film's look), **run web searches** before writing. Concretely:
-- Search current viral hooks/patterns in the exact niche (`WebSearch`).
-- Pull 2–3 reference videos/films for the *look* and name what makes them work.
-- Note what's saturated (so we avoid the cliché) and what's rising.
-- Cite what you found so the choices are defensible, not arbitrary.
-Load the relevant reference file(s) for the deep frameworks.
+### Phase 1 — Research (dispatch the specialists, in parallel)
+The user explicitly wants *fresh, real-world* research every time — "crazy research."
+The best way to get it: **dispatch the four subagents in parallel** so each does deep,
+focused research + generation in its own domain simultaneously, then you fuse the
+results. Send them in a single message (multiple Agent tool calls at once) so they
+run concurrently:
+- `hook-researcher` → what stops the scroll in this exact niche NOW + 5 hook options.
+- `script-architect` → the beat sheet + real lines + "crackers."
+- `film-colorist` → palette, grade, lighting, mood arc + reference look.
+- `camera-director` → the shot list (size/angle/movement) that fits each beat.
+
+Pass each agent the full brief. Two dispatch orders both work:
+1. **Parallel-all** (fastest): send all four at once with the brief; then reconcile.
+2. **Hook-first** (tightest): run `hook-researcher` + `script-architect` first so the
+   chosen hook and beats exist, then pass those beats to `film-colorist` +
+   `camera-director` so their look/shots map to real beats. Prefer this when coherence
+   matters most.
+
+For a quick job you can skip the agents and work inline from the reference files —
+but when the user wants maximum precision, dispatch the specialists.
 
 ### Phase 2 — Hook first
 Design the hook before the body. Generate **3–5 distinct hook options** using
