@@ -31,6 +31,7 @@ hold the whole piece.
 | Colorist | palette, grade, mood, lighting | `film-colorist` | `references/cinematography-color.md` |
 | Camera / framing | shot sizes, angles, composition | `camera-director` | `references/camera-angles.md` |
 | Camera movement | dolly, crane, tracking, orbit, drone | `camera-movement` | `references/camera-movement.md` |
+| Sound & music | score/spotting, leitmotif, Suno prompts, SFX/sound design | `sound-composer` | `references/sound-music.md` |
 
 ### Domain specialists (dispatch when the content calls for it)
 
@@ -49,11 +50,11 @@ hold the whole piece.
 |---|---|---|---|
 | Prompt Engineer | fuses all outputs into hyper-realistic image/video prompts that don't look "AI" | `prompt-engineer` | `references/prompt-engineering.md` |
 
-**14 specialists total.** Your job is a **precision, production-ready script** — nothing
+**15 specialists total.** Your job is a **precision, production-ready script** — nothing
 vague, nothing generic. Every character earns our care; every emotion is felt; every
 line earns its place; every shot has intent.
 
-> ⚠️ **DISPATCH ONLY WHAT FITS.** Never fire all 14 agents by reflex. Read the brief and
+> ⚠️ **DISPATCH ONLY WHAT FITS.** Never fire all 15 agents by reflex. Read the brief and
 > dispatch ONLY the specialists the content actually needs — a talking-head tip video needs
 > hook + script + emotion + colorist + camera (maybe 5), NOT combat/dance/vehicles/VFX/period.
 > A dance reel skips combat & vehicles. A car ad skips dance & combat. Running an irrelevant
@@ -97,13 +98,15 @@ deep, focused research + generation in its own domain simultaneously, then you f
 results. Send them in a single message (multiple Agent tool calls at once) so they run
 concurrently.
 
-**Select which specialists to dispatch** from the intake — don't run all 14 on every job:
+**Select which specialists to dispatch** from the intake — don't run all 15 on every job:
 - Almost always: `hook-researcher`, `script-architect`, `emotion-director`, `film-colorist`,
   `camera-director`, and usually `camera-movement` + `movement-director`.
 - Add domain specialists that fit the content: `dance-choreographer` (dance),
   `combat-choreographer` (fights/action), `vehicle-cinematographer` (any vehicle/transport),
   `vfx-director` (effects/superhero/magic), `period-designer` (any era, or "place + year"),
   `ad-director` (it's an ad — often the lead agent for commercials).
+- Add `sound-composer` whenever the piece needs music or an audio plan (score, Suno prompts,
+  SFX/sound design) — usually late, once the beats and emotion arc exist.
 
 Pass each agent the full brief. Two dispatch orders both work:
 1. **Parallel-all** (fastest): send the selected agents at once with the brief; reconcile.
@@ -147,9 +150,15 @@ For each beat/scene, specify:
   domain reference, tied to each beat and written prompt-ready.
 - **Effects** (if relevant): VFX/superhero/magic per beat (`references/vfx.md`).
 - **Period/design** (if relevant): era wardrobe/sets/props (`references/period-design.md`).
-- **Sound/beat**: music energy, SFX, silence, cut rhythm.
+- **Sound/beat**: music energy, SFX, silence, cut rhythm (see `references/sound-music.md`;
+  dispatch `sound-composer` for a full score + Suno prompts + sound design).
 This turns a script into a **shooting script** someone can actually execute (or
 that you can feed to an AI video generator with precise prompts).
+
+> 🔊 **Keep music and SFX separate for AI video.** When feeding prompts to an AI video
+> generator, request **diegetic sound effects & ambience ONLY — no music**. The score is
+> composed separately (via `sound-composer` → Suno) and laid over in the edit, so it stays
+> under your control.
 
 ### Phase 5 — Pressure-test
 Run the quality checklist below. Kill any weak line. Re-hook if the open is soft.
@@ -228,6 +237,7 @@ dialogue) plus a beat sheet and a shot list — see `references/script-structure
 | Palette, grade, mood, lighting | `references/cinematography-color.md` |
 | Shots, angles, composition | `references/camera-angles.md` |
 | Camera movement (dolly, crane, tracking, orbit, drone) | `references/camera-movement.md` |
+| Sound & music (score, spotting, leitmotif, Suno prompts, SFX/sound design) | `references/sound-music.md` |
 | Movement (walking/gait, gesture, romance/intimacy, blocking) | `references/movement.md` |
 | Dance styles & moves | `references/dance.md` |
 | Combat / martial-arts choreography | `references/combat.md` |
