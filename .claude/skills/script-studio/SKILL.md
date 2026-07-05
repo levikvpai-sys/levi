@@ -155,10 +155,11 @@ For each beat/scene, specify:
 This turns a script into a **shooting script** someone can actually execute (or
 that you can feed to an AI video generator with precise prompts).
 
-> 🔊 **Keep music and SFX separate for AI video.** When feeding prompts to an AI video
-> generator, request **diegetic sound effects & ambience ONLY — no music**. The score is
-> composed separately (via `sound-composer` → Suno) and laid over in the edit, so it stays
-> under your control.
+> 🔊 **SFX in the prompt, music separate.** When feeding prompts to an AI video generator,
+> write each shot's specific diegetic sound **into its prompt** (a "Sound:" line ending
+> "diegetic sound effects only, no music") so the in-world audio is generated with the footage.
+> Only the musical **score** is kept out of the render — composed separately (via
+> `sound-composer` → Suno) and laid over in the edit, so it stays under your control.
 
 ### Phase 5 — Pressure-test
 Run the quality checklist below. Kill any weak line. Re-hook if the open is soft.

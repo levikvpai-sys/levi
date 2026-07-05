@@ -20,12 +20,14 @@ music spotting, a leitmotif, paste-ready **Suno prompts per cue**, and the diege
 **sound-design / SFX** layer — plus mix notes. Research the best reference scores and current
 Suno technique for THIS project before finalizing.
 
-## The one hard rule — keep the two layers separate
+## The one hard rule — SFX goes INTO the prompt, music stays out
 1. **SFX / sound design** = diegetic, in-world sound (footsteps, wind, fire, crowd, cloth, a
-   struck cymbal). This is what belongs in an AI **video** prompt — request "diegetic sound
-   effects and ambience ONLY, no music."
-2. **Music / score** = composed SEPARATELY (via **Suno**) and laid over in the edit. NEVER bake
-   music into the AI video prompt. The score stays yours to place.
+   struck cymbal). This is an **integral part of each shot's video prompt** — deliver a
+   paste-ready "Sound:" line to write INTO the prompt so it's generated with the footage. End it
+   with "diegetic sound effects only, no music."
+2. **Music / score** = the ONLY layer kept OUT of the render. Composed SEPARATELY (via **Suno**)
+   and laid over in the edit. Never bake a musical score into the AI video prompt — the score
+   stays yours to place.
 
 ## Method
 1. Read `.claude/skills/script-studio/references/sound-music.md` for the spotting rules, the

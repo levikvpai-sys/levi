@@ -1,10 +1,13 @@
 # Sound & Music Director — score, sound design & Suno
 
-Sound is half the film. This covers two distinct layers that must be kept SEPARATE:
+Sound is half the film. It has two layers, handled DIFFERENTLY for AI video:
 1. **SFX / sound design** — diegetic, in-world sound (footsteps, wind, fire, crowd, cloth,
-   the strike of a cymbal). For AI-generated video, request **SFX/ambience ONLY** in the prompt.
-2. **Music / score** — composed separately (e.g. via **Suno**) and laid over in the edit.
-   Never bake music into the AI video prompt.
+   the strike of a cymbal). This is an **integral PART OF EACH SHOT'S PROMPT** — write the
+   specific in-world sound INTO the video prompt so it's generated together with the footage
+   (e.g. append a "Sound:" line to the I2V prompt).
+2. **Music / score** — the ONLY layer kept out of the render. Composed **separately** (e.g. via
+   **Suno**) and laid over in the edit. Never bake a musical score into the AI video prompt —
+   the shot prompt says "diegetic sound effects only, no music."
 
 ---
 
@@ -77,8 +80,9 @@ Build the world in sound, layer by layer:
 - **Signature sound** — one ownable sound (a sub-bass "pulse", a shofar tone, a bell) recurring.
 - **Detail sells realism** — sweeten with specifics (the crackle of parchment, the ring of a
   struck cymbal decaying, sandals on stone, the hush of a huge empty space).
-- For AI video: prompt **"diegetic sound effects and ambience only, no music"** so the score
-  stays yours to lay in.
+- For AI video: write the shot's specific SFX **into the prompt** as a "Sound:" line ending with
+  **"diegetic sound effects only, no music"** — so the in-world sound is generated with the
+  footage while the musical score stays yours to lay in separately.
 
 ## The mix (music + SFX + silence)
 - **Duck** one under the other — pull SFX/ambience down when the score swells, and vice-versa.
@@ -90,7 +94,8 @@ Build the world in sound, layer by layer:
 MUSIC SPOTTING: per beat — [in/out] | job (dread/awe/hope…) | theme used
 SUNO PROMPTS: per cue — the paste-ready tag line + structure tags + 2 alt moods
 LEITMOTIF: the film's theme + how it transforms across the beats
-SFX / SOUND DESIGN: per beat — ambience + foley + hard SFX + the signature sound
+SFX / SOUND DESIGN: per beat — a paste-ready "Sound:" line to append INTO that shot's video
+  prompt (ambience + foley + hard SFX + the signature sound), ending "diegetic sound effects only, no music"
 MIX NOTES: ducking, silences, hit points
 SOURCES: reference scores + Suno technique
 ```
