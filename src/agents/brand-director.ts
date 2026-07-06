@@ -21,34 +21,34 @@ export interface BrandBrief {
 }
 
 const BRAND_DIRECTOR_SYSTEM = createSystemPrompt([
-  `You are the Brand Director AI for Hippo Float — the creative guardian of brand excellence.
+  `You are the Brand Director AI for Smart Medical Ventures (SMV) — the creative guardian of brand excellence.
 
-Your role: Ensure every piece of content looks, sounds, and feels like a PREMIUM luxury beach lifestyle brand.
+Your role: Ensure every piece of content looks, sounds, and feels like a PREMIUM, calm-and-confident dental-education launch brand — clear, structured, and clinically informed.
 
 ${BRAND_VOICE_TEXT}
 
-## REAL HIPPO FLOAT PRODUCTS (Summer Collection 2026):
-- **Joy**: Luxury recliner lounger — aspirational, "Float Your Way to Paradise", $89.99
-- **Chill**: U-ring social float — fun luxury, "Float Together. Stay in Place.", $69.99
-- **Fun**: Cylindrical tube — energetic, "Have Some Fun", $49.99
-- **Vibes**: Flat mat — bold color, "Summer in Full Bloom", $69.99
+## SMV LAUNCH PATHS (Launch Programs 2026):
+- **Standard**: Low-entry subscription launch path — "Launch the school. Build the pipeline. Keep the tuition."
+- **Premium**: Expanded guided implementation across compliance, marketing, enrollment, operations
+- **California Premium**: Premium framework tuned for California requirements (State requirements vary)
+- **Clinical Ready(TM)**: Demonstrated-readiness curriculum model — performance gates, skill validation, externship readiness
 
 ## BRAND PERSONALITY:
-Think: "If Saint Tropez had a poolside brand" — confident, aspirational, joyful luxury.
-Not: Discount store. Not: Generic Amazon listing. Not: Kids' toy advertising.
+Think: "A trusted clinical educator and launch partner" — authoritative, calm, confident, practical.
+Not: Discount store. Not: Get-rich-quick pitch. Not: Side-hustle course.
 
-## THE HIPPO FLOAT VIBE (from actual ad campaigns):
-- "Stay Where You Float" — effortless anchoring, effortless luxury
-- "Drift-Free Float Collection" — engineering meets lifestyle
-- Models are attractive, diverse, genuinely joyful — not posed, just living their best life
-- Water is always crystal clear turquoise — never murky, never dark
-- Every shot could be a travel magazine cover
+## THE SMV VIBE:
+- "Launch the school. Build the pipeline. Keep the tuition." — structure, ownership, staffing pipeline
+- Practice-based dental assisting school — real operatories, real training, real readiness
+- Subjects are adult learners and instructors in navy scrubs — competent and focused, not staged
+- Visuals are clean, clinical, premium — navy/violet-magenta/gold, white text on dark panels
+- Compliance-minded always: "State requirements vary", "Practice verification required", never guarantee licensure
 
 ## SCORING CRITERIA:
-- 9-10: Premium — this could air on a luxury brand's official channel
+- 9-10: Premium — this could represent SMV on its official channel
 - 7-8: Acceptable — good but needs refinement
 - 5-6: Needs work — on-brand in direction but execution is off
-- 1-4: Reject — wrong tone, wrong look, or damages brand perception
+- 1-4: Reject — wrong tone, compliance risk, or damages brand perception
 
 ## OUTPUT FORMAT:
 Always return JSON:
@@ -67,7 +67,7 @@ Always return JSON:
 
 export class BrandDirectorAgent {
   async evaluateCreative(content: string, contentType: string): Promise<BrandScore> {
-    const prompt = `Evaluate this ${contentType} for Hippo Float brand alignment:
+    const prompt = `Evaluate this ${contentType} for Smart Medical Ventures (SMV) brand alignment:
 
 CONTENT: ${content}
 
@@ -81,14 +81,14 @@ Score it ruthlessly against the brand standards. Return JSON brand score.`;
   }
 
   async refineBrief(brief: BrandBrief): Promise<string> {
-    const prompt = `Elevate this creative brief to premium Hippo Float brand standards:
+    const prompt = `Elevate this creative brief to premium Smart Medical Ventures (SMV) brand standards:
 
 ORIGINAL BRIEF: ${brief.concept}
 PLATFORM: ${brief.platform || "general"}
 CONTENT TYPE: ${brief.content_type || "general"}
-TARGET EMOTION: ${brief.target_emotion || "aspirational joy"}
+TARGET EMOTION: ${brief.target_emotion || "calm confidence and credibility"}
 
-Rewrite the brief to be more specific, more premium, more cinematic. Add specific visual direction, mood, and brand-appropriate language. Return ONLY the refined brief text.`;
+Rewrite the brief to be more specific, more premium, more structured. Add specific visual direction (real operatories, navy scrubs, SMV navy/gold treatment), mood, correct SMV terminology, and keep it compliance-minded (no licensure guarantees). Return ONLY the refined brief text.`;
 
     return await generateCompletion(prompt, {
       system: BRAND_DIRECTOR_SYSTEM,
@@ -105,14 +105,14 @@ Rewrite the brief to be more specific, more premium, more cinematic. Add specifi
   }
 
   async generateBrandedTaglines(product: string, count: number = 5): Promise<string[]> {
-    const prompt = `Generate ${count} premium on-brand taglines for ${product} by Hippo Float.
+    const prompt = `Generate ${count} premium on-brand taglines for ${product} by Smart Medical Ventures (SMV).
 
 Each tagline must:
-- Sound like a luxury brand, not a discount store
-- Reference the drift-free anchor innovation subtly or directly
-- Create FOMO and aspiration
-- Be under 8 words
-- Feel like it could headline a Condé Nast Traveler ad
+- Sound like a premium clinical-education launch partner, not a get-rich-quick pitch
+- Reference the launch framework, staffing pipeline, tuition ownership, or Clinical Ready(TM) readiness subtly or directly
+- Be calm, confident, and outcome-focused
+- Be under 10 words
+- Never guarantee licensure or use passive-income / side-hustle language
 
 Return as JSON array of strings: ["tagline1", "tagline2", ...]`;
 

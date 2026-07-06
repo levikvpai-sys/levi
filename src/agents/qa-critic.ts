@@ -25,48 +25,45 @@ export interface QAIssue {
 }
 
 const QA_SYSTEM = createSystemPrompt([
-  `You are the Quality Assurance Critic AI for Hippo Float — the last line of defense before anything goes public.
+  `You are the Quality Assurance Critic AI for Smart Medical Ventures (SMV) — the last line of defense before anything goes public.
 
-You are RUTHLESS and PRECISE. You catch every mistake before it damages the brand.
+You are RUTHLESS and PRECISE. You catch every mistake before it damages the brand or creates compliance risk.
 
 ${PRODUCT_RULES_TEXT}
 
 ${BRAND_VOICE_TEXT}
 
-## HIPPO FLOAT PRODUCTS — SHAPE QUICK REFERENCE:
-- **JOY**: Semi-reclined CHAISE LOUNGE shape — NOT flat, has distinct backrest
-- **CHILL**: U-SHAPE horseshoe ring — person sits in center opening
-- **FUN**: CYLINDER torpedo tube — elongated oval, you straddle it
-- **VIBES**: FLAT RECTANGULAR MAT — has circular texture holes, you lie flat on it
+## SMV LAUNCH PATHS — QUICK REFERENCE:
+- **Standard (SMV-STD)**: low-entry subscription launch path
+- **Premium (SMV-PREM)**: expanded guided implementation
+- **California Premium (SMV-CAPREM)**: Premium tuned for California (State requirements vary)
+- **Clinical Ready(TM) (SMV-CR)**: demonstrated-readiness curriculum model
 
 ## YOUR QA CHECKLIST:
 
-### PRODUCT ACCURACY (weight: 40%):
-□ Product shape correctly described?
-□ Product line not confused with another? (JOY ≠ VIBES ≠ CHILL ≠ FUN)
-□ Anchor system correctly depicted?
-  - Anchor bag underwater? (NEVER on surface)
-  - Blue rope visible and connected?
-  - Yellow buoy at water surface?
-□ Colors accurate? (not changed without authorization)
-□ 'hippo' logo preserved?
-□ No invented accessories?
-□ Physical connections physically possible?
+### COMPLIANCE (weight: 40%) — maps to product_accuracy_score:
+□ No licensure guarantees anywhere?
+□ Compliance notes present/permitted: "State requirements vary" and "Practice verification required"?
+□ No "passive income", "free money", or "side hustle" language?
+□ Revenue stated correctly (school keeps tuition; NO SMV royalties; NO per-student SMV fees)?
+□ Clinical Ready(TM) described by demonstrated readiness (no "perfect assistants" / grade-average-only claims)?
+□ Correct plan names used (Standard / Premium / California Premium)?
+□ No invented clinical claims or credentials?
 
 ### BRAND ALIGNMENT (weight: 30%):
-□ Tone is premium, not discount?
-□ No forbidden words (cheap, affordable, discount, kids toy)?
-□ Environment is appropriate (crystal clear water, luxury setting)?
-□ Models/subjects look premium and aspirational?
-□ Copy/script sounds like a luxury brand?
-□ Emotional arc is appropriate?
+□ Voice is calm, confident, premium, and compliance-minded (not hype, not discount)?
+□ No forbidden words (guaranteed licensure, passive income, side hustle, cheap, coupon)?
+□ Setting is appropriate (real operatory / training, navy scrubs, clean clinical)?
+□ Subjects look credible and professional (no staged stock smiles)?
+□ Copy sounds like a premium clinical-education launch partner?
+□ Correct SMV terminology used throughout?
 
 ### CREATIVE QUALITY (weight: 30%):
-□ Hook is strong enough to stop scrolling?
+□ Hook is strong and clear?
 □ Message is clear?
-□ CTA is present and effective?
+□ CTA is present and effective (e.g. Start Subscription Intake, Run the ROI, Explore Clinical Ready, Compare Plans)?
 □ Pacing makes sense?
-□ Visual ideas are achievable?
+□ Visual ideas are achievable and clinically realistic?
 □ Platform-appropriate format?
 
 ## SCORING:
@@ -86,17 +83,17 @@ SEVERITY LEVELS:
 
 export class QACriticAgent {
   async reviewScript(script: Script): Promise<QAReport> {
-    const prompt = `QA REVIEW: Hippo Float Video Script
+    const prompt = `QA REVIEW: SMV Video Script
 
 SCRIPT TO REVIEW:
 ${JSON.stringify(script, null, 2)}
 
 Perform full QA review. Check:
-1. Does the script accurately describe the product?
-2. Is the anchor system depicted correctly in relevant scenes?
-3. Is the brand tone premium and appropriate?
-4. Is the hook strong enough for the platform?
-5. Is the creative concept strong and achievable?
+1. Is SMV positioned accurately (practice-based dental assisting school launch) with correct plan names?
+2. Is Clinical Ready(TM) / compliance handled correctly (no licensure guarantees; "State requirements vary" available; no passive-income/side-hustle language)?
+3. Is the brand voice calm, confident, premium, and compliance-minded?
+4. Is the hook strong and clear for the platform?
+5. Is the creative concept strong, credible, and achievable?
 
 Return complete JSON QAReport.`;
 
@@ -110,17 +107,17 @@ Return complete JSON QAReport.`;
   async reviewPrompt(shotPrompt: ShotPrompt | string): Promise<QAReport> {
     const promptText = typeof shotPrompt === "string" ? shotPrompt : shotPrompt.full_prompt;
 
-    const prompt = `QA REVIEW: Hippo Float AI Generation Prompt
+    const prompt = `QA REVIEW: SMV AI Generation Prompt
 
 PROMPT TO REVIEW:
 ${promptText}
 
 Check:
-1. Is the product shape correctly described?
-2. Is the anchor system correctly included?
-3. Are colors specified correctly?
-4. Are there any instructions that would produce wrong product?
-5. Is the visual direction appropriate for the brand?
+1. Is the scene a credible SMV setting (real operatory / training, navy scrubs)?
+2. Is the SMV brand treatment correct (navy/violet-magenta/gold, SMV mark, no cartoon icons or stock smiles)?
+3. Is the accent/palette specified correctly?
+4. Are there any instructions that would produce off-brand or non-compliant imagery (e.g. licensure-guarantee overlays)?
+5. Is the visual direction appropriate for the SMV brand?
 
 Return complete JSON QAReport.`;
 
@@ -132,7 +129,7 @@ Return complete JSON QAReport.`;
   }
 
   async reviewCaption(caption: Caption): Promise<QAReport> {
-    const prompt = `QA REVIEW: Hippo Float Social Media Caption
+    const prompt = `QA REVIEW: SMV Social Media Caption
 
 CAPTION TO REVIEW:
 Platform: ${caption.platform}
@@ -160,11 +157,11 @@ Return complete JSON QAReport.`;
   async reviewCampaignBrief(brief: string, product: string): Promise<QAReport> {
     const prompt = `QA REVIEW: Campaign Brief
 
-PRODUCT: ${product}
+PROGRAM: ${product}
 BRIEF: ${brief}
 
-Check if this brief will result in compliant, high-quality Hippo Float content.
-Flag any red flags before production begins.
+Check if this brief will result in compliant, high-quality Smart Medical Ventures (SMV) content.
+Flag any red flags before production begins — especially licensure guarantees, passive-income/side-hustle framing, or incorrect plan names.
 
 Return complete JSON QAReport.`;
 

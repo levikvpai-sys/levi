@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       product,
       color || "vibrant",
       concept,
-      style || "LIFESTYLE_BEACH"
+      style || "LIFESTYLE_PRACTICE"
     );
 
     return NextResponse.json({ success: true, data: shotPrompt });

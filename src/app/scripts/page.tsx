@@ -12,10 +12,10 @@ import type { Script } from "@/agents/script-studio";
 const STYLES = [
   { id: "CINEMATIC_LUXURY", label: "Cinematic", emoji: "🎞️" },
   { id: "TIKTOK_VIRAL", label: "TikTok Viral", emoji: "📱" },
-  { id: "PRODUCT_DEMO", label: "Product Demo", emoji: "⚓" },
-  { id: "EMOTIONAL_STORY", label: "Emotional", emoji: "❤️" },
+  { id: "PRODUCT_DEMO", label: "Program Demo", emoji: "🧩" },
+  { id: "EMOTIONAL_STORY", label: "Story", emoji: "❤️" },
   { id: "BRAND_FILM", label: "Brand Film", emoji: "🎬" },
-  { id: "LIFESTYLE_BEACH", label: "Lifestyle", emoji: "🏖️" },
+  { id: "LIFESTYLE_PRACTICE", label: "In the Practice", emoji: "🦷" },
 ];
 
 const PLATFORMS = [
@@ -24,12 +24,12 @@ const PLATFORMS = [
   { id: "youtube", label: "YouTube", emoji: "▶️", duration: "60s" },
 ];
 
-const PRODUCTS = ["Joy", "Chill", "Fun", "Vibes"];
+const PRODUCTS = ["Standard", "Premium", "California Premium", "Clinical Ready"];
 
 export default function ScriptsPage() {
   const [selectedStyle, setSelectedStyle] = useState("CINEMATIC_LUXURY");
   const [selectedPlatform, setSelectedPlatform] = useState("instagram");
-  const [selectedProduct, setSelectedProduct] = useState("Joy");
+  const [selectedProduct, setSelectedProduct] = useState("Standard");
   const [brief, setBrief] = useState("");
   const [generating, setGenerating] = useState(false);
   const [script, setScript] = useState<Script | null>(null);
@@ -45,7 +45,7 @@ export default function ScriptsPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        product: `hippo float ${selectedProduct}`,
+        product: `SMV ${selectedProduct}`,
         platform: selectedPlatform,
         style: selectedStyle,
         objective: brief,
@@ -104,7 +104,7 @@ export default function ScriptsPage() {
                         : "border-border text-muted-foreground"
                     }`}
                   >
-                    hippo float {p}
+                    SMV {p}
                   </button>
                 ))}
               </div>
@@ -152,7 +152,7 @@ export default function ScriptsPage() {
             <div className="space-y-2">
               <label className="text-sm font-medium">Brief</label>
               <Textarea
-                placeholder={`Describe what you want. Example: Show hippo float ${selectedProduct} at a tropical beach club. Highlight the anchor system keeping the float perfectly still while everyone else drifts away. Target: luxury-minded beach lovers aged 25-40.`}
+                placeholder={`Describe what you want. Example: Show SMV ${selectedProduct} in a real dental operatory. Highlight the launch framework and Clinical Ready readiness building a local assistant pipeline. Target: practice owners and DSOs.`}
                 value={brief}
                 onChange={(e) => setBrief(e.target.value)}
                 className="h-36"

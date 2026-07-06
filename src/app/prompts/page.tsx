@@ -9,24 +9,24 @@ import { Badge } from "@/components/ui/badge";
 import type { ShotPrompt } from "@/agents/prompt-director";
 
 const PRODUCTS = [
-  { id: "JOY", label: "Joy", shape: "Luxury Lounger", emoji: "🛋️" },
-  { id: "CHILL", label: "Chill", shape: "U-Ring Float", emoji: "💎" },
-  { id: "FUN", label: "Fun", shape: "Cylinder Tube", emoji: "🎯" },
-  { id: "VIBES", label: "Vibes", shape: "Flat Mat", emoji: "🌊" },
+  { id: "STANDARD", label: "Standard", shape: "Low-Entry Launch", emoji: "🚀" },
+  { id: "PREMIUM", label: "Premium", shape: "Guided Launch", emoji: "📈" },
+  { id: "CALIFORNIA", label: "California Premium", shape: "California Launch", emoji: "🏛️" },
+  { id: "CLINICAL", label: "Clinical Ready™", shape: "Curriculum Model", emoji: "🎓" },
 ];
 
 const COLORS: Record<string, string[]> = {
-  JOY: ["Pink", "Blue", "Flower Print Orange", "Citrus Print Green"],
-  CHILL: ["Pink", "Orange", "Blue", "Flower Print Orange", "Citrus Print Green"],
-  FUN: ["Pink", "Blue", "Green", "Flower Print Orange"],
-  VIBES: ["Pink", "Orange", "Flower Print Orange", "Blue", "Citrus Print Green"],
+  STANDARD: ["Navy", "Violet", "Gold"],
+  PREMIUM: ["Navy", "Violet", "Magenta", "Gold"],
+  CALIFORNIA: ["Navy", "Violet", "Magenta", "Gold"],
+  CLINICAL: ["Violet", "Magenta", "Green", "Gold"],
 };
 
 const STYLES = [
   { id: "CINEMATIC_LUXURY", label: "Cinematic Luxury", emoji: "🎞️" },
   { id: "TIKTOK_VIRAL", label: "TikTok Viral", emoji: "📱" },
-  { id: "PRODUCT_DEMO", label: "Product Demo", emoji: "⚓" },
-  { id: "LIFESTYLE_BEACH", label: "Lifestyle Beach", emoji: "🏖️" },
+  { id: "PRODUCT_DEMO", label: "Program Demo", emoji: "🧩" },
+  { id: "LIFESTYLE_PRACTICE", label: "In the Practice", emoji: "🦷" },
 ];
 
 const TOOL_BADGE: Record<string, string> = {
@@ -38,8 +38,8 @@ const TOOL_BADGE: Record<string, string> = {
 };
 
 export default function PromptsPage() {
-  const [product, setProduct] = useState("JOY");
-  const [color, setColor] = useState("Pink");
+  const [product, setProduct] = useState("STANDARD");
+  const [color, setColor] = useState("Navy");
   const [style, setStyle] = useState("CINEMATIC_LUXURY");
   const [concept, setConcept] = useState("");
   const [generating, setGenerating] = useState(false);
@@ -60,7 +60,7 @@ export default function PromptsPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        product: `hippo float ${product.charAt(0) + product.slice(1).toLowerCase()}`,
+        product: `SMV ${product}`,
         color,
         concept,
         style,
@@ -208,7 +208,7 @@ export default function PromptsPage() {
             <div className="space-y-2">
               <label className="text-sm font-medium">Scene Description</label>
               <Textarea
-                placeholder={`Describe the shot. Example: Woman floating on ${selectedProductSpec?.label ?? "Joy"} in crystal clear water at a luxury resort pool, anchor system visible underwater, golden hour light...`}
+                placeholder={`Describe the shot. Example: Adult learner in navy scrubs at chairside assisting for ${selectedProductSpec?.label ?? "Standard"} in a real dental operatory, instructor validating readiness, SMV navy/gold brand treatment, clean clinical light...`}
                 value={concept}
                 onChange={(e) => setConcept(e.target.value)}
                 className="h-28"
@@ -239,17 +239,17 @@ export default function PromptsPage() {
             <Card className="glass-card border-amber-500/20">
               <CardContent className="p-4">
                 <p className="text-xs text-amber-400 font-medium mb-2">
-                  Product rules enforced automatically:
+                  SMV rules enforced automatically:
                 </p>
                 <ul className="space-y-1 text-xs text-muted-foreground">
-                  <li>✓ Correct shape for {selectedProductSpec?.label} ({selectedProductSpec?.shape})</li>
-                  <li>✓ Anchor bag always underwater</li>
-                  <li>✓ Blue rope always visible</li>
-                  <li>✓ Yellow buoy at water surface</li>
-                  <li>✓ hippo logo preserved</li>
-                  <li>✓ {color} color specified</li>
-                  {product === "CHILL" && (
-                    <li className="text-emerald-400">✓ Green anchor bag (Chill rule)</li>
+                  <li>✓ Correct positioning for {selectedProductSpec?.label} ({selectedProductSpec?.shape})</li>
+                  <li>✓ Practice-based dental assisting school</li>
+                  <li>✓ No SMV royalties or per-student fees</li>
+                  <li>✓ No licensure guarantees</li>
+                  <li>✓ SMV mark &amp; palette preserved</li>
+                  <li>✓ {color} accent specified</li>
+                  {product === "CALIFORNIA" && (
+                    <li className="text-emerald-400">✓ State requirements vary (California)</li>
                   )}
                 </ul>
               </CardContent>
@@ -350,7 +350,7 @@ export default function PromptsPage() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={generatedImageUrl}
-                        alt="DALL-E 3 generated Hippo Float"
+                        alt="DALL-E 3 generated Smart Medical Ventures visual"
                         className="w-full"
                       />
                       <div className="absolute top-3 right-3 flex gap-2">
@@ -364,7 +364,7 @@ export default function PromptsPage() {
                         </a>
                         <a
                           href={generatedImageUrl}
-                          download="hippo-float-dalle3.jpg"
+                          download="smv-dalle3.jpg"
                           className="px-3 py-1.5 bg-[#00d4ff] text-background text-xs font-mono font-bold hover:bg-[#00d4ff]/90 transition-colors"
                         >
                           Download

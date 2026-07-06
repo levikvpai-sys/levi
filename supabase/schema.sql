@@ -1,4 +1,4 @@
--- Hippo Float Brand AI — LEVI Platform
+-- Smart Medical Ventures (SMV) Brand AI — LEVI Platform
 -- Supabase PostgreSQL Schema
 
 -- Enable UUID extension

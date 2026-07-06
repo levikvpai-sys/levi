@@ -86,14 +86,14 @@ export function getContentTypeLabel(type: string): string {
 export function getStatusColor(status: string): string {
   const map: Record<string, string> = {
     draft: "text-gray-400",
-    in_progress: "text-hippo-400",
-    review: "text-yellow-400",
-    approved: "text-aqua-400",
-    published: "text-float-400",
+    in_progress: "text-smv-400",
+    review: "text-smvgold-400",
+    approved: "text-smvgreen-400",
+    published: "text-smvviolet-400",
     idle: "text-gray-400",
-    running: "text-hippo-400",
-    completed: "text-aqua-400",
-    error: "text-coral-400",
+    running: "text-smv-400",
+    completed: "text-smvgreen-400",
+    error: "text-smvcrimson-400",
   };
   return map[status] || "text-gray-400";
 }

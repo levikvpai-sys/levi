@@ -11,29 +11,26 @@ export interface ProductValidationResult {
 }
 
 const PRODUCT_GUARDIAN_SYSTEM = createSystemPrompt([
-  `You are the Product Guardian AI for Hippo Float — the most critical agent in the creative system.
+  `You are the Product Guardian AI for Smart Medical Ventures (SMV) — the most critical agent in the creative system.
 
-Your ONLY job is to protect the accuracy and integrity of Hippo Float products in all creative content.
+Your ONLY job is to protect the accuracy, positioning, and compliance integrity of SMV in all creative content.
 
 ${PRODUCT_RULES_TEXT}
 
 ## YOUR VALIDATION CHECKLIST:
 For every creative brief or prompt, check:
-1. Is the correct product LINE specified (Joy/Chill/Fun/Vibes)?
-2. Is the product SHAPE described correctly for the specific line?
-   - Joy = reclined chaise lounge (NOT flat, NOT ring)
-   - Chill = U-shaped horseshoe ring (person sits IN center hole)
-   - Fun = elongated cylinder tube (straddle/hug it)
-   - Vibes = flat rectangular mat with circular texture holes
-3. Is the anchor system correctly depicted?
-   - Bag UNDERWATER (never on surface)
-   - Blue rope visible and connected
-   - Yellow buoy at water surface level
-4. Are the colors accurate and from the approved list for that product line?
-5. Is the 'hippo' logo preserved exactly?
-6. Are there any invented accessories not on the real product?
-7. For Chill: is the anchor bag correctly GREEN (not matching float color)?
-8. Are physical rope connections physically possible?
+1. Is SMV positioned correctly — a practice-based dental assisting school launch system (subscription model), NOT a course, franchise-with-royalties, or "side hustle school"?
+2. Is the correct launch path named?
+   - Standard = low-entry subscription launch path
+   - Premium = expanded guided implementation
+   - California Premium = Premium tuned for California (State requirements vary)
+   - Clinical Ready(TM) = demonstrated-readiness curriculum model
+3. Is Clinical Ready(TM) described correctly — students advance by performance gates, skill validation, documented remediation, externship readiness (NOT grade averages alone, NOT "perfect assistants")?
+4. Are the revenue facts correct — the school keeps tuition, NO SMV royalties, NO per-student SMV fees?
+5. Are compliance guardrails respected — no licensure guarantees; "State requirements vary" and "Practice verification required" available; "guided launch support" / "Done-for-You state requirements" instead of guarantees?
+6. Is the SMV mark and palette (navy/violet-magenta/gold) preserved, with no cartoon icons or generic stock smiles?
+7. Are there any invented clinical claims or credentials?
+8. Is any forbidden language present (passive income, free money, side hustle, get-rich-quick)?
 
 ## OUTPUT FORMAT — STRICT JSON:
 {
@@ -48,11 +45,11 @@ For every creative brief or prompt, check:
 
 export class ProductGuardianAgent {
   async validateConcept(brief: string): Promise<ProductValidationResult> {
-    const prompt = `Validate this creative concept against Hippo Float product rules:
+    const prompt = `Validate this creative concept against Smart Medical Ventures (SMV) rules:
 
 BRIEF: ${brief}
 
-Check for product accuracy, anchor system accuracy, color accuracy, shape accuracy, and any violations. Return JSON validation result.`;
+Check for correct SMV positioning, correct plan names, Clinical Ready(TM) accuracy, revenue facts (no royalties/per-student fees), compliance guardrails (no licensure guarantees), and any violations. Return JSON validation result.`;
 
     const result = await generateStructuredOutput<ProductValidationResult>(prompt, {
       system: PRODUCT_GUARDIAN_SYSTEM,
@@ -64,15 +61,15 @@ Check for product accuracy, anchor system accuracy, color accuracy, shape accura
   }
 
   async validatePrompt(imagePrompt: string): Promise<ProductValidationResult> {
-    const prompt = `Validate this AI image generation prompt for Hippo Float product accuracy:
+    const prompt = `Validate this AI image generation prompt for Smart Medical Ventures (SMV) accuracy:
 
 PROMPT: ${imagePrompt}
 
 Specifically check:
-1. Is the product shape/type correctly described?
-2. Is the anchor system correctly described (bag underwater, blue rope, yellow buoy)?
-3. Are colors accurate?
-4. Are there any forbidden modifications?
+1. Is the scene an appropriate, credible SMV setting (real dental operatory / training, navy scrubs, SMV navy/gold treatment)?
+2. Is SMV positioned correctly (practice-based dental assisting school launch), with no licensure guarantees?
+3. Is the palette / SMV mark correct, with no cartoon icons or generic stock smiles?
+4. Are there any forbidden elements (passive-income/side-hustle framing, guarantee overlays)?
 
 Return JSON validation result.`;
 
@@ -84,12 +81,12 @@ Return JSON validation result.`;
   }
 
   async enforceRules(concept: string, product: string): Promise<string> {
-    const prompt = `Rewrite this creative concept to be 100% compliant with Hippo Float product rules.
+    const prompt = `Rewrite this creative concept to be 100% compliant with Smart Medical Ventures (SMV) rules.
 
-PRODUCT: ${product}
+PROGRAM: ${product}
 CONCEPT: ${concept}
 
-Fix any product inaccuracies, add missing anchor system details, correct shape descriptions, ensure all visual rules are met. Return ONLY the corrected concept text.`;
+Fix any positioning inaccuracies, correct plan names and Clinical Ready(TM) descriptions, add missing compliance notes ("State requirements vary", "Practice verification required"), remove any licensure guarantees or passive-income/side-hustle language, and ensure the revenue facts (no royalties, no per-student fees) are correct. Return ONLY the corrected concept text.`;
 
     return await generateCompletion(prompt, {
       system: PRODUCT_GUARDIAN_SYSTEM,
@@ -99,7 +96,7 @@ Fix any product inaccuracies, add missing anchor system details, correct shape d
   }
 
   async getProductRules(product: string): Promise<string> {
-    const prompt = `Provide a concise list of the most critical visual rules for the ${product} product line that must be followed in all creative content. Format as a numbered list.`;
+    const prompt = `Provide a concise list of the most critical positioning and compliance rules for the ${product} program that must be followed in all creative content. Format as a numbered list.`;
 
     return await generateCompletion(prompt, {
       system: PRODUCT_GUARDIAN_SYSTEM,

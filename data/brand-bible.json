@@ -1,102 +1,106 @@
 {
-  "brand_name": "HIPPO FLOAT",
-  "brand_voice": "Confident, aspirational, sun-soaked luxury — the brand speaks like a premium lifestyle magazine come to life",
-  "brand_tier": "premium luxury beach lifestyle",
-  "brand_statement": "HIPPO FLOAT exists at the intersection of effortless luxury and the perfect summer day. We don't sell floats — we sell the feeling of having arrived.",
-  "brand_promise": "Every float is a first-class seat in the most beautiful place on earth",
+  "brand_name": "SMART MEDICAL VENTURES",
+  "brand_voice": "Authoritative, calm and confident — clear, structured, and clinically informed. SMV speaks like a premium dental-education launch partner, never hype",
+  "brand_tier": "premium practice-based dental assisting school launch system",
+  "brand_statement": "Smart Medical Ventures exists at the intersection of clinical education and practice growth. We don't sell a course — we help a dental practice launch and operate a real dental assisting school.",
+  "brand_promise": "We take a practice from idea to organized school launch — curriculum, platform, documents, training workflow, and launch support",
+  "master_brand_line": "Launch the school. Build the pipeline. Keep the tuition.",
   "target_audience": {
     "primary": {
-      "segment": "Luxury Lifestyle Enthusiasts",
-      "age_range": "25-45",
-      "gender": "All, slight female skew",
-      "income": "$100k+ household",
+      "segment": "Practice Owners & School Operators",
+      "age_range": "30-60",
+      "gender": "All",
+      "income": "Practice / business owners",
       "psychographics": [
-        "Travels to Ibiza, Mykonos, Tulum, Bali",
-        "Stays at 5-star resorts",
-        "Documents life aesthetically on Instagram",
-        "Values quality over quantity",
-        "Aspires to effortless elegance"
+        "Own or operate a dental practice or DSO",
+        "Want a local pipeline of trained dental assistants",
+        "Looking to add a tuition revenue stream",
+        "Value structure, compliance, and clinical rigor",
+        "Healthcare entrepreneurs seeking a proven launch model"
       ],
-      "platforms": ["Instagram", "TikTok", "Pinterest"]
+      "platforms": ["LinkedIn", "Email", "Webinar", "Instagram"]
     },
     "secondary": {
-      "segment": "Beach & Pool Culture",
-      "age_range": "20-35",
+      "segment": "Dental Influencers & Referral Partners",
+      "age_range": "25-55",
       "psychographics": [
-        "Poolside is their office",
-        "Beach club regulars",
-        "Content creators",
-        "Aesthetic-first buyers"
+        "Dental content creators and podcasters",
+        "Consultants and educators who advise practice owners",
+        "Refer practice owners into launch programs",
+        "Credibility-first, evidence-driven audience"
       ],
-      "platforms": ["TikTok", "Instagram Reels"]
+      "platforms": ["Instagram", "LinkedIn", "YouTube", "Podcast"]
     }
   },
   "tone_keywords": [
-    "effortless luxury",
-    "sun-soaked",
-    "aspirational",
+    "authoritative",
+    "calm and confident",
+    "practical",
     "premium",
-    "cinematic",
-    "editorial",
-    "Mediterranean",
-    "Riviera",
-    "golden hour",
-    "elevated",
-    "timeless",
-    "iconic"
+    "compliance-minded",
+    "clinically informed",
+    "structured",
+    "outcome-focused",
+    "credible",
+    "clear",
+    "guided",
+    "professional"
   ],
   "forbidden_tone": [
+    "hype",
+    "guaranteed licensure",
+    "passive income",
+    "free money",
+    "side hustle",
+    "get rich quick",
     "cheap",
     "discount",
-    "generic",
-    "AI-looking",
-    "cartoon",
-    "plastic-looking",
-    "budget",
-    "sale",
-    "affordable",
-    "kids toy",
-    "inflatable toy",
-    "basic"
+    "coupon",
+    "vague transformation",
+    "students will be perfect assistants",
+    "overpromising"
   ],
   "color_palette": {
-    "primary": "#0A1628",
-    "primary_name": "Deep Navy",
+    "primary": "#0B1B32",
+    "primary_name": "SMV Navy",
     "secondary": "#FFFFFF",
     "secondary_name": "Pure White",
-    "accent": "#C9A84C",
-    "accent_name": "Champagne Gold",
-    "ocean": "#1B6CA8",
-    "ocean_name": "Mediterranean Blue",
-    "sand": "#F5E6C8",
-    "sand_name": "Golden Sand",
-    "coral": "#E8816A",
-    "coral_name": "Sunset Coral",
-    "neutral_dark": "#1A1A2E",
-    "neutral_light": "#F8F9FA"
+    "accent": "#C7983D",
+    "accent_name": "SMV Gold",
+    "violet": "#34147A",
+    "violet_name": "SMV Violet",
+    "magenta": "#B11872",
+    "magenta_name": "SMV Magenta",
+    "green": "#16856B",
+    "green_name": "SMV Green",
+    "cream": "#F6F3EC",
+    "cream_name": "SMV Cream",
+    "ink": "#07111F",
+    "ink_name": "SMV Ink"
   },
+  "signature_gradient": "linear-gradient(135deg,#34147A 0%,#7046A2 45%,#B11872 78%,#A00F3D 100%)",
   "typography_style": {
-    "headline": "Bold serif or high-contrast sans — think Vogue, not startup",
-    "body": "Clean, airy — generous line height, confident spacing",
-    "accent": "Italic serif for emotional moments",
-    "hierarchy": "Headlines dominate, body whispers, product name anchors"
+    "headline": "Inter ExtraBold/Bold — confident, structured, clinical authority",
+    "body": "Inter Regular/Medium — clean, readable, generous spacing",
+    "accent": "Uppercase, letter-spaced gold eyebrows; optional Libre Baskerville / Georgia serif pull quotes",
+    "hierarchy": "Headlines dominate, body informs, gold eyebrow labels the section"
   },
   "photography_style": {
-    "lighting": "Golden hour magic — warm, directional, cinematic. Never flat, never harsh flash",
-    "composition": "Rule of thirds, negative space, leading lines toward the float",
-    "models": "Sun-kissed, effortlessly glamorous — looks like they live there, not posing",
-    "environment": "Crystal-clear water required — teal, turquoise, Mediterranean blue",
-    "mood": "You're supposed to be there right now — immediate aspiration, zero friction",
-    "color_grade": "Warm highlights, cool midtones, rich shadows — editorial not Instagram filter",
-    "skin_tones": "Sun-kissed, glowing, diverse but unified by lifestyle",
-    "wardrobe": "Minimal luxury — designer swimwear, no logos competing with HIPPO FLOAT"
+    "lighting": "Bright-but-controlled premium DSLR look — clean, professional, never flat or gimmicky",
+    "composition": "Structured framing on real clinical work; white text on dark navy/ink/gradient panels",
+    "models": "Adult learners and instructors in clean navy/charcoal scrubs — focused, competent, real",
+    "environment": "Real dental operatories, sterilization areas, radiography training, tray setup, chairside assisting",
+    "mood": "Credible, premium, clinically serious — you are watching real training happen",
+    "color_grade": "Neutral clinical whites, deep navy shadows, gold and violet-magenta only as small accents",
+    "skin_tones": "Natural, diverse, professional",
+    "wardrobe": "Navy or charcoal scrubs, clean and consistent — no logos competing with SMV"
   },
   "video_style": {
-    "pacing": "Slow reveal builds to confident cut — Mediterranean rhythm",
-    "cuts": "Motivated cuts on music, never random",
-    "music_mood": "Deep house, ambient electronic, or cinematic orchestral — never pop",
-    "camera_movement": "Smooth drone, slow push-in, gentle pan — always intentional",
-    "edit_style": "Premium commercial — every frame could be a print ad",
+    "pacing": "Measured and structured — confident build, no hype cuts",
+    "cuts": "Purposeful cuts that follow a training or launch step, never random",
+    "music_mood": "Understated, professional, cinematic-but-restrained — never pop or party",
+    "camera_movement": "Steady, intentional moves — slow push-in, clean pans across clinical work",
+    "edit_style": "Premium educational commercial — every frame reads as credible and clinical",
     "duration": {
       "tiktok": "7-15 seconds hook + 15-30 seconds total",
       "instagram_reel": "15-30 seconds",
@@ -106,54 +110,66 @@
     }
   },
   "approved_environments": [
-    "Infinity pool at luxury resort (Bali, Mykonos, Santorini)",
-    "Mediterranean sea — crystal clear turquoise water",
-    "Private villa pool — white stone, minimal architecture",
-    "Maldives — overwater bungalow setting",
-    "Ibiza beach club — golden hour",
-    "Miami Beach — Art Deco luxury hotel pool",
-    "French Riviera — Cap d'Antibes style",
-    "Tulum — cenote or infinity pool with jungle",
-    "Amalfi Coast — cliffside pool"
+    "Real dental operatory with chairside assisting in progress",
+    "Sterilization and instrument reprocessing area",
+    "Radiography / imaging training station",
+    "Tray setup and instrument identification station",
+    "Instructor-led skill check with performance gate validation",
+    "Clean classroom / simulation lab with adult learners in scrubs",
+    "Front-office / enrollment and onboarding setting",
+    "Practice reception styled with SMV navy and gold accents",
+    "Dark navy or gradient brand panel with white headline text"
   ],
   "brand_copywriting": {
     "hero_lines": [
-      "Float Like Royalty",
-      "Your throne awaits",
-      "This is what summer feels like",
-      "Effortless. Luxury. Float.",
-      "The ocean is your living room",
-      "Float into your best life"
+      "Launch the school. Build the pipeline. Keep the tuition.",
+      "Turn your practice into a dental assisting school",
+      "Train the assistants your practice actually needs",
+      "A structured launch — curriculum, platform, and support",
+      "Clinical Ready(TM): students advance by proven readiness",
+      "Own the school. Own the tuition. Build the pipeline."
     ],
     "product_descriptors": [
-      "The Float",
-      "Your personal float sanctuary",
-      "Luxury reimagined at water level",
-      "Where luxury meets the water"
+      "Practice-based dental assisting school launch system",
+      "Clinical Ready(TM) curriculum ecosystem",
+      "Low-entry dental assisting school launch",
+      "Guided launch framework with platform and documents"
     ],
     "call_to_action": [
-      "Shop the Float",
-      "Claim your float",
-      "Float season starts now",
-      "Reserve yours"
+      "Start Subscription Intake",
+      "Run the ROI",
+      "Explore Clinical Ready(TM)",
+      "Compare Plans"
     ]
   },
   "social_media_guidelines": {
     "instagram": {
-      "caption_style": "1-2 sentences max on first line, then line breaks, emojis sparingly and only premium ones (🌊 ☀️ 💛 🤍)",
-      "hashtag_strategy": "5-10 targeted hashtags in comment or below fold",
+      "caption_style": "1-2 sentences max on first line, then line breaks; keep it credible and specific, no hype",
+      "hashtag_strategy": "5-10 targeted dental-education hashtags below the fold",
       "posting_frequency": "4-5x per week",
       "story_frequency": "Daily"
     },
     "tiktok": {
-      "caption_style": "Hook in first 3 words, conversational, trend-aware but premium",
+      "caption_style": "Clear hook in first line, practical and specific, still premium and compliance-minded",
       "hashtag_strategy": "3-5 relevant hashtags max",
       "posting_frequency": "1x daily minimum"
     }
   },
+  "compliance_notes": {
+    "always_available": [
+      "State requirements vary",
+      "Practice verification required",
+      "Done-for-You state licensure/requirements support — never a guarantee"
+    ],
+    "never": [
+      "Never guarantee licensure",
+      "Never promise passive income or free money",
+      "Never use side hustle framing",
+      "Never overpromise legal or clinical outcomes"
+    ]
+  },
   "language_support": {
     "primary": "English",
-    "secondary": "Hebrew (עברית)",
-    "note": "Product targets global luxury market with strong Israeli customer base"
+    "note": "SMV serves dentists, practice owners, DSOs, and school operators across the United States, including a distinct California Premium path"
   }
 }

@@ -158,7 +158,7 @@ export class CampaignOrchestrator {
     const script = await scriptStudio.writeScript({
       product,
       platform,
-      style: "LIFESTYLE_BEACH",
+      style: "LIFESTYLE_PRACTICE",
       objective: concept,
     });
 

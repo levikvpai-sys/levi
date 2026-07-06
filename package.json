@@ -1,6 +1,7 @@
 {
-  "name": "hippo-float-brand-ai",
+  "name": "smv-brand-ai",
   "version": "0.1.0",
+  "description": "Smart Medical Ventures (SMV) Brand AI — creative system for launching practice-based dental assisting schools",
   "private": true,
   "scripts": {
     "dev": "next dev",

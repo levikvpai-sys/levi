@@ -1,5 +1,9 @@
-// Hippo Float — Complete Product Bible (Summer Collection 2026)
-// All 4 product lines — authoritative source for all AI agents
+// Smart Medical Ventures (SMV) — Complete Product Bible (Launch Programs 2026)
+// All SMV launch paths — authoritative source for all AI agents.
+// NOTE: The ProductLine keys (JOY/CHILL/FUN/VIBES) are retained as stable internal
+// identifiers so types and imports do not break. They map to SMV launch paths:
+//   JOY = SMV Standard, CHILL = SMV Premium,
+//   FUN = SMV California Premium, VIBES = Clinical Ready(TM) Curriculum Model.
 
 export type ProductLine = "JOY" | "CHILL" | "FUN" | "VIBES";
 
@@ -60,273 +64,247 @@ export interface ProductBible {
   };
 }
 
+// The core system that powers every SMV launch path (kept under the ANCHOR_SYSTEM
+// export name for import stability). For SMV this is the Clinical Ready(TM) framework.
 export const ANCHOR_SYSTEM: AnchorSystem = {
-  name: "2-in-1 Carry Bag & Anchor",
+  name: "Clinical Ready(TM) Curriculum & Launch Framework",
   dry_bag:
-    "Waterproof dry bag — fills with water or sand when submerged to anchor the float",
-  rope: "Royal blue twisted nylon rope connecting float to anchor bag",
-  rope_color: "royal blue / navy blue twisted nylon",
-  buoy: "Small bright yellow sphere — marks the rope at water surface level",
-  buoy_color: "bright yellow",
-  carabiner: "Metal carabiner clips at float and bag connection points",
+    "Clinical Ready(TM) curriculum ecosystem mapped to real practice workflow",
+  rope: "Student and instructor platforms connecting coursework, tracking, and skill validation",
+  rope_color: "performance gates and demonstrated readiness",
+  buoy: "Launch documents, onboarding, compliance, and enrollment paperwork",
+  buoy_color: "guided launch support",
+  carabiner:
+    "Guided launch support across compliance, marketing, enrollment, and operations",
   mechanics:
-    "Rope path: float attachment point → down through water → yellow buoy (at surface) → continues down → anchor bag (fully submerged)",
+    "Path: subscription intake -> guided launch setup -> curriculum + platform live -> students advance through performance gates -> documented remediation -> externship readiness",
 };
 
 export const PRODUCTS: Record<ProductLine, ProductSpec> = {
   JOY: {
     id: "JOY",
-    style_code: "HFJOY",
-    full_name: "hippo float Joy",
-    shape: "Luxury recliner / chaise lounge",
+    style_code: "SMV-STD",
+    full_name: "SMV Standard",
+    shape: "Low-entry subscription launch path",
     shape_description:
-      "Semi-reclined inflatable pool chair with elevated backrest and raised headrest. Looks like a premium chaise lounge on water — the backrest is reclined at ~30-40°. NOT flat, NOT a ring. Has a distinct L-shape or chaise profile from the side.",
-    anchor_bag_color: "matches float color",
+      "The core launch path for a practice-based dental assisting school: Clinical Ready(TM) curriculum, student and instructor platforms, launch documents, and guided launch support. Takes a practice from idea to organized school launch. NOT a course, NOT a franchise with royalties.",
+    anchor_bag_color: "No SMV royalties and no per-student SMV fees",
     colors: [
-      { name: "pink", hex: "#FF69B4", sku: "850077236112" },
-      { name: "blue", hex: "#4FC3F7", sku: "850077236129" },
-      {
-        name: "flower print orange",
-        hex: "#FF8C00",
-        sku: "850077236143",
-        pattern: "orange with floral/flower pattern",
-      },
-      {
-        name: "citrus print green",
-        hex: "#7FBA00",
-        sku: "850077236136",
-        pattern: "green with citrus/lemon slice pattern",
-      },
+      { name: "navy", hex: "#0B1B32", sku: "SMV-STD-CORE" },
+      { name: "violet", hex: "#34147A", sku: "SMV-STD-CURRICULUM" },
+      { name: "gold", hex: "#C7983D", sku: "SMV-STD-LAUNCH" },
     ],
     pricing: {
-      unit_cost: 19.99,
-      retail: 39.99,
-      msrp: 89.99,
-      margin: "50.6%",
-      case_qty: 10,
+      unit_cost: 0,
+      retail: 0,
+      msrp: 0,
+      margin: "No SMV royalties or per-student fees — the school keeps tuition",
+      case_qty: 0,
     },
     taglines: [
-      "Float Your Way to Paradise",
-      "Effortless comfort. Endless escape.",
-      "Designed to Indulge. Built to Stay.",
-      "Escape Beautifully.",
+      "Launch the school. Build the pipeline. Keep the tuition.",
+      "A structured, low-entry path to your own assisting school.",
+      "Curriculum, platform, and launch support in one framework.",
+      "Idea to organized school launch.",
     ],
     features: [
-      "Luxury recliner shape — like a first-class seat on water",
-      "2-in-1 anchor bag keeps you perfectly in place",
-      "Drift-free — stay exactly where you want",
-      "Premium inflatable PVC construction",
+      "Clinical Ready(TM) curriculum ecosystem",
+      "Student and instructor platforms",
+      "Launch documents and guided launch support",
+      "Builds a local dental assistant staffing pipeline",
     ],
     prompt_shape_text:
-      "hippo float Joy [COLOR] luxury inflatable pool recliner/lounger — EXACT SHAPE: semi-reclined chaise lounge with raised backrest at 30-40 degree angle from horizontal, like a premium zero-gravity beach chair floating on water. Clear L-profile when viewed from the side: flat seat section transitions into a curved elevated backrest with integrated headrest, backrest rises 12-18 inches above the seat surface. The float is NEVER flat — it has a distinct reclining angle always visible. Glossy inflatable PVC material with visible seam lines. White 'hippo' text logo on the backrest surface. NOT a ring, NOT a flat mat, NOT a tube — always a reclining chair shape.",
+      "SMV Standard — practice-based dental assisting school launch. SCENE: real dental operatory, an adult learner in clean navy scrubs at chairside assisting while an instructor guides tray setup, credible clinical training in progress. [COLOR] brand accent framing with SMV navy panel and gold eyebrow label. Bright-but-controlled premium DSLR look, clean clinical whites. NO cartoon icons, NO generic stock smiles, NO licensure-guarantee claims. Small SMV mark legible.",
   },
 
   CHILL: {
     id: "CHILL",
-    style_code: "HFCHILL",
-    full_name: "hippo float Chill",
-    shape: "U-shaped horseshoe ring float",
+    style_code: "SMV-PREM",
+    full_name: "SMV Premium",
+    shape: "Premium subscription launch path with deeper guided implementation",
     shape_description:
-      "Open U-shape / horseshoe ring. Person sits IN the center opening with arms resting on the ring sides and legs dangling through the opening. Has a mesh or fabric seat in the center hole. Think of a life preserver ring but U-shaped/open at the front.",
-    anchor_bag_color: "green (always green regardless of float color)",
+      "Everything in Standard plus expanded guided implementation across compliance, onboarding, marketing, enrollment, operations, and platform workflows. A more hands-on launch of the practice-based dental assisting school.",
+    anchor_bag_color: "No SMV royalties and no per-student SMV fees",
     colors: [
-      { name: "pink", hex: "#FF69B4", sku: "850077263037" },
-      { name: "orange", hex: "#FF6600", sku: "850077263013" },
-      { name: "blue", hex: "#4FC3F7", sku: "850077263020" },
-      {
-        name: "flower print orange",
-        hex: "#FF8C00",
-        sku: "850077263044",
-        pattern: "orange with floral pattern",
-      },
-      {
-        name: "citrus print green",
-        hex: "#7FBA00",
-        sku: "850077263051",
-        pattern: "green with citrus pattern",
-      },
+      { name: "navy", hex: "#0B1B32", sku: "SMV-PREM-CORE" },
+      { name: "violet", hex: "#34147A", sku: "SMV-PREM-CURRICULUM" },
+      { name: "magenta", hex: "#B11872", sku: "SMV-PREM-MARKETING" },
+      { name: "gold", hex: "#C7983D", sku: "SMV-PREM-LAUNCH" },
     ],
     pricing: {
-      unit_cost: 14.99,
-      retail: 29.99,
-      msrp: 69.99,
-      margin: "50%",
-      case_qty: 10,
+      unit_cost: 0,
+      retail: 0,
+      msrp: 0,
+      margin: "No SMV royalties or per-student fees — the school keeps tuition",
+      case_qty: 0,
     },
     taglines: [
-      "Designed to Lounge. Built to Stay Put.",
-      "Float The Party. Lose The Drift.",
-      "Float Together. Stay in Place.",
-      "Stay Anchored. Stay Social.",
+      "Guided implementation from compliance to enrollment.",
+      "A premium, structured launch for your practice-based school.",
+      "Build the pipeline with full launch support.",
+      "Own the school. Keep the tuition.",
     ],
     features: [
-      "Stay Anchored — zero drift technology",
-      "Stay Social — U-shape keeps you facing friends",
-      "Portable — anchor bag is the carry bag",
-      "Mesh seat for all-day comfort",
+      "Everything in Standard, expanded",
+      "Guided implementation across compliance, onboarding, and operations",
+      "Marketing and enrollment workflow support",
+      "Full platform workflow setup",
     ],
     prompt_shape_text:
-      "hippo float Chill [COLOR] U-shaped horseshoe ring float — EXACT SHAPE: open horseshoe ring when viewed from above, like a circular life ring with the front third removed creating a large entrance gap. Ring tube is approximately 8 inches in diameter. Person seated INSIDE the U-opening: sitting in a mesh fabric seat sling in the center, arms resting on both sides of the ring tube, legs hanging below the water surface through the open front. From above it is clearly U-shaped — NOT a full donut/circle, NOT a ring with the person on top. White 'hippo' text logo on the ring tube surface. CRITICAL: the anchor bag for Chill is always GREEN, never [COLOR].",
+      "SMV Premium — guided launch of a practice-based dental assisting school. SCENE: instructor-led skill check in a real operatory, adult learners in navy scrubs at a sterilization or radiography training station, structured and professional. [COLOR] brand accent with SMV navy/gradient panel and gold eyebrow label. Bright-but-controlled premium DSLR look. NO cartoon icons, NO stock smiles, NO passive-income or side-hustle framing, NO licensure guarantees. Small SMV mark legible.",
   },
 
   FUN: {
     id: "FUN",
-    style_code: "HFFUN",
-    full_name: "hippo float Fun",
-    shape: "Large elongated cylindrical torpedo tube",
+    style_code: "SMV-CAPREM",
+    full_name: "SMV California Premium",
+    shape: "Premium launch path tuned for California requirements",
     shape_description:
-      "Long oval-cylinder inflatable — like an oversized premium pool noodle but much thicker with oval cross-section. You straddle it like a log, lie across it, or hug it while floating. NOT a mat, NOT a ring, NOT a chair — it's a thick elongated tube.",
-    anchor_bag_color: "matches float color",
+      "The Premium launch framework adapted for California, with Done-for-You attention to California state licensure and requirements. State requirements vary and practice verification is required.",
+    anchor_bag_color: "No SMV royalties and no per-student SMV fees",
     colors: [
-      { name: "pink", hex: "#FF69B4", sku: "850077263150" },
-      { name: "blue", hex: "#4FC3F7", sku: "850077263167" },
-      { name: "green", hex: "#7FBA00", sku: "850077263174" },
-      {
-        name: "flower print orange",
-        hex: "#FF8C00",
-        sku: "850077263181",
-        pattern: "orange with floral pattern",
-      },
+      { name: "navy", hex: "#0B1B32", sku: "SMV-CA-CORE" },
+      { name: "violet", hex: "#34147A", sku: "SMV-CA-CURRICULUM" },
+      { name: "magenta", hex: "#B11872", sku: "SMV-CA-COMPLIANCE" },
+      { name: "gold", hex: "#C7983D", sku: "SMV-CA-LAUNCH" },
     ],
     pricing: {
-      unit_cost: 12.5,
-      retail: 24.99,
-      msrp: 49.99,
-      margin: "50%",
-      case_qty: 20,
+      unit_cost: 0,
+      retail: 0,
+      msrp: 0,
+      margin: "No SMV royalties or per-student fees — the school keeps tuition",
+      case_qty: 0,
     },
     taglines: [
-      "Float Together. Stay in Place.",
-      "Have Some Fun.",
-      "Float The Party. Lose The Drift.",
+      "Built for California practice requirements.",
+      "Done-for-You attention to California licensure and requirements.",
+      "A premium California launch — structured and compliant.",
+      "State requirements vary — we help you navigate them.",
     ],
     features: [
-      "Cylindrical torpedo shape — straddle or hug it",
-      "2-in-1 anchor bag system",
-      "Vibrant solid and print colors",
-      "Social float — great for groups",
+      "Premium launch framework adapted for California",
+      "Done-for-You state licensure and requirements support",
+      "Compliance-minded onboarding and enrollment",
+      "Practice verification required",
     ],
     prompt_shape_text:
-      "hippo float Fun [COLOR] large inflatable cylindrical torpedo tube — EXACT SHAPE: elongated oval-cylinder, approximately 5-6 feet long and 14-16 inches in diameter. Oval cross-section slightly wider than tall. Both ends are smooth rounded sealed caps. Person either straddles it lengthwise like riding a horse, lies across it perpendicular, or holds it from the front for support. It is purely an inflatable cylinder/tube — NOT flat, NOT a ring, NOT a chair, NOT a donut. White 'hippo' text logo printed on the side of the cylinder.",
+      "SMV California Premium — California-tuned launch of a practice-based dental assisting school. SCENE: compliant, structured training in a real California dental operatory, adult learners in navy scrubs, instructor validating readiness, front-office enrollment detail in background. [COLOR] brand accent with SMV navy panel and gold eyebrow label. Bright-but-controlled premium DSLR look. Include a subtle 'State requirements vary' compliance note treatment. NO cartoon icons, NO stock smiles, NO licensure guarantees. Small SMV mark legible.",
   },
 
   VIBES: {
     id: "VIBES",
-    style_code: "HFVIBES",
-    full_name: "hippo float Vibes",
-    shape: "Flat rectangular mat with circular texture pattern",
+    style_code: "SMV-CR",
+    full_name: "Clinical Ready(TM) Curriculum Model",
+    shape: "Curriculum and readiness model powering every SMV launch path",
     shape_description:
-      "Wide flat rectangular inflatable mat — like a premium pool lilo/air mattress but with distinctive circular drainage holes/texture dots covering the entire top surface. Very flat and wide. You lie FLAT on top of it. NOT a chair, NOT a ring, NOT a tube.",
-    anchor_bag_color: "matches float color",
+      "Clinical Ready(TM) is the curriculum ecosystem where students advance by demonstrated readiness — performance gates, skill validation, documented remediation, and externship readiness — mapped to real practice workflow. Not grade averages alone.",
+    anchor_bag_color: "No SMV royalties and no per-student SMV fees",
     colors: [
-      { name: "pink", hex: "#FF69B4", sku: "850077263068" },
-      { name: "orange", hex: "#FF6600", sku: "850077263082" },
-      {
-        name: "flower print orange",
-        hex: "#FF8C00",
-        sku: "850077263099",
-        pattern: "orange with floral pattern",
-      },
-      { name: "blue", hex: "#4FC3F7", sku: "850077263075" },
-      {
-        name: "citrus print green",
-        hex: "#7FBA00",
-        sku: "850077263105",
-        pattern: "green with citrus pattern",
-      },
+      { name: "violet", hex: "#34147A", sku: "SMV-CR-GATES" },
+      { name: "magenta", hex: "#B11872", sku: "SMV-CR-VALIDATION" },
+      { name: "green", hex: "#16856B", sku: "SMV-CR-EXTERNSHIP" },
+      { name: "gold", hex: "#C7983D", sku: "SMV-CR-READY" },
     ],
     pricing: {
-      unit_cost: 14.99,
-      retail: 29.99,
-      msrp: 69.99,
-      margin: "51.7%",
-      case_qty: 10,
+      unit_cost: 0,
+      retail: 0,
+      msrp: 0,
+      margin: "Included in every SMV launch path",
+      case_qty: 0,
     },
     taglines: [
-      "Summer in Full Bloom.",
-      "Bold color. Pure comfort.",
-      "Stay Where You Float.",
+      "Students advance by proven readiness.",
+      "Performance gates. Skill validation. Externship readiness.",
+      "Validated readiness — not grade averages alone.",
+      "Clinical Ready(TM): trained around real practice workflow.",
     ],
     features: [
-      "Flat mat design — full body sunbathing",
-      "Distinctive circular texture/drainage holes across surface",
-      "Bold vibrant colors and prints",
-      "2-in-1 anchor bag keeps mat in place",
+      "Performance gates and skill validation",
+      "Documented remediation, not grade averages alone",
+      "Externship readiness mapped to practice workflow",
+      "Powers Standard, Premium, and California Premium paths",
     ],
     prompt_shape_text:
-      "hippo float Vibes [COLOR] flat rectangular inflatable mat — EXACT SHAPE: large flat rectangle approximately 68 inches long by 30 inches wide, only 4-5 inches thick at edges. DEFINING FEATURE: rows of raised circular texture dots covering the ENTIRE top surface, each circle approximately 2 inches in diameter in a uniform grid pattern, like a giant rubber mat with circular drainage holes. Completely FLAT — no backrest, no raised edges, no curvature whatsoever. Person lies horizontally completely flat on top. White 'hippo' text logo at the top end of the mat. NOT a chair, NOT a ring, NOT a tube, NOT curved in any way — always a flat rectangle.",
+      "Clinical Ready(TM) curriculum model — demonstrated-readiness training. SCENE: instructor conducting a performance-gate skill check while an adult learner in navy scrubs demonstrates a validated chairside task; clean skill-validation checklist visible. [COLOR] brand accent with SMV navy/violet-magenta panel and gold eyebrow label. Bright-but-controlled premium DSLR look. Emphasize competence and validation, NOT perfection claims. NO cartoon icons, NO stock smiles, NO licensure guarantees. Small SMV mark legible.",
   },
 };
 
 // ─── Agent-ready text blocks ─────────────────────────────────────────────────
 
+// Core system + compliance rules that must appear in SMV content (kept under the
+// ANCHOR_SYSTEM_RULES_TEXT export name for import stability).
 export const ANCHOR_SYSTEM_RULES_TEXT = `
-ANCHOR SYSTEM — MANDATORY IN ALL WATER SHOTS:
-- Component: 2-in-1 Carry Bag & Anchor
-- Rope: royal blue twisted nylon — always visible connecting float to anchor bag
-- Buoy: small bright YELLOW sphere — always visible at water surface level on the rope
-- Anchor bag: waterproof dry bag — ALWAYS FULLY SUBMERGED UNDERWATER, never on surface
-- Carabiner: metal clip visible at connection points
+CLINICAL READY(TM) & COMPLIANCE — MANDATORY IN ALL SMV CONTENT:
+- SMV positioning: a practice-based dental assisting school launch system, NOT a "side hustle school"
+- Clinical Ready(TM): students advance by demonstrated readiness — performance gates, skill validation, documented remediation, externship readiness
+- Revenue: the school keeps tuition — NO SMV royalties, NO per-student SMV fees
+- Compliance notes always available: "State requirements vary" and "Practice verification required"
+- Use "guided launch support" and "Done-for-You state requirements" — never "guaranteed licensure"
 
 FORBIDDEN:
-✗ Anchor bag above water or at surface
-✗ Rope disconnected from float or bag
-✗ Yellow buoy removed or wrong color
-✗ Anchor system missing when float is in water
+✗ Guaranteeing licensure or clinical/legal outcomes
+✗ "Passive income", "free money", or "side hustle" framing
+✗ Claiming students will be "perfect assistants" (use validated readiness)
+✗ Implying SMV takes royalties or per-student fees (there are none)
 `.trim();
 
+// SMV launch-path reference (kept under the PRODUCT_SHAPES_REFERENCE export name).
 export const PRODUCT_SHAPES_REFERENCE = `
-HIPPO FLOAT PRODUCT SHAPES — NEVER MIX THESE UP:
-- JOY: Semi-reclined CHAISE LOUNGE / RECLINER — has backrest and headrest, NOT flat
-- CHILL: U-SHAPE HORSESHOE RING — person sits in center hole, NOT a full ring
-- FUN: CYLINDER TORPEDO TUBE — elongated oval tube, NOT a mat or ring
-- VIBES: FLAT RECTANGULAR MAT — has circular texture holes, completely flat, NOT a chair
+SMV LAUNCH PATHS — NEVER MIX THESE UP:
+- STANDARD (SMV-STD): low-entry subscription launch path — curriculum, platform, documents, guided support
+- PREMIUM (SMV-PREM): expanded guided implementation across compliance, marketing, enrollment, operations
+- CALIFORNIA PREMIUM (SMV-CAPREM): Premium framework tuned for California licensure/requirements (State requirements vary)
+- CLINICAL READY(TM) (SMV-CR): the demonstrated-readiness curriculum model that powers all paths
 `.trim();
 
 export const PRODUCT_RULES_TEXT = `
-HIPPO FLOAT — PRODUCT BIBLE (MANDATORY ENFORCEMENT)
+SMART MEDICAL VENTURES — PRODUCT BIBLE (MANDATORY ENFORCEMENT)
 
-Brand: "hippo float" (lowercase, logo has wave in second 'o')
-Collection: Summer Collection 2026
-Main Tagline: "STAY WHERE YOU FLOAT"
+Brand: "Smart Medical Ventures" (short mark: SMV)
+Programs: SMV Launch Programs 2026
+Master Line: "Launch the school. Build the pipeline. Keep the tuition."
 
 ${PRODUCT_SHAPES_REFERENCE}
 
 ${ANCHOR_SYSTEM_RULES_TEXT}
 
-UNIVERSAL RULES FOR ALL PRODUCTS:
-- 'hippo' logo text always visible on float in contrasting color (white on colored floats)
-- Do NOT change product shape or silhouette
-- Do NOT alter 'hippo' logo
-- Do NOT change rope color from blue
-- Do NOT change buoy color from yellow
-- Do NOT invent accessories not on real product
-- Do NOT mix product lines (Joy ≠ Chill ≠ Fun ≠ Vibes)
-- Do NOT change product colors without authorization
+UNIVERSAL RULES FOR ALL SMV CONTENT:
+- SMV is a practice-based dental assisting school launch system (subscription model)
+- Correct plan names only: Standard, Premium, California Premium (+ Clinical Ready curriculum model)
+- Keep the SMV mark clean; palette navy/violet-magenta/gold with gold eyebrow labels
+- Do NOT guarantee licensure
+- Do NOT use passive income / free money / side hustle language
+- Do NOT claim SMV royalties or per-student fees (there are none)
+- Do NOT drop compliance notes ("State requirements vary", "Practice verification required")
+- Do NOT invent clinical claims, credentials, or accessories
+- Do NOT use cartoon icons or generic stock smiles
 
-PRODUCTS & COLORS:
-- Joy (HFJOY, $89.99 MSRP): Pink, Blue, Flower Print Orange, Citrus Print Green
-- Chill (HFCHILL, $69.99 MSRP): Pink, Orange, Blue, Flower Print Orange, Citrus Print Green — GREEN anchor bag always
-- Fun (HFFUN, $49.99 MSRP): Pink, Blue, Green, Flower Print Orange
-- Vibes (HFVIBES, $69.99 MSRP): Pink, Orange, Flower Print Orange, Blue, Citrus Print Green
+PLANS:
+- SMV Standard (SMV-STD): low-entry subscription path — curriculum, platform, documents, guided launch support
+- SMV Premium (SMV-PREM): expanded guided implementation across the full launch framework
+- SMV California Premium (SMV-CAPREM): Premium adapted for California requirements — State requirements vary
+- Clinical Ready(TM) (SMV-CR): performance gates, skill validation, remediation, externship readiness
 `.trim();
 
-// Per-product what-it-is-NOT (for negative prompts and shape locking)
+// Per-path negative guidance (kept under the PRODUCT_SHAPE_NEGATIVES export name).
 export const PRODUCT_SHAPE_NEGATIVES: Record<ProductLine, string> = {
-  JOY: "wrong shape, flat mat, ring float, donut float, pool noodle, tube float, fully flat, no backrest, incorrect recliner angle, flat lounger without backrest elevation",
-  CHILL: "wrong shape, full circle ring, donut float, flat mat, recliner chair, tube float, person sitting on top of ring instead of inside it, anchor bag not green",
-  FUN: "wrong shape, flat mat, ring float, donut float, recliner chair, short tube, thin pool noodle shape, inflatable chair, person lying flat on mat",
-  VIBES: "wrong shape, recliner chair, ring float, tube float, raised edges, curved mat, no circular texture dots on surface, backrest visible",
+  JOY: "licensure guarantee, passive income, free money, side hustle framing, cartoon icons, generic stock smiles, cheap or discount tone, vague transformation claims",
+  CHILL: "licensure guarantee, passive income, side hustle framing, royalty or per-student fee implication, cartoon icons, stock smiles, hype tone, coupon or discount language",
+  FUN: "licensure guarantee, missing 'State requirements vary' note, ignoring practice verification, passive income, side hustle framing, cartoon icons, stock smiles, non-California claims presented as California",
+  VIBES: "perfection claims, 'students will be perfect assistants', grade-average-only advancement, licensure guarantee, cartoon icons, stock smiles, hype language",
 };
 
-// Color-specific prompt descriptions (for pattern colors)
+// Accent / brand-treatment descriptions (kept under the COLOR_DESCRIPTIONS export name).
 export const COLOR_DESCRIPTIONS: Record<string, string> = {
-  "pink": "solid vibrant hot pink (#FF69B4)",
-  "blue": "solid sky/aqua blue (#4FC3F7)",
-  "orange": "solid bright orange (#FF6600)",
-  "green": "solid lime/grass green (#7FBA00)",
-  "flower print orange": "orange base with large tropical flower print in pink, white, and yellow floral pattern",
-  "citrus print green": "green base with lemon/citrus slice print pattern in yellow and white, tropical citrus fruit design",
+  "navy": "deep SMV navy (#0B1B32) brand panel with white headline text",
+  "ink": "SMV ink (#07111F) near-black panel with white text",
+  "violet": "SMV violet (#34147A) accent, part of the violet-to-magenta gradient",
+  "purple": "SMV purple (#7046A2) accent within the signature gradient",
+  "magenta": "SMV magenta (#B11872) accent, part of the violet-to-magenta gradient",
+  "crimson": "SMV crimson (#A00F3D) deep accent at the end of the signature gradient",
+  "gold": "SMV gold (#C7983D) eyebrow label and small accent detail",
+  "green": "SMV green (#16856B) success/validation accent",
+  "cream": "SMV cream (#F6F3EC) light background panel",
 };
 
 export function getColorDescription(colorName: string): string {
@@ -353,10 +331,11 @@ export function getAllColors(line: ProductLine): ProductColor[] {
 
 export function detectProductLine(productStr: string): ProductLine {
   const s = productStr.toLowerCase();
-  if (s.includes("joy")) return "JOY";
-  if (s.includes("chill")) return "CHILL";
-  if (s.includes("fun")) return "FUN";
-  if (s.includes("vibes")) return "VIBES";
+  // Order matters: check "california" before "premium" (California Premium contains "premium").
+  if (s.includes("california")) return "FUN";
+  if (s.includes("clinical")) return "VIBES";
+  if (s.includes("premium")) return "CHILL";
+  if (s.includes("standard")) return "JOY";
   return "JOY";
 }
 

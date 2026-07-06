@@ -1,4 +1,4 @@
-// Hollywood-level cinematic prompt templates for Hippo Float
+// Premium cinematic prompt templates for Smart Medical Ventures (SMV)
 
 export type ProductLine = "JOY" | "CHILL" | "FUN" | "VIBES";
 export type PromptStyle =
@@ -7,7 +7,7 @@ export type PromptStyle =
   | "PRODUCT_DEMO"
   | "EMOTIONAL_STORY"
   | "BRAND_FILM"
-  | "LIFESTYLE_BEACH";
+  | "LIFESTYLE_PRACTICE";
 
 export interface SceneRequest {
   product: ProductLine;
@@ -34,48 +34,48 @@ export interface ShotPrompt {
 }
 
 const PRODUCT_DESCRIPTIONS: Record<ProductLine, string> = {
-  JOY: "hippo float Joy luxury inflatable pool recliner/lounger — EXACT SHAPE: semi-reclined chaise lounge with raised backrest at 30-40 degree angle, like a zero-gravity beach chair on water. Clear L-profile from the side: flat seat transitions to elevated curved backrest with integrated headrest rising 12-18 inches above seat. NEVER flat, NEVER a ring — always a reclining chair shape. White 'hippo' logo on backrest.",
-  CHILL: "hippo float Chill U-shaped horseshoe ring float — EXACT SHAPE: open horseshoe ring from above, like a circular life ring with front third removed. Ring tube ~8 inches diameter. Person sits INSIDE the U-opening in mesh seat sling, arms on ring sides, legs dangling below water. NEVER a full circle — always U-shaped/open-front. White 'hippo' logo on ring. GREEN anchor bag always.",
-  FUN: "hippo float Fun large inflatable cylindrical torpedo tube — EXACT SHAPE: elongated oval-cylinder ~5-6 feet long, 14-16 inches diameter, rounded sealed end caps. Person straddles lengthwise or lies across it. NEVER flat, NEVER a ring, NEVER a chair — always a thick inflatable tube. White 'hippo' logo on cylinder side.",
-  VIBES: "hippo float Vibes flat rectangular inflatable mat — EXACT SHAPE: large flat rectangle ~68x30 inches, 4-5 inches thick. DEFINING: rows of raised circular texture dots covering ENTIRE top surface in uniform grid pattern, each ~2 inches diameter. Completely FLAT — no backrest, no raised edges. Person lies flat on top. NEVER a chair, NEVER a ring — always a flat mat. White 'hippo' logo at top end.",
+  JOY: "SMV Standard — practice-based dental assisting school launch. Real dental operatory, adult learner in clean navy scrubs at chairside assisting while an instructor guides tray setup. SMV navy panel with gold eyebrow label. Credible clinical training, premium and structured. Small SMV mark legible.",
+  CHILL: "SMV Premium — guided launch of a practice-based dental assisting school. Instructor-led skill check in a real operatory, adult learners in navy scrubs at a sterilization or radiography training station. SMV navy/gradient panel with gold eyebrow label. Structured, professional, premium. Small SMV mark legible.",
+  FUN: "SMV California Premium — California-tuned launch of a practice-based dental assisting school. Compliant, structured training in a real California dental operatory, learners in navy scrubs, instructor validating readiness, subtle 'State requirements vary' compliance treatment. SMV navy panel with gold eyebrow label. Small SMV mark legible.",
+  VIBES: "Clinical Ready(TM) curriculum model — demonstrated-readiness training. Instructor conducting a performance-gate skill check as an adult learner in navy scrubs demonstrates a validated chairside task, clean skill-validation checklist visible. SMV navy/violet-magenta panel with gold eyebrow label. Small SMV mark legible.",
 };
 
 const ANCHOR_SYSTEM_PROMPT =
-  "connected to blue twisted nylon rope going underwater, small bright yellow buoy sphere at water surface on rope, hippo float anchor dry bag fully submerged underwater below the float, rope taut and visible";
+  "SMV brand treatment applied: dark navy or violet-to-magenta gradient panel, uppercase letter-spaced gold eyebrow label, white headline text, gold and violet-magenta only as small accents, clean clinical whites, small SMV mark legible";
 
 const CAMERA_PRESETS: Record<string, string> = {
   ARRI_LUXURY:
-    "shot on ARRI Alexa Mini LF look, 35mm anamorphic lens, 2.39:1 aspect ratio",
+    "shot on ARRI Alexa Mini LF look, 35mm lens, cinematic 2.39:1 aspect ratio",
   SONY_CINEMA:
-    "shot on Sony Venice look, 50mm spherical lens, cinematic color science",
+    "shot on Sony Venice look, 50mm spherical lens, clean color science",
   IPHONE_PREMIUM: "shot on iPhone 15 Pro Max Cinematic mode, shallow depth of field",
-  DRONE_AERIAL: "aerial drone shot, DJI Inspire 3 look, 24mm wide lens",
+  DRONE_AERIAL: "elevated establishing shot, clean wide 24mm lens",
 };
 
 const STYLE_MODIFIERS: Record<PromptStyle, string> = {
   CINEMATIC_LUXURY:
-    "ultra-premium luxury commercial aesthetic, editorial photography quality, aspirational lifestyle, every frame a print ad",
+    "ultra-premium, calm and confident brand aesthetic, editorial-grade clinical photography, outcome-focused, credible and structured",
   TIKTOK_VIRAL:
-    "dynamic energetic composition, bold colors, high contrast, instant eye-catch, social media optimized, vibrant and fun",
+    "clear strong-hook composition, clean bold framing, instant clarity, social-optimized but still premium and compliance-minded",
   PRODUCT_DEMO:
-    "crystal clear product visibility, hero product shot, demonstrate features clearly, clean composition",
+    "clear demonstration of the launch framework or a Clinical Ready skill, hero framing, clean structured composition",
   EMOTIONAL_STORY:
-    "emotional resonance, human connection, storytelling composition, warm and inviting, feels like a memory",
+    "human connection through real training, practice owner and learner journey, warm but professional, feels credible",
   BRAND_FILM:
-    "cinematic brand storytelling, premium production value, Mediterranean luxury atmosphere, timeless quality",
-  LIFESTYLE_BEACH:
-    "authentic beach lifestyle, sun-soaked joy, effortless luxury, golden summer energy, aspirational but achievable",
+    "cinematic brand storytelling, premium production value, calm confident authority, timeless and clinical",
+  LIFESTYLE_PRACTICE:
+    "authentic day-in-the-practice content, real operatory and training moments, professional and aspirational-but-achievable, structured premium energy",
 };
 
 const LIGHTING_PRESETS: Record<string, string> = {
   golden_hour:
-    "warm golden hour sunlight, soft directional side lighting, warm highlights, sun-kissed glow, no harsh shadows",
+    "warm professional key light, soft directional fill, clean and flattering, premium DSLR look, no harsh shadows",
   midday:
-    "bright natural daylight, clear blue sky light, crisp and clean, tropical brightness",
+    "bright even clinical daylight, clean neutral whites, crisp and professional",
   sunset:
-    "dramatic sunset warm tones, orange and pink sky reflections on water, magical golden light",
+    "warm restrained tone, soft gold accent light, calm confident mood",
   blue_hour:
-    "early morning blue hour, soft cool light, serene and peaceful, crystal clarity",
+    "cool soft light, serene and clean, controlled premium clarity",
 };
 
 export class PromptEngine {
@@ -87,23 +87,23 @@ export class PromptEngine {
       scene.showAnchorSystem !== false ? `, ${ANCHOR_SYSTEM_PROMPT}` : "";
     const environment =
       scene.environment ||
-      "crystal clear turquoise tropical beach water, white sand beach, palm trees";
-    const subject = scene.subject || "attractive fit model in premium swimwear";
-    const action = scene.action || "relaxing effortlessly";
+      "real dental operatory with chairside assisting, clean clinical setting";
+    const subject = scene.subject || "adult learner in clean navy scrubs";
+    const action = scene.action || "at chairside assisting under instructor guidance";
     const camera =
       CAMERA_PRESETS[
         scene.style === "TIKTOK_VIRAL" ? "IPHONE_PREMIUM" : "ARRI_LUXURY"
       ];
-    const color = scene.color ? `${scene.color} colored` : "";
+    const color = scene.color ? `${scene.color} accent` : "";
 
-    return `${styleModifier}, ${color} ${productDesc}, ${subject} ${action} on the float${anchor}, ${environment}, ${lighting}, ${camera}, photorealistic, sharp detail, no AI artifacts, exact product geometry preserved, no shape alterations, authentic water physics, ultra high resolution commercial photography quality`;
+    return `${styleModifier}, ${color} ${productDesc}, ${subject} ${action}${anchor}, ${environment}, ${lighting}, ${camera}, photorealistic, premium commercial photography quality, credible clinical detail, no cartoon icons, no generic stock smiles, ultra high resolution`;
   }
 
   buildVideoPrompt(scene: SceneRequest): string {
     const basePrompt = this.buildImagePrompt(scene);
     const motion =
-      scene.motion || "slow smooth camera push-in, gentle water movement, natural float drift arrested by anchor";
-    return `${basePrompt}, ${motion}, cinematic motion blur, 24fps cinematic look, smooth stabilized camera movement, no jerky motion`;
+      scene.motion || "slow smooth camera push-in, steady intentional movement across the clinical work";
+    return `${basePrompt}, ${motion}, cinematic-but-restrained, 24fps professional look, smooth stabilized camera movement, no jerky motion`;
   }
 
   buildProductShotPrompt(
@@ -113,10 +113,10 @@ export class PromptEngine {
     color?: string
   ): string {
     const productDesc = PRODUCT_DESCRIPTIONS[product];
-    const colorStr = color ? `${color}` : "vibrant";
+    const colorStr = color ? `${color} accent` : "SMV navy and gold";
     const anchor = ANCHOR_SYSTEM_PROMPT;
 
-    return `Hero product shot, ${colorStr} ${productDesc}, ${angle} angle, ${environment}, ${anchor}, ARRI Alexa Mini LF look, 85mm lens, natural daylight with soft reflector fill, ultra sharp product detail, crystal clear water, premium commercial product photography, photorealistic, exact product shape preserved, 'hippo' logo perfectly readable, no distortion`;
+    return `Hero brand shot, ${colorStr}, ${productDesc}, ${angle} angle, ${environment}, ${anchor}, ARRI Alexa Mini LF look, 50mm lens, clean professional lighting, ultra sharp detail, premium commercial photography, photorealistic, SMV mark perfectly readable, no distortion, no cartoon icons`;
   }
 
   buildLifestylePrompt(
@@ -127,25 +127,25 @@ export class PromptEngine {
     color?: string
   ): string {
     const productDesc = PRODUCT_DESCRIPTIONS[product];
-    const colorStr = color ? `${color} colored` : "vibrant";
+    const colorStr = color ? `${color} accent` : "SMV navy and gold";
     const anchor = ANCHOR_SYSTEM_PROMPT;
 
-    return `Luxury lifestyle photography, ${colorStr} ${productDesc}, ${subject} ${action}, ${environment}, ${anchor}, golden hour natural sunlight, ARRI Alexa Mini LF look, 35mm lens, rule of thirds composition, sun-kissed warm tones, aspirational premium beach lifestyle mood, photorealistic, authentic expressions, no AI artifacts, exact product geometry preserved`;
+    return `Premium day-in-the-practice photography, ${colorStr}, ${productDesc}, ${subject} ${action}, ${environment}, ${anchor}, warm professional lighting, ARRI Alexa Mini LF look, 35mm lens, structured composition, calm confident premium mood, photorealistic, authentic professional expressions, no cartoon icons, no stock smiles`;
   }
 
   buildUnderWaterSplitShot(product: ProductLine, color?: string): string {
     const productDesc = PRODUCT_DESCRIPTIONS[product];
-    const colorStr = color ? `${color} colored` : "vibrant";
+    const colorStr = color ? `${color} accent` : "SMV navy and gold";
 
-    return `Dramatic split underwater/surface shot, above waterline: attractive model relaxing on ${colorStr} ${productDesc} in crystal clear turquoise water, below waterline: hippo float waterproof dry bag anchor fully submerged hanging from blue twisted rope, small yellow buoy sphere at water surface level on rope between float and anchor, underwater visibility shows coral sand bottom, ARRI Alexa Mini LF look, 24mm wide lens, natural tropical sunlight penetrating water, photorealistic water refraction, exact product geometry preserved, ultra premium commercial quality`;
+    return `Signature split-panel SMV brand shot, top: ${colorStr} ${productDesc} with an adult learner in navy scrubs at chairside assisting in a real operatory, bottom: a dark navy or violet-to-magenta gradient panel with white headline text and an uppercase gold eyebrow label reading the campaign line, ARRI Alexa Mini LF look, 35mm lens, clean professional lighting, photorealistic, premium clinical quality, small SMV mark legible, no cartoon icons`;
   }
 
   buildTikTokHookShot(product: ProductLine, hookConcept: string, color?: string): string {
     const productDesc = PRODUCT_DESCRIPTIONS[product];
-    const colorStr = color ? `${color}` : "vibrant bright";
+    const colorStr = color ? `${color} accent` : "SMV navy and gold";
     const anchor = ANCHOR_SYSTEM_PROMPT;
 
-    return `High-energy social media hero shot, ${colorStr} ${productDesc}, ${hookConcept}, ${anchor}, crystal clear tropical water, bright saturated colors, bold composition, center frame product placement, sunny tropical vibes, Sony Venice cinematic look, 35mm lens, natural sunlight, photorealistic, maximum visual impact, no AI artifacts, product shape exact`;
+    return `High-clarity social hero shot, ${colorStr}, ${productDesc}, ${hookConcept}, ${anchor}, clean clinical setting, bold clear composition, center-frame subject, professional premium vibe, Sony Venice look, 35mm lens, clean lighting, photorealistic, maximum clarity, no cartoon icons, no stock smiles`;
   }
 
   buildScriptToShotList(
@@ -168,62 +168,62 @@ export class PromptEngine {
       camera_specs: CAMERA_PRESETS.ARRI_LUXURY,
       lighting: LIGHTING_PRESETS.golden_hour,
       motion_notes: `${scene.shot_type} — smooth ${scene.duration}s duration`,
-      continuity_notes: `Match color grade and product ${color || ""} to previous shots`,
+      continuity_notes: `Match SMV brand treatment and ${color || "navy/gold"} accent to previous shots`,
     }));
   }
 }
 
 export const UNIVERSAL_NEGATIVE_PROMPT =
-  "wrong product shape, modified product shape, altered product geometry, shape distortion, wrong float type, mixing product lines, flat when should be reclined, ring when should be tube, tube when should be mat, mat when should be chair, missing rope, disconnected anchor rope, anchor bag above water surface, anchor bag floating at surface, floating anchor bag, wrong logo text, altered hippo logo, missing logo, extra accessories, invented product features, cartoon, illustration, painting, drawing, render, CGI look, plastic toy look, cheap quality, AI artifacts, distorted human proportions, blurry, low resolution, watermark, generic stock photo, washed out colors, unrealistic water, missing yellow buoy, yellow buoy wrong color, blue rope wrong color";
+  "cartoon, cartoon icons, illustration, painting, drawing, CGI look, generic stock smiles, staged fake enthusiasm, licensure guarantee overlay, 'guaranteed licensure' text, passive income text, free money text, side hustle framing, coupon or discount styling, cheap look, hype styling, incorrect SMV plan names, missing compliance note, wrong palette, altered SMV mark, invented credentials or clinical claims, distorted human proportions, blurry, low resolution, watermark, washed out colors";
 
 export const SCRIPT_STYLES = {
   CINEMATIC_LUXURY: {
     name: "Cinematic Luxury",
-    description: "Premium brand film quality — Apple/Nike level production",
+    description: "Premium brand film quality — calm, confident, authoritative",
     pace: "slow and deliberate",
-    hook_style: "visual intrigue — show before tell",
-    music: "ambient electronic or cinematic orchestral",
-    example_hook: "The ocean remembers where you stopped drifting.",
+    hook_style: "credible statement or clear outcome — show the real training",
+    music: "understated cinematic or professional ambient",
+    example_hook: "Your practice can train the assistants it actually needs.",
   },
   TIKTOK_VIRAL: {
     name: "TikTok Viral",
-    description: "Hook-first, energetic, trend-aware but premium",
-    pace: "fast cuts, instant payoff",
-    hook_style: "question or shocking statement in first 2 words",
-    music: "trending audio or upbeat beach vibes",
-    example_hook: "POV: you're the only one not drifting away at the beach",
+    description: "Hook-first, clear, practical — still premium and compliance-minded",
+    pace: "fast, clear payoff",
+    hook_style: "direct question or specific claim in the first line",
+    music: "clean upbeat but professional",
+    example_hook: "What if your dental practice ran its own assisting school?",
   },
   PRODUCT_DEMO: {
-    name: "Product Demo",
-    description: "Feature-forward, educational, clear value demonstration",
+    name: "Program Demo",
+    description: "Feature-forward, educational, clear value of the launch framework",
     pace: "measured, clear",
-    hook_style: "problem-solution reveal",
-    music: "light positive background music",
-    example_hook: "This bag is the reason you'll never chase your float again.",
+    hook_style: "problem-solution reveal — staffing gap to launch",
+    music: "light professional background",
+    example_hook: "This is how a practice goes from idea to organized school launch.",
   },
   EMOTIONAL_STORY: {
-    name: "Emotional Story",
-    description: "Human connection, memory-making, feeling over feature",
-    pace: "emotional rhythm, breathe between moments",
-    hook_style: "relatable moment or universal truth",
-    music: "warm acoustic or gentle piano",
-    example_hook: "Some summers stay with you forever.",
+    name: "Practice Owner Story",
+    description: "Human connection — the practice owner and learner journey",
+    pace: "steady rhythm, room to breathe",
+    hook_style: "relatable practice moment or staffing reality",
+    music: "warm restrained score",
+    example_hook: "Every practice has felt the assistant shortage.",
   },
   BRAND_FILM: {
     name: "Brand Film",
-    description: "60-180 second cinematic brand statement",
+    description: "60-180 second cinematic brand statement for SMV",
     pace: "cinematic — slow build to payoff",
-    hook_style: "atmospheric world-building",
-    music: "cinematic score",
-    example_hook: "There is a place where the water is always clear.",
+    hook_style: "atmospheric, credible world-building in a real operatory",
+    music: "cinematic score, restrained",
+    example_hook: "There is a better way to build your assistant pipeline.",
   },
-  LIFESTYLE_BEACH: {
-    name: "Lifestyle Beach",
-    description: "Authentic summer lifestyle content — feels real, aspirational",
+  LIFESTYLE_PRACTICE: {
+    name: "In the Practice",
+    description: "Authentic day-in-the-practice content — real, credible, aspirational",
     pace: "natural and candid feeling",
-    hook_style: "FOMO trigger — you should be here",
-    music: "summer indie or chill beach vibes",
-    example_hook: "This is what your summer was supposed to look like.",
+    hook_style: "real training moment — you should see this in action",
+    music: "clean professional underscore",
+    example_hook: "This is what a practice-based assisting school looks like in real life.",
   },
 };
 

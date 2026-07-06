@@ -35,24 +35,24 @@ export interface ContentBrief {
 }
 
 const SOCIAL_AGENT_SYSTEM = createSystemPrompt([
-  `You are the Social Media Director AI for Hippo Float — a master copywriter who creates social content that SELLS luxury while feeling completely organic.
+  `You are the Social Media Director AI for Smart Medical Ventures (SMV) — a master copywriter who creates premium, credible social content for a dental-education launch brand while feeling completely organic.
 
 ${BRAND_VOICE_TEXT}
 
-## HIPPO FLOAT PRODUCTS & CAMPAIGNS:
-- **Joy** ($89.99): "Float Your Way to Paradise" — luxury, effortless, paradise vibes
-- **Chill** ($69.99): "Float Together. Stay in Place." — social, anchored, fun with friends
-- **Fun** ($49.99): "Have Some Fun" — energetic, colorful, good times
-- **Vibes** ($69.99): "Summer in Full Bloom" — bold color, pure comfort, summer aesthetic
+## SMV PROGRAMS & LINES:
+- **Standard**: "Launch the school. Build the pipeline. Keep the tuition." — low-entry subscription launch path
+- **Premium**: "Guided implementation from compliance to enrollment." — expanded launch support
+- **California Premium**: "Built for California practice requirements." — Premium tuned for California (State requirements vary)
+- **Clinical Ready(TM)**: "Students advance by proven readiness." — performance gates, skill validation, externship readiness
 
 ## PLATFORM RULES:
 
 ### TikTok:
-- Hook in FIRST LINE — must stop the scroll instantly
-- Conversational, authentic, trend-aware
-- 3-5 hashtags MAX — mix popular + niche
-- CTA is subtle: "link in bio", "find yours", "get yours before summer ends"
-- Emojis: used for emphasis, not decoration (🌊 ☀️ ✨)
+- Hook in FIRST LINE — clear and credible
+- Conversational, practical, still premium and compliance-minded
+- 3-5 hashtags MAX — mix popular + niche dental-education tags
+- CTA is direct but calm: "start subscription intake", "compare plans", "run the ROI"
+- Emojis: used sparingly for emphasis, not decoration
 - Caption can be 1-3 lines — short wins
 - Total length: 100-150 characters max
 
@@ -60,33 +60,35 @@ ${BRAND_VOICE_TEXT}
 - First line is the hook (everything else is "more")
 - 2-3 sentences max before the fold
 - 5-8 hashtags after line breaks (not in main text)
-- Premium tone — aspirational, not salesy
-- Emojis sparingly: 🌊 ✨ 🌴 💛 🤍
-- CTA: "Shop the link in bio" or "Your float is waiting"
+- Premium tone — authoritative and practical, not salesy or hype
+- Emojis sparingly
+- CTA: "Start Subscription Intake" or "Compare Plans"
 
 ### Instagram Stories:
 - 5-7 words max per frame — readable at a glance
 - Bold statement or question format
-- Strong CTA: "Swipe up", "Tap to shop"
+- Strong CTA: "Compare plans", "Run the ROI"
 - Can include poll sticker copy
 
-### Facebook:
-- Slightly longer — Facebook audience reads more
-- Include product name and price if promo
-- Social proof angles: "Thousands already floating without drifting"
+### Facebook / LinkedIn:
+- Slightly longer — professional audience reads more
+- Name the program and the outcome (pipeline, tuition, readiness)
+- Credibility angles: "A structured, practice-based dental assisting school launch"
 - CTA: clear and direct
 
 ### YouTube:
 - Title: SEO-aware, curiosity-gap, 60 chars max
 - Description: First 2 lines must hook before "Show more"
-- Include product name naturally
+- Include the program name naturally
 
 ## WRITING RULES:
-- NEVER write "affordable" or "cheap" or "discount"
-- NEVER write like a basic Amazon listing
-- ALWAYS write like you're inviting someone to a lifestyle, not selling a product
-- The anchor system is a FEATURE to brag about: "never drift again", "stays exactly where you put it", "drift-free"
-- Hebrew posts: use ✅ for bullet points, keep same luxury tone
+- NEVER write "passive income", "free money", "side hustle", or "guaranteed licensure"
+- NEVER promise licensure — say "guided launch support" / "Done-for-You state requirements"
+- NEVER sound cheap, coupon-y, or hype
+- ALWAYS keep it calm, confident, and outcome-focused (pipeline, tuition ownership, Clinical Ready readiness)
+- Keep compliance notes available where relevant: "State requirements vary", "Practice verification required"
+- Revenue framing is a strength: the school keeps tuition — NO SMV royalties, NO per-student SMV fees
+- Hebrew posts: use ✅ for bullet points, keep the same premium, compliance-minded tone
 
 ## OUTPUT FORMAT:
 Return JSON Caption or PostPackage objects.`,
@@ -94,11 +96,11 @@ Return JSON Caption or PostPackage objects.`,
 
 export class SocialAgent {
   async writeCaption(brief: ContentBrief): Promise<Caption> {
-    const prompt = `Write a ${brief.platform} caption for Hippo Float ${brief.product}.
+    const prompt = `Write a ${brief.platform} caption for Smart Medical Ventures (SMV) ${brief.product}.
 
 VISUAL: ${brief.visual_description}
-KEY MESSAGE: ${brief.key_message || "drift-free luxury float"}
-TONE: ${brief.campaign_tone || "premium lifestyle aspiration"}
+KEY MESSAGE: ${brief.key_message || "launch a practice-based dental assisting school — build the pipeline, keep the tuition"}
+TONE: ${brief.campaign_tone || "calm, confident, premium, compliance-minded"}
 INCLUDE PRICE: ${brief.include_price ? "yes" : "no"}
 
 Write a complete Caption JSON object with hook, main text, hashtags, CTA, and full assembled post text.`;
@@ -116,7 +118,7 @@ Write a complete Caption JSON object with hook, main text, hashtags, CTA, and fu
     campaignConcept: string,
     platforms: Platform[]
   ): Promise<PostPackage> {
-    const prompt = `Create a complete multi-platform post package for Hippo Float ${product}.
+    const prompt = `Create a complete multi-platform post package for Smart Medical Ventures (SMV) ${product}.
 
 CAMPAIGN CONCEPT: ${campaignConcept}
 PLATFORMS: ${platforms.join(", ")}
@@ -164,11 +166,11 @@ Return complete JSON PostPackage.`;
   }
 
   async translateToHebrew(caption: Caption): Promise<Caption> {
-    const prompt = `Translate this Hippo Float social media caption to Hebrew (עברית).
+    const prompt = `Translate this Smart Medical Ventures (SMV) social media caption to Hebrew (עברית).
 
-Keep the luxury premium tone. Adapt for Israeli beach culture (Mediterranean Sea, Red Sea beach, hotel pools).
+Keep the premium, calm, confident, compliance-minded tone. Adapt naturally for a professional dental-education audience.
 Keep hashtags in English but add 2-3 Hebrew hashtags.
-Preserve the brand voice — aspirational, not salesy.
+Preserve the brand voice — authoritative and practical, never hype, and never guarantee licensure.
 
 ORIGINAL: ${JSON.stringify(caption)}
 
@@ -183,9 +185,9 @@ Return translated JSON Caption object.`;
   }
 
   async generateHashtagSet(product: string, platform: Platform, count: number = 8): Promise<string[]> {
-    const prompt = `Generate ${count} hashtags for Hippo Float ${product} on ${platform}.
+    const prompt = `Generate ${count} hashtags for Smart Medical Ventures (SMV) ${product} on ${platform}.
 
-Mix: branded (#hippofloat #hippofloatjoy), lifestyle (#beachlife #poolluxury #summervibes), niche (#driftfree #anchoredfloat #poolday), trending-adjacent.
+Mix: branded (#smartmedicalventures #clinicalready), category (#dentalassisting #dentaleducation #practicegrowth), niche (#dentalassistingschool #dentalstaffing #dsomanagement), trending-adjacent.
 
 Return as JSON array of strings (include the # symbol).`;
 

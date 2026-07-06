@@ -1,4 +1,4 @@
-// HIPPO FLOAT — Brand Bible
+// SMART MEDICAL VENTURES (SMV) — Brand Bible
 // Authoritative brand identity rules for all AI agents
 
 export interface BrandTone {
@@ -13,12 +13,12 @@ export interface ColorPalette {
   secondary_name: string;
   accent: string;
   accent_name: string;
-  ocean: string;
-  ocean_name: string;
-  sand: string;
-  sand_name: string;
-  coral: string;
-  coral_name: string;
+  violet: string;
+  violet_name: string;
+  magenta: string;
+  magenta_name: string;
+  green: string;
+  green_name: string;
 }
 
 export interface PhotographyStyle {
@@ -56,82 +56,82 @@ export interface BrandBible {
 }
 
 export const BRAND_BIBLE: BrandBible = {
-  brand_name: "HIPPO FLOAT",
+  brand_name: "SMART MEDICAL VENTURES",
   brand_voice:
-    "Confident, aspirational, sun-soaked luxury — the brand speaks like a premium lifestyle magazine come to life",
-  brand_tier: "premium luxury beach lifestyle",
+    "Authoritative, calm and confident — clear, structured, and clinically informed. SMV speaks like a premium dental-education launch partner, never hype",
+  brand_tier: "premium practice-based dental assisting school launch system",
   brand_statement:
-    "HIPPO FLOAT exists at the intersection of effortless luxury and the perfect summer day. We don't sell floats — we sell the feeling of having arrived.",
+    "Smart Medical Ventures exists at the intersection of clinical education and practice growth. We don't sell a course — we help a dental practice launch and operate a real dental assisting school.",
   brand_promise:
-    "Every float is a first-class seat in the most beautiful place on earth",
+    "We take a practice from idea to organized school launch — curriculum, platform, documents, training workflow, and launch support",
   tone: {
     keywords: [
-      "effortless luxury",
-      "sun-soaked",
-      "aspirational",
+      "authoritative",
+      "calm and confident",
+      "practical",
       "premium",
-      "cinematic",
-      "editorial",
-      "Mediterranean",
-      "Riviera",
-      "golden hour",
-      "elevated",
-      "timeless",
-      "iconic",
+      "compliance-minded",
+      "clinically informed",
+      "structured",
+      "outcome-focused",
+      "credible",
+      "clear",
+      "guided",
+      "professional",
     ],
     forbidden: [
+      "hype",
+      "guaranteed licensure",
+      "passive income",
+      "free money",
+      "side hustle",
+      "get rich quick",
       "cheap",
       "discount",
-      "generic",
-      "AI-looking",
-      "cartoon",
-      "plastic-looking",
-      "budget",
-      "sale",
-      "affordable",
-      "kids toy",
-      "inflatable toy",
-      "basic",
+      "coupon",
+      "vague transformation language",
+      "students will be perfect assistants",
+      "legal or clinical overpromising",
     ],
   },
   color_palette: {
-    primary: "#0A1628",
-    primary_name: "Deep Navy",
+    primary: "#0B1B32",
+    primary_name: "SMV Navy",
     secondary: "#FFFFFF",
     secondary_name: "Pure White",
-    accent: "#C9A84C",
-    accent_name: "Champagne Gold",
-    ocean: "#1B6CA8",
-    ocean_name: "Mediterranean Blue",
-    sand: "#F5E6C8",
-    sand_name: "Golden Sand",
-    coral: "#E8816A",
-    coral_name: "Sunset Coral",
+    accent: "#C7983D",
+    accent_name: "SMV Gold",
+    violet: "#34147A",
+    violet_name: "SMV Violet",
+    magenta: "#B11872",
+    magenta_name: "SMV Magenta",
+    green: "#16856B",
+    green_name: "SMV Green",
   },
   photography_style: {
     lighting:
-      "Golden hour magic — warm, directional, cinematic. Never flat, never harsh flash",
+      "Bright-but-controlled premium DSLR look — clean, professional, never flat or gimmicky",
     composition:
-      "Rule of thirds, negative space, leading lines toward the float",
+      "Structured framing on real clinical work; white text on dark navy/ink/gradient panels",
     models:
-      "Sun-kissed, effortlessly glamorous — looks like they live there, not posing",
+      "Adult learners and instructors in clean navy/charcoal scrubs — focused, competent, real",
     environment:
-      "Crystal-clear water required — teal, turquoise, Mediterranean blue",
-    mood: "You're supposed to be there right now — immediate aspiration, zero friction",
+      "Real dental operatories, sterilization, radiography training, tray setup, chairside assisting",
+    mood: "Credible, premium, clinically serious — you are watching real training happen",
     color_grade:
-      "Warm highlights, cool midtones, rich shadows — editorial not Instagram filter",
-    skin_tones: "Sun-kissed, glowing, diverse but unified by lifestyle",
+      "Neutral clinical whites, deep navy shadows, gold and violet-magenta only as small accents",
+    skin_tones: "Natural, diverse, professional",
     wardrobe:
-      "Minimal luxury — designer swimwear, no logos competing with HIPPO FLOAT",
+      "Navy or charcoal scrubs, clean and consistent — no logos competing with SMV",
   },
   video_style: {
-    pacing: "Slow reveal builds to confident cut — Mediterranean rhythm",
-    cuts: "Motivated cuts on music, never random",
+    pacing: "Measured and structured — confident build, no hype cuts",
+    cuts: "Purposeful cuts that follow a training or launch step, never random",
     music_mood:
-      "Deep house, ambient electronic, or cinematic orchestral — never pop",
+      "Understated, professional, cinematic-but-restrained — never pop or party",
     camera_movement:
-      "Smooth drone, slow push-in, gentle pan — always intentional",
-    edit_style: "Premium commercial — every frame could be a print ad",
+      "Steady, intentional moves — slow push-in, clean pans across clinical work",
+    edit_style: "Premium educational commercial — every frame reads as credible and clinical",
     duration: {
       tiktok: "7-15 seconds hook + 15-30 seconds total",
       instagram_reel: "15-30 seconds",
@@ -141,40 +141,49 @@ export const BRAND_BIBLE: BrandBible = {
     },
   },
   approved_environments: [
-    "Infinity pool at luxury resort (Bali, Mykonos, Santorini)",
-    "Mediterranean sea — crystal clear turquoise water",
-    "Private villa pool — white stone, minimal architecture",
-    "Maldives — overwater bungalow setting",
-    "Ibiza beach club — golden hour",
-    "Miami Beach — Art Deco luxury hotel pool",
-    "French Riviera — Cap d'Antibes style",
-    "Tulum — cenote or infinity pool with jungle",
-    "Amalfi Coast — cliffside pool",
+    "Real dental operatory with chairside assisting in progress",
+    "Sterilization and instrument reprocessing area",
+    "Radiography / imaging training station",
+    "Tray setup and instrument identification station",
+    "Instructor-led skill check with performance gate validation",
+    "Clean classroom / simulation lab with adult learners in scrubs",
+    "Front-office / enrollment and onboarding setting",
+    "Dark navy or gradient brand panel with white headline text",
   ],
   hero_lines: [
-    "Float Like Royalty",
-    "Your throne awaits",
-    "This is what summer feels like",
-    "Effortless. Luxury. Float.",
-    "The ocean is your living room",
-    "Float into your best life",
+    "Launch the school. Build the pipeline. Keep the tuition.",
+    "Turn your practice into a dental assisting school.",
+    "Train the assistants your practice actually needs.",
+    "A structured launch — curriculum, platform, and support.",
+    "Clinical Ready(TM): students advance by proven readiness.",
+    "Own the school. Own the tuition. Build the pipeline.",
   ],
 };
 
 export const BRAND_VOICE_TEXT = `
-HIPPO FLOAT — BRAND BIBLE (MANDATORY RULES)
+SMART MEDICAL VENTURES (SMV) — BRAND BIBLE (MANDATORY RULES)
 
 BRAND: ${BRAND_BIBLE.brand_name}
 TIER: ${BRAND_BIBLE.brand_tier}
 VOICE: ${BRAND_BIBLE.brand_voice}
 
 BRAND STATEMENT: ${BRAND_BIBLE.brand_statement}
+MASTER BRAND LINE: "Launch the school. Build the pipeline. Keep the tuition."
+
+WHAT SMV IS:
+A dental education launch company for practice owners. SMV helps a dental practice launch and operate a practice-based dental assisting school — to build a local assistant pipeline, add a tuition revenue stream, and operate with a structured Clinical Ready(TM) curriculum and support ecosystem.
 
 TONE — USE THESE WORDS AND FEELINGS:
 ${BRAND_BIBLE.tone.keywords.map((k) => `• ${k}`).join("\n")}
 
 FORBIDDEN TONE — NEVER USE:
 ${BRAND_BIBLE.tone.forbidden.map((f) => `• ${f}`).join("\n")}
+
+COMPLIANCE (ALWAYS):
+• Keep "State requirements vary" and "Practice verification required" available
+• Never guarantee licensure — say "guided launch support" / "Done-for-You state requirements"
+• Never use passive income / free money / side hustle framing
+• The school keeps tuition — NO SMV royalties, NO per-student SMV fees
 
 PHOTOGRAPHY RULES:
 • Lighting: ${BRAND_BIBLE.photography_style.lighting}

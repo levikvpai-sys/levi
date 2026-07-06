@@ -12,26 +12,26 @@ import type { Script } from "@/agents/script-studio";
 import type { PostPackage } from "@/agents/social-agent";
 
 const PRODUCTS = [
-  { id: "Joy", label: "hippo float Joy", shape: "Luxury Lounger/Recliner", msrp: "$89.99", emoji: "🛋️" },
-  { id: "Chill", label: "hippo float Chill", shape: "U-Shape Ring Float", msrp: "$69.99", emoji: "💎" },
-  { id: "Fun", label: "hippo float Fun", shape: "Cylinder Torpedo Tube", msrp: "$49.99", emoji: "🎯" },
-  { id: "Vibes", label: "hippo float Vibes", shape: "Flat Mat with Texture", msrp: "$69.99", emoji: "🌊" },
+  { id: "Standard", label: "SMV Standard", shape: "Low-Entry Launch Path", msrp: "Subscription", emoji: "🚀" },
+  { id: "Premium", label: "SMV Premium", shape: "Guided Launch", msrp: "Subscription", emoji: "📈" },
+  { id: "California Premium", label: "SMV California Premium", shape: "California Launch", msrp: "Subscription", emoji: "🏛️" },
+  { id: "Clinical Ready", label: "Clinical Ready™", shape: "Curriculum Model", msrp: "Included", emoji: "🎓" },
 ];
 
 const COLORS: Record<string, string[]> = {
-  Joy: ["Pink", "Blue", "Flower Print Orange", "Citrus Print Green"],
-  Chill: ["Pink", "Orange", "Blue", "Flower Print Orange", "Citrus Print Green"],
-  Fun: ["Pink", "Blue", "Green", "Flower Print Orange"],
-  Vibes: ["Pink", "Orange", "Flower Print Orange", "Blue", "Citrus Print Green"],
+  Standard: ["Navy", "Violet", "Gold"],
+  Premium: ["Navy", "Violet", "Magenta", "Gold"],
+  "California Premium": ["Navy", "Violet", "Magenta", "Gold"],
+  "Clinical Ready": ["Violet", "Magenta", "Green", "Gold"],
 };
 
 const STYLES = [
-  { id: "CINEMATIC_LUXURY", label: "Cinematic Luxury", desc: "Apple/Nike level — aspirational and premium", emoji: "🎞️" },
-  { id: "TIKTOK_VIRAL", label: "TikTok Viral", desc: "Hook-first, energetic, scroll-stopping", emoji: "📱" },
-  { id: "PRODUCT_DEMO", label: "Product Demo", desc: "Feature-forward anchor system showcase", emoji: "⚓" },
-  { id: "EMOTIONAL_STORY", label: "Emotional Story", desc: "Human connection and memory-making", emoji: "❤️" },
+  { id: "CINEMATIC_LUXURY", label: "Cinematic Luxury", desc: "Premium, calm, and confident brand film", emoji: "🎞️" },
+  { id: "TIKTOK_VIRAL", label: "TikTok Viral", desc: "Hook-first, clear, scroll-stopping", emoji: "📱" },
+  { id: "PRODUCT_DEMO", label: "Program Demo", desc: "Feature-forward launch framework showcase", emoji: "🧩" },
+  { id: "EMOTIONAL_STORY", label: "Practice Owner Story", desc: "Human connection and the launch journey", emoji: "❤️" },
   { id: "BRAND_FILM", label: "Brand Film", desc: "60-180 second cinematic brand statement", emoji: "🎬" },
-  { id: "LIFESTYLE_BEACH", label: "Lifestyle Beach", desc: "Authentic summer lifestyle content", emoji: "🏖️" },
+  { id: "LIFESTYLE_PRACTICE", label: "In the Practice", desc: "Authentic day-in-the-practice content", emoji: "🦷" },
 ];
 
 const PLATFORMS = [
@@ -113,7 +113,7 @@ export default function NewCampaignPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: form.name,
-        product: `hippo float ${form.product}`,
+        product: `SMV ${form.product}`,
         productColor: form.color || undefined,
         platforms: form.platforms,
         style: form.style,
@@ -374,8 +374,8 @@ export default function NewCampaignPage() {
         {step === 1 && (
           <div className="space-y-4 animate-fade-in">
             <div>
-              <h2 className="text-2xl font-bold mb-1">Choose Product</h2>
-              <p className="text-muted-foreground text-sm">Which Hippo Float are you promoting?</p>
+              <h2 className="text-2xl font-bold mb-1">Choose Program</h2>
+              <p className="text-muted-foreground text-sm">Which SMV launch path are you promoting?</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {PRODUCTS.map((product) => (
@@ -393,14 +393,14 @@ export default function NewCampaignPage() {
                     <span className="font-semibold">{product.label}</span>
                   </div>
                   <p className="text-sm text-muted-foreground">{product.shape}</p>
-                  <p className="text-xs text-amber-400 mt-1 font-medium">MSRP {product.msrp}</p>
+                  <p className="text-xs text-amber-400 mt-1 font-medium">{product.msrp}</p>
                 </button>
               ))}
             </div>
 
             {form.product && (
               <div className="space-y-2 animate-fade-in">
-                <p className="text-sm font-medium text-muted-foreground">Select color variant:</p>
+                <p className="text-sm font-medium text-muted-foreground">Select brand accent:</p>
                 <div className="flex flex-wrap gap-2">
                   {COLORS[form.product]?.map((color) => (
                     <button
@@ -486,7 +486,7 @@ export default function NewCampaignPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Campaign Name</label>
                 <Input
-                  placeholder="e.g. Summer 2026 Joy Launch"
+                  placeholder="e.g. Q1 2026 Standard Launch Push"
                   value={form.name}
                   onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 />
@@ -494,7 +494,7 @@ export default function NewCampaignPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Objective</label>
                 <Textarea
-                  placeholder="e.g. Launch hippo float Joy to beach lifestyle audience. Show the anchor system in action at a tropical location. Create FOMO..."
+                  placeholder="e.g. Promote SMV Standard to practice owners. Show the launch framework and Clinical Ready readiness in a real operatory. Emphasize the staffing pipeline and keeping the tuition..."
                   value={form.objective}
                   onChange={(e) => setForm((f) => ({ ...f, objective: e.target.value }))}
                   className="h-28"
@@ -503,7 +503,7 @@ export default function NewCampaignPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Key Message <span className="text-muted-foreground font-normal">(optional)</span></label>
                 <Input
-                  placeholder="e.g. Never drift again — drift-free luxury starts here"
+                  placeholder="e.g. Launch the school. Build the pipeline. Keep the tuition."
                   value={form.keyMessage}
                   onChange={(e) => setForm((f) => ({ ...f, keyMessage: e.target.value }))}
                 />
@@ -528,8 +528,8 @@ export default function NewCampaignPage() {
                     <p className="font-medium">{form.name}</p>
                   </div>
                   <div>
-                    <p className="text-muted-foreground">Product</p>
-                    <p className="font-medium">hippo float {form.product} {form.color && `(${form.color})`}</p>
+                    <p className="text-muted-foreground">Program</p>
+                    <p className="font-medium">SMV {form.product} {form.color && `(${form.color})`}</p>
                   </div>
                   <div>
                     <p className="text-muted-foreground">Style</p>
