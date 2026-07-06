@@ -1,0 +1,107 @@
+{
+  "title": "The Staffing Gap — SMV Website Explainer",
+  "style": "AUTHORITY_EXPLAINER",
+  "platform": "website",
+  "total_duration_seconds": 95,
+  "hook": "There aren't enough dental assistants. And if you run a practice, you feel it every single day.",
+  "concept": "A calm, credible dental educator explains — expert-to-owner, not testimonial — why the smartest practices are solving the assistant shortage by training their own, and how Smart Medical Ventures makes launching a practice-based dental assisting school low-entry, structured, and compliant. Speaks primarily to practice owners (the end audience) and closes with a direct partner invite to the creators and educators who share it (the direct audience).",
+  "emotional_arc": "Pressure (daily staffing pain) -> Recognition (there's a better way) -> Skepticism (but it costs too much up front) -> Relief & control (SMV removes the barrier) -> Reassurance (compliance handled the right way) -> Ownership pride (steady pipeline, keep the tuition) -> Invitation (partner with us).",
+  "beat_sheet": [
+    "Hook: name the problem every practice owner feels — not enough assistants.",
+    "Problem: slow hiring, constant turnover, assistants who aren't chairside-ready.",
+    "The shift: the best practices now train the next generation themselves.",
+    "The objection: existing school-launch services demand a big investment up front, before fit is even known.",
+    "SMV enters: curriculum, student & instructor platforms, licensing support, structured launch — on a low-entry subscription.",
+    "Compliance beat: state requirements vary; every practice is verified first.",
+    "Payoff: a steady, workflow-trained pipeline — and you keep the tuition, no royalties, no per-student fees.",
+    "Partner invite: creators/educators whose audience includes practice owners — work with SMV.",
+    "Brand close: Launch the school. Build the pipeline. Keep the tuition."
+  ],
+  "scenes": [
+    {
+      "scene_number": 1,
+      "shot_type": "Presenter to camera, medium",
+      "duration_seconds": 6,
+      "visual": "American male presenter, ~30-35, in navy scrubs or smart casual, standing in a bright, modern operatory. Calm, direct eye contact. Controlled premium DSLR lighting, clean navy/cream background.",
+      "audio": "There aren't enough dental assistants. And if you run a practice, you feel it every single day.",
+      "on_screen_text": "THE STAFFING GAP",
+      "notes": "Gold uppercase eyebrow, lower third. Unhurried delivery sets the calm-and-confident register."
+    },
+    {
+      "scene_number": 2,
+      "shot_type": "B-roll cutaways",
+      "duration_seconds": 10,
+      "visual": "Empty operatory chair; one assistant stretched thin across two rooms; sterilization area mid-turnover. Real clinical environment, no staged stock smiles.",
+      "audio": "Hiring is slow. Turnover is constant. And the assistants who do come in aren't always ready for real chairside work.",
+      "on_screen_text": "",
+      "notes": "Show the problem, don't overstate it. Keep it credible, not doom-y."
+    },
+    {
+      "scene_number": 3,
+      "shot_type": "Presenter + b-roll",
+      "duration_seconds": 12,
+      "visual": "Cut to an instructor-led skill check: adult learners in clean navy scrubs, tray setup, chairside practice, documented readiness check.",
+      "audio": "So more and more practice owners are solving it a different way -- by training the next generation of assistants themselves.",
+      "on_screen_text": "TRAIN YOUR OWN",
+      "notes": "This is the turn from problem to solution. Warm, hopeful, still measured."
+    },
+    {
+      "scene_number": 4,
+      "shot_type": "Presenter to camera, closer",
+      "duration_seconds": 12,
+      "visual": "Presenter slightly tighter frame. Honest, level tone as he names the catch with existing options.",
+      "audio": "There are already services that help you open an assisting school inside your practice. But most ask for a large investment up front -- before you even know if your practice is the right fit.",
+      "on_screen_text": "",
+      "notes": "Positions SMV against high-upfront-cost competitors without naming them. Compliance-minded honesty builds trust."
+    },
+    {
+      "scene_number": 5,
+      "shot_type": "Brand reveal + platform UI",
+      "duration_seconds": 18,
+      "visual": "SMV logo resolves on navy; clean cutaways of student & instructor platforms, curriculum modules, and launch documents. Gold and violet-magenta gradient accents per brand.",
+      "audio": "That's where Smart Medical Ventures comes in. SMV gives you the curriculum, the student and instructor platforms, guided support through licensing, and a structured launch framework -- through a low-entry subscription model.",
+      "on_screen_text": "SMART MEDICAL VENTURES",
+      "notes": "Use reversed/white logo on navy. Show real platform structure, not generic dashboards. 'Low-entry subscription' is on-brand language."
+    },
+    {
+      "scene_number": 6,
+      "shot_type": "Presenter to camera",
+      "duration_seconds": 10,
+      "visual": "Presenter, calm and matter-of-fact for the compliance beat. Navy lower-third panel with two chips.",
+      "audio": "State requirements vary, and every practice goes through verification first -- so your school is built to launch the right way.",
+      "on_screen_text": "State requirements vary  |  Practice verification required",
+      "notes": "REQUIRED compliance mentions. Deliver plainly, no over-promise, no guarantees. This beat protects the brand."
+    },
+    {
+      "scene_number": 7,
+      "shot_type": "B-roll payoff",
+      "duration_seconds": 12,
+      "visual": "A confident graduate assisting chairside in a real operatory; a full, working team moving with ease. Warm but controlled light.",
+      "audio": "The result: a steady pipeline of assistants trained around your workflow -- and you keep the tuition. No SMV royalties. No per-student fees.",
+      "on_screen_text": "KEEP THE TUITION  ·  No SMV royalties  ·  No per-student fees",
+      "notes": "Economic angle in brand-safe language. Avoid 'passive income' / '100% free money'."
+    },
+    {
+      "scene_number": 8,
+      "shot_type": "Presenter to camera",
+      "duration_seconds": 10,
+      "visual": "Direct address to creators/educators/consultants. Slight warmth, still calm and confident.",
+      "audio": "And if you create for the dental world -- if your audience includes practice owners -- Smart Medical Ventures wants to work with you. Reach out, and help your community build the pipeline too.",
+      "on_screen_text": "PARTNER WITH SMV",
+      "notes": "Serves the DIRECT audience (influencers, podcasters, consultants, educators) with an explicit invitation to collaborate/refer."
+    },
+    {
+      "scene_number": 9,
+      "shot_type": "End card",
+      "duration_seconds": 5,
+      "visual": "Navy end card, reversed/white SMV logo, violet-magenta gradient underline rule, one primary CTA button.",
+      "audio": "Smart Medical Ventures. Launch the school. Build the pipeline. Keep the tuition.",
+      "on_screen_text": "Launch the school. Build the pipeline. Keep the tuition.  —  Start Subscription Intake",
+      "notes": "Master brand line + single primary CTA. White text on navy per dark-background rule."
+    }
+  ],
+  "voiceover": "There aren't enough dental assistants. And if you run a practice, you feel it every single day. Hiring is slow. Turnover is constant. And the assistants who do come in aren't always ready for real chairside work. So more and more practice owners are solving it a different way -- by training the next generation of assistants themselves. There are already services that help you open an assisting school inside your practice. But most ask for a large investment up front -- before you even know if your practice is the right fit. That's where Smart Medical Ventures comes in. SMV gives you the curriculum, the student and instructor platforms, guided support through licensing, and a structured launch framework -- through a low-entry subscription model. State requirements vary, and every practice goes through verification first -- so your school is built to launch the right way. The result: a steady pipeline of assistants trained around your workflow -- and you keep the tuition. No SMV royalties. No per-student fees. And if you create for the dental world -- if your audience includes practice owners -- Smart Medical Ventures wants to work with you. Reach out, and help your community build the pipeline too. Smart Medical Ventures. Launch the school. Build the pipeline. Keep the tuition.",
+  "music_direction": "Understated, confident, modern underscore -- soft sustained pads with a light rhythmic pulse. Supports authority and clarity, never hype. Lift subtly at the SMV reveal (scene 5) and at the brand close (scene 9); pull back under the compliance beat (scene 6) so the words land.",
+  "visual_intention": "Premium clinical education, not a generic course ad. Real operatories, sterilization, tray setup, chairside assisting, instructor-led skill checks. Navy/charcoal scrubs; magenta-violet or gold only as small accents. Bright-but-controlled DSLR lighting, clean backgrounds, subtle SMV Academy signage where possible. Navy #0B1B32 / ink #07111F dark panels, warm cream #F6F3EC canvases, Authority Gold #C7983D eyebrows and dividers, violet->magenta gradient (135deg #34147A -> #7046A2 -> #B11872 -> #A00F3D) for accent rules and the end card. White text on every dark background. Inter typography.",
+  "cta": "Primary: Start Subscription Intake (practice owners). Secondary invitation: influencers, podcasters, consultants and dental educators -> reach out to partner with SMV and refer practice-owner audiences."
+}
