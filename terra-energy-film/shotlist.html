@@ -2,203 +2,189 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terra Energy Center — Director's Shotlist</title>
 <style>
   :root {
-    --bg: #0e0e10;
-    --panel: #17171a;
-    --panel-2: #1d1d21;
-    --border: #2a2a30;
-    --text: #e8e8ea;
-    --text-dim: #9a9aa2;
-    --accent: #d4a259;
-    --done: #4ade80;
+    --bg: #0b0b0d; --panel: #141417; --panel-2: #1b1b1f; --border: #27272d;
+    --text: #eaeaec; --text-dim: #92929c; --accent: #d4a259; --done: #4ade80;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
+    margin: 0; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    line-height: 1.5;
-    padding: 32px 24px 80px;
+    line-height: 1.5; padding: 32px 24px 80px;
   }
   .container { max-width: 980px; margin: 0 auto; }
-  h1 { font-size: 28px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.02em; }
-  .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+  .eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 800; margin: 0 0 4px; letter-spacing: -.03em; }
+  .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 24px; }
   .howto {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 18px;
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 16px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; font-size: 13px; color: var(--text-dim); margin-bottom: 16px;
   }
   .notes {
-    background: var(--panel);
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding: 14px 18px;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 24px;
+    background: var(--panel); border: 1px solid var(--accent); border-radius: 8px;
+    padding: 14px 18px; font-size: 13px; color: var(--text); margin-bottom: 24px;
   }
   .notes strong { color: var(--accent); }
   details.style-prefix {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin-bottom: 32px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; margin-bottom: 32px;
   }
   details.style-prefix summary { cursor: pointer; font-weight: 600; color: var(--accent); user-select: none; }
   details.style-prefix pre {
-    margin: 14px 0 0; padding: 14px;
-    background: var(--panel-2);
-    border-radius: 6px;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 12.5px;
-    white-space: pre-wrap;
-    color: var(--text);
+    margin: 14px 0 0; padding: 14px; background: var(--panel-2); border-radius: 6px;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px;
+    white-space: pre-wrap; color: var(--text);
   }
-  .scene {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 22px;
-    margin-bottom: 18px;
-  }
+  .scene { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 18px; }
   .scene-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
-  .scene-header input[type="checkbox"] {
-    width: 20px; height: 20px; margin-top: 2px;
-    accent-color: var(--done); cursor: pointer; flex-shrink: 0;
-  }
-  .scene-num { font-size: 18px; font-weight: 700; color: var(--accent); min-width: 56px; }
+  .scene-header input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--done); cursor: pointer; flex-shrink: 0; }
+  .scene-num { font-size: 18px; font-weight: 700; color: var(--accent); min-width: 30px; }
   .scene-desc { font-size: 15px; color: var(--text); flex: 1; }
   .scene-desc .timing { color: var(--text-dim); font-size: 12.5px; display: block; margin-top: 2px; }
   .scene.done .scene-desc { text-decoration: line-through; color: var(--text-dim); }
-  .prompt-block {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-top: 12px;
-    overflow: hidden;
-  }
+  .prompt-block { background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; margin-top: 12px; overflow: hidden; }
   .prompt-label {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 14px;
-    background: rgba(255,255,255,0.02);
-    border-bottom: 1px solid var(--border);
-    font-size: 12px; color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 0.05em;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 8px 14px; background: rgba(255,255,255,.02); border-bottom: 1px solid var(--border);
+    font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .05em;
   }
-  .char-count {
-    font-size: 11px;
-    color: var(--text-dim);
-    opacity: 0.6;
-  }
+  .char-count { font-size: 11px; color: var(--text-dim); opacity: .6; margin-left: auto; margin-right: 10px; }
   .char-count.warn { color: #f59e0b; opacity: 1; }
   .char-count.over { color: #ef4444; opacity: 1; font-weight: 700; }
   .copy-btn {
-    background: transparent; color: var(--accent);
-    border: 1px solid var(--border); border-radius: 4px;
-    padding: 4px 10px; font-size: 11px; cursor: pointer;
-    text-transform: uppercase; letter-spacing: 0.05em;
-    font-family: inherit;
+    background: transparent; color: var(--accent); border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 10px; font-size: 11px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: .05em; font-family: inherit;
   }
   .copy-btn:hover { border-color: var(--accent); }
   .copy-btn.copied { color: var(--done); border-color: var(--done); }
   pre.prompt {
-    margin: 0; padding: 14px 16px;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 12.5px;
-    white-space: pre-wrap;
-    color: var(--text);
+    margin: 0; padding: 14px 16px; font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px; white-space: pre-wrap; color: var(--text);
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Terra Energy Center</h1>
-  <div class="subtitle">Director's Shotlist · Seedance 2.0 · 60-Second Film — JCOAL Clean Coal Day International Symposium</div>
+  <div class="eyebrow">JCOAL Clean Coal Day International Symposium</div>
+  <h1>The Light That Waited</h1>
+  <div class="subtitle">Terra Energy Center — 60-Second Film · Director's Shotlist · Seedance 2.0</div>
 
   <div class="howto">
     Tick scenes as you finish them — progress saves automatically in your browser.
     Click Copy on any prompt to grab the full text ready for Seedance 2.0.
-    Each prompt generates 15 seconds of footage — trim to the scene's runtime in the edit.
+    Each prompt generates 15 seconds — trim to the scene's runtime in the edit.
     Character count shown per prompt — stay under 5,000 characters.
-    All on-screen titles, supers, and the Terra logo are added in post — no prompt renders text.
-    Want changes? Describe what to revise and the file updates.
+    All on-screen titles, supers and the Terra logo are added in post — no prompt renders text.
+    Companion documents: <strong>storyboard.html</strong> (frames, shot specs, type system) and <strong>script.html</strong> (the story read).
   </div>
 
   <div class="notes">
-    <strong>Client production notes (baked into every prompt):</strong><br>
-    1. <strong>Weather turn</strong> — Scenes 1–3 play under a dark, heavy storm deck. The moment the camera reaches daylight in Scene 4 (the Terra reveal), the sky is cloudless, clear, and golden — and stays that way to the end.<br>
-    2. <strong>No rivers, ever</strong> — no rivers, streams, creeks, lakes, wetlands, or fish in any frame. All terrain is dry tundra, spruce forest, ridgelines, and snowfields. This is a hard rule in the Global Style Prefix and each prompt's Avoid line. (The open Pacific appears only in the two strategic map/orbital views, where the script requires it.)
+    <strong>Locked rules — baked into every prompt:</strong><br>
+    1. <strong>Weather turn</strong> — the prologue and Scenes 1–3 play under storm or underground. From the instant the camera bursts out of the mine in Prompt 4a CUT 1, the sky is cloudless and golden and stays clear to the end.<br>
+    2. <strong>No rivers, ever</strong> — no rivers, streams, creeks, lakes, ponds, wetlands or fish in any frame, the prehistoric forest included. All terrain is dry tundra, spruce, ridgelines and snowfields. This is a hard rule in the Global Style Prefix and in each prompt's Avoid line. The open Pacific appears only in the two strategic map/orbital views the script requires.<br>
+    3. <strong>Character continuity</strong> — <code>@Image1</code> is Kate in every prompt she appears in (1b, 2b, 5a, 7). Use the same reference image each time so her face never drifts. <code>@Image3</code> is the coal seam and fossil leaf; keep the leaf identical between Prompt 1a and Prompt 3b — that match is the whole point of the film.
   </div>
 
   <details class="style-prefix">
-    <summary>Global Style Prefix (applied to every prompt)</summary>
+    <summary>Global Style Prefix (applied verbatim to every prompt)</summary>
     <pre>Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.</pre>
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.</pre>
   </details>
 
   <div class="scene">
     <div class="scene-header">
       <input type="checkbox" data-scene="1">
       <div class="scene-num">1.</div>
-      <div class="scene-desc">WARNING — natural-gas control room at night; supply gauge falls, alarms begin, the operator turns.
-        <span class="timing">Film time 0:00–0:06 · no narration · SFX: hum, beeps</span>
+      <div class="scene-desc">Prologue &amp; Warning — the ancient forest, the buried leaf, and the night the gauge falls
+        <span class="timing">Film time 0:00 – 0:06 · 2 prompts</span>
       </div>
     </div>
 
     <div class="prompt-block">
       <div class="prompt-label">
-        <span>Prompt 1 · 15s</span>
+        <span>Prompt 1a · 15s</span>
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the control-room operator — face, build, and uniform preserved throughout.
-@Image2 as the natural-gas system control room environment.
-
-Characters:
-@Image1 is a gas-system operator in a navy utility shirt, mid-40s, sleeves rolled, headset resting around the neck, seated at a curved console — alert, professional, deep into a night shift.
+@Image2 as the Cretaceous Alaskan forest environment.
+@Image4 as the style reference — warm ancient-sunlight grade, green-gold.
 
 Scene:
-Night. A natural-gas control room (@Image2 ): a curved wall of monitors displaying schematic maps of Southcentral Alaska's gas network. @Image1 sits at the center console facing the main wall screen, coffee cup at the right hand. The room is lit only by monitor glow.
+One hundred million years ago, a warm Alaskan forest. No ice, no snow — a green world under a low warm sun. No people. The falling leaf is the only moving subject; every camera move is slow.
 
-CUT 1 — extreme close-up, macro lens, locked-off tripod:
-Black frame under a low mechanical hum. A single monitor fades up out of the darkness: a green supply gauge. Its level begins ticking downward, step by step. A soft, rhythmic warning beep starts. No people in frame.
+CUT 1 — wide establishing, 24mm, very slow push-in between the trunks:
+Tall conifers and broad-leaved trees. Three hard shafts of sunlight fall between the trunks onto a dry forest floor of ferns, needles and fallen bark. Dust and pollen turn slowly inside the beams. Nothing moves but the light. The ground is dry — packed soil, leaf litter, no water anywhere.
+
+CUT 2 — medium, 85mm, locked-off, camera follows the fall:
+A single broad leaf releases from a branch at the top of frame and falls, turning slowly, catching a flash of gold on each rotation. It settles flat on the forest floor among the ferns.
+
+CUT 3 — macro lens, very slow push-in:
+The leaf on the dark soil, veins and edges razor-sharp, still lit warm. Fine soil begins to rise and close over it — not thrown, but rising gently as if time itself is covering it — until the frame goes almost entirely black with only a faint amber glow left at the leaf&#x27;s center.
+
+Avoid: no water, no rivers, no streams, no ponds, no snow or ice, no people, no animals, no text on screen, no logo, avoid jitter, avoid temporal flicker, avoid chaotic composition, keep the leaf shape identical across all three cuts.</pre>
+    </div>
+    <div class="prompt-block">
+      <div class="prompt-label">
+        <span>Prompt 1b · 15s</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
+Camera: Physical cine lens. 180° shutter motion blur.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
+Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
+Composition: Rule of thirds + golden ratio.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
+Technical: 24fps smooth motion. 8K detail. No jitter.
+Audio: Environmental SFX only. No music. No narration. No subtitles.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
+
+References:
+@Image1 as Kate — face, build and wardrobe preserved throughout the film.
+@Image2 as the natural-gas control room environment.
+
+Characters:
+@Image1 is Kate — a woman in her mid-forties, dark navy operator shirt with rolled sleeves, headset resting around her neck, hair tied back, no makeup. Calm, competent, tired from a night shift. Same face in every shot.
+
+Scene:
+Hard cut out of black. Night, present day. A natural-gas control room: a curved wall of monitors showing schematic maps of Southcentral Alaska&#x27;s gas network. Rain runs down the window glass. @Image1 sits at the centre console facing the main wall screen. The room is lit only by monitor glow and a pulsing warning light.
+
+CUT 1 — extreme close-up, macro lens, locked-off:
+A single monitor fades up out of the darkness: a supply gauge stepping downward, notch by notch. A soft rhythmic warning beep begins. Rain shadows crawl across the screen bezel.
 
 CUT 2 — wide, 24mm, slow push-in:
-The full control-room wall. Across the monitors, schematic pipeline-network graphics glow steel-blue. One by one, amber status tiles flip to blinking red. A red warning wash begins pulsing across the consoles and ceiling in rhythm with the beeps. @Image1 is a small silhouette at the center console, motionless.
+The full control-room wall. Schematic pipeline-network graphics glow steel-blue. One by one, amber status tiles flip to blinking red. A red warning wash begins pulsing across the consoles and ceiling in rhythm with the beeps. @Image1 is a small silhouette at the centre console, motionless.
 
-CUT 3 — medium over-the-shoulder, 50mm, locked-off:
-@Image1 stops mid-keystroke. A half-beat pause — a slow exhale — then @Image1 turns their head toward the main wall screen. The pulsing red light sweeps across their face. Eyes narrow, jaw sets. Hold on the stare.
+CUT 3 — close-up, 85mm, locked-off, camera on her shadow side:
+@Image1 stops mid-keystroke. A half-beat pause — one slow exhale, chest falling — then she lifts her eyes to the wall screen. The pulsing red light sweeps across her face. Her eyes narrow slightly, jaw sets. She is not panicking; she is calculating. Hold on the stare.
 
-Avoid: readable on-screen text, no text on screen, no logo, avoid jitter, avoid extra fingers or floating hands, avoid facial drift between shots, avoid temporal flicker, avoid inventing rooms not present in the reference, no rivers or water anywhere.</pre>
+Avoid: no readable text on the monitors, no text on screen, no logo, avoid jitter, avoid extra fingers or floating hands, avoid facial drift between cuts, avoid temporal flicker beyond the intentional warning pulse, avoid inventing rooms not present in the reference, no rivers or water anywhere.</pre>
     </div>
   </div>
 
@@ -206,8 +192,8 @@ Avoid: readable on-screen text, no text on screen, no logo, avoid jitter, avoid 
     <div class="scene-header">
       <input type="checkbox" data-scene="2">
       <div class="scene-num">2.</div>
-      <div class="scene-desc">WHAT'S AT STAKE — storm-lit montage: gas plant, transmission lines, Anchorage flickering dark; JBER flight line; rise into the Indo-Pacific strategic map.
-        <span class="timing">Film time 0:06–0:14 · VO: "Alaska stands on the front line…" · two prompts</span>
+      <div class="scene-desc">What's at Stake — her city goes dark, the base flickers, and her hand cannot land
+        <span class="timing">Film time 0:06 – 0:14 · 2 prompts</span>
       </div>
     </div>
 
@@ -217,70 +203,72 @@ Avoid: readable on-screen text, no text on screen, no logo, avoid jitter, avoid 
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
 @Image2 as the Southcentral Alaska grid environment.
 @Image4 as the style reference — cold, storm-lit night grade.
 
 Scene:
-Night montage under a heavy, low storm-cloud deck — the fragile grid everything depends on. No featured people. The editing rhythm is fast cuts; every camera move is slow or locked — fast cuts are the only fast element.
+Night montage under a heavy, low storm-cloud deck — the fragile grid everything depends on. No featured people. The editing rhythm is fast cuts; every camera move is slow or locked, so fast cuts are the only fast element.
 
-CUT 1 — wide establishing, 35mm anamorphic, locked-off tripod:
+CUT 1 — insert, 50mm, slow push-in on a wall map display:
+A schematic map of Southcentral Alaska. Warm amber load-centre dots hold steady, then die one by one in a slow wave — one district, then the next, then the next — leaving cold grey behind. The camera holds a half-beat longer on one dying district than the others.
+
+CUT 2 — wide establishing, 35mm anamorphic, locked-off tripod:
 A gas-fired power plant at night: floodlit stacks, steam plumes shearing sideways in the wind, dense charcoal storm clouds pressing low overhead. Plant lights reflect off wet concrete pads — hard surfaces only, no standing water.
 
-CUT 2 — wide, 50mm, slow lateral tracking:
-A line of high-voltage transmission towers marching across a dark, snow-dusted tundra ridge, conductors swaying slightly in the wind, the storm sky churning behind them. The terrain below is dry tundra and black spruce only.
-
 CUT 3 — wide elevated vantage, 85mm telephoto, locked-off:
-The Anchorage skyline at night beneath the same storm deck, mountains a black mass behind. The city light stutters — then whole grid sections dim to black in sequence, block by block, like a wave of failing power. A few blocks hold on, glowing weakly.
+The Anchorage skyline at night beneath the same storm deck, mountains a black mass behind. The city light stutters, then whole grid sections dim to black in sequence, block by block, like a wave of failing power. A few blocks hold on, glowing weakly.
 
-Avoid: no rivers, coastline, or any open water in any frame, no text on screen, no logo, avoid jitter, avoid temporal flicker beyond the intentional blackout wave, avoid chaotic composition, avoid scene bleed between cuts.</pre>
+Avoid: no rivers, coastline, or any open water in any frame, no readable labels or text, no text on screen, no logo, avoid jitter, avoid temporal flicker beyond the intentional blackout wave, avoid chaotic composition, avoid scene bleed between cuts.</pre>
     </div>
-
     <div class="prompt-block">
       <div class="prompt-label">
         <span>Prompt 2b · 15s</span>
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
+@Image1 as Kate — same face and wardrobe as the control-room shots.
 @Image2 as the military airbase environment.
-@Image4 as the style reference — cold, storm-lit night grade.
+
+Characters:
+@Image1 is Kate — a woman in her mid-forties, dark navy operator shirt with rolled sleeves, headset resting around her neck, hair tied back, no makeup. Calm, competent, tired from a night shift. Same face in every shot.
 
 Scene:
-Night at a joint military airbase under the same storm deck as the previous shots, then a single vertical rise into a strategic map view of the North Pacific. The continuous crane rise in CUT 3 is the only fast element; every subject stays static.
+Night at a joint military airbase under the same storm deck, then back inside the control room for one insert, then a single vertical rise. The continuous crane rise in CUT 3 is the only fast element; every subject stays slow or static.
 
 CUT 1 — wide, 35mm anamorphic, slow tracking alongside:
-A military flight line at night: rows of gray military aircraft under sodium floodlights, ground-crew silhouettes moving between them with marshalling wands, breath fogging in the cold, storm clouds pressing low. Camera tracks slowly parallel to the row.
+A military flight line at night: rows of grey military aircraft under sodium floodlights, ground-crew silhouettes moving between them, breath fogging in the cold, storm clouds pressing low. Along the runway edge, half the lights burn steady amber and the other half are completely dark. A white radar dome turns steadily behind them.
 
-CUT 2 — medium, 50mm, slow push-in:
-A white radar dome rotating steadily against the churning night sky; below it, the glow of command-operations windows — screens, silhouettes of personnel at consoles. Red and green aviation lights blink in rhythm.
+CUT 2 — insert, high angle, 50mm, locked-off, no camera move:
+Back in the control room. @Image1 &#x27;s open hand hovering a few centimetres above the keyboard, fingers spread. It does not land. One small tremor of the index finger, then stillness. The red warning pulse crosses her knuckles twice. Nothing else in frame moves.
 
 CUT 3 — crane up, continuous vertical rise, 24mm wide:
-The camera rises straight up from the base, punches through the cloud deck, and keeps rising into a dark satellite-style view: the North Pacific rendered as a glowing strategic map — Alaska at the top of frame, Japan and Korea lower left, thin arcs of pale light connecting them across the dark ocean. The rise is smooth and unbroken.
+The camera rises straight up from the airbase, punches through the cloud deck, and keeps rising into a dark satellite-style view: the North Pacific as a glowing strategic map — Alaska at the top of frame, Japan and Korea lower left, thin arcs of pale light connecting them across the dark ocean. The rise is smooth and unbroken.
 
-Avoid: no rivers on any terrain or map, no readable labels or text on the map, no text on screen, no logo, avoid jitter, avoid temporal flicker, do not invent extra continents or coastlines, avoid chaotic composition.</pre>
+Avoid: no rivers on any terrain or map, no readable labels or text on the map, no text on screen, no logo, avoid jitter, avoid extra fingers or bent fingers on the hand, avoid facial drift, avoid temporal flicker, do not invent extra continents or coastlines.</pre>
     </div>
   </div>
 
@@ -288,45 +276,80 @@ Avoid: no rivers on any terrain or map, no readable labels or text on the map, n
     <div class="scene-header">
       <input type="checkbox" data-scene="3">
       <div class="scene-num">3.</div>
-      <div class="scene-desc">THE TURN — alarms fade over the darkened land; the camera plunges through rock strata to the coal seam; tension becomes hope.
-        <span class="timing">Film time 0:14–0:22 · VO: "But the solution has been beneath us all along…"</span>
+      <div class="scene-desc">The Turn — the dive through a hundred million years, and the leaf inside the coal
+        <span class="timing">Film time 0:14 – 0:22 · 2 prompts</span>
       </div>
     </div>
 
     <div class="prompt-block">
       <div class="prompt-label">
-        <span>Prompt 3 · 15s</span>
+        <span>Prompt 3a · 15s</span>
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image2 as the Southcentral Alaska landscape environment.
-@Image4 as the style reference — the grade warms from steel-blue toward amber across this prompt.
+@Image2 as the Southcentral Alaska landscape and subsurface environment.
+@Image4 as the style reference — the grade warms from steel-blue toward deep amber across this prompt.
 
 Scene:
-The turn of the film — from darkened land into the earth itself. The alarms are gone; the world goes quiet. The camera's continuous descent is the only fast element.
+The turn of the film — from the darkened surface down into the earth. The alarms are gone; the world goes quiet. The camera&#x27;s continuous descent is the only fast element in this prompt; there are no people.
 
 CUT 1 — wide establishing, 35mm anamorphic, locked-off:
-A darkened Southcentral Alaska landscape at night: rolling snow-dusted tundra and black spruce under a storm-cloud deck that is just beginning to thin — the first stars visible through a tear in the clouds. The wind settles; drifting snow crystals slow and stop. Stillness. Dry frozen land only — no water anywhere.
+A darkened Southcentral Alaska landscape at night: rolling snow-dusted tundra and black spruce under a storm-cloud deck just beginning to thin, the first stars showing through a tear in the clouds. The wind settles; drifting snow crystals slow and stop. Stillness. Dry frozen land only — no water anywhere.
 
-CUT 2 — vertical plunge, 24mm wide, continuous descending move:
-The camera dives straight down into the ground: one unbroken descending shot through geological strata — frozen soil, gravel, gray siltstone beds, dark shale — each layer's texture distinct, bedding planes sliding upward past the lens, faint dust motes caught in the shaft of light that follows the camera down.
+CUT 2 — vertical plunge, 24mm wide, one continuous descending move:
+The camera dives straight down into the ground in a single unbroken shot through geological strata — frozen soil, gravel, grey siltstone beds, golden sandstone, dark shale — each layer&#x27;s texture distinct, bedding planes sliding upward past the lens, fine dust motes caught in the travelling shaft of light that follows the camera down. The deeper it goes, the warmer the light becomes.
 
-CUT 3 — macro lens, very slow drift:
-The descent eases to a stop at a massive black coal seam emerging from the darkness — a glossy, faceted wall of coal stretching past every edge of frame. A warm amber glow rises slowly across its surface, catching the facets like embers waking. The camera drifts gently along the seam face as the low hum of the opening returns as a warm, hopeful tone.
+CUT 3 — wide, 24mm, the descent eases to a slow stop:
+The plunge slows and stops before a massive black coal seam emerging from the darkness — a glossy, faceted wall of coal stretching past every edge of frame. A warm amber glow rises slowly across its surface, catching the facets like embers waking.
 
-Avoid: no rivers or groundwater shown, no text on screen, no logo, avoid jitter, avoid temporal flicker, avoid chaotic composition, keep the rock strata horizontal and geologically coherent, avoid cartoonish glowing.</pre>
+Avoid: no rivers, no groundwater, no underground water of any kind, no text on screen, no logo, avoid jitter, avoid temporal flicker, keep rock strata horizontal and geologically coherent, avoid cartoonish glowing, avoid chaotic composition.</pre>
+    </div>
+    <div class="prompt-block">
+      <div class="prompt-label">
+        <span>Prompt 3b · 15s</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
+Camera: Physical cine lens. 180° shutter motion blur.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
+Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
+Composition: Rule of thirds + golden ratio.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
+Technical: 24fps smooth motion. 8K detail. No jitter.
+Audio: Environmental SFX only. No music. No narration. No subtitles.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
+
+References:
+@Image3 as the coal seam face and the fossil leaf — the same leaf shape established in the prologue.
+@Image4 as the style reference — deep amber on black, warm rim light.
+
+Scene:
+The signature image of the film. Inside the coal seam, in near-total quiet. The camera drift is extremely slow; nothing else moves. No people.
+
+CUT 1 — macro lens, very slow drift along the seam face:
+The wall of black coal fills frame — glossy conchoidal facets, fine bedding laminations, dust in the light. Warm amber light travels slowly across the surface, waking highlights facet by facet.
+
+CUT 2 — macro lens, very slow push-in, extremely shallow focus:
+Inside the black coal, something small and perfectly preserved comes into focus: a fossilized broad leaf, whole and intact, its central vein and side veins razor-sharp as a natural impression in the coal — golden-brown against the black. A soft gold rim-light traces its outline.
+
+CUT 3 — extreme macro, locked-off, the smallest possible drift:
+The leaf fills the frame. The amber light strengthens gently along its veins as though the leaf still holds warm sunlight inside it. Hold. Absolute stillness.
+
+Avoid: no water, no rivers, no groundwater, no text on screen, no logo, no glowing energy effects or magic light, no visible plant material other than the single fossil leaf, avoid jitter, avoid temporal flicker, keep the leaf shape identical to the prologue leaf, avoid chaotic composition.</pre>
     </div>
   </div>
 
@@ -334,8 +357,8 @@ Avoid: no rivers or groundwater shown, no text on screen, no logo, avoid jitter,
     <div class="scene-header">
       <input type="checkbox" data-scene="4">
       <div class="scene-num">4.</div>
-      <div class="scene-desc">TERRA REVEAL — the weather turns: out of the mine into brilliant clear morning; conveyor to the sweeping aerial of the plant; power races out and the lights return.
-        <span class="timing">Film time 0:22–0:35 · VO: "Terra Energy Center will transform Alaska coal into 1,250 megawatts…" · two prompts · WEATHER TURN happens at 4a CUT 1</span>
+      <div class="scene-desc">Terra Reveal — the weather turns, the plant appears, the light returns
+        <span class="timing">Film time 0:22 – 0:35 · 2 prompts</span>
       </div>
     </div>
 
@@ -345,70 +368,69 @@ Avoid: no rivers or groundwater shown, no text on screen, no logo, avoid jitter,
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the Terra Energy Center plant design — five generating units, long turbine hall, switchyard — layout preserved exactly.
-@Image2 as the surface coal mine environment.
+@Image2 as the surface coal mine and dry tundra environment.
+@Image4 as the style reference — clear golden morning grade.
 
 Scene:
-The reveal. One continuous forward journey: coal seam, open mine, enclosed conveyor, then the aerial reveal of the plant. THE WEATHER TURNS HERE: from the instant the camera reaches daylight, the storm is gone — a cloudless deep-blue sky with low golden morning sun, and it stays clear for the rest of the film. The camera's continuous forward motion is the only fast element.
+The reveal. One continuous forward journey: coal seam, open mine, daylight, enclosed conveyor. THE WEATHER TURNS HERE: from the instant the camera reaches daylight the storm is gone — a cloudless deep-blue sky with low golden morning sun — and it stays clear for the rest of the film. The camera&#x27;s continuous forward motion is the only fast element.
 
 CUT 1 — continuous forward tracking, 24mm wide:
-From the black coal seam face, the camera accelerates forward along the seam as it opens into a working surface-mine bench — and bursts into brilliant, clear morning daylight. Cloudless blue sky, long golden light, frost sparkling on the benches, haul trucks working the terraces below.
+From the black coal seam face the camera accelerates forward along the seam as it opens into a working surface-mine bench — and bursts into brilliant, clear morning daylight. Cloudless blue sky, long golden light, frost sparkling on the benches, haul trucks working the terraces below. Not one cloud in frame.
 
 CUT 2 — tracking alongside, 35mm anamorphic:
-The camera races along an enclosed overland conveyor — a long silver gallery on trestles crossing dry tundra — sunlight glinting off its cladding, coal visible streaming steadily along the belt at open inspection points. Terrain below is dry tundra and spruce only.
+The camera races along an enclosed overland conveyor — a long silver gallery on trestles crossing dry tundra — sunlight glinting off its cladding, coal visible streaming steadily along the belt at open inspection points. The terrain below is dry tundra and black spruce only.
 
-CUT 3 — Rise+Tilt+Pan shot, sweeping aerial:
-The camera lifts off the conveyor line and sweeps upward into a grand aerial reveal: Terra Energy Center (@Image1 ) — five generating units in a row, the long turbine hall, the switchyard — gleaming in clear morning sun against snow-capped peaks under a flawless blue sky. A single clean white steam plume rises perfectly vertical in the still air.
+CUT 3 — low angle looking up, 35mm, slow rise:
+The conveyor gallery passes overhead against the flawless blue sky, the sun flaring along its edge. Snow-capped peaks stand sharp on the horizon in perfectly clear air.
 
-Avoid: no storm clouds from CUT 1 onward, no rivers, ponds, or any water in the terrain, no text on screen, no logo, avoid jitter, avoid identity drift of the plant layout, avoid chaotic composition, avoid black smoke.</pre>
+Avoid: no storm clouds anywhere in this prompt, no rivers, ponds or any water in the terrain, no text on screen, no logo, avoid jitter, avoid chaotic composition, avoid black smoke, avoid temporal flicker.</pre>
     </div>
-
     <div class="prompt-block">
       <div class="prompt-label">
         <span>Prompt 4b · 15s</span>
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the Terra Energy Center plant design and switchyard.
-@Image2 as the Anchorage and airbase environments seen dark in Scene 2 — same vantages, now restored.
+@Image2 as the Terra Energy Center plant — five generating units, long turbine hall, switchyard — layout preserved exactly.
+@Image4 as the style reference — clear golden morning grade.
 
 Scene:
-Power flows out. Clear, cold dawn — a cloudless sky shading from deep blue overhead to pale gold at the horizon. The storm is gone for good. City and base lights read warm against the dawn. The traveling pulse of light along the lines is the only fast element.
+The plant reveal and the power leaving it. Cloudless sky throughout. The travelling pulse of light along the conductors is the only fast element; the camera moves are stately.
 
-CUT 1 — aerial tracking alongside, 35mm anamorphic:
-From the Terra switchyard, transmission lines recede toward the horizon. The camera flies steadily alongside the conductors as a subtle pulse of light travels along the wires ahead of it, tower after tower, crossing dry ridgelines, snowfields, and spruce forest. No water below — dry land the entire route.
+CUT 1 — Rise+Tilt+Pan shot, sweeping aerial:
+The camera lifts and sweeps upward into a grand aerial reveal of Terra Energy Center (@Image2 ) — five generating units in a row, the long turbine hall, the switchyard — gleaming in clear morning sun against snow-capped peaks under a flawless blue sky. A single clean white steam plume rises perfectly vertical in the still air.
 
-CUT 2 — wide elevated vantage, 85mm telephoto, locked-off:
-Anchorage at clear dawn — the same vantage as the blackout shot, but the sky is cloudless pale gold above the mountains. The darkened grid sections re-illuminate in waves, block after block, windows warming to life until the whole city glows steadily.
+CUT 2 — aerial tracking alongside, 35mm anamorphic:
+From the switchyard, transmission lines recede toward the horizon. The camera flies steadily alongside the conductors as a subtle pulse of light travels along the wires ahead of it, tower after tower, crossing dry ridgelines, snowfields and spruce forest. No water below — dry land the entire route.
 
-CUT 3 — wide, 50mm, slow push-in:
-The military flight line in clear first light: floodlights steady, the rows of aircraft crisp, the radar dome turning calmly against a clean blue-gold sky, ground crew walking with purpose. Everything holds rock steady — no flicker anywhere.
+CUT 3 — wide elevated vantage, 85mm telephoto, locked-off:
+Anchorage at clear morning, the same vantage as the earlier blackout shot but with a cloudless pale-gold sky above the mountains. The darkened grid sections re-illuminate in waves, block after block, windows warming to life until the whole city glows steadily. Everything holds rock steady — no flicker anywhere.
 
-Avoid: no storm clouds, no rivers, coastline, or open water, no text on screen, no logo, avoid jitter, avoid temporal flicker except the intentional single re-illumination wave in CUT 2, avoid chaotic composition.</pre>
+Avoid: no storm clouds, no rivers, coastline or open water, no text on screen, no logo, avoid jitter, avoid identity drift of the plant layout, avoid temporal flicker except the single intentional re-illumination wave, avoid black smoke.</pre>
     </div>
   </div>
 
@@ -416,8 +438,8 @@ Avoid: no storm clouds, no rivers, coastline, or open water, no text on screen, 
     <div class="scene-header">
       <input type="checkbox" data-scene="5">
       <div class="scene-num">5.</div>
-      <div class="scene-desc">A NEW GENERATION OF COAL — inside the plant: CFB combustion becomes electricity; then the flue stream enters carbon capture and CO₂ peels away toward the pipeline.
-        <span class="timing">Film time 0:35–0:47 · VO: "And this is not yesterday's coal…" · two prompts</span>
+      <div class="scene-desc">A New Generation of Coal — inside the plant, and the carbon leaves the smoke
+        <span class="timing">Film time 0:35 – 0:47 · 2 prompts</span>
       </div>
     </div>
 
@@ -427,70 +449,72 @@ Avoid: no storm clouds, no rivers, coastline, or open water, no text on screen, 
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the Terra plant design.
+@Image1 as Kate — same face as the control-room shots, now in a Terra work jacket and hard hat.
 @Image2 as the turbine hall and boiler interior environment.
 
+Characters:
+@Image1 is Kate — a woman in her mid-forties, dark navy operator shirt with rolled sleeves, headset resting around her neck, hair tied back, no makeup. Calm, competent, tired from a night shift. Same face in every shot. In this scene she wears a light Terra work jacket over the same shirt and a white hard hat. Rested, purposeful, at ease in the light.
+
 Scene:
-Inside the plant — coal becomes electricity. Bright, clean, modern industrial interiors: daylight falling in shafts through high clerestory windows, polished floors, orderly machinery. The machinery's steady continuous motion is the only fast element; the camera stays slow.
+Inside the plant — coal becomes electricity. Bright, clean, modern industrial interiors: daylight falling in shafts through high clerestory windows, polished floors, orderly machinery. The machinery&#x27;s steady motion is the only fast element; the camera stays slow.
 
 CUT 1 — Steadicam long take, 35mm anamorphic:
-The turbine hall: a vast, clean hall with sunlight streaming through high windows, a row of massive turbine-generator casings receding into the distance, two technicians in hard hats walking the elevated gallery, one pointing something out to the other. The camera glides forward down the centerline of the hall.
+A vast, clean turbine hall with sunlight streaming through high windows, a row of massive turbine-generator casings receding into the distance. @Image1 walks the elevated gallery at mid-frame, one hand on the rail, glancing down at the machines as she passes. The camera glides forward down the centreline of the hall.
 
 CUT 2 — macro lens, slow push-in:
 The heart of the boiler: through a circular sight glass, the circulating fluidized bed — a swirling, ember-bright storm of incandescent particles cycling in a steady controlled vortex, orange-white and hypnotic. Heat shimmer bends the air at the edge of the glass.
 
 CUT 3 — medium, 50mm, slow lateral tracking:
-The generator floor: a massive generator shaft spinning smoothly, gauge needles holding steady, then a pulse of light traveling along the overhead busbars and out of the hall — the electricity leaving for the switchyard.
+The generator floor: a massive generator shaft spinning smoothly, gauge needles holding steady, then a pulse of light travelling along the overhead busbars and out of the hall.
 
-Avoid: no uncontrolled fire, no smoke inside the hall, no text on screen, no logo, avoid jitter, avoid extra fingers on technicians, avoid identity drift, keep machinery scale consistent across cuts.</pre>
+Avoid: no uncontrolled fire, no smoke inside the hall, no text on screen, no logo, avoid jitter, avoid extra fingers or floating hands, avoid facial drift, keep machinery scale consistent across cuts, no storm clouds in any window or skylight, no rivers or water.</pre>
     </div>
-
     <div class="prompt-block">
       <div class="prompt-label">
         <span>Prompt 5b · 15s</span>
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the Terra plant design — the carbon-capture island sits beside the boiler house.
-@Image4 as the style reference — clean, bright, precise industrial grade.
+@Image2 as the Terra carbon-capture island — silver absorber columns beside the boiler house.
+@Image4 as the style reference — clean, bright, precise industrial grade under cloudless blue.
 
 Scene:
-Not yesterday's coal — the carbon-capture island. Exterior and interior under the continuing clear blue sky. The CO₂ is always visualized as a faint pearl-white translucent stream — elegant and controlled, never smoky, never dark.
+Not yesterday&#x27;s coal — the carbon-capture island, exterior then interior, under the continuing clear blue sky. The captured carbon dioxide is always a faint pearl-white translucent stream — elegant and controlled, never smoky, never dark. No people in this prompt.
 
 CUT 1 — crane up, 24mm wide:
 Following the great flue duct from the boiler house out into full sunlight: the carbon-capture island — a cluster of tall silver absorber columns laced with pipework and stairways, thin wisps of clean white steam, everything sharp-edged against the cloudless blue sky. The camera cranes slowly up the height of a column.
 
-CUT 2 — macro lens, slow push-in, photoreal technical visualization:
-Inside the absorber: the flue-gas stream flows upward as a faint gray haze; within it, a pearl-white translucent stream — the carbon dioxide — separates cleanly and is drawn aside into its own gleaming line, like a current peeling out of a flow. The main stream continues on, visibly clearer than before.
+CUT 2 — macro lens, slow push-in, photoreal technical visualisation:
+Inside the absorber: the flue-gas stream flows upward as a faint grey haze, and within it a pearl-white translucent current separates cleanly and is drawn aside into its own gleaming line, like a current peeling out of a flow. The main stream continues on, visibly clearer than before.
 
 CUT 3 — medium, 50mm, slow lateral tracking:
-The compression hall: a row of multi-stage compressors thrumming steadily under skylight glow; the captured stream's silver lines gather into a single insulated pipeline that exits through the far wall toward open daylight.
+The compression hall: a row of multi-stage compressors thrumming steadily under skylight glow; the captured stream&#x27;s silver lines gather into a single insulated pipeline that exits through the far wall toward open daylight.
 
-Avoid: no black smoke anywhere, no storm clouds, no rivers or water, no text on screen, no logo, avoid jitter, avoid chaotic tangled pipework, avoid temporal flicker, keep the CO₂ stream pearl-white and translucent — never dark or smoky.</pre>
+Avoid: no black smoke anywhere, no storm clouds, no rivers or water, no text on screen, no logo, avoid jitter, avoid chaotic tangled pipework, avoid temporal flicker, keep the captured stream pearl-white and translucent — never dark or smoky.</pre>
     </div>
   </div>
 
@@ -498,8 +522,8 @@ Avoid: no black smoke anywhere, no storm clouds, no rivers or water, no text on 
     <div class="scene-header">
       <input type="checkbox" data-scene="6">
       <div class="scene-num">6.</div>
-      <div class="scene-desc">GEOLOGY BECOMES AN ADVANTAGE — the CO₂ pipeline crosses dry Alaska terrain; the camera follows the CO₂ down past the caprock into permanent storage.
-        <span class="timing">Film time 0:47–0:55 · VO: "Alaska's remarkable geology…" · pipeline route crosses NO rivers</span>
+      <div class="scene-desc">Geology Becomes an Advantage — the carbon goes back where it came from
+        <span class="timing">Film time 0:47 – 0:55 · 1 prompt</span>
       </div>
     </div>
 
@@ -509,34 +533,34 @@ Avoid: no black smoke anywhere, no storm clouds, no rivers or water, no text on 
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
 @Image2 as the interior Alaska terrain environment — dry tundra, ridgelines, snowfields, spruce.
-@Image4 as the style reference — clear golden daylight grade.
+@Image4 as the style reference — clear golden daylight above, deep amber below ground.
 
 Scene:
-Geology becomes the advantage. The CO₂ pipeline crosses Alaska overland, then the camera follows the CO₂ underground into permanent storage. CRITICAL: the pipeline route crosses ONLY dry terrain — tundra ridges, snowfields, spruce forest. It never crosses, parallels, or approaches any river, stream, or water body, and no water appears in any frame. The camera's continuous descent in CUT 2 is the only fast element.
+Geology becomes the advantage. The pipeline crosses Alaska overland, then the camera follows the captured carbon dioxide underground into permanent storage. CRITICAL: the pipeline route crosses ONLY dry terrain — tundra ridges, snowfields, spruce forest. It never crosses, parallels or approaches any river, stream or body of water, and no water appears in any frame. The continuous descent in CUT 2 is the only fast element. No people.
 
 CUT 1 — aerial tracking alongside, 35mm anamorphic:
-A single silver pipeline running low across sunlit dry tundra and over gentle ridgelines, marker posts ticking past, snow-capped peaks far in the distance, cloudless blue sky. The camera flies steadily alongside.
+A single silver pipeline running low across sunlit dry tundra and over gentle ridgelines, marker posts ticking past, snow-capped peaks far in the distance, cloudless blue sky. The camera flies steadily alongside it.
 
 CUT 2 — continuous descending move, 24mm wide:
-At a lone injection wellhead station on a gravel pad, the camera dives down along the well bore into the earth: descending through rock strata — golden sandstone, gray siltstone, then a thick, dark, unbroken caprock layer — each layer sliding past distinctly, the light dimming to deep amber.
+At a lone injection wellhead station on a gravel pad, the camera dives down along the well bore into the earth: descending through rock strata — golden sandstone, grey siltstone, then a thick, dark, unbroken caprock layer — each layer sliding past distinctly, the light dimming to deep amber.
 
 CUT 3 — macro lens, very slow drift:
-Deep in the storage formation: a pearl-white translucent CO₂ plume spreads gently outward through the pores of golden sandstone, slows, and settles — held beneath the massive, unbroken dark caprock ceiling above it. The plume stills. Contained. A low, resolved calm.
+Deep in the storage formation: a pearl-white translucent plume spreads gently outward through the pores of golden sandstone, slows, and settles — held beneath the massive, unbroken dark caprock ceiling above it. The plume stills. Contained. A low, resolved calm.
 
-Avoid: no rivers, lakes, streams, or wetlands anywhere, no leaking or escaping gas, no cracks or fractures in the caprock, no text on screen, no logo, avoid jitter, keep strata horizontal and geologically coherent, avoid temporal flicker.</pre>
+Avoid: no rivers, lakes, streams or wetlands anywhere, no leaking or escaping gas, no cracks or fractures in the caprock, no storm clouds — the sky stays cloudless, no text on screen, no logo, avoid jitter, keep strata horizontal and geologically coherent, avoid temporal flicker.</pre>
     </div>
   </div>
 
@@ -544,8 +568,8 @@ Avoid: no rivers, lakes, streams, or wetlands anywhere, no leaking or escaping g
     <div class="scene-header">
       <input type="checkbox" data-scene="7">
       <div class="scene-num">7.</div>
-      <div class="scene-desc">THE PACIFIC VISION — rise from the earth to orbit; Japan and Korea illuminate; final sunlit portrait of Terra for the end card.
-        <span class="timing">Film time 0:55–1:00 · VO: "Energy security. National security. Lower emissions." · logo added in post</span>
+      <div class="scene-desc">The Pacific Vision — the same light, on her face
+        <span class="timing">Film time 0:55 – 1:00 · 1 prompt</span>
       </div>
     </div>
 
@@ -555,85 +579,74 @@ Avoid: no rivers, lakes, streams, or wetlands anywhere, no leaking or escaping g
         <button class="copy-btn">Copy</button>
       </div>
       <pre class="prompt">Style: 8K IMAX. Photorealistic — no 3D render, no game engine, no CGI look.
-Lighting: Motivated sources only — monitor glow, floodlights, and stormlight in the dark opening scenes; clear natural sunlight from the Terra reveal onward. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
-Color: Act I (Scenes 1–3) 60:30:10 — dominant cold steel-blue / secondary graphite / accent warning-red. Act II (Scenes 4–7) 60:30:10 — dominant clear-sky blue / secondary warm gold / accent clean white.
+Lighting: Motivated sources only. PROLOGUE: warm ancient sunlight through forest canopy. ACT I (storm/night): monitor glow, floodlights and stormlight only. ACT II (from the Terra reveal onward): clear natural sunlight, cloudless sky. Camera on shadow side, atmospheric haze for depth. No artificial lightning.
+Color: Prologue 60:30:10 — dominant green-gold / secondary deep forest brown / accent amber. Act I — dominant cold steel-blue / secondary graphite / accent warning-red. Act II — dominant clear-sky blue / secondary warm gold / accent clean white.
 Camera: Physical cine lens. 180° shutter motion blur.
-People (when present): Pore-level skin realism, micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing.
+People: Pore-level skin realism — vellus hair, asymmetric moles, capillary flush. Micro-pauses before reactions, precise eye-line, living eyes with catch-lights, chest rise from breathing. Restraint over expression.
 Physics: Gravity and inertia respected — mass has real weight, correct contact shadows. No floating props.
 Composition: Rule of thirds + golden ratio.
-Continuity: Machinery, terrain, and weather identical across every cut within a prompt. No identity drift.
+Continuity: Faces, machinery, terrain and weather identical across every cut within a prompt. No identity drift.
 Technical: 24fps smooth motion. 8K detail. No jitter.
 Audio: Environmental SFX only. No music. No narration. No subtitles.
-Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, wetlands, open freshwater, or fish in any shot. Landscapes are dry tundra, spruce forest, ridgelines, and snowfields only.
+Hard rule: NEVER show rivers, streams, creeks, waterfalls, lakes, ponds, wetlands, open freshwater, or fish in any shot. All landscapes are dry tundra, spruce forest, ridgelines and snowfields only.
 
 References:
-@Image1 as the Terra Energy Center plant design — final portrait must match the Scene 4 reveal exactly.
-@Image2 as the Alaska landscape environment.
+@Image1 as Kate — same face as every previous shot, in the Terra work jacket, no hard hat.
+@Image2 as the Terra Energy Center plant and the Alaska landscape — plant layout identical to the reveal.
+
+Characters:
+@Image1 is Kate — a woman in her mid-forties, dark navy operator shirt with rolled sleeves, headset resting around her neck, hair tied back, no makeup. Calm, competent, tired from a night shift. Same face in every shot. Here the night shift is over: her shoulders drop, her face opens. Quiet relief, not celebration.
 
 Scene:
-The Pacific vision and the closer. From deep underground to orbit, then the final portrait of the plant. The vertical rise in CUT 1 is the only fast element; everything after is stately and calm. Clear daylight throughout.
+The closer. From underground up into daylight, one human beat, then the widest view in the film. Clear golden daylight throughout. The vertical rise in CUT 1 is the only fast element; everything after is stately and calm.
 
 CUT 1 — continuous vertical rise, 24mm wide:
-From the dark storage formation, the camera launches straight up — rock strata streaking past in reverse — and bursts out of the ground into brilliant clear daylight above the sunlit Alaska landscape of dry tundra, spruce, and snow peaks, continuing up into deep blue sky.
+From the dark storage formation the camera launches straight up — rock strata streaking past in reverse — and bursts out of the ground into brilliant clear daylight above the sunlit Alaska landscape of dry tundra, spruce and snow peaks, continuing up into deep blue sky.
 
-CUT 2 — high orbital pull-back, 50mm:
-The rise becomes a smooth pull-back over the curve of the Earth: Alaska below in daylight, the North Pacific sweeping into frame, and the coastlines of Japan and Korea illuminating with warm golden light — soft arcs of light reaching toward them from Alaska across the dark ocean.
+CUT 2 — medium, 50mm, very slow push-in:
+@Image1 steps out of a plant doorway into the morning and stops. A low golden sun crosses her face in a clean band of warm light; she lifts her chin very slightly into it and blinks once, eyes catching the light. The Terra plant stands quietly behind her in clear sun. She does not smile — she just breathes out.
 
-CUT 3 — wide, 35mm anamorphic, locked-off with slow push-in:
-The final portrait: Terra Energy Center (@Image1 ) operating in full clear sunlight against the Alaska landscape — five units in a row, a single clean white steam plume rising perfectly straight in still air, golden light on the snow-capped peaks behind, flawless blue sky. Hold, push in slowly, and let the frame settle — leaving clean negative space upper-center for the end-card logo and title, which are added in post.
+CUT 3 — high orbital pull-back, 50mm, then wide 35mm anamorphic hold:
+A smooth pull-back over the curve of the Earth: Alaska below in daylight, the North Pacific sweeping into frame, and the coastlines of Japan and Korea illuminating with warm golden light, soft arcs of light reaching toward them. Transition to the final portrait: Terra Energy Center operating in full clear sunlight, five units in a row, one clean white steam plume rising perfectly straight in still air, flawless blue sky, with clean negative space upper-centre.
 
-Avoid: no rivers or freshwater anywhere — the open Pacific appears only in the orbital view, no text on screen, no logo, avoid jitter, avoid identity drift of the plant, avoid chaotic composition, no storm clouds.</pre>
+Avoid: no rivers or freshwater anywhere — the open Pacific appears only in the orbital view, no text on screen, no logo, avoid jitter, avoid facial drift from earlier shots, avoid identity drift of the plant, avoid chaotic composition, no storm clouds.</pre>
     </div>
   </div>
+
+
 </div>
 
 <script>
-  // Persist checkbox state
-  document.querySelectorAll('.scene input[type="checkbox"]').forEach(cb => {
-    const key = 'shotlist-scene-' + cb.dataset.scene + '-done';
+  document.querySelectorAll('.scene input[type="checkbox"]').forEach(function (cb) {
+    var key = 'shotlist-scene-' + cb.dataset.scene + '-done';
     try {
-      if (localStorage.getItem(key) === '1') {
-        cb.checked = true;
-        cb.closest('.scene').classList.add('done');
-      }
+      if (localStorage.getItem(key) === '1') { cb.checked = true; cb.closest('.scene').classList.add('done'); }
     } catch (e) {}
-    cb.addEventListener('change', () => {
+    cb.addEventListener('change', function () {
       try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch (e) {}
       cb.closest('.scene').classList.toggle('done', cb.checked);
     });
   });
 
-  // Character counters
-  document.querySelectorAll('pre.prompt').forEach(pre => {
-    const block = pre.closest('.prompt-block');
-    const label = block.querySelector('.prompt-label');
-    const count = pre.textContent.length;
-    const span = document.createElement('span');
+  document.querySelectorAll('pre.prompt').forEach(function (pre) {
+    var label = pre.closest('.prompt-block').querySelector('.prompt-label');
+    var count = pre.textContent.length;
+    var span = document.createElement('span');
     span.classList.add('char-count');
-    if (count > 5000) {
-      span.classList.add('over');
-      span.textContent = count + ' chars — OVER LIMIT';
-    } else if (count > 4200) {
-      span.classList.add('warn');
-      span.textContent = count + ' / 5000 chars';
-    } else {
-      span.textContent = count + ' / 5000 chars';
-    }
+    if (count > 5000) { span.classList.add('over'); span.textContent = count + ' chars — OVER LIMIT'; }
+    else if (count > 4200) { span.classList.add('warn'); span.textContent = count + ' / 5000 chars'; }
+    else { span.textContent = count + ' / 5000 chars'; }
     label.insertBefore(span, label.querySelector('.copy-btn'));
   });
 
-  // Copy buttons
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pre = btn.closest('.prompt-block').querySelector('pre.prompt');
-      navigator.clipboard.writeText(pre.textContent).then(() => {
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.closest('.prompt-block').querySelector('pre.prompt');
+      navigator.clipboard.writeText(pre.textContent).then(function () {
         btn.classList.add('copied');
-        const original = btn.textContent;
+        var original = btn.textContent;
         btn.textContent = 'Copied';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.textContent = original;
-        }, 1500);
+        setTimeout(function () { btn.classList.remove('copied'); btn.textContent = original; }, 1500);
       });
     });
   });
