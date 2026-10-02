@@ -1,0 +1,500 @@
+<title>חדר העריכה של WOW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a production slate on top, then the edit-room sequence — diagnose, fix today, shoot week 1, run 30 days. RTL, single column, wide tables scroll inside their own frame. */
+:root{
+  --paper:#EDF0F3; --panel:#FFFFFF; --ink:#14171D; --ink-2:#4A5260; --line:#D5DBE2;
+  --tungsten:#A65E00; --tungsten-fill:#D98A1C; --tungsten-soft:#F6E7D2; --rec:#C8322A; --good:#2E7D4F;
+  --display:"Frank Ruhl Libre","David Libre","Times New Roman",serif;
+  --body:"Assistant","Arial Hebrew","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F1216; --panel:#171B21; --ink:#E8EBF0; --ink-2:#A2ABB8; --line:#2A313B;
+  --tungsten:#F0A443; --tungsten-fill:#E59A35; --tungsten-soft:#2B2216; --rec:#F0574D; --good:#5CC48A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1216; --panel:#171B21; --ink:#E8EBF0; --ink-2:#A2ABB8; --line:#2A313B;
+  --tungsten:#F0A443; --tungsten-fill:#E59A35; --tungsten-soft:#2B2216; --rec:#F0574D; --good:#5CC48A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;padding-inline:16px;padding-block:24px 64px}
+.wrap{max-width:960px;margin-inline:auto;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(26px,4vw,34px);font-weight:900}
+h3{font-size:20px;font-weight:700}
+p{margin:0;max-width:65ch}
+a{color:var(--tungsten);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--tungsten);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2);text-transform:uppercase}
+section{display:grid;gap:20px}
+.sec-head{display:grid;gap:8px;border-top:2px solid var(--ink);padding-top:14px}
+.lede{color:var(--ink-2)}
+
+/* Slate */
+.slate{background:var(--ink);color:var(--paper);border-radius:6px;overflow:hidden}
+.clap{height:26px;background:repeating-linear-gradient(-45deg,var(--paper) 0 22px,var(--ink) 22px 44px);opacity:.92}
+.slate-body{padding:24px clamp(18px,4vw,36px) 28px;display:grid;gap:22px}
+.slate h1{font-size:clamp(34px,7vw,64px);font-weight:900;letter-spacing:-.01em}
+.slate h1 em{font-style:normal;color:var(--tungsten-fill)}
+.slate .sub{font-size:18px;opacity:.85;max-width:60ch}
+.slate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border-top:1px solid color-mix(in srgb,var(--paper) 30%,transparent)}
+.slate-grid div{padding:10px 0 0;display:grid;gap:2px}
+.slate-grid span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;opacity:.65}
+.slate-grid b{font-weight:600;font-size:15px}
+.rec{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.rec::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--rec)}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.stat{background:var(--panel);padding:16px 18px;display:grid;gap:2px}
+.stat b{font-family:var(--display);font-size:36px;font-weight:900;line-height:1}
+.stat span{color:var(--ink-2);font-size:14px}
+
+/* Chart */
+.chart-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;position:relative}
+.chart-scroll{overflow-x:auto}
+#chart{display:block;width:100%;min-width:640px;height:auto}
+#chart text{font-family:var(--mono);font-size:11px;fill:var(--ink-2)}
+#chart .lbl{fill:var(--ink);font-weight:500}
+#chart .grid{stroke:var(--line);stroke-width:1}
+#chart .bar{fill:var(--tungsten-fill)}
+#chart .bar.dim{fill:color-mix(in srgb,var(--tungsten-fill) 45%,var(--panel))}
+#chart .hit{fill:transparent;cursor:pointer}
+#chart .hit:hover+.bar,#chart .hit:focus+.bar{fill:var(--tungsten)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);padding:8px 10px;border-radius:4px;font-size:13px;line-height:1.4;max-width:240px;z-index:2}
+.tip .mono{font-size:12px;opacity:.8}
+details.data{font-size:14px}
+details.data summary{cursor:pointer;color:var(--ink-2)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:start;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;font-weight:500;color:var(--ink-2);background:color-mix(in srgb,var(--paper) 60%,var(--panel))}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.tc{font-family:var(--mono);white-space:nowrap;color:var(--tungsten)}
+td.ost{font-weight:700}
+
+/* Works / breaks */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px}
+.two>*{min-width:0}
+.list{display:grid;gap:0;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.item{padding:14px 16px;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.item:last-child{border-bottom:0}
+.item .k{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.item .k b{font-weight:700}
+.item p{color:var(--ink-2);font-size:15px}
+.fix{color:var(--ink);font-size:15px}
+.fix::before{content:"תיקון · ";font-family:var(--mono);font-size:11px;color:var(--tungsten)}
+.tag{font-family:var(--mono);font-size:12px;color:var(--ink-2);white-space:nowrap}
+.col-title{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.g{background:var(--good)} .dot.r{background:var(--rec)}
+
+/* Checklist */
+.checklist{display:grid;gap:12px}
+.task{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:12px}
+.task-head{display:flex;gap:12px;align-items:flex-start}
+.task-head input{width:20px;height:20px;margin:3px 0 0;accent-color:var(--tungsten);flex:none}
+.task-head label{font-weight:700;font-size:17px;cursor:pointer}
+.task.done .task-head label{text-decoration:line-through;color:var(--ink-2)}
+.task .why{color:var(--ink-2);font-size:15px}
+.progress{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.copybox{border:1px dashed var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:10px;background:color-mix(in srgb,var(--paper) 50%,var(--panel))}
+.copybox pre{margin:0;white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.6}
+.copyrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.copyrow .tag{font-size:11px}
+button.copy{font:600 13px var(--body);background:var(--ink);color:var(--paper);border:0;border-radius:4px;padding:6px 12px;cursor:pointer}
+button.copy.ok{background:var(--good)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px}
+.opts>*{min-width:0}
+ul.links{margin:0;padding-inline-start:18px;display:grid;gap:4px;font-size:15px}
+
+/* Scripts */
+.script{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.script-head{padding:16px 18px;display:grid;gap:6px;border-bottom:1px solid var(--line)}
+.script-head .row{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
+.pill{font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:999px;background:var(--tungsten-soft);color:var(--tungsten);white-space:nowrap}
+.script-body{padding:16px 18px;display:grid;gap:14px}
+.script-body .tbl-wrap{border-radius:4px}
+.ph{background:var(--tungsten-soft);color:var(--tungsten);padding:0 4px;border-radius:3px}
+
+/* Calendar */
+.cal{display:grid;gap:12px}
+.week{display:grid;grid-template-columns:120px repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.week>div{background:var(--panel);padding:12px 14px;display:grid;gap:4px;align-content:start}
+.week .wk{background:color-mix(in srgb,var(--paper) 60%,var(--panel))}
+.week .wk b{font-family:var(--display);font-size:20px}
+.slot .d{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.slot b{font-size:15px;line-height:1.35}
+.slot .m{font-size:13px;color:var(--ink-2)}
+@media (max-width:640px){.week{grid-template-columns:1fr}}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.sw{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:3px;border:1px solid var(--line);color:var(--ink)}
+
+/* Scoreboard */
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px}
+.score>div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:4px}
+.score b{font-family:var(--display);font-size:26px;font-weight:900}
+.score span{color:var(--ink-2);font-size:14px}
+.note{border-inline-start:3px solid var(--tungsten);padding:10px 14px;background:var(--panel);border-radius:0 6px 6px 0;color:var(--ink-2);font-size:15px}
+footer{color:var(--ink-2);font-size:14px;display:grid;gap:6px;border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){button.copy{transition:background .2s}}
+</style>
+
+<div class="wrap" dir="rtl" lang="he">
+
+<header class="slate">
+  <div class="clap" aria-hidden="true"></div>
+  <div class="slate-body">
+    <span class="rec">אבחון · 30 ימים</span>
+    <h1>חדר העריכה של <em>WOW</em></h1>
+    <p class="sub">אבחון מלא של ‎@wowprod.ai‎ מתוך 21 הריילס שלך, ותוכנית עבודה: מה לתקן היום, מה לצלם השבוע, ומה לפרסם בחודש הקרוב.</p>
+    <div class="slate-grid">
+      <div><span>הפקה</span><b>WOW Production</b></div>
+      <div><span>במאי</span><b>לויק כהן</b></div>
+      <div><span>חשבון</span><b class="mono">@wowprod.ai</b></div>
+      <div><span>נתונים</span><b class="mono">25.04–30.09.2026</b></div>
+      <div><span>תאריך</span><b class="mono">02.10.2026</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- 1 · Diagnosis -->
+<section id="diagnosis">
+  <div class="sec-head">
+    <span class="eyebrow">סצנה 1 · אבחון</span>
+    <h2>מה הנתונים אומרים</h2>
+    <p class="lede">האיכות של הסרטים גבוהה. מה שמעכב את הצמיחה הוא הפורמט, ההוק והעקביות. התשובה כבר נמצאת בנתונים שלך: שלושה פוסטים הביאו 47% מכל הלייקים.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b class="mono">67</b><span>עוקבים</span></div>
+    <div class="stat"><b class="mono">21</b><span>ריילס בחצי שנה</span></div>
+    <div class="stat"><b class="mono">9.4</b><span>לייקים בממוצע לריל</span></div>
+    <div class="stat"><b class="mono">40</b><span>שיא: "הבחור הזה לא קיים"</span></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="copyrow"><h3>לייקים לכל ריל, לפי סדר פרסום</h3><span class="tag">ריחוף על עמודה לפרטים</span></div>
+    <div class="chart-scroll" dir="ltr"><svg id="chart" viewBox="0 0 900 300" role="img" aria-label="לייקים לכל ריל לפי סדר פרסום"></svg></div>
+    <div class="tip" id="tip" hidden></div>
+    <details class="data"><summary>טבלת הנתונים המלאה</summary>
+      <div class="tbl-wrap" style="margin-top:10px"><table id="datatable"><thead><tr><th>תאריך</th><th>ריל</th><th>❤️</th><th>💬</th></tr></thead><tbody></tbody></table></div>
+    </details>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="col-title"><span class="dot g"></span><h3>מה עובד אצלך</h3></div>
+      <div class="list">
+        <div class="item"><div class="k"><b><a href="https://www.instagram.com/reel/DaTczsXIgs1/" target="_blank" rel="noopener">"הבחור הזה לא קיים"</a></b><span class="tag">40 ❤️ · 20 💬</span></div><p>הוק של "זה לא אמיתי" בשנייה הראשונה, אקשן, ושאלה פתוחה בסוף ("איזה עולם הייתם מוסיפים?").</p></div>
+        <div class="item"><div class="k"><b><a href="https://www.instagram.com/reel/DX2r616oeuw/" target="_blank" rel="noopener">וְאָהַבְתָּ — המכולת</a></b><span class="tag">31 ❤️ · 1 💬</span></div><p>סיפור אנושי מוכר עם לקוח אמיתי שמשתף. זו ההוכחה הכי טובה שלך מול לקוחות.</p></div>
+        <div class="item"><div class="k"><b><a href="https://www.instagram.com/reel/DaPqZG_o4IA/" target="_blank" rel="noopener">המג״ד</a></b><span class="tag">21 ❤️ · 8 💬</span></div><p>הומור ישראלי ודמות שאפשר להפוך לסדרה.</p></div>
+        <div class="item"><div class="k"><b><a href="https://www.instagram.com/reel/Dc8W1ZfI-PZ/" target="_blank" rel="noopener">אולם רומי: ChatGPT ← Seedance</a></b><span class="tag">12 ❤️ · 10 💬</span></div><p>מאחורי הקלעים עם "כתבו מדריך". יחס התגובות ללייקים הכי גבוה בחשבון.</p></div>
+        <div class="item"><div class="k"><b><a href="https://www.instagram.com/reel/Dav46etIHzw/" target="_blank" rel="noopener">פחד, תקווה ותפילה</a></b><span class="tag">11 ❤️ · 12 💬</span></div><p>שאלה רגשית שקל לענות עליה: "איזו מהן הכי נגעה בכם?"</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-title"><span class="dot r"></span><h3>מה מוריד אותך</h3></div>
+      <div class="list">
+        <div class="item"><div class="k"><b>שארית של ChatGPT בכיתוב</b></div><p><a href="https://www.instagram.com/reel/DdD1z09o6_Q/" target="_blank" rel="noopener">טיזר JOSALLE</a> נפתח במילים "בטח — משהו קצר, קולנועי ומסקרן:".</p><p class="fix">להחליף בכיתוב המתוקן (סצנה 2).</p></div>
+        <div class="item"><div class="k"><b>אותו סרט עלה פעמיים</b><span class="tag">3 מקרים</span></div><p>בית השואבה, הקול הפנימי ו-JOSALLE. כל כפילות מפצלת את המעורבות בין שני פוסטים.</p><p class="fix">להעביר לארכיון את הגרסה החלשה.</p></div>
+        <div class="item"><div class="k"><b>פוסטים של "צרו קשר"</b><span class="tag">0 💬 בכולם</span></div><p>מי שלא מכיר אותך לא עוצר לגלול בשביל פרסומת עצמית.</p><p class="fix">כל עבודה ללקוח מוצגת כסיפור עם לפני ואחרי.</p></div>
+        <div class="item"><div class="k"><b>שלוש שפות בפיד אחד</b></div><p>עברית, אנגלית וצרפתית. האלגוריתם לא יודע למי להציג אותך.</p><p class="fix">עברית בפיד. אנגלית רק בפוסטים לקהילת ה-AI הבינלאומית, ואז כל הפוסט באנגלית.</p></div>
+        <div class="item"><div class="k"><b>קצב לא עקבי</b></div><p>פער של 40 יום בין 2.5 ל-11.6, ואחריו שלושה פוסטים ביום אחד.</p><p class="fix">שלושה פוסטים בשבוע, בימים קבועים.</p></div>
+        <div class="item"><div class="k"><b>שולחים אנשים החוצה</b></div><p>קישורים ליוטיוב ול-Higgsfield בכיתוב מוציאים את הצופה מאינסטגרם.</p><p class="fix">הסרט המלא בקישור בביו או בהודעה פרטית אוטומטית.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · Fix today -->
+<section id="today">
+  <div class="sec-head">
+    <span class="eyebrow">סצנה 2 · תיקונים להיום</span>
+    <h2>שישה תיקונים, שעה אחת</h2>
+    <p class="lede">את כולם עושים ידנית באפליקציה. ממשק אינסטגרם לא מאפשר לשנות ביו, לערוך כיתוב או להעביר לארכיון מבחוץ. ההתקדמות נשמרת בדפדפן שלך.</p>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <div class="checklist">
+    <div class="task" data-id="bio">
+      <div class="task-head"><input type="checkbox" id="t-bio"><label for="t-bio">ביו חדש בעברית, עם הבטחה אחת</label></div>
+      <p class="why">הביו הנוכחי באנגלית בזמן שהקהל שלך בעברית. בחר אחת משלוש האפשרויות:</p>
+      <div class="opts">
+        <div class="copybox"><pre id="bio1">🎬 סרטים ואנימציה ב-AI שנראים כמו קולנוע
+מאחורי הקלעים כל שבוע
+סרטים למותגים וארגונים ↓</pre><div class="copyrow"><span class="tag">אפשרות א · מומלצת</span><button class="copy" data-target="bio1">העתק</button></div></div>
+        <div class="copybox"><pre id="bio2">סרטים שלא צולמו. סיפורים שכן קרו.
+AI · אנימציה · פרסומות
+לויק כהן | לפרויקט ↓</pre><div class="copyrow"><span class="tag">אפשרות ב</span><button class="copy" data-target="bio2">העתק</button></div></div>
+        <div class="copybox"><pre id="bio3">הופך רעיון לסרט, בלי מצלמה.
+סרטי AI למותגים, ארגונים וקהילות
+הצצה לתהליך כל שבוע ↓</pre><div class="copyrow"><span class="tag">אפשרות ג</span><button class="copy" data-target="bio3">העתק</button></div></div>
+      </div>
+    </div>
+
+    <div class="task" data-id="name">
+      <div class="task-head"><input type="checkbox" id="t-name"><label for="t-name">שם פרופיל עם מילות חיפוש</label></div>
+      <p class="why">אינסטגרם מחפש לפי שדה השם. "WOW Production" לא נשמע כמו משהו שאנשים מחפשים, ו"סרטי AI" כן.</p>
+      <div class="copybox"><pre id="name1">לויק כהן | סרטי AI ואנימציה</pre><div class="copyrow"><span class="tag">שדה Name</span><button class="copy" data-target="name1">העתק</button></div></div>
+    </div>
+
+    <div class="task" data-id="josalle">
+      <div class="task-head"><input type="checkbox" id="t-josalle"><label for="t-josalle">לתקן את הכיתוב של טיזר JOSALLE</label></div>
+      <p class="why"><a href="https://www.instagram.com/reel/DdD1z09o6_Q/" target="_blank" rel="noopener">לפוסט</a> · ⋯ ← עריכה. להחליף את כל הכיתוב:</p>
+      <div class="copybox"><pre id="jos">משהו מיוחד בדרך 🎬
+סיפור על עושר, סוד ולב גדול, ועל המשמעות האמיתית של נתינה.
+
+JOSALLE – THE HOLY MISER
+בקרוב.
+
+נוצר על ידי לוי כהן וגל עדרי
+#Josalle #AIFilm #אנימציה #סרטקצר</pre><div class="copyrow"><span class="tag">כיתוב מתוקן</span><button class="copy" data-target="jos">העתק</button></div></div>
+    </div>
+
+    <div class="task" data-id="dupes">
+      <div class="task-head"><input type="checkbox" id="t-dupes"><label for="t-dupes">להעביר לארכיון 3 כפילויות</label></div>
+      <p class="why">ארכיון, לא מחיקה: אפשר להחזיר בכל רגע. בכל זוג נשארת הגרסה שקיבלה יותר לייקים.</p>
+      <ul class="links">
+        <li><a href="https://www.instagram.com/reel/Dd6K3VTo3O_/" target="_blank" rel="noopener">בית השואבה, ההעלאה השנייה</a> <span class="tag">(1 ❤️, נשארת זו עם 3)</span></li>
+        <li><a href="https://www.instagram.com/reel/DazUxFXjOd8/" target="_blank" rel="noopener">הקול הפנימי, ההעלאה הראשונה</a> <span class="tag">(0 ❤️, נשארת זו עם 5)</span></li>
+        <li><a href="https://www.instagram.com/reel/DdEdvEJo4rg/" target="_blank" rel="noopener">JOSALLE, ההעלאה השנייה</a> <span class="tag">(4 ❤️, נשארת זו עם 12)</span></li>
+      </ul>
+    </div>
+
+    <div class="task" data-id="pin">
+      <div class="task-head"><input type="checkbox" id="t-pin"><label for="t-pin">לנעוץ את 3 הסרטים החזקים בראש הפרופיל</label></div>
+      <p class="why">מי שנכנס לפרופיל מחליט תוך שניות אם לעקוב. שיראה קודם את הטוב ביותר:</p>
+      <ul class="links">
+        <li><a href="https://www.instagram.com/reel/DaTczsXIgs1/" target="_blank" rel="noopener">הבחור הזה לא קיים</a>: הוכחה ליכולת</li>
+        <li><a href="https://www.instagram.com/reel/DX2r616oeuw/" target="_blank" rel="noopener">וְאָהַבְתָּ</a>: הוכחה ללקוחות</li>
+        <li><a href="https://www.instagram.com/reel/DaPqZG_o4IA/" target="_blank" rel="noopener">המג״ד</a>: הוכחה לאישיות</li>
+      </ul>
+    </div>
+
+    <div class="task" data-id="dm">
+      <div class="task-head"><input type="checkbox" id="t-dm"><label for="t-dm">הודעה פרטית אוטומטית למילה "פרומפט"</label></div>
+      <p class="why">כל מי שמגיב "פרומפט" מקבל הודעה פרטית מיד. מגדירים את זה ב-ManyChat, או שאבנה את זה דרך Composio. זו התבנית:</p>
+      <div class="copybox"><pre id="dm1">היי! 🎬 הנה הפרומפט מהסרט:
+[להדביק כאן את הפרומפט]
+
+טיפ: שמרו את תיאור הדמות קבוע ושנו רק את העולם.
+רוצים סרט כזה למותג שלכם? WhatsApp:
+wa.me/message/C4RQ2OAOFX5SO1
+לויק</pre><div class="copyrow"><span class="tag">תשובה אוטומטית</span><button class="copy" data-target="dm1">העתק</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Week 1 -->
+<section id="week1">
+  <div class="sec-head">
+    <span class="eyebrow">סצנה 3 · שבוע הצילומים הראשון</span>
+    <h2>שלושה ריילס, תסריט מלא לכל אחד</h2>
+    <p class="lede">ראשון: סרט שמביא חשיפה. שלישי: מאחורי הקלעים של אותו סרט, שמביא עוקבים והודעות. חמישי: פרק בסדרה, שמחזיר צופים. מה שמסומן <span class="ph">כך</span> ממלאים בחומר אמיתי.</p>
+  </div>
+
+  <article class="script">
+    <div class="script-head">
+      <div class="row"><h3>"ביקשתם. הוא חזר."</h3><span class="pill">ראשון 4.10 · סרט</span></div>
+      <p class="lede">המשך ל"הבחור הזה לא קיים". הפוסט ההוא קיבל 20 תגובות לשאלה "איזה עולם הייתם מוסיפים?", אז הקהל כבר בחר את הפרק הבא.</p>
+    </div>
+    <div class="script-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>זמן</th><th>מה רואים</th><th>טקסט על המסך</th><th>קול / סאונד</th></tr></thead>
+        <tbody>
+          <tr><td class="tc">0:00–0:02</td><td>הדמות נוחתת בתוך <span class="ph">העולם שהכי ביקשו בתגובות</span>, והמצלמה מסתובבת סביבה</td><td class="ost">ביקשתם. הוא חזר.</td><td>בום, ואז שקט</td></tr>
+          <tr><td class="tc">0:02–0:08</td><td>פלאש מהסרט הראשון: שמיים, קונג־פו, נינג׳ות</td><td class="ost">הבחור הזה עדיין לא קיים</td><td>מוזיקה עולה</td></tr>
+          <tr><td class="tc">0:08–0:24</td><td>ההרפתקה החדשה בשלושה שוטים: כניסה, עימות, רגע הומור</td><td>—</td><td>סאונד של העולם</td></tr>
+          <tr><td class="tc">0:24–0:30</td><td>פריים קפוא, הדמות מסתכלת למצלמה</td><td class="ost">לאן עכשיו? אתם בוחרים</td><td>נשימה, סוף</td></tr>
+        </tbody>
+      </table></div>
+      <div class="copybox"><pre id="c1">ביקשתם, הוא חזר. 🎬
+בסרט הקודם שאלתי לאיזה עולם הבחור שלא קיים צריך להגיע. [העולם] ניצח.
+כל שוט נוצר ב־AI, עם אותה דמות מההתחלה ועד הסוף.
+
+לאן הוא הולך בפרק הבא? כתבו עולם אחד בתגובות.
+
+לויק כהן | WOW Production
+#AIFilm #סרטקצר #אנימציה</pre><div class="copyrow"><span class="tag">כיתוב</span><button class="copy" data-target="c1">העתק</button></div></div>
+    </div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <div class="row"><h3>"אותה דמות. 5 עולמות."</h3><span class="pill">שלישי 6.10 · מאחורי הקלעים</span></div>
+      <p class="lede">מגלים איך הדמות נשארת זהה בכל עולם. זה הפורמט שהביא לך הכי הרבה תגובות ביחס ללייקים.</p>
+    </div>
+    <div class="script-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>זמן</th><th>מה רואים</th><th>טקסט על המסך</th><th>קול / סאונד</th></tr></thead>
+        <tbody>
+          <tr><td class="tc">0:00–0:02</td><td>הפריים הכי חזק מהסרט</td><td class="ost">אותה דמות. 5 עולמות.</td><td>היט</td></tr>
+          <tr><td class="tc">0:02–0:05</td><td>צילום מסך של תמונת הרפרנס</td><td class="ost">הכול התחיל מתמונה אחת</td><td>קליק</td></tr>
+          <tr><td class="tc">0:05–0:12</td><td>גיליון דמות: חזית, צד, גב</td><td class="ost">1 · גיליון דמות</td><td>ביט</td></tr>
+          <tr><td class="tc">0:12–0:19</td><td>אותו פרומפט, ורק העולם מתחלף בין שוט לשוט</td><td class="ost">2 · דמות קבועה, עולם משתנה</td><td>ביט</td></tr>
+          <tr><td class="tc">0:19–0:25</td><td>יצירת הווידאו ב־<span class="ph">Higgsfield / Seedance</span> ועריכה</td><td class="ost">3 · תנועה ועריכה בסוף</td><td>ביט</td></tr>
+          <tr><td class="tc">0:25–0:30</td><td>מסך מפוצל, לפני ואחרי</td><td class="ost">כתבו ״פרומפט״ ואשלח לכם</td><td>סוף</td></tr>
+        </tbody>
+      </table></div>
+      <div class="copybox"><pre id="c2">הסוד לדמות שנשארת אותה דמות בכל עולם? הסדר, לא הכלי.
+
+1. גיליון דמות אחד, מכל הזוויות.
+2. פרומפט קבוע לדמות, ורק העולם משתנה.
+3. תנועה ועריכה בסוף, לא בהתחלה.
+
+כתבו ״פרומפט״ בתגובות ואשלח לכם בפרטי את פרומפט הדמות המלא מהסרט.
+
+לויק כהן | WOW Production
+#AIFilmmaking #מאחוריהקלעים #Higgsfield</pre><div class="copyrow"><span class="tag">כיתוב · התשובה האוטומטית מוכנה בסצנה 2</span><button class="copy" data-target="c2">העתק</button></div></div>
+    </div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <div class="row"><h3>"המג״ד · פרק 2"</h3><span class="pill">חמישי 8.10 · סדרה</span></div>
+      <p class="lede">התגובה הכי מצחיקה נכנסת לפרק 3, וזו סיבה טובה להגיב.</p>
+    </div>
+    <div class="script-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>זמן</th><th>מה רואים</th><th>טקסט על המסך</th><th>קול / סאונד</th></tr></thead>
+        <tbody>
+          <tr><td class="tc">0:00–0:02</td><td>המג״ד מול <span class="ph">בעיה מוזרה חדשה</span></td><td class="ost">המג״ד · פרק 2</td><td>אפקט קומי</td></tr>
+          <tr><td class="tc">0:02–0:10</td><td>הוא מנסה לפתור לפי הנוהל</td><td class="ost">נוהל זה נוהל</td><td>דיאלוג</td></tr>
+          <tr><td class="tc">0:10–0:22</td><td>שתי הסלמות, כל אחת גרועה מהקודמת</td><td>—</td><td>מוזיקה מואצת</td></tr>
+          <tr><td class="tc">0:22–0:30</td><td>הטלפון מצלצל</td><td class="ost">המח״ט על הקו. מה הוא אומר?</td><td>צלצול, קאט</td></tr>
+        </tbody>
+      </table></div>
+      <div class="copybox"><pre id="c3">המג״ד חשב שהיום הגרוע ביותר כבר מאחוריו. 🎖️👽
+פרק 2 בסדרה. הכול נוצר ב־AI: הדמויות, העולם והסאונד.
+
+מה הוא אומר למח״ט? התשובה הכי מצחיקה בתגובות נכנסת לפרק 3.
+
+לויק כהן | WOW Production
+#המגד #אנימציה #קומדיה</pre><div class="copyrow"><span class="tag">כיתוב</span><button class="copy" data-target="c3">העתק</button></div></div>
+    </div>
+  </article>
+</section>
+
+<!-- 4 · 30 days -->
+<section id="calendar">
+  <div class="sec-head">
+    <span class="eyebrow">סצנה 4 · לוח צילומים</span>
+    <h2>30 יום, 12 פוסטים</h2>
+    <p class="lede">שלושה פוסטים בשבוע, בימים קבועים. כל יום שלישי מפרק את הסרט של יום ראשון, כך שכל סרט עובד פעמיים.</p>
+  </div>
+  <div class="legend"><span><span class="sw">סרט</span> חשיפה</span><span><span class="sw">מאחורי הקלעים</span> עוקבים והודעות</span><span><span class="sw">סדרה</span> צופים חוזרים</span><span><span class="sw">לקוח</span> פרויקטים</span></div>
+  <div class="cal" id="cal"></div>
+  <p class="note">פוסט ללקוח מעלים כשיתוף פעולה (Collab) עם חשבון הלקוח, כדי שהסרט יופיע גם אצלו. ברכת שבת עדיף להעלות לסטורי ולא לפיד.</p>
+</section>
+
+<!-- 5 · Scoreboard -->
+<section id="score">
+  <div class="sec-head">
+    <span class="eyebrow">סצנה 5 · מה מודדים</span>
+    <h2>יעדים לחודש הקרוב</h2>
+    <p class="lede">היעדים נגזרים מהממוצעים שלך עד היום. נתוני Insights נפתחים בממשק רק מ-1,000 עוקבים, אז בינתיים בודקים ידנית פעם בשבוע.</p>
+  </div>
+  <div class="score">
+    <div><b class="mono">12 / 12</b><span>פוסטים בזמן, בלי אף כפילות</span></div>
+    <div><b class="mono">12+</b><span>לייקים בממוצע לריל (היום 9.4)</span></div>
+    <div><b class="mono">8+</b><span>תגובות לכל פוסט מאחורי הקלעים (שיא קודם: 10)</span></div>
+    <div><b class="mono">4+</b><span>שיחות וואטסאפ מלקוחות פוטנציאליים בחודש</span></div>
+  </div>
+</section>
+
+<footer>
+  <span>הנתונים נשלפו מהחשבון ב-02.10.2026 דרך חיבור קריאה בלבד. לא שיניתי ולא פרסמתי כלום.</span>
+  <span>הסקיל wow-content-studio מכיר את המותג, הקול והנתונים האלה, וכותב את התוכן לשבועות הבאים.</span>
+</footer>
+</div>
+
+<script>
+const REELS=[
+ ["2026-04-25","איזה סיפור תרצו שהקהל יזכור",4,1],
+ ["2026-04-28","חטיבת החשמונאים",1,0],
+ ["2026-05-02","וְאָהַבְתָּ — המכולת",31,1],
+ ["2026-06-11","ואם הטכנולוגיה הייתה…",3,0],
+ ["2026-06-22","Votre marque (צרפתית)",7,0],
+ ["2026-06-23","PROMPT — ניו יורק",9,5],
+ ["2026-07-01","המג״ד",21,8],
+ ["2026-07-02","הבחור הזה לא קיים",40,20],
+ ["2026-07-09","שבת שלום — מטות־מסעי",6,1],
+ ["2026-07-10","מה קורה כשנותנים לדמיון…",4,0],
+ ["2026-07-13","פחד, תקווה ותפילה",11,12],
+ ["2026-07-15","הקול הפנימי (העלאה 1)",0,0],
+ ["2026-07-15","הקול הפנימי (העלאה 2)",5,0],
+ ["2026-08-17","TITAN",6,1],
+ ["2026-08-17","French Chabad — דולר אחד",12,0],
+ ["2026-09-06","אולם רומי: ChatGPT ← Seedance",12,10],
+ ["2026-09-09","JOSALLE — טיזר",5,3],
+ ["2026-09-09","JOSALLE (העלאה 1)",12,0],
+ ["2026-09-09","JOSALLE (העלאה 2)",4,0],
+ ["2026-09-30","בית השואבה (העלאה 1)",3,0],
+ ["2026-09-30","בית השואבה (העלאה 2)",1,0]
+];
+const fmt=d=>{const[y,m,dd]=d.split("-");return dd+"."+m};
+
+(function chart(){
+  const svg=document.getElementById("chart"),tip=document.getElementById("tip"),card=svg.closest(".chart-card");
+  const W=900,H=300,L=40,R=12,T=24,B=58,max=40,ticks=[0,10,20,30,40];
+  const pw=W-L-R,ph=H-T-B,n=REELS.length,step=pw/n,bw=step-2;
+  const y=v=>T+ph-(v/max)*ph, NS="http://www.w3.org/2000/svg";
+  const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+  ticks.forEach(t=>{el("line",{x1:L,x2:W-R,y1:y(t),y2:y(t),class:"grid"});const tx=el("text",{x:L-8,y:y(t)+4,"text-anchor":"end"});tx.textContent=t});
+  const top=[...REELS].map((r,i)=>[r[2],i]).sort((a,b)=>b[0]-a[0]).slice(0,3).map(x=>x[1]);
+  REELS.forEach((r,i)=>{
+    const x=L+i*step+1,h=Math.max(ph-(y(r[2])-T),0),yy=y(r[2]);
+    const hit=el("rect",{x:L+i*step,y:T,width:step,height:ph,class:"hit",tabindex:"0","aria-label":r[1]+": "+r[2]+" לייקים, "+r[3]+" תגובות"});
+    if(r[2]>0){const rad=Math.min(4,h);el("path",{class:"bar"+(top.includes(i)?"":" dim"),d:`M${x},${T+ph}V${yy+rad}Q${x},${yy} ${x+rad},${yy}H${x+bw-rad}Q${x+bw},${yy} ${x+bw},${yy+rad}V${T+ph}Z`})}
+    else el("rect",{class:"bar dim",x:x,y:T+ph-1,width:bw,height:1});
+    if(top.includes(i)){const t=el("text",{x:x+bw/2,y:yy-6,"text-anchor":"middle",class:"lbl"});t.textContent=r[2]}
+    if(i%2===0){const t=el("text",{x:x+bw/2,y:T+ph+16,"text-anchor":"middle"});t.textContent=fmt(r[0])}
+    const show=()=>{tip.innerHTML=`<b></b><div class="mono"></div>`;tip.querySelector("b").textContent=r[1];tip.querySelector(".mono").textContent=`${fmt(r[0])} · ${r[2]} ❤️ · ${r[3]} 💬`;tip.hidden=false;
+      const cb=card.getBoundingClientRect(),hb=hit.getBoundingClientRect();let left=hb.left-cb.left+hb.width/2-110;left=Math.max(8,Math.min(left,cb.width-248));tip.style.left=left+"px";tip.style.top=(hb.top-cb.top+12)+"px"};
+    const hide=()=>{tip.hidden=true};
+    hit.addEventListener("mouseenter",show);hit.addEventListener("focus",show);hit.addEventListener("mouseleave",hide);hit.addEventListener("blur",hide);
+  });
+  const ax=el("text",{x:L,y:H-12});ax.textContent="ריל לפי סדר פרסום (25.04 ← 30.09)";
+  const tb=document.querySelector("#datatable tbody");
+  REELS.forEach(r=>{const tr=document.createElement("tr");[fmt(r[0]),r[1],r[2],r[3]].forEach((v,j)=>{const td=document.createElement("td");td.textContent=v;if(j!==1)td.className="num";tr.appendChild(td)});tb.appendChild(tr)});
+})();
+
+(function calendar(){
+  const W=[
+   ["שבוע 1","4–8.10",[["א׳ 4.10","סרט","ביקשתם. הוא חזר.","שאלה: לאן עכשיו?"],["ג׳ 6.10","מאחורי הקלעים","אותה דמות. 5 עולמות.","״פרומפט״"],["ה׳ 8.10","סדרה","המג״ד · פרק 2","התגובה נכנסת לפרק 3"]]],
+   ["שבוע 2","11–15.10",[["א׳ 11.10","סרט","אף מצלמה לא הייתה כאן: קאט של 20 שניות מ-JOSALLE","איזה רגע נשאר איתכם?"],["ג׳ 13.10","מאחורי הקלעים","מסקיצה לסרט: איך נבנה JOSALLE","״מדריך״"],["ה׳ 15.10","לקוח","דולר אחד: הסיפור מאחורי הפרסומת ל-French Chabad","WhatsApp בביו"]]],
+   ["שבוע 3","18–22.10",[["א׳ 18.10","סרט","3 דקות שכל הורה צריך לראות: קאט מ\"הקול הפנימי\"","שתפו עם הורה אחד"],["ג׳ 20.10","מאחורי הקלעים","ChatGPT בונה, Seedance מצלם: חלק 2","״פרומפט״"],["ה׳ 22.10","סדרה","המג״ד · פרק 3, עם התגובה הזוכה","מה בפרק 4?"]]],
+   ["שבוע 4","25–29.10",[["א׳ 25.10","סרט","הבחור שלא קיים · העולם הבא שבחרתם","בחרו עולם"],["ג׳ 27.10","מאחורי הקלעים","כמה זמן לוקח סרט AI באמת? ציר זמן מלא","״מדריך״"],["ה׳ 29.10","לקוח","וְאָהַבְתָּ: מהבעיה של המכולת לסרט","Collab עם הלקוח"]]]
+  ];
+  const cal=document.getElementById("cal");
+  W.forEach(([w,range,slots])=>{const row=document.createElement("div");row.className="week";
+    const h=document.createElement("div");h.className="wk";h.innerHTML="<b></b><span class='mono'></span>";h.querySelector("b").textContent=w;h.querySelector("span").textContent=range;row.appendChild(h);
+    slots.forEach(([d,f,t,c])=>{const s=document.createElement("div");s.className="slot";s.innerHTML="<span class='d'></span><span class='sw'></span><b></b><span class='m'></span>";
+      s.querySelector(".d").textContent=d;s.querySelector(".sw").textContent=f;s.querySelector("b").textContent=t;s.querySelector(".m").textContent="CTA: "+c;row.appendChild(s)});
+    cal.appendChild(row)});
+})();
+
+document.querySelectorAll("button.copy").forEach(b=>b.addEventListener("click",()=>{
+  const pre=document.getElementById(b.dataset.target),txt=pre.textContent;
+  const done=()=>{b.textContent="הועתק";b.classList.add("ok");setTimeout(()=>{b.textContent="העתק";b.classList.remove("ok")},1600)};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="מסומן, העתק ידנית"};
+  try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+}));
+
+(function checklist(){
+  const KEY="wow-fixes-v1";let st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+  const tasks=[...document.querySelectorAll(".task")],prog=document.getElementById("progress");
+  const render=()=>{const n=tasks.filter(t=>t.querySelector("input").checked).length;prog.textContent=`בוצעו ${n} מתוך ${tasks.length}`};
+  tasks.forEach(t=>{const cb=t.querySelector("input");cb.checked=!!st[t.dataset.id];t.classList.toggle("done",cb.checked);
+    cb.addEventListener("change",()=>{st[t.dataset.id]=cb.checked;t.classList.toggle("done",cb.checked);try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}render()})});
+  render();
+})();
+</script>
