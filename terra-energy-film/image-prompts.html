@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra Energy Center — Image Prompts</title>
+<style>
+  :root{--bg:#0b0b0d;--panel:#141417;--panel2:#1b1b1f;--bd:#27272d;--bdl:#35353d;
+        --tx:#eaeaec;--dim:#92929c;--faint:#64646e;--acc:#d4a259;--hero:#4ade80;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);line-height:1.55;padding:34px 22px 90px;
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+  .wrap{max-width:900px;margin:0 auto}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:9px}
+  h1{font-size:30px;font-weight:800;margin:0 0 4px;letter-spacing:-.03em}
+  .sub{color:var(--dim);font-size:14px;margin-bottom:22px}
+  .howto{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:15px 19px;
+         font-size:13.2px;color:var(--dim);margin-bottom:14px}
+  .howto b{color:var(--tx)}
+  .rules{background:var(--panel);border:1px solid var(--acc);border-radius:8px;padding:15px 19px;
+         font-size:13.2px;color:var(--tx);margin-bottom:28px}
+  .rules b{color:var(--acc)}
+  details.tail{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:14px 18px;margin-bottom:30px}
+  details.tail summary{cursor:pointer;font-weight:600;color:var(--acc);user-select:none}
+  details.tail pre{margin:13px 0 0;padding:13px;background:var(--panel2);border-radius:6px;
+       font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.3px;white-space:pre-wrap;color:var(--tx)}
+  .card{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:17px 19px;margin-bottom:15px}
+  .card-head{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:8px}
+  .pid{font-family:"SF Mono",Menlo,monospace;font-weight:700;font-size:14px;color:var(--acc)}
+  .ttl{font-weight:700;font-size:15px;letter-spacing:-.01em;flex:1;min-width:170px}
+  .tc{font-family:"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--faint)}
+  .meta{margin-bottom:10px}
+  .tag{display:inline-block;font-family:"SF Mono",Menlo,monospace;font-size:10.5px;padding:2px 9px;
+       border-radius:3px;border:1px solid var(--bdl);color:var(--faint)}
+  .tag.hero{border-color:var(--hero);color:var(--hero)}
+  .tag.turn{border-color:var(--acc);color:var(--acc)}
+  .prompt-block{background:var(--panel2);border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+  .prompt-label{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 13px;
+      background:rgba(255,255,255,.02);border-bottom:1px solid var(--bd);font-size:11.5px;color:var(--dim);
+      text-transform:uppercase;letter-spacing:.05em}
+  .cc{font-size:11px;color:var(--dim);opacity:.6;margin-left:auto;margin-right:10px}
+  .copy-btn{background:transparent;color:var(--acc);border:1px solid var(--bd);border-radius:4px;
+      padding:4px 10px;font-size:11px;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;font-family:inherit}
+  .copy-btn:hover{border-color:var(--acc)}
+  .copy-btn.copied{color:var(--hero);border-color:var(--hero)}
+  pre.prompt{margin:0;padding:13px 15px;font-family:"SF Mono",Menlo,Consolas,monospace;
+      font-size:12.4px;white-space:pre-wrap;color:var(--tx)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">JCOAL Clean Coal Day International Symposium</div>
+  <h1>The Light That Waited</h1>
+  <div class="sub">Terra Energy Center — 60-Second Film · 20 Still-Image Prompts (one frame per beat)</div>
+
+  <div class="howto">
+    Each prompt below generates <b>one still frame</b> — a keyframe, not a video shot. Written for any
+    photoreal image generator (Midjourney, Nano Banana, Flux, Seedream, Firefly).
+    The shared quality-and-rules tail is already appended to every prompt, so each one works standalone —
+    just hit Copy and paste.<br><br>
+    <b>Aspect ratio:</b> use 16:9 for all of them.
+    <b>For Kate&rsquo;s frames (04, 07, 13, 16a):</b> generate her character sheet first, then feed that image
+    as a reference so her face stays identical across all four.
+  </div>
+
+  <div class="rules">
+    <b>Locked client rules, already inside every prompt:</b><br>
+    1. <b>Weather turn</b> — frames 01&ndash;09 are storm, night or underground. From frame 10 onward the sky is
+    completely cloudless and golden, and stays that way to the end.<br>
+    2. <b>No water</b> — no rivers, streams, lakes, ponds, wetlands or fish in any frame. All terrain is dry tundra,
+    spruce, ridgelines and snowfields. The open Pacific appears only in frames 06b and 16b, where the script requires it.<br>
+    3. <b>No text in frame</b> — every prompt forbids letters, numbers, logos and UI overlays. All titles and the
+    Terra logo are added in post.
+  </div>
+
+  <details class="tail">
+    <summary>Shared quality &amp; rules tail (already appended to every prompt)</summary>
+    <pre>Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+  </details>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">01</span>
+      <span class="ttl">Prologue — the ancient forest</span>
+      <span class="tc">0:00</span>
+    </div>
+    <div class="meta"><span class="tag">Act I · prologue</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">A warm Cretaceous Alaskan forest one hundred million years ago, seen in a wide static frame. Tall conifers and broad-leaved trees; three hard shafts of low golden sunlight fall between the trunks onto a dry forest floor of ferns, needles and fallen bark. Dust and pollen hang suspended in the beams. Deep green-gold grade, warm ancient sunlight as the only light source, heavy atmospheric haze between the trunks. No ice, no snow, no people, no animals. The ground is dry packed soil and leaf litter. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">02</span>
+      <span class="ttl">Prologue — the leaf is buried</span>
+      <span class="tc">0:03</span>
+    </div>
+    <div class="meta"><span class="tag">Act I · prologue</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Extreme macro frame of a single broad green-gold leaf lying flat on dark forest soil among ferns, its veins and serrated edge razor-sharp. A single shaft of warm sunlight falls directly on it while everything around it drops into deep shadow. Fine dark soil is beginning to close over the leaf&#x27;s lower edge. Deep amber-on-black grade, the leaf glowing faintly at the centre of an almost black frame. Shallow focus, the leaf perfectly sharp. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">03</span>
+      <span class="ttl">Control room — the gauge falls</span>
+      <span class="tc">0:04</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide interior frame of a natural-gas control room at night, rain running down a large window. A curved wall of monitors displays schematic pipeline network maps in cold steel-blue; several status tiles glow warning red. A pulsing red warning light washes across the consoles and ceiling. a woman in her mid-forties, fair weathered skin, defined jawline and mature adult bone structure, deep-set grey-blue eyes with fine crow&#x27;s feet and faint shadowing beneath the lower lids, dark ash-brown hair with a few grey strands pulled back into a low ponytail, bare face with visible pores and no makeup, dark navy utility work shirt with sleeves rolled to mid-forearm, black over-ear headset resting around her neck, seen from behind in silhouette, small at the centre console against the wall of screens. Monitor glow is the only light. Cold steel-blue grade with warning-red accent. Screens show abstract graphics with no readable text. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">04</span>
+      <span class="ttl">Kate — the warning crosses her face</span>
+      <span class="tc">0:05</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Tight close-up portrait of a woman in her mid-forties, fair weathered skin, defined jawline and mature adult bone structure, deep-set grey-blue eyes with fine crow&#x27;s feet and faint shadowing beneath the lower lids, dark ash-brown hair with a few grey strands pulled back into a low ponytail, bare face with visible pores and no makeup, dark navy utility work shirt with sleeves rolled to mid-forearm, black over-ear headset resting around her neck, lit only by a pulsing red warning light from screen right and cold monitor spill from the left, camera on her shadow side. She has just lifted her eyes from the keyboard to the screens: narrowed eyes, set jaw, lips slightly parted mid-exhale. Not panic — calculation, and running out of options. Pore-level skin texture, fine lines, faint natural asymmetry, no beauty retouching, matte complexion with no glare. Naturally muted catchlights in the eyes. Dark control room bokeh behind her. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">05</span>
+      <span class="ttl">The map — her city going dark</span>
+      <span class="tc">0:06</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Close insert of a large wall-mounted schematic map display of a southern Alaskan power grid at night. Warm amber load-centre dots are scattered across the map; a wave of them has gone cold grey, district by district, leaving a spreading dark zone. A thin red locating reticle sits over one dying district. Cold steel-blue display glow, warning-red accents, dark room around the screen. Abstract cartographic shapes only — no readable place names, no coastlines, no water bodies drawn on the map. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">06a</span>
+      <span class="ttl">The base — half the lights are dead</span>
+      <span class="tc">0:09</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide night exterior of a military flight line under a heavy low storm-cloud deck. Rows of grey military transport aircraft sit under sodium floodlights, ground-crew silhouettes small between them, breath fogging in freezing air. Along the runway edge, half the lights burn steady amber and half are completely dark. A white radar dome turns in the middle distance, lit by its own red aviation lights. Cold steel-blue grade, sodium-amber accents, wet concrete with hard reflective sheen and no standing water. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">06b</span>
+      <span class="ttl">Rise into the Pacific</span>
+      <span class="tc">0:12</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">High orbital satellite view of the North Pacific at night, seen from far above the cloud deck. Alaska occupies the top of frame in cold blue-grey relief; Japan and Korea sit lower left, small and dim. Thin arcs of pale light span the dark ocean between them. Storm cloud systems swirl over the Alaskan landmass. Deep navy and steel-blue grade, faint atmospheric limb glow at the horizon. Photoreal satellite imagery look. No labels, no borders, no graphics overlay. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">07</span>
+      <span class="ttl">Nothing left to press</span>
+      <span class="tc">0:13</span>
+    </div>
+    <div class="meta"><span class="tag">Act I</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">High-angle insert of a woman&#x27;s open hand hovering a few centimetres above a worn industrial keyboard, fingers spread, not touching the keys. Short unpolished nails, a thin plain steel watch on the wrist, rolled navy shirt cuff. A red warning light crosses the knuckles. Everything else falls into darkness. Cold steel-blue grade with a red pulse, extremely shallow focus on the hand. Tension held completely still. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">08</span>
+      <span class="ttl">The dive through the strata</span>
+      <span class="tc">0:15</span>
+    </div>
+    <div class="meta"><span class="tag">Act I → turn</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Underground vertical frame looking down through geological rock strata, as if falling through the earth. Distinct horizontal bands slide past: frozen soil, grey gravel, pale siltstone, golden sandstone, dark shale, each layer&#x27;s texture and bedding planes sharply visible. A travelling shaft of light illuminates the strata directly around the lens and falls off to black at the edges, fine dust motes turning in it. Grade warms from steel-blue at the top of frame to deep amber at the bottom. No water, no groundwater, no cave openings. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">09</span>
+      <span class="ttl">THE FOSSIL LEAF — hero frame</span>
+      <span class="tc">0:19</span>
+    </div>
+    <div class="meta"><span class="tag hero">Act I → turn</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Extreme macro frame of a wall of glossy black coal filling the entire frame, with fine conchoidal facets and bedding laminations catching warm amber light. Embedded in the black coal, perfectly preserved, is the natural impression of a single broad fossilized leaf — whole and intact, its central vein and side veins razor-sharp, golden-brown against the black. A soft gold rim-light traces its outline; the leaf looks as though it still holds warm sunlight inside it. Deep amber on near-black grade, shallow focus, absolute stillness. No glowing energy effects, no magic light, no other plant material. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">10</span>
+      <span class="ttl">Out of the mine — THE WEATHER TURN</span>
+      <span class="tc">0:22</span>
+    </div>
+    <div class="meta"><span class="tag turn">Act II · weather turns here</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide frame from inside the mouth of a coal mine bench looking out into brilliant clear morning. A completely cloudless deep-blue sky, low golden sun, frost sparkling on the terraced mine benches, haul trucks working the levels below, snow-capped peaks sharp on the horizon in perfectly clear air. The dark rock of the bench frames the left edge. Clear-sky blue and warm gold grade, long morning shadows, crystalline visibility. Absolutely no clouds in the sky. Dry tundra and black spruce beyond the mine, no water. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">11</span>
+      <span class="ttl">TERRA REVEAL — hero frame</span>
+      <span class="tc">0:26</span>
+    </div>
+    <div class="meta"><span class="tag hero">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Sweeping high aerial frame of a large modern coal-fired power station on dry Alaskan tundra in clear golden morning light: five generating units in a neat row, a long low turbine hall alongside them, and an ordered switchyard of transmission gantries. One clean white steam plume rises perfectly vertical in still air. Snow-capped mountains stand behind under a flawless cloudless deep-blue sky. The plant reads calm, ordered, permanent and immaculately clean. Clear-sky blue and warm gold grade. No black smoke, no haze, no clouds, no water anywhere in the terrain. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">12</span>
+      <span class="ttl">The light comes back</span>
+      <span class="tc">0:31</span>
+    </div>
+    <div class="meta"><span class="tag">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide elevated vantage of a northern city at clear dawn beneath snow-capped mountains, the sky cloudless and shading from deep blue overhead to pale gold at the horizon. The city grid glows warm amber, window by window, fully lit and rock steady, with a few districts still catching light. High-voltage transmission towers cross dry snow-dusted ridgelines in the foreground. Clear blue and warm gold grade, crisp cold air, long shadows. No flicker, no storm, no water, no coastline. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">13</span>
+      <span class="ttl">Inside the turbine hall</span>
+      <span class="tc">0:36</span>
+    </div>
+    <div class="meta"><span class="tag">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide interior of a vast, spotlessly clean turbine hall. Shafts of daylight pour through high clerestory windows onto a polished floor; a row of massive turbine-generator casings recedes into the distance. a woman in her mid-forties, fair weathered skin, defined jawline and mature adult bone structure, deep-set grey-blue eyes with fine crow&#x27;s feet and faint shadowing beneath the lower lids, dark ash-brown hair with a few grey strands pulled back into a low ponytail, bare face with visible pores and no makeup, dark navy utility work shirt with sleeves rolled to mid-forearm, black over-ear headset resting around her neck with a light sand-grey work jacket over the shirt and a white hard hat, walks an elevated steel gallery at mid-frame with one hand on the rail, small against the scale of the machines. Cool daylight key with warm machine-light accents, clean modern industrial. No smoke, no fire, no grime. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">14</span>
+      <span class="ttl">Carbon capture — the stream peels away</span>
+      <span class="tc">0:42</span>
+    </div>
+    <div class="meta"><span class="tag">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Low-angle exterior frame of a carbon-capture island beside a power plant boiler house in full clear sunlight: a cluster of tall silver absorber columns laced with pipework, ladders and stairways, thin wisps of clean white steam at the top, everything sharp-edged against a flawless cloudless deep-blue sky. A great insulated flue duct sweeps in from frame left. Clean white, silver and clear blue grade, hard bright sunlight, immaculate industrial surfaces. No black smoke, no haze, no clouds. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">15a</span>
+      <span class="ttl">The pipeline across dry tundra</span>
+      <span class="tc">0:48</span>
+    </div>
+    <div class="meta"><span class="tag">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Aerial frame flying low alongside a single silver pipeline running across sunlit dry Alaskan tundra and over gentle ridgelines, marker posts ticking past, patches of snow and black spruce, snow-capped peaks far in the distance under a cloudless deep-blue sky. Clear blue and warm gold grade, long low sun, crisp air. The terrain is entirely dry — no rivers, streams, lakes, ponds or wet ground anywhere in the frame. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">15b</span>
+      <span class="ttl">The carbon settles beneath the caprock</span>
+      <span class="tc">0:53</span>
+    </div>
+    <div class="meta"><span class="tag">Act II</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Underground cross-section frame deep below the surface: a thick, unbroken dark caprock layer spans the top of the frame, and beneath it a porous golden sandstone formation. A pearl-white translucent plume spreads gently outward through the pore space and settles, held beneath the sealing rock. Deep amber and warm gold on near-black grade, soft internal light, extremely fine rock texture. Completely still and contained. No cracks or fractures in the caprock, no escaping gas, no water. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">16a</span>
+      <span class="ttl">The same light, on her face</span>
+      <span class="tc">0:56</span>
+    </div>
+    <div class="meta"><span class="tag">Act II · closer</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Medium frame of a woman in her mid-forties, fair weathered skin, defined jawline and mature adult bone structure, deep-set grey-blue eyes with fine crow&#x27;s feet and faint shadowing beneath the lower lids, dark ash-brown hair with a few grey strands pulled back into a low ponytail, bare face with visible pores and no makeup, dark navy utility work shirt with sleeves rolled to mid-forearm, black over-ear headset resting around her neck with a light sand-grey work jacket and no hard hat, stepping out of a plant doorway into clear morning and stopping. A single low band of warm golden sunlight crosses her face; she has lifted her chin very slightly into it, eyes catching the light, shoulders dropped. Quiet relief, not celebration — she does not smile. The power station stands softly out of focus behind her in clear sun under a cloudless sky. Warm gold key with cool blue sky fill. Pore-level skin realism, no retouching, matte complexion. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">16b</span>
+      <span class="ttl">Japan and Korea illuminate</span>
+      <span class="tc">0:58</span>
+    </div>
+    <div class="meta"><span class="tag">Act II · closer</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">High orbital view over the curve of the Earth: Alaska below in clear daylight at the top of frame, the North Pacific sweeping across, and the coastlines of Japan and Korea lower left illuminating with warm golden light. Soft arcs of pale gold light reach across the ocean toward them. Deep blue ocean, warm gold city light, luminous atmospheric limb glow at the horizon. Photoreal satellite imagery look. No labels, no borders, no graphics overlay. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="pid">16c</span>
+      <span class="ttl">End-card plate</span>
+      <span class="tc">1:00</span>
+    </div>
+    <div class="meta"><span class="tag">Act II · closer</span></div>
+    <div class="prompt-block">
+      <div class="prompt-label"><span>Image prompt</span><button class="copy-btn">Copy</button></div>
+      <pre class="prompt">Wide static frame of the same coal-fired power station operating in full clear sunlight against the Alaskan landscape — five generating units in a row, long turbine hall, switchyard, one clean white steam plume rising perfectly straight in still air, golden light on the snow-capped peaks behind, flawless cloudless deep-blue sky. The plant sits in the lower third of frame with generous clean empty sky in the upper centre for a title and logo to be added in post. Clear blue and warm gold grade, immaculate, calm, permanent. Photorealistic cinematic film still, 35mm anamorphic lens, natural depth of field, fine film grain, no CGI look, no 3D render, no illustration, no painterly style, no text, no letters, no numbers, no watermark, no logo, no UI overlay. Hard rule: no rivers, streams, creeks, lakes, ponds, wetlands or fish anywhere in frame.</pre>
+    </div>
+  </div>
+
+</div>
+<script>
+  document.querySelectorAll('pre.prompt').forEach(function(pre){
+    var label=pre.closest('.prompt-block').querySelector('.prompt-label');
+    var s=document.createElement('span'); s.className='cc';
+    s.textContent=pre.textContent.length+' chars';
+    label.insertBefore(s,label.querySelector('.copy-btn'));
+  });
+  document.querySelectorAll('.copy-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var pre=b.closest('.prompt-block').querySelector('pre.prompt');
+      navigator.clipboard.writeText(pre.textContent).then(function(){
+        b.classList.add('copied'); var o=b.textContent; b.textContent='Copied';
+        setTimeout(function(){b.classList.remove('copied');b.textContent=o;},1500);
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra Energy Center — Storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0b0d;
+    --panel: #141417;
+    --panel-2: #1b1b1f;
+    --border: #27272d;
+    --border-lit: #35353d;
+    --text: #eaeaec;
+    --text-dim: #92929c;
+    --text-faint: #64646e;
+    --accent: #d4a259;
+    --warn: #e5484d;
+    --cool: #5b8fc7;
+    --done: #4ade80;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Archivo, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.55;
+    padding: 36px 24px 100px;
+  }
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  /* ---------- masthead ---------- */
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(30px, 5vw, 46px); font-weight: 800; margin: 0 0 6px;
+    letter-spacing: -0.03em; line-height: 1.05;
+  }
+  .subtitle { color: var(--text-dim); font-size: 15px; margin-bottom: 8px; }
+  .runtime { color: var(--text-faint); font-size: 13px; font-family: "Roboto Mono", monospace; margin-bottom: 30px; }
+
+  .logline {
+    background: linear-gradient(135deg, rgba(212,162,89,0.07), rgba(212,162,89,0.01));
+    border: 1px solid rgba(212,162,89,0.28);
+    border-radius: 10px; padding: 22px 26px; margin-bottom: 22px;
+  }
+  .logline .label {
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 10px;
+  }
+  .logline p { margin: 0 0 12px; font-size: 16.5px; line-height: 1.62; }
+  .logline p:last-child { margin-bottom: 0; }
+  .logline strong { color: #fff; }
+
+  .rules {
+    background: var(--panel); border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 8px; padding: 16px 20px; margin-bottom: 22px; font-size: 13.5px;
+  }
+  .rules .label {
+    font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--warn); font-weight: 700; margin-bottom: 10px;
+  }
+  .rules ol { margin: 0; padding-left: 18px; }
+  .rules li { margin-bottom: 7px; color: var(--text-dim); }
+  .rules li:last-child { margin-bottom: 0; }
+  .rules b { color: var(--text); }
+
+  .howto {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 20px; margin-bottom: 34px;
+    font-size: 13px; color: var(--text-dim);
+  }
+
+  /* ---------- act headers ---------- */
+  .act {
+    display: flex; align-items: baseline; gap: 14px;
+    margin: 46px 0 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .act-num {
+    font-family: "Roboto Mono", monospace; font-size: 11px; letter-spacing: 0.16em;
+    color: var(--accent); font-weight: 700; text-transform: uppercase;
+  }
+  .act-title { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .act-meta { margin-left: auto; font-family: "Roboto Mono", monospace; font-size: 12px; color: var(--text-faint); }
+
+  /* ---------- scene strip ---------- */
+  .scene-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 18px; margin: 26px 0 14px;
+  }
+  .scene-strip input[type="checkbox"] {
+    width: 19px; height: 19px; accent-color: var(--done); cursor: pointer; flex-shrink: 0;
+  }
+  .scene-strip .sc-num {
+    font-family: "Roboto Mono", monospace; font-weight: 700;
+    color: var(--accent); font-size: 13px; letter-spacing: 0.08em;
+  }
+  .scene-strip .sc-name { font-weight: 600; font-size: 14.5px; }
+  .scene-strip .sc-tc {
+    margin-left: auto; font-family: "Roboto Mono", monospace;
+    font-size: 12px; color: var(--text-faint);
+  }
+  .scene-strip.done .sc-name { text-decoration: line-through; color: var(--text-faint); }
+
+  /* ---------- panel card ---------- */
+  .panel {
+    display: grid; grid-template-columns: 460px 1fr; gap: 0;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 16px; overflow: hidden;
+  }
+  @media (max-width: 900px) { .panel { grid-template-columns: 1fr; } }
+
+  .panel-visual { border-right: 1px solid var(--border); background: #000; }
+  @media (max-width: 900px) { .panel-visual { border-right: none; border-bottom: 1px solid var(--border); } }
+  .panel-visual svg { display: block; width: 100%; height: auto; }
+
+  .panel-body { padding: 18px 22px 20px; }
+  .panel-head {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
+  .p-num {
+    font-family: "Roboto Mono", monospace; font-weight: 700; font-size: 15px;
+    color: var(--accent);
+  }
+  .p-title { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; flex: 1; min-width: 180px; }
+  .p-tc {
+    font-family: "Roboto Mono", monospace; font-size: 11.5px; color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .row { display: grid; grid-template-columns: 74px 1fr; gap: 12px; margin-bottom: 9px; font-size: 13.4px; }
+  .row .k {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 700; padding-top: 3px;
+  }
+  .row .v { color: var(--text-dim); }
+  .row .v b { color: var(--text); font-weight: 600; }
+  .row.spec .v { font-family: "Roboto Mono", monospace; font-size: 12.2px; color: var(--cool); }
+
+  .vo {
+    background: rgba(212,162,89,0.06); border-left: 2px solid var(--accent);
+    padding: 9px 14px; margin: 12px 0 9px; border-radius: 0 5px 5px 0;
+  }
+  .vo .k {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; display: block; margin-bottom: 4px;
+  }
+  .vo p { margin: 0; font-size: 14px; font-style: italic; color: #fff; line-height: 1.5; }
+  .vo.silent p { font-style: normal; color: var(--text-faint); font-size: 12.5px; }
+
+  .super {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--panel-2); border: 1px solid var(--border-lit);
+    border-radius: 5px; padding: 6px 12px; margin-top: 4px;
+  }
+  .super .k {
+    font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 700;
+  }
+  .super .t {
+    font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; color: #fff;
+  }
+  .super.clean .t { font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--text-faint); font-size: 12px; }
+
+  .tag {
+    display: inline-block; font-family: "Roboto Mono", monospace; font-size: 10.5px;
+    padding: 2px 8px; border-radius: 3px; margin-right: 6px; margin-top: 8px;
+    border: 1px solid var(--border-lit); color: var(--text-faint);
+  }
+  .tag.turn { border-color: var(--accent); color: var(--accent); }
+  .tag.hero { border-color: var(--done); color: var(--done); }
+
+  /* ---------- typography section ---------- */
+  .type-section { margin-top: 60px; }
+  .type-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px 26px; margin-bottom: 16px;
+  }
+  .type-card h3 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+  .type-card .role { font-size: 12px; color: var(--text-faint); margin-bottom: 18px; }
+  .specimen {
+    background: #000; border: 1px solid var(--border);
+    border-radius: 6px; padding: 26px 22px; margin-bottom: 16px; text-align: center;
+  }
+  .spec-display {
+    font-family: Archivo, sans-serif; font-weight: 800; font-size: clamp(26px, 4.6vw, 44px);
+    letter-spacing: 0.055em; text-transform: uppercase; color: #fff; line-height: 1.12;
+  }
+  .spec-mono {
+    font-family: "Roboto Mono", monospace; font-weight: 500; font-size: clamp(12px, 1.7vw, 15px);
+    letter-spacing: 0.16em; text-transform: uppercase; color: #fff; margin-top: 12px;
+  }
+  .spec-jp {
+    font-family: "Noto Sans JP", sans-serif; font-weight: 700;
+    font-size: clamp(20px, 3.2vw, 30px); color: #fff; letter-spacing: 0.04em;
+  }
+  .stack {
+    font-family: "Roboto Mono", monospace; font-size: 11.5px; color: var(--cool);
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 5px; padding: 10px 13px; overflow-x: auto; white-space: pre;
+  }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 12.6px; }
+  th, td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th {
+    background: var(--panel-2); font-size: 10px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 700; white-space: nowrap;
+  }
+  td { color: var(--text-dim); }
+  td b { color: var(--text); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  td.mono, th.mono { font-family: "Roboto Mono", monospace; font-size: 11.5px; white-space: nowrap; }
+  .swatch {
+    display: inline-block; width: 11px; height: 11px; border-radius: 2px;
+    margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(255,255,255,0.2);
+  }
+  h2.sec {
+    font-size: 21px; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0 0 6px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .sec-note { color: var(--text-dim); font-size: 13.5px; margin: 14px 0 22px; }
+  .note-inline {
+    font-size: 12.5px; color: var(--text-faint); margin-top: 12px;
+    padding-left: 12px; border-left: 2px solid var(--border-lit);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="eyebrow">JCOAL Clean Coal Day International Symposium</div>
+  <h1>The Light That Waited</h1>
+  <div class="subtitle">Terra Energy Center — 60-Second Film · Director's Storyboard &amp; Type System</div>
+  <div class="runtime">RUNTIME 1:00 · 16:9 · 15 PANELS · 7 SCENES</div>
+
+  <div class="logline">
+    <div class="label">Logline</div>
+    <p>A hundred million years ago, sunlight fell on an Alaskan forest and a single leaf carried it into the dark. Tonight, an operator watches her city lose its light — and the answer is the light that has been waiting under her feet the whole time.</p>
+    <p class="note-inline" style="margin:0;padding-left:12px">The film is the journey of <strong>one thing: light</strong>. It goes down into the earth in the first ten seconds and comes back up for the rest of the film. Coal stops being a black rock and becomes <strong>stored sunlight</strong> — and the carbon returns to the ground that lent it. <strong>The earth gave us the light; we give back the carbon.</strong></p>
+  </div>
+
+  <div class="rules">
+    <div class="label">Locked client rules — apply to every panel</div>
+    <ol>
+      <li><b>Weather turn.</b> Panels 1–9 play under storm or underground. From <b>Panel 10 CUT 1</b> — the burst out of the mine — the sky is cloudless and golden and stays clear to the end. No storm cloud may reappear.</li>
+      <li><b>No water. Ever.</b> No rivers, streams, creeks, lakes, ponds, wetlands, or fish in any frame — the prehistoric forest included. All terrain is dry tundra, spruce, ridgelines and snowfields. The open Pacific appears only in Panels 6 and 15, where the script requires the strategic view.</li>
+      <li><b>No text in frame.</b> Every super and the logo are added in post. Nothing is rendered as on-set or in-camera type.</li>
+      <li><b>Narration is locked.</b> All eight approved VO lines appear here verbatim, in their approved positions.</li>
+    </ol>
+  </div>
+
+  <div class="howto">
+    Each panel shows the actual frame composition — horizon, subject placement and scale, camera move, and the color grade of that exact moment. Thirds guides are overlaid for framing reference only. Tick a scene when it's shot; progress saves in your browser. The full type system for every on-screen super is at the bottom of this document.
+  </div>
+
+  <!-- ============ ACT I ============ -->
+  <div class="act">
+    <div class="act-num">Act I</div>
+    <div class="act-title">The Light Is Buried, and the Light Runs Out</div>
+    <div class="act-meta">0:00 – 0:22</div>
+  </div>
+
+  <div class="scene-strip" data-scene="1">
+    <input type="checkbox" data-scene="1">
+    <span class="sc-num">SC 1</span>
+    <span class="sc-name">Prologue &amp; Warning — the leaf, and the night the gauge falls</span>
+    <span class="sc-tc">0:00 – 0:06</span>
+  </div>
+
+  <!-- P1 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Cretaceous forest, shafts of light through canopy">
+        <defs>
+          <linearGradient id="p1sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c9a24a"/><stop offset="45%" stop-color="#6f7a35"/><stop offset="100%" stop-color="#20281a"/>
+          </linearGradient>
+          <linearGradient id="p1beam" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffe9a8" stop-opacity="0.62"/><stop offset="100%" stop-color="#ffe9a8" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p1sky)"/>
+        <g opacity="0.95">
+          <polygon points="90,0 150,0 128,360 60,360" fill="url(#p1beam)"/>
+          <polygon points="300,0 356,0 372,360 300,360" fill="url(#p1beam)"/>
+          <polygon points="480,0 524,0 560,360 500,360" fill="url(#p1beam)"/>
+        </g>
+        <g fill="#141a10">
+          <rect x="42" y="0" width="26" height="360"/><rect x="196" y="0" width="19" height="360"/>
+          <rect x="404" y="0" width="30" height="360"/><rect x="560" y="0" width="22" height="360"/>
+          <rect x="292" y="0" width="13" height="360" opacity="0.75"/>
+        </g>
+        <g fill="#1c2415" opacity="0.9">
+          <ellipse cx="120" cy="332" rx="130" ry="30"/><ellipse cx="360" cy="345" rx="150" ry="28"/>
+          <ellipse cx="560" cy="330" rx="120" ry="26"/>
+        </g>
+        <g stroke="#2f3d22" stroke-width="2.4" fill="none" opacity="0.85">
+          <path d="M60 350 q30 -34 66 -18"/><path d="M250 352 q34 -40 74 -20"/><path d="M470 344 q30 -36 68 -16"/>
+        </g>
+        <ellipse cx="336" cy="120" rx="9" ry="4.6" fill="#e8d271" transform="rotate(-24 336 120)"/>
+        <g stroke="#ffffff" stroke-opacity="0.14" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+        <text x="16" y="26" font-family="monospace" font-size="12" fill="#ffe9a8" opacity="0.85">100 MYA</text>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">01</span>
+        <span class="p-title">Prologue — the ancient forest</span>
+        <span class="p-tc">0:00.0 – 0:02.0 · 2.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">WIDE · 24mm · slow push-in through the trunks</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: low ancient sun through canopy · FILL: none · RIM: gold on trunk edges</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">A Cretaceous Alaskan forest. Three hard shafts of sunlight fall between the trunks onto a dry forest floor of ferns and needles. Dust and pollen drift in the beams. Nothing moves but the light. <b>Not a frame of ice — this is a warm world.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">A low tone, almost sub-audible. Faint wind in high canopy. No music yet.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">dry forest floor · no water</span><span class="tag">grade: green-gold</span></div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="The leaf falls and is buried">
+        <defs>
+          <linearGradient id="p2bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8a7a30"/><stop offset="55%" stop-color="#2b2a16"/><stop offset="100%" stop-color="#050505"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p2bg)"/>
+        <g opacity="0.5" fill="#1a1c10"><rect x="70" y="0" width="18" height="230"/><rect x="520" y="0" width="22" height="210"/></g>
+        <g opacity="0.32" stroke="#e8d271" stroke-width="1.4" fill="none" stroke-dasharray="5 7">
+          <path d="M300 62 q28 40 -6 78 q-30 38 6 74 q26 30 2 62"/>
+        </g>
+        <ellipse cx="306" cy="66" rx="15" ry="7" fill="#e8d271" opacity="0.35" transform="rotate(-30 306 66)"/>
+        <ellipse cx="292" cy="160" rx="16" ry="7.5" fill="#e8d271" opacity="0.6" transform="rotate(24 292 160)"/>
+        <ellipse cx="304" cy="272" rx="19" ry="9" fill="#f0dc86" transform="rotate(-8 304 272)"/>
+        <line x1="288" y1="274" x2="322" y2="270" stroke="#8a7a30" stroke-width="1.2"/>
+        <rect x="0" y="286" width="640" height="74" fill="#0d0b06"/>
+        <path d="M0 292 q160 -14 320 2 q160 16 320 -4 L640 360 L0 360 Z" fill="#070604"/>
+        <rect x="0" y="330" width="640" height="30" fill="#000"/>
+        <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+        <path d="M300 40 v22 M296 56 l4 8 l4 -8" stroke="#ffe9a8" stroke-width="1.6" fill="none" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">02</span>
+        <span class="p-title">Prologue — the leaf is buried</span>
+        <span class="p-tc">0:02.0 – 0:04.0 · 2.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">MEDIUM → MACRO · 85mm · locked, camera follows the fall down</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: single shaft on the leaf · falls off to black as earth closes</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">One leaf releases from a branch and falls, turning slowly, catching the light on each rotation. It settles on the forest floor. Soil rises over it — <b>not thrown, but rising, as though time itself is covering it</b> — and the frame goes to black with the leaf still glowing faintly at its center.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">A single soft leaf-fall. The low tone deepens and closes, like a lid.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag hero">plant this leaf — it pays off at Panel 09</span></div>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Control room, the gauge falls">
+        <defs>
+          <linearGradient id="p3bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#121922"/><stop offset="100%" stop-color="#05070a"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p3bg)"/>
+        <rect x="54" y="44" width="238" height="140" rx="4" fill="#0d1a26" stroke="#2b4358"/>
+        <rect x="306" y="44" width="150" height="140" rx="4" fill="#0d1a26" stroke="#2b4358"/>
+        <rect x="470" y="44" width="118" height="140" rx="4" fill="#0d1a26" stroke="#2b4358"/>
+        <g stroke="#3f7fb0" stroke-width="1.2" fill="none" opacity="0.75">
+          <path d="M70 150 L110 118 L150 130 L196 96 L246 108 L282 84"/>
+          <path d="M320 150 h124 M320 132 h96 M320 114 h110"/>
+        </g>
+        <rect x="484" y="62" width="90" height="10" rx="2" fill="#12202c" stroke="#2b4358"/>
+        <rect x="484" y="62" width="26" height="10" rx="2" fill="#e5484d"/>
+        <g fill="#e5484d">
+          <rect x="484" y="86" width="90" height="9" rx="2" opacity="0.85"/>
+          <rect x="484" y="104" width="66" height="9" rx="2" opacity="0.55"/>
+        </g>
+        <path d="M492 150 L510 138 L528 142 L546 128 L566 158" stroke="#e5484d" stroke-width="2" fill="none"/>
+        <rect x="0" y="208" width="640" height="152" fill="#080b0f"/>
+        <path d="M0 214 q320 -26 640 0 L640 360 L0 360 Z" fill="#0c1118" stroke="#1d2a36"/>
+        <g fill="#16212c" stroke="#233343">
+          <rect x="96" y="240" width="150" height="42" rx="3"/><rect x="270" y="240" width="150" height="42" rx="3"/>
+          <rect x="444" y="240" width="110" height="42" rx="3"/>
+        </g>
+        <g opacity="0.28" fill="#e5484d"><rect x="0" y="208" width="640" height="152"/></g>
+        <ellipse cx="330" cy="300" rx="52" ry="60" fill="#05080b"/>
+        <circle cx="330" cy="252" r="26" fill="#070b0f"/>
+        <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+        <g stroke="#d4a259" stroke-width="1.8" fill="none">
+          <path d="M596 300 v-40" marker-end="url(#p3ar)"/>
+        </g>
+        <defs><marker id="p3ar" markerWidth="7" markerHeight="7" refX="3.5" refY="6" orient="auto">
+          <path d="M0.5 6 L3.5 0.5 L6.5 6" fill="none" stroke="#d4a259" stroke-width="1.6"/></marker></defs>
+        <text x="560" y="322" font-family="monospace" font-size="10" fill="#d4a259">PUSH</text>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">03</span>
+        <span class="p-title">Control room — the gauge falls</span>
+        <span class="p-tc">0:04.0 – 0:05.2 · 1.2s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">WIDE · 24mm · very slow push-in · Kate in silhouette, back to camera</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: monitor glow only · ACCENT: pulsing warning red across consoles and ceiling</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Hard cut out of black. A gas control room at night, rain on the glass. A wall of monitors carries schematic maps of the Southcentral Alaska gas network. On the right screen a supply gauge steps down, notch by notch. Amber status tiles flip red one by one. <b>Kate</b> sits centered at the console, small against the wall of screens.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Room tone and rain. <i>Beep… beep… beep…</i> — slow, patient, wrong.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">grade: storm steel-blue + warning red</span></div>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Kate's face lit by the warning">
+        <rect width="640" height="360" fill="#070a0e"/>
+        <g opacity="0.85">
+          <ellipse cx="150" cy="150" rx="200" ry="180" fill="#0f1a26"/>
+        </g>
+        <path d="M212 356 q6 -110 96 -150 q92 -40 130 44 q26 84 -10 106 L212 356 Z" fill="#141c24"/>
+        <path d="M300 168 q56 -30 96 22 q22 44 -6 84 q-40 44 -92 12 q-36 -34 2 -118 Z" fill="#2a2119"/>
+        <path d="M300 168 q56 -30 96 22 q22 44 -6 84 q-40 44 -92 12 q-36 -34 2 -118 Z" fill="#e5484d" opacity="0.32"/>
+        <path d="M288 178 q-16 66 14 122" stroke="#e5484d" stroke-width="7" fill="none" opacity="0.55"/>
+        <g fill="#0b0f14"><ellipse cx="330" cy="228" rx="12" ry="6"/><ellipse cx="386" cy="224" rx="12" ry="6"/></g>
+        <g fill="#f4d9c2"><circle cx="331" cy="228" r="2.6"/><circle cx="387" cy="224" r="2.6"/></g>
+        <path d="M340 268 q22 8 40 -2" stroke="#1a1010" stroke-width="3" fill="none"/>
+        <g opacity="0.4"><rect x="470" y="40" width="150" height="280" fill="#12202c"/>
+          <rect x="486" y="70" width="118" height="10" rx="2" fill="#e5484d"/>
+          <rect x="486" y="94" width="86" height="10" rx="2" fill="#e5484d" opacity="0.6"/>
+          <rect x="486" y="118" width="104" height="10" rx="2" fill="#e5484d" opacity="0.4"/>
+        </g>
+        <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">04</span>
+        <span class="p-title">Kate — the red light crosses her face</span>
+        <span class="p-tc">0:05.2 – 0:06.0 · 0.8s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">CLOSE-UP · 85mm · locked · camera on her shadow side</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: pulsing red from screen right · FILL: cold monitor spill · no rim</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Kate, mid-forties, dark operator shirt, headset resting at her neck. She stops mid-keystroke. A half-beat pause — one slow exhale — then she lifts her eyes to the wall. The warning light sweeps across her face. <b>She isn't panicking. She's calculating, and running out of answers.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">The beep continues. Her breath is audible under it.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag hero">establish Kate's face — identity anchor for the whole film</span></div>
+    </div>
+  </div>
+
+  <div class="scene-strip" data-scene="2">
+    <input type="checkbox" data-scene="2">
+    <span class="sc-num">SC 2</span>
+    <span class="sc-name">What's at Stake — her city goes dark, and the base with it</span>
+    <span class="sc-tc">0:06 – 0:14</span>
+  </div>
+
+  <!-- P5 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="The map — the city going dark">
+        <rect width="640" height="360" fill="#04070b"/>
+        <rect x="24" y="20" width="592" height="320" rx="5" fill="#071018" stroke="#20374a"/>
+        <g stroke="#1d3346" stroke-width="1" opacity="0.7">
+          <path d="M60 300 q90 -60 150 -30 q80 40 150 -20 q70 -46 160 -10"/>
+          <path d="M60 250 q110 -40 190 -6 q90 38 170 -30"/>
+        </g>
+        <g stroke="#2b5f8a" stroke-width="1.4" opacity="0.85" fill="none">
+          <path d="M120 292 L210 240 L300 258 L392 206 L500 224"/>
+        </g>
+        <g>
+          <circle cx="210" cy="240" r="15" fill="#e8a33d" opacity="0.9"/>
+          <circle cx="300" cy="258" r="12" fill="#e8a33d" opacity="0.55"/>
+          <circle cx="392" cy="206" r="13" fill="#3a4048" opacity="0.9"/>
+          <circle cx="500" cy="224" r="10" fill="#3a4048" opacity="0.9"/>
+          <circle cx="120" cy="292" r="9" fill="#3a4048" opacity="0.9"/>
+        </g>
+        <g fill="#e5484d">
+          <circle cx="392" cy="206" r="20" fill="none" stroke="#e5484d" stroke-width="1.6" opacity="0.85"/>
+          <circle cx="500" cy="224" r="16" fill="none" stroke="#e5484d" stroke-width="1.4" opacity="0.6"/>
+        </g>
+        <g opacity="0.9">
+          <rect x="352" y="176" width="80" height="1.4" fill="#e5484d"/>
+          <rect x="391" y="166" width="1.4" height="70" fill="#e5484d"/>
+        </g>
+        <g fill="#0a121a" stroke="#20374a"><rect x="44" y="286" width="128" height="38" rx="3"/></g>
+        <g fill="#3a4048"><rect x="54" y="298" width="46" height="6" rx="2"/><rect x="54" y="310" width="70" height="5" rx="2"/></g>
+        <g stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+        <text x="404" y="196" font-family="monospace" font-size="10" fill="#e5484d">HER CITY</text>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">05</span>
+        <span class="p-title">The map — her own city going out</span>
+        <span class="p-tc">0:06.0 – 0:09.0 · 3.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">INSERT / OTS · 50mm · slow push-in on the wall map</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: the screen itself · everything else falls to black</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The Southcentral map. Warm amber load-centers hold, then die — one district, then the next, then the next, in a slow wave across Anchorage. Rapid intercuts under this beat: gas-fired plant stacks in the wind, transmission towers on a dark tundra ridge, the skyline stuttering out block by block. <b>One of the dying districts is hers. The camera holds on it a half-beat longer than the others.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Alarms thin out; a low sub-bass swells. Music enters — tense, minor, patient.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Alaska stands on the front line of America's defense of the Indo-Pacific.</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">no coastline detail · no water bodies on the map</span></div>
+    </div>
+  </div>
+
+  <!-- P6 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="JBER flight line flickering, rise to strategic map">
+        <defs>
+          <linearGradient id="p6sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a1119"/><stop offset="100%" stop-color="#1a2430"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p6sky)"/>
+        <g fill="#0d141c" opacity="0.9">
+          <path d="M0 150 q120 -22 250 -6 q160 20 390 -12 L640 240 L0 240 Z"/>
+        </g>
+        <rect x="0" y="238" width="640" height="122" fill="#0a0e13"/>
+        <g stroke="#e8a33d" stroke-width="2" opacity="0.75">
+          <line x1="40" y1="300" x2="80" y2="300"/><line x1="140" y1="300" x2="180" y2="300"/>
+          <line x1="240" y1="300" x2="280" y2="300"/>
+        </g>
+        <g stroke="#3a4048" stroke-width="2">
+          <line x1="340" y1="300" x2="380" y2="300"/><line x1="440" y1="300" x2="480" y2="300"/>
+          <line x1="540" y1="300" x2="580" y2="300"/>
+        </g>
+        <g fill="#161d26" stroke="#242e3a">
+          <path d="M96 250 l54 -16 l40 6 l-16 22 Z"/><path d="M132 240 l30 -30 l14 4 l-16 28 Z"/>
+          <path d="M286 252 l54 -16 l40 6 l-16 22 Z"/><path d="M322 242 l30 -30 l14 4 l-16 28 Z"/>
+          <path d="M476 250 l54 -16 l40 6 l-16 22 Z"/><path d="M512 240 l30 -30 l14 4 l-16 28 Z"/>
+        </g>
+        <g><circle cx="470" cy="120" r="36" fill="#111922" stroke="#2b3a48" stroke-width="2"/>
+          <path d="M470 84 a36 36 0 0 1 0 72" fill="#18232e"/>
+          <line x1="470" y1="156" x2="470" y2="190" stroke="#2b3a48" stroke-width="5"/></g>
+        <g opacity="0.5"><circle cx="470" cy="120" r="48" fill="none" stroke="#e5484d" stroke-width="1.4" stroke-dasharray="4 6"/></g>
+        <g stroke="#d4a259" stroke-width="1.8" fill="none">
+          <path d="M600 300 v-210" marker-end="url(#p6ar)"/></g>
+        <defs><marker id="p6ar" markerWidth="7" markerHeight="7" refX="3.5" refY="6" orient="auto">
+          <path d="M0.5 6 L3.5 0.5 L6.5 6" fill="none" stroke="#d4a259" stroke-width="1.6"/></marker></defs>
+        <text x="556" y="322" font-family="monospace" font-size="10" fill="#d4a259">CRANE UP</text>
+        <g stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">06</span>
+        <span class="p-title">The base flickers — rise into the Pacific</span>
+        <span class="p-tc">0:09.0 – 0:12.5 · 3.5s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">WIDE tracking · 35mm anamorphic → CRANE UP, one continuous rise</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: sodium floodlights · RIM: aviation red/green · storm deck pressing low</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The JBER flight line: rows of military aircraft, ground crew silhouettes, breath fogging. Half the runway edge lights are amber and steady — <b>the other half are dead</b>. The radar dome turns; the command windows behind it dim and recover. The camera rises straight up, punches the cloud deck, and keeps going into a dark satellite view: Alaska at top of frame, Japan and Korea lower left, thin arcs of pale light between them.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Jet-blast wash, wind, a dropped generator hum. Music opens outward as we rise.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Yet this strategic region depends heavily on a declining supply of Cook Inlet natural gas.</p></div>
+      <div class="super"><span class="k">On screen</span><span class="t">Energy Security Is National Security</span></div>
+      <div><span class="tag">Pacific permitted here — strategic view only</span></div>
+    </div>
+  </div>
+
+  <!-- P7 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Her hand hovering over the keyboard">
+        <rect width="640" height="360" fill="#06090d"/>
+        <rect x="0" y="0" width="640" height="150" fill="#0a141d"/>
+        <g opacity="0.55" fill="#e5484d">
+          <rect x="60" y="34" width="150" height="12" rx="2"/><rect x="60" y="60" width="110" height="12" rx="2" opacity="0.7"/>
+          <rect x="60" y="86" width="132" height="12" rx="2" opacity="0.45"/>
+        </g>
+        <g opacity="0.35" fill="#2b5f8a">
+          <rect x="380" y="34" width="180" height="12" rx="2"/><rect x="380" y="60" width="140" height="12" rx="2"/>
+        </g>
+        <rect x="0" y="150" width="640" height="210" fill="#0b1016"/>
+        <rect x="70" y="236" width="500" height="96" rx="5" fill="#131a22" stroke="#212c37"/>
+        <g fill="#0e141b" stroke="#1c2530">
+          <rect x="88" y="252" width="34" height="22" rx="3"/><rect x="130" y="252" width="34" height="22" rx="3"/>
+          <rect x="172" y="252" width="34" height="22" rx="3"/><rect x="214" y="252" width="34" height="22" rx="3"/>
+          <rect x="256" y="252" width="34" height="22" rx="3"/><rect x="298" y="252" width="34" height="22" rx="3"/>
+          <rect x="340" y="252" width="34" height="22" rx="3"/><rect x="382" y="252" width="34" height="22" rx="3"/>
+          <rect x="424" y="252" width="34" height="22" rx="3"/><rect x="466" y="252" width="34" height="22" rx="3"/>
+          <rect x="88" y="288" width="76" height="22" rx="3"/><rect x="172" y="288" width="34" height="22" rx="3"/>
+          <rect x="214" y="288" width="34" height="22" rx="3"/><rect x="256" y="288" width="120" height="22" rx="3"/>
+          <rect x="384" y="288" width="34" height="22" rx="3"/><rect x="426" y="288" width="74" height="22" rx="3"/>
+        </g>
+        <path d="M250 196 q56 -34 118 -8 q46 20 44 52 q-2 22 -30 20 q-24 -2 -30 -18 q-8 -20 -34 -22 q-30 -2 -46 8 q-26 16 -34 -8 q-6 -18 12 -24 Z" fill="#c99a78"/>
+        <g fill="#c99a78">
+          <ellipse cx="298" cy="234" rx="12" ry="20" transform="rotate(12 298 234)"/>
+          <ellipse cx="330" cy="238" rx="11" ry="22" transform="rotate(4 330 238)"/>
+          <ellipse cx="360" cy="234" rx="10" ry="20" transform="rotate(-6 360 234)"/>
+          <ellipse cx="386" cy="228" rx="9" ry="16" transform="rotate(-14 386 228)"/>
+        </g>
+        <g opacity="0.3" fill="#e5484d"><rect x="0" y="150" width="640" height="210"/></g>
+        <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">07</span>
+        <span class="p-title">Nothing left to press</span>
+        <span class="p-tc">0:12.5 – 0:14.0 · 1.5s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">INSERT, high angle · 50mm · locked, no move</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: screen wash from above · red pulse crossing the hand every beat</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Her hand, open, hovering a few centimetres above the keyboard. Fingers spread. <b>It does not land.</b> One small tremor of the index finger, then stillness. The red pulse crosses her knuckles twice. This is the emotional zero of the film: the person whose whole job is to keep the light on has <b>nothing left to give it</b>.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Everything drops away but the beep and her breath. Music thins to a single held note.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION — hold the silence into Scene 3</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag hero">the turn hinges on this beat — do not rush it</span></div>
+    </div>
+  </div>
+
+  <div class="scene-strip" data-scene="3">
+    <input type="checkbox" data-scene="3">
+    <span class="sc-num">SC 3</span>
+    <span class="sc-name">The Turn — down through the earth, to the leaf in the coal</span>
+    <span class="sc-tc">0:14 – 0:22</span>
+  </div>
+
+  <!-- P8 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="The dive through rock strata">
+        <defs>
+          <linearGradient id="p8g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1b2530"/><stop offset="35%" stop-color="#4a3d2a"/>
+            <stop offset="70%" stop-color="#2e2620"/><stop offset="100%" stop-color="#0a0908"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p8g)"/>
+        <g opacity="0.9">
+          <rect x="0" y="42" width="640" height="26" fill="#5b6470" opacity="0.5"/>
+          <rect x="0" y="86" width="640" height="34" fill="#7a6a4a" opacity="0.55"/>
+          <rect x="0" y="140" width="640" height="22" fill="#4e4536" opacity="0.6"/>
+          <rect x="0" y="180" width="640" height="40" fill="#8a7550" opacity="0.45"/>
+          <rect x="0" y="238" width="640" height="28" fill="#3c342a" opacity="0.7"/>
+          <rect x="0" y="284" width="640" height="34" fill="#241f1a" opacity="0.8"/>
+        </g>
+        <g stroke="#000" stroke-opacity="0.35" stroke-width="1">
+          <line x1="0" y1="68" x2="640" y2="66"/><line x1="0" y1="120" x2="640" y2="123"/>
+          <line x1="0" y1="162" x2="640" y2="160"/><line x1="0" y1="220" x2="640" y2="222"/>
+          <line x1="0" y1="266" x2="640" y2="264"/>
+        </g>
+        <ellipse cx="320" cy="180" rx="230" ry="150" fill="none" stroke="#ffe9a8" stroke-opacity="0.10" stroke-width="40"/>
+        <g opacity="0.5" fill="#ffe9a8">
+          <circle cx="200" cy="120" r="1.6"/><circle cx="430" cy="90" r="1.4"/><circle cx="360" cy="210" r="1.8"/>
+          <circle cx="240" cy="260" r="1.3"/><circle cx="500" cy="180" r="1.5"/>
+        </g>
+        <g stroke="#d4a259" stroke-width="2.4" fill="none">
+          <path d="M320 40 v250" marker-end="url(#p8ar)"/></g>
+        <defs><marker id="p8ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <text x="330" y="330" font-family="monospace" font-size="11" fill="#d4a259">CONTINUOUS DIVE — 100 MYA</text>
+        <g stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">08</span>
+        <span class="p-title">The dive — a hundred million years in one move</span>
+        <span class="p-tc">0:14.0 – 0:18.0 · 4.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">VERTICAL PLUNGE · 24mm · one unbroken descending move, no cut</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">A travelling shaft that follows the camera down · grade warms steel-blue → amber</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The alarms fade out entirely. The camera leaves Kate and dives <b>straight down through the floor</b> — frozen soil, gravel, gray siltstone, golden sandstone, dark shale — bedding planes sliding up past the lens, dust motes turning in the light. The deeper it goes, the warmer and quieter the world becomes. <b>We are travelling backwards through time, not just downwards.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Alarms gone. A rising warm drone. Music turns from tension to open, hopeful.</div></div>
+      <div class="vo"><span class="k">VO</span><p>But the solution has been beneath us all along.</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">One Fast Thing: the dive is the only fast element</span><span class="tag">no groundwater</span></div>
+    </div>
+  </div>
+
+  <!-- P9 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="The fossilized leaf in the coal face">
+        <defs>
+          <linearGradient id="p9c" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#15130f"/><stop offset="50%" stop-color="#080706"/><stop offset="100%" stop-color="#1a1712"/>
+          </linearGradient>
+          <radialGradient id="p9glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffd97a" stop-opacity="0.5"/><stop offset="100%" stop-color="#ffd97a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p9c)"/>
+        <g stroke="#2a251c" stroke-width="1.2" opacity="0.8" fill="none">
+          <path d="M0 60 q160 14 320 -4 q160 -18 320 6"/><path d="M0 300 q170 -18 330 2 q150 18 310 -8"/>
+          <path d="M40 0 q18 180 -6 360"/><path d="M580 0 q-22 180 8 360"/>
+        </g>
+        <g opacity="0.55" fill="#3a332a">
+          <polygon points="90,120 140,108 150,150 96,162"/><polygon points="500,200 556,188 566,232 508,244"/>
+          <polygon points="180,260 232,250 240,288 186,298"/>
+        </g>
+        <ellipse cx="320" cy="180" rx="180" ry="130" fill="url(#p9glow)"/>
+        <g transform="translate(320 180) rotate(-14)">
+          <path d="M-84 0 q40 -50 84 -52 q44 2 84 52 q-40 50 -84 52 q-44 -2 -84 -52 Z" fill="#b89a52" opacity="0.92"/>
+          <line x1="-84" y1="0" x2="84" y2="0" stroke="#6b5824" stroke-width="2.4"/>
+          <g stroke="#6b5824" stroke-width="1.5" opacity="0.9">
+            <path d="M-52 -1 l24 -28"/><path d="M-20 -1 l26 -32"/><path d="M12 -1 l26 -30"/><path d="M44 -1 l22 -22"/>
+            <path d="M-52 1 l24 28"/><path d="M-20 1 l26 32"/><path d="M12 1 l26 30"/><path d="M44 1 l22 22"/>
+          </g>
+          <path d="M-84 0 q40 -50 84 -52 q44 2 84 52 q-40 50 -84 52 q-44 -2 -84 -52 Z"
+                fill="none" stroke="#ffe9a8" stroke-width="1.6" opacity="0.75"/>
+        </g>
+        <g stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+        <text x="16" y="344" font-family="monospace" font-size="11" fill="#ffd97a" opacity="0.85">HERO FRAME</text>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">09</span>
+        <span class="p-title">The coal face — the leaf, still holding the sun</span>
+        <span class="p-tc">0:18.0 – 0:22.0 · 4.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">MACRO · macro lens · the dive eases to a stop, then a very slow drift in</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: warm amber rising across the coal facets · RIM: gold along the leaf's edge</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The descent stops at a vast black coal seam — glossy, faceted, filling the frame. Warm light wakes across its surface like embers. The camera drifts closer, and inside the black there is something small and perfect: <b>the leaf from Panel 02, fossilized — whole, veined, intact.</b> A gold rim-light traces its outline. It still looks like it is holding the sunlight of that one afternoon. <b>This is the shot the audience remembers.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Near-silence, one warm sustained chord. A single low resonance as we recognise the leaf.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Generations of secure, abundant Alaska energy.</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame — let the image carry it</span></div>
+      <div><span class="tag hero">signature image of the film</span><span class="tag">scientifically real: fossil leaves are common in Alaskan coal</span></div>
+    </div>
+  </div>
+
+  <!-- ============ ACT II ============ -->
+  <div class="act">
+    <div class="act-num">Act II</div>
+    <div class="act-title">The Light Comes Back Up, and the Carbon Goes Home</div>
+    <div class="act-meta">0:22 – 1:00</div>
+  </div>
+
+  <div class="scene-strip" data-scene="4">
+    <input type="checkbox" data-scene="4">
+    <span class="sc-num">SC 4</span>
+    <span class="sc-name">Terra Reveal — the weather turns, the plant appears, the light returns</span>
+    <span class="sc-tc">0:22 – 0:35</span>
+  </div>
+
+  <!-- P10 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Burst out of the mine into clear morning">
+        <defs>
+          <linearGradient id="p10sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2f7fc4"/><stop offset="60%" stop-color="#8fc4e8"/><stop offset="100%" stop-color="#f2d79a"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p10sky)"/>
+        <circle cx="512" cy="96" r="34" fill="#fff3cd" opacity="0.95"/>
+        <circle cx="512" cy="96" r="58" fill="#fff3cd" opacity="0.25"/>
+        <path d="M0 190 L120 128 L210 176 L300 118 L410 178 L510 140 L640 192 L640 240 L0 240 Z" fill="#e8eef4"/>
+        <path d="M0 200 L120 140 L210 186 L300 130 L410 188 L510 152 L640 202 L640 240 L0 240 Z" fill="#b8c8d6" opacity="0.7"/>
+        <rect x="0" y="238" width="640" height="122" fill="#8a7b5c"/>
+        <path d="M0 238 q160 -10 320 4 q160 14 320 -6 L640 268 L0 268 Z" fill="#9c8b66"/>
+        <g fill="#6f6349">
+          <rect x="0" y="278" width="640" height="16"/><rect x="0" y="310" width="640" height="18"/>
+        </g>
+        <g fill="#2b2620">
+          <rect x="0" y="292" width="640" height="20" opacity="0.85"/>
+        </g>
+        <g fill="#4a4238" stroke="#3a342c">
+          <rect x="96" y="298" width="54" height="20" rx="3"/><rect x="88" y="290" width="26" height="12" rx="2"/>
+          <rect x="420" y="300" width="48" height="18" rx="3"/>
+        </g>
+        <g opacity="0.35" fill="#0a0a0a">
+          <path d="M0 240 L96 240 L84 360 L0 360 Z"/>
+        </g>
+        <g stroke="#d4a259" stroke-width="2.4" fill="none">
+          <path d="M60 330 L560 240" marker-end="url(#p10ar)"/></g>
+        <defs><marker id="p10ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <text x="20" y="350" font-family="monospace" font-size="10.5" fill="#7a5c1e">FORWARD — BURST INTO DAYLIGHT</text>
+        <g stroke="#ffffff" stroke-opacity="0.22" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">10</span>
+        <span class="p-title">Out of the mine — <span style="color:var(--accent)">THE WEATHER TURN</span></span>
+        <span class="p-tc">0:22.0 – 0:25.5 · 3.5s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">CONTINUOUS FORWARD TRACK · 24mm · unbroken from the coal face out</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: low golden morning sun · cloudless deep-blue sky · frost sparkle on benches</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The camera accelerates forward along the seam as it opens into the working mine bench — and <b>bursts into brilliant, clear morning</b>. This is the exact frame where the client's weather turn happens: <b>the storm is gone and never returns</b>. Cloudless blue, long gold light, haul trucks working the terraces. Then a hard-charging track along the enclosed silver conveyor crossing dry tundra.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">A rush of open air. Music resolves to major and lifts.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Terra Energy Center will transform Alaska coal into 1,250 megawatts of reliable, 24/7 power — at the mine mouth.</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame — supers land on Panel 11</span></div>
+      <div><span class="tag turn">WEATHER TURN — clear from here to the end</span><span class="tag">dry tundra only</span></div>
+    </div>
+  </div>
+
+  <!-- P11 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Terra Energy Center aerial reveal">
+        <defs>
+          <linearGradient id="p11sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2477bd"/><stop offset="70%" stop-color="#9ecbe8"/><stop offset="100%" stop-color="#f5e0ad"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p11sky)"/>
+        <circle cx="96" cy="70" r="28" fill="#fff6d8" opacity="0.9"/>
+        <path d="M0 150 L110 96 L190 140 L280 88 L380 142 L470 104 L560 148 L640 118 L640 178 L0 178 Z" fill="#dbe6ef"/>
+        <path d="M0 160 L110 110 L190 150 L280 102 L380 152 L470 118 L560 158 L640 132 L640 178 L0 178 Z" fill="#a9bccd" opacity="0.8"/>
+        <rect x="0" y="176" width="640" height="184" fill="#9a8f6a"/>
+        <path d="M0 176 q160 8 320 -2 q160 -10 320 4 L640 210 L0 210 Z" fill="#a89c75"/>
+        <g fill="#6f7a5a" opacity="0.5">
+          <ellipse cx="70" cy="330" rx="90" ry="22"/><ellipse cx="580" cy="340" rx="80" ry="20"/>
+        </g>
+        <g fill="#c9cfd6" stroke="#8f979f">
+          <rect x="150" y="196" width="42" height="86" rx="2"/><rect x="200" y="196" width="42" height="86" rx="2"/>
+          <rect x="250" y="196" width="42" height="86" rx="2"/><rect x="300" y="196" width="42" height="86" rx="2"/>
+          <rect x="350" y="196" width="42" height="86" rx="2"/>
+        </g>
+        <rect x="146" y="282" width="250" height="44" rx="3" fill="#b7bec6" stroke="#8f979f"/>
+        <rect x="404" y="236" width="130" height="90" rx="3" fill="#aeb6bf" stroke="#8f979f"/>
+        <g stroke="#7b848c" stroke-width="1.4">
+          <line x1="416" y1="240" x2="416" y2="322"/><line x1="446" y1="240" x2="446" y2="322"/>
+          <line x1="476" y1="240" x2="476" y2="322"/><line x1="506" y1="240" x2="506" y2="322"/>
+        </g>
+        <path d="M262 196 q-6 -40 6 -70 q10 -26 4 -46" stroke="#ffffff" stroke-width="12" fill="none" opacity="0.75" stroke-linecap="round"/>
+        <g stroke="#8f979f" stroke-width="2" fill="none">
+          <path d="M534 262 L580 250 L626 258"/>
+          <line x1="580" y1="250" x2="580" y2="300"/>
+          <line x1="562" y1="256" x2="598" y2="256"/>
+        </g>
+        <g stroke="#d4a259" stroke-width="2.2" fill="none">
+          <path d="M60 340 q40 -80 120 -110" marker-end="url(#p11ar)"/></g>
+        <defs><marker id="p11ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <text x="20" y="352" font-family="monospace" font-size="10.5" fill="#6b5320">RISE + TILT + PAN</text>
+        <g stroke="#ffffff" stroke-opacity="0.22" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">11</span>
+        <span class="p-title">Terra Energy Center — the reveal</span>
+        <span class="p-tc">0:25.5 – 0:30.0 · 4.5s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">SWEEPING AERIAL · Rise + Tilt + Pan · 35mm anamorphic</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: clear morning sun from camera left · flawless blue sky · snow-capped peaks behind</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">The camera lifts off the conveyor line and opens into the full reveal: <b>five generating units in a row, the long turbine hall, the switchyard</b>, gleaming against the mountains. One clean white steam plume rises perfectly vertical in still air. The whole plant reads calm, ordered and permanent — the opposite of the flickering, failing world of Act I.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Full open music. A steady, deep plant hum — confidence, not strain.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Strengthening Alaska's grid, America's military, and our strategic position in the Indo-Pacific.</p></div>
+      <div class="super"><span class="k">On screen</span><span class="t">1,250 MW · Mine-Mouth • 24/7 Firm Power</span></div>
+      <div><span class="tag">no black smoke · white plume only</span><span class="tag">plant layout locked for reuse in Panel 15</span></div>
+    </div>
+  </div>
+
+  <!-- P12 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Light returning to the city">
+        <defs>
+          <linearGradient id="p12sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1c4f80"/><stop offset="55%" stop-color="#6ba3ce"/><stop offset="100%" stop-color="#f6d9a0"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p12sky)"/>
+        <path d="M0 168 L110 116 L200 158 L300 104 L400 156 L500 120 L640 166 L640 200 L0 200 Z" fill="#c3d3e0"/>
+        <path d="M0 178 L110 130 L200 168 L300 118 L400 166 L500 134 L640 176 L640 200 L0 200 Z" fill="#8fa6ba" opacity="0.85"/>
+        <rect x="0" y="198" width="640" height="162" fill="#243244"/>
+        <g fill="#2f4055">
+          <rect x="40" y="238" width="46" height="122"/><rect x="98" y="212" width="38" height="148"/>
+          <rect x="148" y="252" width="52" height="108"/><rect x="212" y="196" width="42" height="164"/>
+          <rect x="266" y="240" width="36" height="120"/><rect x="314" y="220" width="50" height="140"/>
+          <rect x="376" y="258" width="40" height="102"/><rect x="428" y="206" width="44" height="154"/>
+          <rect x="484" y="246" width="52" height="114"/><rect x="548" y="228" width="44" height="132"/>
+        </g>
+        <g fill="#ffd98a">
+          <rect x="48" y="250" width="8" height="8"/><rect x="64" y="250" width="8" height="8"/><rect x="48" y="268" width="8" height="8"/>
+          <rect x="106" y="226" width="8" height="8"/><rect x="122" y="226" width="8" height="8"/><rect x="106" y="244" width="8" height="8"/>
+          <rect x="156" y="266" width="8" height="8"/><rect x="172" y="266" width="8" height="8"/>
+          <rect x="220" y="210" width="8" height="8"/><rect x="236" y="210" width="8" height="8"/><rect x="220" y="228" width="8" height="8"/>
+          <rect x="274" y="254" width="8" height="8"/><rect x="322" y="234" width="8" height="8"/><rect x="338" y="234" width="8" height="8"/>
+        </g>
+        <g fill="#6e7d8e" opacity="0.85">
+          <rect x="384" y="272" width="8" height="8"/><rect x="400" y="272" width="8" height="8"/>
+          <rect x="436" y="220" width="8" height="8"/><rect x="452" y="220" width="8" height="8"/>
+          <rect x="492" y="260" width="8" height="8"/><rect x="556" y="242" width="8" height="8"/>
+        </g>
+        <g stroke="#ffd98a" stroke-width="2.6" fill="none" opacity="0.9">
+          <path d="M0 214 L120 210 L260 216 L400 212"/>
+        </g>
+        <circle cx="400" cy="212" r="7" fill="#fff3cd"/>
+        <circle cx="400" cy="212" r="15" fill="#fff3cd" opacity="0.35"/>
+        <g stroke="#d4a259" stroke-width="2" fill="none">
+          <path d="M410 212 L560 214" marker-end="url(#p12ar)"/></g>
+        <defs><marker id="p12ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <text x="440" y="200" font-family="monospace" font-size="10" fill="#f3e2b6">RELIGHT WAVE →</text>
+        <g stroke="#ffffff" stroke-opacity="0.18" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">12</span>
+        <span class="p-title">The light comes back — in reverse</span>
+        <span class="p-tc">0:30.0 – 0:35.0 · 5.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">AERIAL TRACK alongside conductors → WIDE elevated city vantage · 85mm · locked</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: clear dawn, gold at horizon · warm window light building through the shot</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">A pulse of light travels the transmission line ahead of the camera, tower after tower over dry ridges. Then the same Anchorage vantage as Panel 05 — but clear-skied — and the city relights <b>in the exact reverse order it died</b>, block after block, until the whole grid holds steady. Cut to the flight line in first light: runway edge lights all burning, radar turning calmly. <b>Nothing flickers anymore.</b></div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">A rising warm swell, then a settled, steady hum. The beeping is gone for good.</div></div>
+      <div class="vo silent"><span class="k">VO</span><p>NO NARRATION — music and image carry this beat</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">match Panel 05 vantage exactly — the payoff depends on it</span></div>
+    </div>
+  </div>
+
+  <div class="scene-strip" data-scene="5">
+    <input type="checkbox" data-scene="5">
+    <span class="sc-num">SC 5</span>
+    <span class="sc-name">A New Generation of Coal — inside the plant, carbon leaves the smoke</span>
+    <span class="sc-tc">0:35 – 0:47</span>
+  </div>
+
+  <!-- P13 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Turbine hall and CFB combustion">
+        <defs>
+          <linearGradient id="p13h" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#dfe8f0"/><stop offset="100%" stop-color="#7f8b98"/>
+          </linearGradient>
+          <radialGradient id="p13f" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffd27a"/><stop offset="55%" stop-color="#ef8a2c"/><stop offset="100%" stop-color="#8c3a08"/>
+          </radialGradient>
+        </defs>
+        <rect width="640" height="360" fill="#1a222b"/>
+        <path d="M60 0 L580 0 L520 360 L120 360 Z" fill="#2b3742"/>
+        <g fill="url(#p13h)" opacity="0.5">
+          <polygon points="120,26 200,26 188,120 130,120"/><polygon points="440,26 520,26 510,120 452,120"/>
+        </g>
+        <g opacity="0.35" fill="#e9f2fa">
+          <polygon points="130,120 190,120 250,360 120,360"/><polygon points="452,120 510,120 520,360 400,360"/>
+        </g>
+        <rect x="110" y="330" width="420" height="30" fill="#3c4854"/>
+        <g fill="#8e9aa6" stroke="#5d6874">
+          <rect x="150" y="238" width="120" height="66" rx="26"/>
+          <rect x="288" y="248" width="96" height="58" rx="24"/>
+          <rect x="400" y="256" width="76" height="50" rx="20"/>
+        </g>
+        <g fill="#6d7a86"><rect x="150" y="304" width="120" height="12"/><rect x="288" y="306" width="96" height="10"/></g>
+        <circle cx="210" cy="180" r="54" fill="#0f1620" stroke="#4a5763" stroke-width="4"/>
+        <circle cx="210" cy="180" r="42" fill="url(#p13f)"/>
+        <g fill="#fff0c4" opacity="0.85">
+          <circle cx="196" cy="166" r="3"/><circle cx="222" cy="174" r="2.4"/><circle cx="206" cy="192" r="2.8"/>
+          <circle cx="228" cy="196" r="2"/><circle cx="188" cy="188" r="2.2"/>
+        </g>
+        <g stroke="#ffd27a" stroke-width="2" fill="none" opacity="0.8">
+          <path d="M264 180 q60 -14 120 0" marker-end="url(#p13ar)"/></g>
+        <defs><marker id="p13ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#ffd27a" stroke-width="1.8"/></marker></defs>
+        <text x="290" y="166" font-family="monospace" font-size="10" fill="#ffd27a">HEAT → POWER</text>
+        <g stroke="#ffffff" stroke-opacity="0.14" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">13</span>
+        <span class="p-title">Inside — the turbine hall and the burning bed</span>
+        <span class="p-tc">0:35.0 – 0:40.0 · 5.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">STEADICAM long take · 35mm anamorphic → MACRO on the sight glass</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: daylight shafts through clerestory windows · ACCENT: orange bed glow</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">A vast, clean turbine hall — sunlight coming through high windows, polished floor, generator casings receding into the distance, two technicians walking the gallery. Then macro through a circular sight glass into the <b>circulating fluidized bed</b>: a controlled storm of incandescent particles cycling in a steady vortex. <b>Kate walks this floor now</b> — same face, Terra work jacket, at home in the light.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Deep steady turbine tone. Distant, contained roar behind glass.</div></div>
+      <div class="vo"><span class="k">VO</span><p>And this is not yesterday's coal.</p></div>
+      <div class="super clean"><span class="k">On screen</span><span class="t">Clean frame</span></div>
+      <div><span class="tag">Kate reappears — closes the character arc</span><span class="tag">no smoke indoors</span></div>
+    </div>
+  </div>
+
+  <!-- P14 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Carbon capture — CO2 separating from flue stream">
+        <defs>
+          <linearGradient id="p14sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2b7cc0"/><stop offset="100%" stop-color="#a7cfe9"/>
+          </linearGradient>
+          <linearGradient id="p14co2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.92"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p14sky)"/>
+        <rect x="0" y="300" width="640" height="60" fill="#8d8464"/>
+        <g fill="#c6ced6" stroke="#8b949d">
+          <rect x="70" y="90" width="52" height="212" rx="6"/><rect x="136" y="120" width="44" height="182" rx="6"/>
+          <rect x="194" y="104" width="48" height="198" rx="6"/>
+        </g>
+        <g stroke="#98a2ab" stroke-width="3" fill="none">
+          <path d="M122 150 h14 M180 176 h14 M242 160 h40"/>
+          <path d="M96 90 v-24 h60 v24"/>
+        </g>
+        <path d="M282 160 q60 -6 96 -2" stroke="#6f7a85" stroke-width="18" fill="none" opacity="0.55"/>
+        <path d="M282 160 q60 -6 96 -2" stroke="url(#p14co2)" stroke-width="9" fill="none"/>
+        <path d="M378 158 q46 -2 70 34 q22 34 20 76" stroke="url(#p14co2)" stroke-width="11" fill="none"/>
+        <g fill="#ffffff" opacity="0.9">
+          <circle cx="404" cy="164" r="3"/><circle cx="426" cy="176" r="2.4"/><circle cx="444" cy="198" r="2.8"/>
+          <circle cx="458" cy="226" r="2.2"/><circle cx="466" cy="256" r="2.6"/>
+        </g>
+        <g fill="#b9c2ca" stroke="#8b949d">
+          <rect x="430" y="252" width="60" height="50" rx="4"/><rect x="500" y="262" width="52" height="40" rx="4"/>
+        </g>
+        <path d="M552 288 q50 6 88 4" stroke="#c6ced6" stroke-width="12" fill="none"/>
+        <g stroke="#4a5a68" stroke-width="1.6" fill="none" opacity="0.8">
+          <path d="M300 128 q40 -14 84 -6" stroke-dasharray="4 5"/>
+        </g>
+        <text x="296" y="120" font-family="monospace" font-size="10" fill="#2c4c66">CO₂ PEELS OUT</text>
+        <g stroke="#ffffff" stroke-opacity="0.2" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">14</span>
+        <span class="p-title">Carbon capture — the stream that peels away</span>
+        <span class="p-tc">0:40.0 – 0:47.0 · 7.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">CRANE UP the absorber → MACRO inside the column → LATERAL TRACK compression hall</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: full clear sunlight on steel · INTERIOR: skylight glow · cloudless blue behind</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Out into the sun along the flue duct to the capture island — tall silver absorber columns, stairways, thin clean white steam. Then inside: the flue stream rises as faint gray haze, and within it a <b>pearl-white translucent current separates and is drawn aside into its own gleaming line</b> — the gas that continues on is visibly clearer. Compressors gather it into a single insulated pipeline heading out through the wall.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Deep compressor thrum, a clean rhythmic pulse. Music steady and precise.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Terra is designed to capture approximately 90 percent of its carbon dioxide — combining proven coal technology with advanced carbon management.</p></div>
+      <div class="super"><span class="k">On screen</span><span class="t">Designed for ~90% CO₂ Capture</span></div>
+      <div><span class="tag">CO₂ always pearl-white and translucent — never dark or smoky</span></div>
+    </div>
+  </div>
+
+  <div class="scene-strip" data-scene="6">
+    <input type="checkbox" data-scene="6">
+    <span class="sc-num">SC 6</span>
+    <span class="sc-name">Geology Becomes an Advantage — the carbon goes home</span>
+    <span class="sc-tc">0:47 – 0:55</span>
+  </div>
+
+  <!-- P15 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="CO2 pipeline and permanent storage below caprock">
+        <defs>
+          <linearGradient id="p15sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2b7cc0"/><stop offset="100%" stop-color="#cfe4f2"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p15sky)"/>
+        <path d="M0 96 L120 62 L230 92 L340 56 L460 94 L560 68 L640 96 L640 120 L0 120 Z" fill="#dfe9f1"/>
+        <rect x="0" y="118" width="640" height="46" fill="#9a8f68"/>
+        <path d="M0 126 q160 -10 320 2 q160 12 320 -6 L640 164 L0 164 Z" fill="#a99d73"/>
+        <path d="M40 152 q160 -20 300 -4 q160 16 268 -8" stroke="#c6ced6" stroke-width="7" fill="none"/>
+        <g fill="#b9c2ca" stroke="#8b949d"><rect x="300" y="128" width="26" height="30" rx="3"/></g>
+        <rect x="0" y="162" width="640" height="42" fill="#c2a86e"/>
+        <rect x="0" y="202" width="640" height="34" fill="#9e8c5e"/>
+        <rect x="0" y="234" width="640" height="40" fill="#2f2a22"/>
+        <rect x="0" y="272" width="640" height="88" fill="#c9a962"/>
+        <g stroke="#1e1a15" stroke-width="1.4" opacity="0.6">
+          <line x1="0" y1="234" x2="640" y2="236"/><line x1="0" y1="272" x2="640" y2="270"/>
+        </g>
+        <line x1="313" y1="158" x2="313" y2="286" stroke="#8b949d" stroke-width="5"/>
+        <g fill="#ffffff" opacity="0.86">
+          <ellipse cx="313" cy="304" rx="120" ry="30"/>
+          <ellipse cx="313" cy="304" rx="80" ry="20" opacity="0.7"/>
+        </g>
+        <g fill="#ffffff" opacity="0.55">
+          <circle cx="230" cy="300" r="3"/><circle cx="270" cy="314" r="2.6"/><circle cx="356" cy="298" r="3"/>
+          <circle cx="392" cy="312" r="2.4"/><circle cx="313" cy="288" r="2.8"/>
+        </g>
+        <text x="20" y="258" font-family="monospace" font-size="11" fill="#e8dcc0">IMPERMEABLE CAPROCK</text>
+        <text x="20" y="348" font-family="monospace" font-size="11" fill="#5e4a1e">STORAGE FORMATION — CONTAINED</text>
+        <g stroke="#d4a259" stroke-width="2.2" fill="none">
+          <path d="M470 170 v100" marker-end="url(#p15ar)"/></g>
+        <defs><marker id="p15ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <g stroke="#ffffff" stroke-opacity="0.16" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">15</span>
+        <span class="p-title">The carbon goes back where it came from</span>
+        <span class="p-tc">0:47.0 – 0:55.0 · 8.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">AERIAL TRACK alongside pipeline → CONTINUOUS DESCENT down the well bore → MACRO</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: clear golden daylight above · dimming to deep amber through the strata</div></div>
+      <div class="row"><div class="k">Action</div><div class="v">A single silver pipeline runs low across sunlit dry tundra and gentle ridgelines — <b>marker posts, snowfields, spruce, and nothing else; the route never approaches water</b>. At a lone wellhead on a gravel pad the camera dives down the bore through golden sandstone, gray siltstone, then a thick unbroken dark caprock. Below it, a pearl-white plume spreads gently through the pore space, slows, and <b>settles beneath the sealing rock. Contained.</b> This is the circle closing: the earth gave the light, and takes the carbon back.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Surface wind gives way to deep subterranean quiet. Music resolves and calms.</div></div>
+      <div class="vo"><span class="k">VO</span><p>And Alaska's remarkable geology offers the potential to permanently store that captured carbon deep underground.</p></div>
+      <div class="super"><span class="k">On screen</span><span class="t">Capture • Transport • Permanent Storage</span></div>
+      <div><span class="tag">route crosses zero water · no fractures in caprock · no leaks</span></div>
+    </div>
+  </div>
+
+  <div class="scene-strip" data-scene="7">
+    <input type="checkbox" data-scene="7">
+    <span class="sc-num">SC 7</span>
+    <span class="sc-name">The Pacific Vision — the same light, on her face</span>
+    <span class="sc-tc">0:55 – 1:00</span>
+  </div>
+
+  <!-- P16 -->
+  <div class="panel">
+    <div class="panel-visual">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Kate in the sun, rise to the Pacific, end card">
+        <defs>
+          <linearGradient id="p16sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2477bd"/><stop offset="60%" stop-color="#9ecbe8"/><stop offset="100%" stop-color="#f9dfa4"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#p16sky)"/>
+        <circle cx="120" cy="86" r="40" fill="#fff6d8"/>
+        <circle cx="120" cy="86" r="72" fill="#fff6d8" opacity="0.28"/>
+        <path d="M0 150 L120 104 L230 148 L340 100 L460 150 L560 116 L640 152 L640 196 L0 196 Z" fill="#dbe6ef"/>
+        <rect x="0" y="194" width="640" height="166" fill="#9c9070"/>
+        <g fill="#c9cfd6" stroke="#98a1a9" opacity="0.92">
+          <rect x="392" y="206" width="26" height="58" rx="2"/><rect x="424" y="206" width="26" height="58" rx="2"/>
+          <rect x="456" y="206" width="26" height="58" rx="2"/><rect x="488" y="206" width="26" height="58" rx="2"/>
+          <rect x="520" y="206" width="26" height="58" rx="2"/>
+          <rect x="390" y="264" width="180" height="30" rx="2"/>
+        </g>
+        <path d="M448 206 q-4 -30 4 -52" stroke="#ffffff" stroke-width="9" fill="none" opacity="0.7" stroke-linecap="round"/>
+        <g>
+          <path d="M150 360 q4 -74 46 -96 q42 -20 68 8 q26 30 20 88 Z" fill="#2c3440"/>
+          <path d="M196 262 q26 -30 50 -6 q16 22 2 44 q-24 24 -48 2 q-16 -20 -4 -40 Z" fill="#e2b489"/>
+          <path d="M196 262 q26 -30 50 -6 q16 22 2 44 q-24 24 -48 2 q-16 -20 -4 -40 Z" fill="#ffd98a" opacity="0.45"/>
+          <path d="M188 268 q-6 42 16 66" stroke="#fff3cd" stroke-width="6" fill="none" opacity="0.8"/>
+          <path d="M182 244 q34 -30 76 -6 q-38 -6 -76 6 Z" fill="#3a3128"/>
+        </g>
+        <g stroke="#fff3cd" stroke-width="2" opacity="0.55">
+          <path d="M120 120 L186 262"/><path d="M140 108 L200 250"/>
+        </g>
+        <g stroke="#d4a259" stroke-width="2.2" fill="none">
+          <path d="M600 320 v-250" marker-end="url(#p16ar)"/></g>
+        <defs><marker id="p16ar" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+          <path d="M0.6 1 L4 7 L7.4 1" fill="none" stroke="#d4a259" stroke-width="1.8"/></marker></defs>
+        <text x="524" y="340" font-family="monospace" font-size="10" fill="#6b5320">RISE TO ORBIT</text>
+        <g stroke="#ffffff" stroke-opacity="0.22" stroke-width="1" fill="none">
+          <line x1="213" y1="0" x2="213" y2="360"/><line x1="427" y1="0" x2="427" y2="360"/>
+          <line x1="0" y1="120" x2="640" y2="120"/><line x1="0" y1="240" x2="640" y2="240"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-body">
+      <div class="panel-head">
+        <span class="p-num">16</span>
+        <span class="p-title">The same light — and the Pacific</span>
+        <span class="p-tc">0:55.0 – 1:00.0 · 5.0s</span>
+      </div>
+      <div class="row spec"><div class="k">Shot</div><div class="v">MEDIUM on Kate · 50mm · slow push → CRANE/ORBITAL PULL-BACK → final plant WIDE</div></div>
+      <div class="row spec"><div class="k">Light</div><div class="v">KEY: low golden sun directly on her face — <b>the same quality as Panel 01</b></div></div>
+      <div class="row"><div class="k">Action</div><div class="v">Kate steps out of the plant into the morning. The night is over. She stops, and a band of gold light lands across her face — <b>the same light that fell on that leaf, returned after a hundred million years underground</b>. She holds it for one beat. The camera rises: over Alaska, over the Pacific, until <b>Japan and Korea illuminate</b> with soft arcs reaching toward them. Final transition to Terra operating in full clear sun, negative space upper-centre for the end card.</div></div>
+      <div class="row"><div class="k">Sound</div><div class="v">Music opens to its widest, then settles. Wind. One clean final note.</div></div>
+      <div class="vo"><span class="k">VO</span><p>Energy security. National security. Lower emissions. <span style="opacity:.6">[beat]</span> Terra Energy Center. A new generation of coal power.</p></div>
+      <div class="super"><span class="k">End card</span><span class="t">Terra Energy Center · From Mine to Megawatt. Megawatt to Market.</span></div>
+      <div><span class="tag hero">closes the light's journey — match Panel 01 light quality</span><span class="tag">Pacific permitted — strategic view</span></div>
+    </div>
+  </div>
+
+  <!-- ============ TYPE SYSTEM ============ -->
+  <div class="type-section">
+    <h2 class="sec">Typography System</h2>
+    <p class="sec-note">
+      Every super and the end card, specified so an editor can build the titles without guessing.
+      All specimens below are rendering in the actual typefaces — what you see is what the film gets.
+      <b>If Terra Energy Center has a licensed brand typeface, it supersedes the display face below</b> and everything
+      else in this system (weights, tracking, case, position, timing) carries over unchanged.
+    </p>
+
+    <div class="type-card">
+      <h3>Archivo — Display</h3>
+      <div class="role">Primary face · all on-screen supers and the end card · SIL Open Font License, cleared for commercial broadcast</div>
+      <div class="specimen">
+        <div class="spec-display">Energy Security<br>Is National Security</div>
+      </div>
+      <div class="specimen">
+        <div class="spec-display" style="letter-spacing:0.02em">1,250 MW</div>
+        <div class="spec-mono">Mine-Mouth • 24/7 Firm Power</div>
+      </div>
+      <div class="stack">font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight: 800 (headline supers) / 600 (end card lockup)
+text-transform: uppercase · font-variant-numeric: tabular-nums</div>
+      <div class="note-inline">Chosen for a grotesk that reads as engineered rather than corporate — tight apertures, strong verticals, and a tabular numeral set so <b>1,250 MW</b> and <b>~90%</b> hold their width when animating.</div>
+    </div>
+
+    <div class="type-card">
+      <h3>Roboto Mono — Technical labels</h3>
+      <div class="role">Secondary face · the small qualifier lines under a headline super · Apache 2.0</div>
+      <div class="specimen">
+        <div class="spec-mono">Capture • Transport • Permanent Storage</div>
+      </div>
+      <div class="stack">font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+font-weight: 500 · letter-spacing: 0.16em · text-transform: uppercase</div>
+      <div class="note-inline">The monospaced qualifier line gives the technical claims a measured, instrument-panel authority and visually separates them from the headline without a second display weight.</div>
+    </div>
+
+    <div class="type-card">
+      <h3>Noto Sans JP — Japanese companion</h3>
+      <div class="role">For the Japanese subtitle / super track · SIL Open Font License</div>
+      <div class="specimen">
+        <div class="spec-jp">エネルギー安全保障は国家安全保障</div>
+        <div class="spec-mono" style="margin-top:14px">Energy Security Is National Security</div>
+      </div>
+      <div class="stack">font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+font-weight: 700 (supers) / 500 (subtitles)</div>
+      <div class="note-inline">The screening is a Japanese symposium, so the JP track is specified up front rather than improvised at delivery. Noto Sans JP is metrically compatible with Archivo's weight and colour on screen, so a bilingual super holds the same visual density.</div>
+    </div>
+
+    <div class="type-card">
+      <h3>Per-super specification</h3>
+      <div class="role">Sizes given for a 1920×1080 master · title-safe margin 10% (192px sides, 108px top/bottom)</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Panel</th><th>Text</th><th>Face / weight</th><th class="mono">Size</th>
+              <th class="mono">Tracking</th><th>Position</th><th>Color</th><th>In / out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">06</td>
+              <td><b>ENERGY SECURITY IS NATIONAL SECURITY</b></td>
+              <td>Archivo 800, uppercase</td>
+              <td class="mono">64px</td><td class="mono">+0.055em</td>
+              <td>Lower third, centred</td>
+              <td><span class="swatch" style="background:#fff"></span>#FFFFFF</td>
+              <td>Fade + 8px rise, 12f in / 10f out</td>
+            </tr>
+            <tr>
+              <td class="mono">11</td>
+              <td><b>1,250 MW</b><br>MINE-MOUTH • 24/7 FIRM POWER</td>
+              <td>Archivo 800 / Roboto Mono 500</td>
+              <td class="mono">104px / 26px</td><td class="mono">+0.02em / +0.16em</td>
+              <td>Lower third, centred, 18px gap</td>
+              <td><span class="swatch" style="background:#fff"></span>#FFFFFF</td>
+              <td>Numerals count up 10f, label fades after</td>
+            </tr>
+            <tr>
+              <td class="mono">14</td>
+              <td><b>DESIGNED FOR ~90% CO₂ CAPTURE</b></td>
+              <td>Archivo 800, uppercase</td>
+              <td class="mono">58px</td><td class="mono">+0.055em</td>
+              <td>Lower third, centred</td>
+              <td><span class="swatch" style="background:#fff"></span>#FFFFFF</td>
+              <td>Fade + 8px rise, 12f in / 10f out</td>
+            </tr>
+            <tr>
+              <td class="mono">15</td>
+              <td>CAPTURE • TRANSPORT • PERMANENT STORAGE</td>
+              <td>Roboto Mono 500, uppercase</td>
+              <td class="mono">30px</td><td class="mono">+0.16em</td>
+              <td>Lower third, centred</td>
+              <td><span class="swatch" style="background:#fff"></span>#FFFFFF</td>
+              <td>Wipe on by word, 14f total</td>
+            </tr>
+            <tr>
+              <td class="mono">16</td>
+              <td><b>TERRA ENERGY CENTER</b><br>From Mine to Megawatt. Megawatt to Market.</td>
+              <td>Archivo 600 / Archivo 500</td>
+              <td class="mono">88px / 30px</td><td class="mono">+0.08em / +0.02em</td>
+              <td>Centred, optically above middle</td>
+              <td><span class="swatch" style="background:#fff"></span>#FFFFFF</td>
+              <td>Logo fades, name 8f later, tagline 8f after that; hold to black</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note-inline">
+        <b>Scrim:</b> every lower-third super sits over a bottom gradient scrim, <span class="swatch" style="background:#000"></span><code>#000000</code> at 45% opacity fading to 0% across the bottom 28% of frame. It keeps supers legible over moving aerials without reading as a graphic box.<br>
+        <b>Warning red</b> <span class="swatch" style="background:#e5484d"></span><code>#E5484D</code> is an Act I <i>lighting</i> accent only — it never appears in type. All supers are pure white, in every act.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.scene-strip input[type="checkbox"]').forEach(function (cb) {
+    var key = 'terra-sb-scene-' + cb.dataset.scene + '-done';
+    var strip = cb.closest('.scene-strip');
+    try {
+      if (localStorage.getItem(key) === '1') { cb.checked = true; strip.classList.add('done'); }
+    } catch (e) {}
+    cb.addEventListener('change', function () {
+      try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch (e) {}
+      strip.classList.toggle('done', cb.checked);
+    });
+  });
+</script>
+</body>
+</html>
