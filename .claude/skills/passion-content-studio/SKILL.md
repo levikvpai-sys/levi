@@ -13,7 +13,7 @@ Core principle: **the AI writes the structure, the creator brings the trust.** N
 
 ### 1. Load the brand profile
 
-Look for a filled profile in the conversation or in a `brand-profile.md` file the user points to. If none exists, ask **only** for what's missing, in one short message (use AskUserQuestion when available):
+Load the default profile [brand-profile.md](brand-profile.md) first — it is pre-filled for this creator, so start generating right away without asking questions. Anything said in the conversation overrides it. Fields marked `[À COMPLÉTER]` must never be invented (see rules). Only if the user explicitly works for a different brand, ask **only** for what's missing, in one short message (use AskUserQuestion when available):
 
 - Niche / sujet principal
 - Audience (who, main pain, level)
@@ -22,7 +22,7 @@ Look for a filled profile in the conversation or in a `brand-profile.md` file th
 - Content language (default: French; follow the user if they say otherwise)
 - 1–3 **real** stories (a failure, a turning point, a client result) — optional but strongly encouraged
 
-Template: [references/brand-profile-template.md](references/brand-profile-template.md). Offer to save the filled profile so it's reused next time.
+Template: [references/brand-profile-template.md](references/brand-profile-template.md). When the user shares a real story or post, offer to add it to `brand-profile.md`.
 
 ### 2. Pick the mode
 
