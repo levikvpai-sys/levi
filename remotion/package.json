@@ -1,0 +1,26 @@
+{
+  "name": "jungle-ad",
+  "version": "1.0.0",
+  "description": "WOW Production – jungle house ad, edited in Remotion",
+  "scripts": {
+    "music": "node scripts/make-music.mjs",
+    "dev": "npm run music && remotion studio src/index.ts",
+    "render": "npm run music && remotion render src/index.ts JungleAd out/jungle-ad-16x9.mp4",
+    "render:vertical": "npm run music && remotion render src/index.ts JungleAdVertical out/jungle-ad-9x16.mp4",
+    "still": "remotion still src/index.ts JungleAd out/still.png",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@fontsource/heebo": "^5.3.0",
+    "@remotion/cli": "^4.0.532",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.532"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module"
+}
