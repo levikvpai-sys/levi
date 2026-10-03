@@ -1,0 +1,54 @@
+{
+  "fps": 30,
+  "durationInFrames": 1800,
+  "shots": [
+    {"id": "01_canopy", "from": 0, "duration": 150, "title": "רחפן יורד דרך חופת הג'ונגל בגשם"},
+    {"id": "02_clearing", "from": 150, "duration": 150, "title": "גלישה מעל שרכים אל קרחת יער ריקה"},
+    {"id": "03_seed", "from": 300, "duration": 150, "title": "זרע זוהר נופל לבוץ"},
+    {"id": "04_roots", "from": 450, "duration": 150, "title": "שורשים פורצים, במבוק צומח"},
+    {"id": "05_frame", "from": 600, "duration": 150, "title": "קורות נשזרות לשלד, זכוכית מחליקה למקום"},
+    {"id": "06_complete", "from": 750, "duration": 150, "title": "גג ירוק נפתח, הווילה שלמה"},
+    {"id": "07_doors", "from": 900, "duration": 150, "title": "אישה פותחת דלתות זכוכית"},
+    {"id": "08_girl", "from": 1050, "duration": 150, "title": "ילדה רצה על הדק לבריכה"},
+    {"id": "09_family", "from": 1200, "duration": 150, "title": "המשפחה על שפת הבריכה"},
+    {"id": "10_aerial", "from": 1350, "duration": 450, "title": "רחפן מתרחק מעל החופה (הופך לסקיצה)"}
+  ],
+  "captions": [
+    {"from": 45, "to": 165, "text": "כל דבר גדול..."},
+    {"from": 320, "to": 445, "text": "מתחיל מכלום."},
+    {"from": 470, "to": 585, "text": "קודם רעיון."},
+    {"from": 610, "to": 725, "text": "אחר כך שורש."},
+    {"from": 750, "to": 880, "text": "אחר כך קיר."},
+    {"from": 925, "to": 1045, "text": "ואז, יום אחד,"},
+    {"from": 1065, "to": 1200, "text": "אתה מתעורר בתוכו."},
+    {"from": 1385, "to": 1490, "text": "הבית הזה לא קיים."},
+    {"from": 1495, "to": 1585, "text": "גם הסרט הזה לא צולם.", "dark": true}
+  ],
+  "voice": [
+    {"file": "vo_01.mp3", "from": 50},
+    {"file": "vo_02.mp3", "from": 325},
+    {"file": "vo_03.mp3", "from": 475},
+    {"file": "vo_04.mp3", "from": 615},
+    {"file": "vo_05.mp3", "from": 755},
+    {"file": "vo_06.mp3", "from": 930},
+    {"file": "vo_07.mp3", "from": 1070},
+    {"file": "vo_08.mp3", "from": 1390},
+    {"file": "vo_09.mp3", "from": 1505},
+    {"file": "vo_10.mp3", "from": 1705}
+  ],
+  "events": {
+    "seedLand": 420,
+    "poles": [505, 520, 535, 550, 565, 580],
+    "beams": 615,
+    "glass": [690, 702, 714, 726, 738, 750, 762, 774, 786],
+    "roof": 790,
+    "pool": 840,
+    "desaturate": [1420, 1480],
+    "sketch": [1470, 1545],
+    "silence": 1560,
+    "pencil": 1595,
+    "shrink": [1560, 1680],
+    "logo": 1690,
+    "boom": 1690
+  }
+}
