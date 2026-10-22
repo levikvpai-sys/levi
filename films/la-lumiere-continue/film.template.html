@@ -1,0 +1,192 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Cinzel;font-weight:500;src:url(data:font/woff2;base64,__CINZEL500__) format('woff2')}
+@font-face{font-family:Cinzel;font-weight:600;src:url(data:font/woff2;base64,__CINZEL600__) format('woff2')}
+@font-face{font-family:Cinzel;font-weight:700;src:url(data:font/woff2;base64,__CINZEL700__) format('woff2')}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#000}
+#cv{position:absolute;left:0;top:0}
+.layer{position:absolute;inset:0;pointer-events:none}
+.cap{position:absolute;left:96px;right:96px;bottom:118px;text-align:center;white-space:nowrap;
+  font:500 52px/1 Cinzel,serif;letter-spacing:.03em;color:#fff;
+  text-shadow:0 2px 3px rgba(0,0,0,.55),0 4px 26px rgba(0,0,0,.55)}
+.cap .w{display:inline-block;margin:0 .14em;transform-origin:50% 60%}
+.acc{color:#F3C47C}
+#label{position:absolute;left:96px;bottom:60px;font:600 22px/1 Cinzel,serif;letter-spacing:.16em;color:rgba(255,255,255,.62);
+  text-shadow:0 1px 6px rgba(0,0,0,.6)}
+#card30{position:absolute;left:150px;top:330px;font:600 68px/1.22 Cinzel,serif;letter-spacing:.02em;color:#fff;
+  text-shadow:0 2px 24px rgba(0,0,0,.6)}
+#card30 .ln{overflow:hidden;padding:4px 0 10px}
+#card30 .ln span{display:inline-block}
+#logoGroup{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:960px 520px}
+#logoGroup .lg{position:absolute;width:901px;height:518px;background-size:901px 518px;background-repeat:no-repeat}
+#cta{position:absolute;left:0;right:0;top:720px;text-align:center;font:600 56px/1 Cinzel,serif;letter-spacing:.03em;color:#5A6026}
+#qr{position:absolute;left:900px;top:815px;width:120px;height:120px;box-sizing:border-box;border:2px solid #8C8E78;
+  font:700 26px/116px Cinzel,serif;text-align:center;color:#6F715C;letter-spacing:.12em}
+#qrNote{position:absolute;left:0;right:0;top:955px;text-align:center;font:600 20px/1 Cinzel,serif;letter-spacing:.14em;color:#8C8E78}
+</style></head><body>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<div class="layer" id="caps"></div>
+<div id="label"></div>
+<div id="card30"></div>
+<div class="layer" id="end">
+  <div id="logoGroup">
+    <div class="lg" id="lgStroke"></div>
+    <div class="lg" id="lgLeft"></div>
+    <div class="lg" id="lgLamp"></div>
+    <div class="lg" id="lgRight"></div>
+  </div>
+  <div id="cta"></div><div id="qr">QR</div><div id="qrNote">lien de don à valider</div>
+</div>
+<script>
+const TL=__TIMELINE__;
+const FPS=TL.fps, W=TL.W, H=TL.H, PAPER='#F7F3EA';
+const clamp=(x,a=0,c=1)=>Math.min(c,Math.max(a,x)), prog=(t,t0,d)=>clamp((t-t0)/d);
+const mix=(a,b,p)=>a+(b-a)*p, lmix=(a,b,p)=>Math.exp(mix(Math.log(a),Math.log(b),p));
+const expoOut=x=>x>=1?1:1-Math.pow(2,-10*x), expoIn=x=>x<=0?0:Math.pow(2,10*x-10);
+const smooth=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;            // camera: eases both ways
+const outSoft=x=>1-Math.pow(1-x,3);
+const EASE={lin:x=>x, smooth:x=>mix(x,smooth(x),.55)};             // keep some drift through the middle
+const VIG={riot:.42, damage:.40, fire:.30, symbol:.25, warm:.24, video:.30};
+
+// ---------- assets ----------
+const IM={}, VID={}, GR=[]; let pending=0;
+function load(src){pending++; const im=new Image(); im.onload=()=>{im.decode().catch(()=>{}).finally(()=>pending--)}; im.onerror=()=>{console.error('missing '+src); pending--}; im.src=src; return im;}
+for(const s of TL.shots){
+  if(s.src) IM[s.src]=load('assets/img_g/'+s.src+'.jpg');
+  if(s.video){VID[s.video]=[]; for(let i=1;i<=s.n;i++) VID[s.video].push(load(`assets/img_g/${s.video}/${String(i).padStart(3,'0')}.jpg`));}
+}
+for(let i=0;i<8;i++) GR.push(load(`assets/img/grain/g${i}.png`));
+for(const id of ['lgStroke','lgLeft','lgLamp','lgRight']){
+  const el=document.getElementById(id); el.style.left=TL.logo.left+'px'; el.style.top=TL.logo.top+'px';
+  el.style.backgroundImage=`url(assets/img/${id==='lgStroke'?'logo_stroke':'logo_mark'}.png)`;
+}
+load('assets/img/logo_mark.png'); load('assets/img/logo_stroke.png');
+
+// ---------- text ----------
+function wordHTML(w){const acc=w.startsWith('*'); w=w.replace(/\*/g,''); return `<span class="w${acc?' acc':''}">${w}</span>`;}
+const capEls=TL.captions.map(c=>{
+  const d=document.createElement('div'); d.className='cap';
+  const words=c.build?c.build.map(b=>b[0]):c.words;
+  d.innerHTML=words.map(wordHTML).join(''); document.getElementById('caps').appendChild(d);
+  const spans=[...d.querySelectorAll('.w')];
+  const times=c.build?c.build.map(b=>b[1]):words.map((_,i)=>c.in+i*c.stagger);
+  return {c,d,spans,times};
+});
+document.getElementById('label').textContent=TL.label.text;
+const c30=document.getElementById('card30');
+c30.innerHTML=TL.card30.lines.map(l=>`<div class="ln"><span class="${l.startsWith('*')?'acc':''}">${l.replace(/\*/g,'')}</span></div>`).join('');
+const c30spans=[...c30.querySelectorAll('.ln span')];
+document.getElementById('cta').textContent=TL.cta.text;
+
+// word arrival: rise + brighten + blur clear (frame-quantized so stills and video agree)
+function arrive(el,t,tin,tout,rise=22){
+  const a=prog(t,tin,18/FPS), o=expoOut(prog(t,tin,14/FPS));
+  const out=1-prog(t,tout-5/FPS,5/FPS);
+  const y=Math.round(rise*(1-expoOut(a))*10)/10, blur=Math.max(0,6*(1-prog(t,tin,10/FPS)));
+  el.style.opacity=(o*out).toFixed(3);
+  el.style.transform=`translateY(${y}px)`;
+  el.style.filter=blur>.05?`blur(${blur.toFixed(2)}px)`:'none';
+  return o*out;
+}
+
+// ---------- picture ----------
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='low';
+function drawShot(s,t){
+  // a->b over the shot; optional b->c zoom-through after s.tm (accelerating, leaves on the fastest frame)
+  let A=s.a, B=s.b, p=EASE[s.ease||'smooth'](prog(t,s.t0,(s.tm||s.t1)-s.t0));
+  if(s.c&&t>=s.tm){ A=s.b; B=s.c; p=Math.pow(prog(t,s.tm,s.t1-s.tm),2.4); }
+  let im=s.src?IM[s.src]:VID[s.video][clamp(Math.round((t-s.t0)*FPS),0,s.n-1)];
+  const iw=im.naturalWidth, ih=im.naturalHeight, cover=Math.max(W/iw,H/ih);
+  const z=lmix(A[2],B[2],p), r=mix(A[3],B[3],p)*Math.PI/180;
+  const sc=cover*z, dw=iw*sc, dh=ih*sc;
+  // keep the window inside the picture (with rotation margin)
+  const m=Math.abs(Math.sin(r))*Math.max(W,H)/2;
+  let cx=mix(A[0],B[0],p)*dw, cy=mix(A[1],B[1],p)*dh;
+  cx=clamp(cx,W/2+m,dw-W/2-m); cy=clamp(cy,H/2+m,dh-H/2-m);
+  ctx.save();   // grade is baked into the pixels (bake.py)
+  ctx.translate(W/2,H/2); ctx.rotate(r); ctx.drawImage(im,-cx,-cy,dw,dh); ctx.restore();
+  const g=ctx.createRadialGradient(W/2,H/2,H*.38,W/2,H/2,H*1.05);
+  g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,`rgba(0,0,0,${VIG[s.grade]||.3})`);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+}
+function wash(color,a){ if(a<=0.001) return; ctx.save(); ctx.globalAlpha=Math.min(1,a); ctx.fillStyle=color; ctx.fillRect(0,0,W,H); ctx.restore(); }
+function grain(f,amt){ ctx.save(); ctx.globalCompositeOperation='overlay'; ctx.globalAlpha=amt; ctx.drawImage(GR[f%8],0,0,W,H); ctx.restore(); }
+
+// ---------- end cards ----------
+const lg={stroke:document.getElementById('lgStroke'),left:document.getElementById('lgLeft'),lamp:document.getElementById('lgLamp'),right:document.getElementById('lgRight')};
+function softMask(el,dir,p,x0=0,x1=901){ // reveal edge moves in `dir`; region limited to [x0,x1) in logo px
+  const e=8, P=mix(-e,100+e,p);
+  const grad=`linear-gradient(${dir}, #000 ${P-e}%, transparent ${P}%)`;
+  const reg=`linear-gradient(to right, transparent ${x0/9.01}%, #000 ${x0/9.01}%, #000 ${x1/9.01}%, transparent ${x1/9.01}%)`;
+  el.style.webkitMaskImage=`${grad}, ${reg}`; el.style.webkitMaskComposite='source-in'; el.style.maskComposite='intersect';
+  el.style.opacity=p>0?1:0;
+}
+function drawEnd(t){
+  const L=TL.logo, C=TL.cta, mv=smooth(prog(t,C.move[0],C.move[1]));
+  const creep=1+0.012*prog(t,45.0,5.0), s=L.base*mix(1,C.scale,mv)*creep, ty=C.dy*mv;
+  const fx=960+(L.left+L.flame[0]-960)*s, fy=520+(L.top+L.flame[1]-520)*s+ty;
+  ctx.fillStyle=PAPER; ctx.fillRect(0,0,W,H);
+  // the light that filled the frame condenses into the lantern's flame
+  const gp=expoOut(prog(t,L.glow[0],L.glow[1]));
+  const R=lmix(1500,95,gp), fl=1+.04*Math.sin(t*23.1)+.03*Math.sin(t*37.7+1.3);
+  const g=ctx.createRadialGradient(fx,fy,0,fx,fy,R*fl);
+  g.addColorStop(0,`rgba(255,214,150,${mix(.95,.55,gp)})`); g.addColorStop(.35,`rgba(255,226,180,${mix(.75,.22,gp)})`); g.addColorStop(1,'rgba(255,240,215,0)');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  softMask(lg.lamp,'to bottom',outSoft(prog(t,L.lamp[0],L.lamp[1])),L.split[0],L.split[1]);
+  const wp=expoOut(prog(t,L.words[0],L.words[1]));
+  softMask(lg.left,'to left',wp,0,L.split[0]);
+  softMask(lg.right,'to right',wp,L.split[1],901);
+  softMask(lg.stroke,'to right',smooth(prog(t,L.stroke[0],L.stroke[1])));
+  // hold alive, then make room for the call to action
+  document.getElementById('logoGroup').style.transform=`translateY(${ty.toFixed(2)}px) scale(${s.toFixed(4)})`;
+  const cta=document.getElementById('cta');
+  arrive(cta,t,C.textIn,99);
+  const q=prog(t,C.qrIn,14/FPS);
+  document.getElementById('qr').style.opacity=q; document.getElementById('qrNote').style.opacity=q*.9;
+}
+
+// ---------- frame ----------
+window.seek=function(t){
+  t=Math.round(t*FPS)/FPS+1e-6;
+  const f=Math.round(t*FPS);
+  const shot=TL.shots.find(s=>t>=s.t0&&t<s.t1)||TL.shots[TL.shots.length-1];
+  const endOn=!!shot.card;
+  document.getElementById('end').style.display=endOn?'block':'none';
+  if(endOn){ drawEnd(t); grain(f,.05); }
+  else{
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H);
+    drawShot(shot,t);
+    if(shot.id===19) wash('rgba(255,150,60,1)',.10*prog(t,20.4,.6));
+    if(shot.id===21) wash('rgb(255,214,160)',.42*expoIn(prog(t,23.18,.32)));      // the flame flares into the next room
+    if(shot.id===22) wash('rgb(255,226,190)',.30*(1-expoOut(prog(t,23.5,.45))));
+    const wt=TL.whiten; if(shot.id===30){ const w=prog(t,wt.t0,wt.t1-wt.t0);
+      ctx.save(); ctx.globalCompositeOperation='screen'; ctx.globalAlpha=Math.min(1,Math.pow(w,1.3)); ctx.fillStyle='rgb(255,206,140)'; ctx.fillRect(0,0,W,H); ctx.restore();
+      wash(PAPER,Math.pow(w,2.8)); }
+    // caption scrim, only while a caption is on screen
+    const capOn=capEls.some(e=>t>=e.times[0]-.1&&t<e.c.out);
+    if(capOn&&shot.grade!=='riot'){
+      const sg=ctx.createLinearGradient(0,H*.58,0,H); sg.addColorStop(0,'rgba(0,0,0,0)'); sg.addColorStop(1,'rgba(0,0,0,.50)');
+      ctx.fillStyle=sg; ctx.fillRect(0,0,W,H);
+    }
+    grain(f,shot.grade==='warm'?.07:.11);
+  }
+  // captions
+  for(const e of capEls){
+    const on=t>=e.times[0]-.01&&t<e.c.out;
+    e.d.style.display=on?'block':'none';
+    if(on) e.spans.forEach((sp,i)=>arrive(sp,t,e.times[i],e.c.out));
+  }
+  // reconstruction label (AI shots of the riot)
+  const lb=document.getElementById('label');
+  lb.style.opacity=(t>=TL.label.in&&t<TL.label.out)?(.62*prog(t,TL.label.in,8/FPS)/.62).toFixed(3):0;
+  // shot 30 card
+  const k=TL.card30;
+  c30.style.display=(t>=k.in&&t<45)?'block':'none';
+  c30spans.forEach((sp,i)=>{ const tin=k.in+i*k.gap, a=expoOut(prog(t,tin,20/FPS));
+    sp.style.transform=`translateY(${((1-a)*100).toFixed(2)}%)`;
+    sp.style.opacity=(1-prog(t,k.out-8/FPS,8/FPS)).toFixed(3); });
+};
+window.ready=()=>pending===0&&document.fonts.status==='loaded';
+document.fonts.ready.then(()=>{});
+</script></body></html>
