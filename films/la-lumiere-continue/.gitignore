@@ -1,0 +1,11 @@
+# personal media and generated files stay out of git
+input/
+assets/
+src/
+audio/
+fonts/
+stills*/
+qa*/
+film.html
+*.mp4
+*_frames/
