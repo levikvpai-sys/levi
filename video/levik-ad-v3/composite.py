@@ -25,6 +25,9 @@ GRADES = {  # baked into the proxy
     'cold': 'eq=contrast=1.08:saturation=0.92,colorbalance=rs=-0.04:bs=0.06',
     'punch': 'eq=contrast=1.16:saturation=1.12:gamma=0.96',
     'none': 'null',
+    # 720p sources cropped to 9:16 get upscaled ~3x: sharpen after the scale
+    'film_sharp': 'eq=contrast=1.08:saturation=1.06:gamma=0.98,unsharp=5:5:0.7:5:5:0.0',
+    'warm_sharp': 'eq=contrast=1.10:saturation=1.05,colorbalance=rs=0.05:bs=-0.06:rm=0.03:bm=-0.04,unsharp=5:5:0.7:5:5:0.0',
 }
 
 
@@ -82,7 +85,7 @@ def make_proxy(i):
     x = int(min(max(sh.get('cx', 0.5) * sw - cw / 2, 0), sw - cw)); y = int(min(max(sh.get('cy', 0.5) * shh - ch / 2, 0), shh - ch))
     speed = sh.get('speed', 1.0)
     t0 = max(0.0, sh['in'] - pre / FPS * speed)
-    vf = [f'setpts=PTS/{speed}' if speed != 1.0 else 'null', f'fps={FPS}', f'crop={cw}:{ch}:{x}:{y}', f'scale={PW}:{PH}:flags=bicubic', GRADES[sh.get('grade', 'film')], 'format=yuv420p']
+    vf = [f'setpts=PTS/{speed}' if speed != 1.0 else 'null', f'fps={FPS}', f'crop={cw}:{ch}:{x}:{y}', f'scale={PW}:{PH}:flags=lanczos', GRADES[sh.get('grade', 'film')], 'format=yuv420p']
     out = f'{D}/px/{i:02d}.mp4'
     r = subprocess.run([FF, '-v', 'error', '-y', '-ss', f'{t0:.3f}', '-i', src, '-frames:v', str(n), '-vf', ','.join(vf), '-an',
                         '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-threads', '1', out], capture_output=True, text=True)

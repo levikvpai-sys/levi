@@ -67,6 +67,47 @@ function heroText(s, x, y, size, o = {}) {
   ctx.fillStyle = o.fill || CREAM; ctx.fillText(s, 0, 0);
   ctx.restore();
 }
+// 3D type: an extruded block in the brand's deep tones under a lit face, with a sheen that sweeps across on arrival.
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const lerpCol = (a, b, q) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * q)).join(',')})`; };
+function text3D(s, x, y, size, o = {}) {
+  const sc = o.scale ?? 1, al = o.alpha ?? 1; if (al <= 0 || sc <= 0) return;
+  const depth = Math.max(0, (o.depth ?? size * 0.17) * (o.k3 ?? 1));
+  const ang = o.ang ?? 1.0, dx = Math.cos(ang), dy = Math.sin(ang);
+  setFont(size, o.weight || 900);
+  const w = ctx.measureText(s).width, pw = Math.ceil(w + size * 0.6), ph = Math.ceil(size * 1.7);
+  // the lit face on its own canvas so the sheen and bevel shading stay inside the glyphs
+  const off = document.createElement('canvas'); off.width = pw; off.height = ph; const c = off.getContext('2d');
+  c.font = `${o.weight || 900} ${size}px Rubik`; c.direction = 'rtl'; c.textAlign = 'center'; c.textBaseline = 'middle';
+  let face;
+  if (o.face === 'brand') { face = c.createLinearGradient(pw / 2 + w / 2, 0, pw / 2 - w / 2, 0); for (const [q, col] of STOPS) face.addColorStop(q, col); }
+  else { face = c.createLinearGradient(0, ph / 2 - size / 2, 0, ph / 2 + size / 2); face.addColorStop(0, '#FFFFFF'); face.addColorStop(0.55, '#F3F1EC'); face.addColorStop(1, '#D9D2F2'); }
+  c.fillStyle = face; c.fillText(s, pw / 2, ph / 2);
+  c.globalCompositeOperation = 'source-atop';
+  const shade = c.createLinearGradient(0, ph / 2 - size / 2, 0, ph / 2 + size / 2);
+  shade.addColorStop(0, 'rgba(255,255,255,0.35)'); shade.addColorStop(0.45, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(20,10,50,0.28)');
+  c.fillStyle = shade; c.fillRect(0, 0, pw, ph);
+  if (o.sheen > 0 && o.sheen < 1) {
+    const bx = mix(pw + size, -size, o.sheen), g = c.createLinearGradient(bx - size * 0.5, 0, bx + size * 0.5, 0);
+    g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,0.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    c.save(); c.translate(bx, ph / 2); c.transform(1, 0, -0.45, 1, 0, 0); c.translate(-bx, -ph / 2); c.fillStyle = g; c.fillRect(0, 0, pw, ph); c.restore();
+  }
+  ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y + (o.rise || 0)); ctx.scale(sc, sc);
+  if (o.skew) ctx.transform(1, 0, o.skew, 1, 0, 0);
+  // soft contact shadow, then the extrusion from the back layer forward
+  ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = size * 0.28; ctx.shadowOffsetY = 8;
+  const front = o.face === 'brand' ? '#4b3a9e' : '#7a63d8', back = o.face === 'brand' ? '#0d0726' : '#1a0f3d';
+  const n = Math.round(depth);
+  for (let i = n; i >= 1; i--) {
+    ctx.fillStyle = lerpCol(front, back, i / n); ctx.fillText(s, i * dx, i * dy);
+    if (i === n) { ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; }
+  }
+  ctx.shadowColor = 'transparent';
+  ctx.drawImage(off, -pw / 2, -ph / 2);
+  // rim light along the glyph edges
+  ctx.lineWidth = Math.max(1.5, size * 0.012); ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.strokeText(s, -0.6, -0.6);
+  ctx.restore();
+}
 // relay line: draws right-to-left under a word, the film's travelling device
 function relayLine(xc, y, w, p, thick = 8, alpha = 1) {
   if (p <= 0 || alpha <= 0) return;
@@ -78,17 +119,21 @@ function relayLine(xc, y, w, p, thick = 8, alpha = 1) {
   ctx.restore();
 }
 function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, Math.max(0, w), h, r); }
-function slamWord(s, t, t0, t1, x, y, size, line = true) {
+function slamWord(s, t, t0, t1, x, y, size, line = true, face = 'cream') {
   if (t < t0 || t >= t1) return;
   const el = (t - t0) * FPS, k = expoOut(clamp(el / 20));
-  heroText(s, x, y, size, { scale: mix(1.5, 1, k) });
+  // slams in flat and tilted, then the block extrudes out of the screen and a sheen crosses it
+  text3D(s, x, y, size, { scale: mix(1.5, 1, k), skew: mix(-0.22, 0, k), k3: expoOut(clamp((el - 2) / 14)), sheen: clamp((el - 4) / 16),
+    ang: 1.0 + 0.22 * Math.sin(t * 1.4), face });
   if (line) { const w = textW(s, size, 900); relayLine(x, y + size * 0.62, w * 0.9, expoOut(clamp((el - 3) / 10))); }
 }
 function riseWord(s, t, t0, t1, x, y, size, o = {}) {
   if (t < t0 || t >= t1) return;
   const el = (t - t0) * FPS, k = expoOut(clamp(el / 18));
   const out = o.fadeOut ? clamp((t1 - t) * FPS / 6) : 1;
-  heroText(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight });
+  if (o.flat) { heroText(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight }); return; }
+  text3D(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight, k3: mix(0.25, 1, k),
+    sheen: clamp((el - 6) / 18), ang: 1.0 + 0.22 * Math.sin(t * 1.4), face: o.face });
 }
 function pill(s, t, t0, t1, y) {
   if (t < t0 || t >= t1) return;
@@ -223,7 +268,7 @@ function drawGfx(t) {
       const el = (t - a) * FPS, k = expoOut(clamp(el / 14)), y = 800 + i * 160;
       const yy = mix(y, 960, imp), sc = mix(1, 0.05, imp);
       ctx.save(); ctx.beginPath(); ctx.rect(0, y - 90, W, 180); if (imp <= 0) ctx.clip();
-      heroText(s, 540, yy + mix(70, 0, k) * (1 - imp), 118, { alpha: (1 - imp), scale: sc, shadow: 0 });
+      text3D(s, 540, yy + mix(70, 0, k) * (1 - imp), 118, { alpha: (1 - imp), scale: sc, k3: k, sheen: clamp((el - 4) / 16), ang: 1.0 + 0.22 * Math.sin(t * 1.4) });
       ctx.restore();
       const w = textW(s, 118, 900) * 0.92;
       relayLine(mix(540, 540, imp), yy + 74 * (1 - imp), w * (1 - imp), expoOut(clamp((el - 6) / 12)), 7, 1 - imp);
@@ -251,17 +296,17 @@ function drawGfx(t) {
     if (pz > 0 && pz < 0.45) { // the mark keeps its colour for a few frames while it grows, then becomes a pure window
       ctx.save(); ctx.globalAlpha = 1 - smooth(clamp(pz / 0.45)); ctx.drawImage(IMG.icon, ...lvRect(pz)); ctx.restore();
     }
-    riseWord(T.studio, t, TD + 0.62, lvStart + 0.12, 540, 1440, 60, { weight: 700, fadeOut: true });
+    riseWord(T.studio, t, TD + 0.62, lvStart + 0.12, 540, 1440, 60, { weight: 700, fadeOut: true, flat: true });
   }
   // ---- category bars ----
   T.bars.forEach(([tag, word, wy], j) => {
     const a = tb[j + 1], b = tb[j + 2];
     pill(tag, t, a, b, 1440);
-    slamWord(word, t, a + 0.05, b, 540, wy, 186);
+    slamWord(word, t, a + 0.05, b, 540, wy, 186, true, 'brand');
   });
   // ---- idea line ----
-  slamWord(T.idea[0][0], t, tb[9] + 0.05, tb[9] + 2 * BB, 540, T.idea[0][1], 168);
-  slamWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 168);
+  slamWord(T.idea[0][0], t, tb[9] + 0.05, tb[9] + 2 * BB, 540, T.idea[0][1], 168, true, 'brand');
+  slamWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 168, true, 'brand');
   // ---- break: question and answer ----
   riseWord(T.break[0][0], t, tb[10] + 0.25, tb[11], 540, T.break[0][1], 150, { fadeOut: true });
   riseWord(T.break[1][0], t, tb[11] + 0.2, tb[12], 540, T.break[1][1], 150, { fadeOut: true });
@@ -274,7 +319,7 @@ function drawGfx(t) {
     ctx.fillStyle = 'rgba(8,8,12,0.66)'; ctx.fillRect(0, 0, W, H);
     radialGlow(540, 700, 640, 0.6 * clamp(el / 10));
     drawLogo(t, tb[14], 700, 0.92);
-    riseWord(T.end_line, t, tb[14] + 0.75, 99, 540, 1330, 62, { weight: 700 });
+    riseWord(T.end_line, t, tb[14] + 0.75, 99, 540, 1330, 62, { weight: 700, flat: true });
     pill(T.cta, t, tb[14] + 1.1, 99, 1480);
     const fo = prog(t, TL.dur - 0.45, 0.45); if (fo > 0) { ctx.fillStyle = `rgba(0,0,0,${smooth(fo)})`; ctx.fillRect(0, 0, W, H); }
   }
@@ -293,19 +338,10 @@ function drawGfx(t) {
 function faceTitle(t, a, b) {
   if (t < a || t >= b) return;
   const el = (t - a) * FPS, out = clamp((b - t) * FPS / 5);
-  // the relay line traces the portrait card, then the name lands under it
-  const [cx, cy, cw, ch] = TL.card, r = 36, per = 2 * (cw + ch);
-  const k = expoOut(clamp(el / 18));
-  ctx.save(); ctx.globalAlpha = out; ctx.lineWidth = 7; ctx.strokeStyle = grad(cx + cw, cy, cx, cy + ch);
-  ctx.shadowColor = 'rgba(167,98,221,0.7)'; ctx.shadowBlur = 26;
-  ctx.setLineDash([per * k, per]); ctx.beginPath(); ctx.roundRect(cx, cy, cw, ch, r); ctx.stroke(); ctx.setLineDash([]);
-  ctx.restore();
-  const y = cy + ch + 120, kn = expoOut(clamp((el - 6) / 16));
-  ctx.save(); ctx.globalAlpha = out;
-  heroText(TL.text.face_name, 540, y + mix(24, 0, kn), 96, { alpha: kn, weight: 900 });
-  relayLine(540, y + 66, 420, expoOut(clamp((el - 10) / 12)), 6);
-  heroText(TL.text.face_role, 540, y + 128, 40, { alpha: clamp((el - 12) / 10), weight: 500, shadow: 12 });
-  ctx.restore();
+  const y = 1540, kn = expoOut(clamp((el - 4) / 16));
+  text3D(TL.text.face_name, 540, y + mix(30, 0, kn), 112, { alpha: kn * out, face: 'brand', k3: kn, sheen: clamp((el - 8) / 16), ang: 1.0 + 0.22 * Math.sin(t * 1.4) });
+  relayLine(540, y + 78, 460, expoOut(clamp((el - 10) / 12)), 6, out);
+  heroText(TL.text.face_role, 540, y + 140, 42, { alpha: clamp((el - 12) / 10) * out, weight: 600, shadow: 14 });
 }
 
 window.seek = function (t) {

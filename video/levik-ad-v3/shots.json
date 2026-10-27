@@ -24,8 +24,8 @@
  {"i": 22, "src": "titan", "in": 23.3, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "note": "typing the idea"},
  {"i": 23, "src": "perfectme", "in": 105.2, "cx": 0.55, "z0": 1.08, "z1": 1.0, "grade": "film", "note": "holographic globe"},
  {"i": 24, "src": "titan", "in": 18.9, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "film", "note": "business meeting, NYC"},
- {"i": 25, "src": "perfectme", "in": 15.2, "cx": 0.5, "z0": 1.06, "z1": 1.0, "grade": "warm", "note": "jeep out of the jungle"},
- {"i": 26, "src": "levi_sheet", "image": [1013, 48, 1467, 540], "z0": 1.0, "z1": 1.0, "grade": "none", "note": "Levik's portrait card"},
- {"i": 27, "src": "action", "in": 40.2, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "note": "by the cinema camera"},
+ {"i": 25, "src": "levik", "in": 37.3, "cx": 0.58, "z0": 1.0, "z1": 1.06, "grade": "warm_sharp", "note": "Levik in the forest light"},
+ {"i": 26, "src": "levik", "z0": 1.0, "z1": 1.07, "grade": "film_sharp", "note": "Levik in the suit, to camera", "in": 54.8, "cx": 0.52},
+ {"i": 27, "src": "levik", "in": 32.7, "cx": 0.66, "z0": 1.06, "z1": 1.0, "grade": "film_sharp", "note": "Levik editing the panther film"},
  {"i": 28, "src": "action", "in": 44.6, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "cold", "note": "end card background: the teal portal"}
 ]
