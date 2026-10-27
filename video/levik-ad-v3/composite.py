@@ -193,10 +193,14 @@ if __name__ == '__main__':
             ok = f'{D}/fr/chunk_{n0}.ok'
             if os.path.exists(ok): continue
             for attempt in range(3):   # the box is small; a decoder can get OOM-killed, so retry the chunk
+                subprocess.run(['pkill', '-f', 'rawvideo -pix_fmt'])   # stray decoders from a failed chunk hold memory
                 r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
                 if r.returncode == 0: break
             if r.returncode == 0: open(ok, 'w').write('1')
             else: sys.exit(r.returncode)
         sys.exit(encode())
     elif sys.argv[1] == 'chunk':
-        render(int(sys.argv[2]), int(sys.argv[3]))
+        try:
+            render(int(sys.argv[2]), int(sys.argv[3]))
+        finally:
+            subprocess.run(['pkill', '-f', 'rawvideo -pix_fmt'])
