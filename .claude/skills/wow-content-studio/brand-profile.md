@@ -1,7 +1,8 @@
-# Brand profile — WOW Production (@wowprod.ai)
+# Brand profile — LEVIK PRODUCTION (Instagram: @wowprod.ai)
 
 ## Identity
-- Studio: **WOW Production** — לויק כהן (Levik Cohen)
+- Studio: **LEVIK PRODUCTION** — לויק כהן (Levik Cohen). On screen and in copy the studio is always LEVIK PRODUCTION, never "WOW Production".
+- Logo: [`assets/brand/levik-production-logo.png`](../../../assets/brand/levik-production-logo.png) (LV mark + LEVIK / PRODUCTION wordmark) and [`assets/brand/lv-icon.png`](../../../assets/brand/lv-icon.png) (LV mark alone: cyan→blue L, pink→purple V). Use the real files; don't redraw the logo.
 - What it makes: AI short films, animation, commercials and brand films, music clips
 - Tools in use: Higgsfield, Seedance 2.5, ChatGPT (incl. 3D scenes in code), AI voice/sound
 - Business goal: client projects (brands, organizations, Jewish/community initiatives) via WhatsApp: https://wa.me/message/C4RQ2OAOFX5SO1
@@ -16,7 +17,7 @@
 - Hebrew, warm, confident, short lines. A director talking, not an agency.
 - Allowed: humor (המג״ד), wonder ("הבחור הזה לא קיים"), heart (הקול הפנימי).
 - Banned: AI residue ("בטח", "כמובן, הנה"), hype words (מטורף, מהפכני, פצצה), walls of emoji, "צרו קשר" as a whole post.
-- Signature line: `לויק כהן | WOW Production`
+- Signature line: `לויק כהן | LEVIK PRODUCTION`
 
 ## Content pillars (weekly rotation)
 | Pillar | Share | Job | Proven by |

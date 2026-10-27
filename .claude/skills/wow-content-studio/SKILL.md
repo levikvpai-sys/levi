@@ -1,6 +1,6 @@
 ---
 name: wow-content-studio
-description: Instagram content studio for WOW Production (@wowprod.ai), Levik Cohen's AI film, animation and brand-video studio. Writes Hebrew Reel scripts with shot tables, "this was never filmed" hooks, behind-the-scenes breakdowns with a comment-keyword DM funnel, client case-study posts, series episodes, captions, bios, CTAs and a weekly content calendar, in Levik's voice, grounded in the account's real performance data. Use for any Instagram/Reels/TikTok content request for this account or AI-film content in general, e.g. "תסריט לריל", "כיתוב", "ביו", "מאחורי הקלעים", "תוכן לשבוע", "רעיון לסרט AI", "פוסט ללקוח", "Reel script", "caption", "content calendar".
+description: Instagram content studio for LEVIK PRODUCTION (Instagram @wowprod.ai), Levik Cohen's AI film, animation and brand-video studio. Writes Hebrew Reel scripts with shot tables, "this was never filmed" hooks, behind-the-scenes breakdowns with a comment-keyword DM funnel, client case-study posts, series episodes, captions, bios, CTAs and a weekly content calendar, in Levik's voice, grounded in the account's real performance data. Use for any Instagram/Reels/TikTok content request for this account or AI-film content in general, e.g. "תסריט לריל", "כיתוב", "ביו", "מאחורי הקלעים", "תוכן לשבוע", "רעיון לסרט AI", "פוסט ללקוח", "Reel script", "caption", "content calendar".
 ---
 
 # WOW Content Studio
