@@ -1,7 +1,7 @@
 """Footage compositor for ad v3 (runs on the 1-CPU editing box).
 
   python3 composite.py proxies   -> cut a graded 9:16 proxy per shot from shots.json
-  python3 composite.py render    -> A/B tracks + mask.mp4 + gfx.mp4 (+ aud/mix.wav) -> out.mp4
+  python3 composite.py render    -> A/B tracks + mask.mp4 + gfx.mp4 -> fr/*.jpg in resumable chunks, then out.mp4 with aud/mix.wav
 
 Track A holds even shots, track B odd shots. mask.mp4 is white where B shows.
 gfx.mp4 is 1080x3840: premultiplied RGB on top, alpha (as grey) underneath.
@@ -90,10 +90,11 @@ def make_proxy(i):
 
 
 class Reader:
-    def __init__(self, path, w, h, fmt='rgb24'):
+    def __init__(self, path, w, h, fmt='rgb24', start=0):
         self.w, self.h, self.ch = w, h, 1 if fmt == 'gray' else 3
         self.fs = w * h * self.ch
-        self.p = subprocess.Popen([FF, '-v', 'error', '-threads', '1', '-i', path, '-f', 'rawvideo', '-pix_fmt', fmt, '-'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        ss = ['-ss', f'{start / FPS:.4f}'] if start > 0 else []
+        self.p = subprocess.Popen([FF, '-v', 'error', '-threads', '1'] + ss + ['-i', path, '-f', 'rawvideo', '-pix_fmt', fmt, '-'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         self.last = None
 
     def next(self):
@@ -136,23 +137,19 @@ def frame_for(i, n, img):
     return np.asarray(im.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + bw, y0 + bh)))
 
 
-def render():
+def render(n0, n1):
+    """Composite frames [n0, n1) to JPEGs in fr/ (chunked so memory stays low and a restart can resume)."""
+    os.makedirs(f'{D}/fr', exist_ok=True)
     spans = {i: span(i) for i in SH}
     inv = {SHOTS[int(k)]['f0'] for k, tr in TL['trans'].items() if tr['type'] == 'invertcut'}
-    gfx = Reader(f'{D}/gfx.mp4', W, 2 * H); mask = Reader(f'{D}/mask.mp4', W, H, 'gray')
-    has_audio = os.path.exists(f'{D}/aud/mix.wav')
-    enc = subprocess.Popen([FF, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-']
-                           + (['-i', f'{D}/aud/mix.wav'] if has_audio else [])
-                           + ['-vf', 'noise=alls=4:allf=t', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-threads', '1', '-pix_fmt', 'yuv420p',
-                              '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-movflags', '+faststart']
-                           + (['-c:a', 'aac', '-b:a', '192k', '-shortest'] if has_audio else []) + [f'{D}/out.mp4'], stdin=subprocess.PIPE)
+    gfx = Reader(f'{D}/gfx.mp4', W, 2 * H, start=n0); mask = Reader(f'{D}/mask.mp4', W, H, 'gray', start=n0)
     readers = {}; t0 = time.time()
     black = np.zeros((H, W, 3), np.uint8)
-    for n in range(NF):
+    for n in range(n0, n1):
         tracks = [None, None]
         for i, (a, b) in spans.items():
             if a <= n < b:
-                if i not in readers: readers[i] = Reader(f'{D}/px/{i:02d}.mp4', PW, PH)
+                if i not in readers: readers[i] = Reader(f'{D}/px/{i:02d}.mp4', PW, PH, start=n - a)
                 img = readers[i].next()
                 if img is not None: tracks[SHOTS[i]['track']] = frame_for(i, n, img)
             elif n >= b and i in readers:
@@ -169,11 +166,19 @@ def render():
         if n in inv: base = 255 - base
         rgb, al = g[:H], g[H:, :, :1].astype(np.uint16)
         out = (base.astype(np.uint16) * (255 - al) // 255 + rgb).clip(0, 255).astype(np.uint8)
-        enc.stdin.write(out.tobytes())
+        Image.fromarray(out).save(f'{D}/fr/{n:05d}.jpg', quality=94, subsampling=0)
         if n % 30 == 0:
             open(f'{D}/render.progress', 'w').write(f'{n}/{NF} {time.time() - t0:.0f}s\n')
-    enc.stdin.close(); enc.wait()
-    open(f'{D}/render.progress', 'w').write(f'DONE {NF} {time.time() - t0:.0f}s\n')
+    for r in list(readers.values()) + [gfx, mask]: r.close()
+
+
+def encode():
+    a = f'{D}/aud/mix.wav'
+    cmd = [FF, '-v', 'error', '-y', '-framerate', str(FPS), '-i', f'{D}/fr/%05d.jpg'] + (['-i', a] if os.path.exists(a) else []) + \
+          ['-vf', 'noise=alls=4:allf=t', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-threads', '1', '-x264-params', 'rc-lookahead=10',
+           '-pix_fmt', 'yuv420p', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-movflags', '+faststart'] + \
+          (['-c:a', 'aac', '-b:a', '192k', '-shortest'] if os.path.exists(a) else []) + [f'{D}/out.mp4']
+    return subprocess.run(cmd).returncode
 
 
 if __name__ == '__main__':
@@ -182,5 +187,14 @@ if __name__ == '__main__':
         only = [int(x) for x in sys.argv[2].split(',')] if len(sys.argv) > 2 else sorted(SH)
         for i in only:
             print(*make_proxy(i), flush=True)
-    else:
-        render()
+    elif sys.argv[1] == 'render':
+        CH = 150
+        for n0 in range(0, NF, CH):
+            ok = f'{D}/fr/chunk_{n0}.ok'
+            if os.path.exists(ok): continue
+            r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
+            if r.returncode == 0: open(ok, 'w').write('1')
+            else: sys.exit(r.returncode)
+        sys.exit(encode())
+    elif sys.argv[1] == 'chunk':
+        render(int(sys.argv[2]), int(sys.argv[3]))
