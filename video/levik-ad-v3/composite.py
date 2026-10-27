@@ -109,6 +109,35 @@ class Reader:
         except Exception: pass
 
 
+class Seq:
+    """Frames exploded to image files; reading them in-process keeps memory flat on the small box."""
+    def __init__(self, pattern, start=0, mode='RGB'):
+        self.pattern, self.k, self.mode, self.last = pattern, start, mode, None
+
+    def next(self):
+        f = self.pattern % (self.k + 1); self.k += 1
+        if os.path.exists(f):
+            im = Image.open(f); im = im.convert(self.mode) if im.mode != self.mode else im
+            self.last = np.asarray(im)
+        return self.last
+
+    def close(self):
+        pass
+
+
+def explode():
+    """Decode every proxy and both layers to images, one decoder at a time."""
+    jobs = [(f'{D}/gfx.mp4', f'{D}/g', '%05d.jpg'), (f'{D}/mask.mp4', f'{D}/m', '%05d.png')] + \
+           [(f'{D}/px/{i:02d}.mp4', f'{D}/px/{i:02d}', '%04d.jpg') for i in sorted(SH)]
+    for src, out, pat in jobs:
+        if os.path.exists(out + '/done'): continue
+        os.makedirs(out, exist_ok=True)
+        extra = ['-pix_fmt', 'gray'] if pat.endswith('png') else ['-q:v', '2']
+        r = subprocess.run([FF, '-v', 'error', '-y', '-threads', '1', '-i', src] + extra + [f'{out}/{pat}'])
+        if r.returncode == 0: open(out + '/done', 'w').write('1')
+        print(out, r.returncode, flush=True)
+
+
 def ease(u):
     return 1 - (1 - u) ** 2
 
@@ -133,7 +162,7 @@ def frame_for(i, n, img):
     ox, oy = sh.get('ox', 0.0), sh.get('oy', 0.0)   # optional drift (fraction of headroom)
     x0 = (PW - bw) / 2 * (1 + ox) + dx; y0 = (PH - bh) / 2 * (1 + oy) + dy
     x0 = min(max(x0, 0), PW - bw); y0 = min(max(y0, 0), PH - bh)
-    im = Image.frombuffer('RGB', (PW, PH), img.tobytes(), 'raw', 'RGB', 0, 1)
+    im = Image.fromarray(img)
     return np.asarray(im.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + bw, y0 + bh)))
 
 
@@ -142,14 +171,14 @@ def render(n0, n1):
     os.makedirs(f'{D}/fr', exist_ok=True)
     spans = {i: span(i) for i in SH}
     inv = {SHOTS[int(k)]['f0'] for k, tr in TL['trans'].items() if tr['type'] == 'invertcut'}
-    gfx = Reader(f'{D}/gfx.mp4', W, 2 * H, start=n0); mask = Reader(f'{D}/mask.mp4', W, H, 'gray', start=n0)
+    gfx = Seq(f'{D}/g/%05d.jpg', n0); mask = Seq(f'{D}/m/%05d.png', n0, 'L')
     readers = {}; t0 = time.time()
     black = np.zeros((H, W, 3), np.uint8)
     for n in range(n0, n1):
         tracks = [None, None]
         for i, (a, b) in spans.items():
             if a <= n < b:
-                if i not in readers: readers[i] = Reader(f'{D}/px/{i:02d}.mp4', PW, PH, start=n - a)
+                if i not in readers: readers[i] = Seq(f'{D}/px/{i:02d}/%04d.jpg', n - a)
                 img = readers[i].next()
                 if img is not None: tracks[SHOTS[i]['track']] = frame_for(i, n, img)
             elif n >= b and i in readers:
@@ -188,6 +217,7 @@ if __name__ == '__main__':
         for i in only:
             print(*make_proxy(i), flush=True)
     elif sys.argv[1] == 'render':
+        explode()
         CH = 150
         for n0 in range(0, NF, CH):
             ok = f'{D}/fr/chunk_{n0}.ok'
