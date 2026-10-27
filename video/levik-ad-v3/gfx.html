@@ -338,7 +338,7 @@ function drawGfx(t) {
 function faceTitle(t, a, b) {
   if (t < a || t >= b) return;
   const el = (t - a) * FPS, out = clamp((b - t) * FPS / 5);
-  const y = 1540, kn = expoOut(clamp((el - 4) / 16));
+  const y = 1060, kn = expoOut(clamp((el - 4) / 16));
   text3D(TL.text.face_name, 540, y + mix(30, 0, kn), 112, { alpha: kn * out, face: 'brand', k3: kn, sheen: clamp((el - 8) / 16), ang: 1.0 + 0.22 * Math.sin(t * 1.4) });
   relayLine(540, y + 78, 460, expoOut(clamp((el - 10) / 12)), 6, out);
   heroText(TL.text.face_role, 540, y + 140, 42, { alpha: clamp((el - 12) / 10) * out, weight: 600, shadow: 14 });

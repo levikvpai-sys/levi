@@ -205,12 +205,23 @@ def render(n0, n1):
 
 
 def encode():
+    """Encode fr/*.jpg in 4 s segments (a single long x264 run gets OOM-killed on the 1 GB box), then join and add the mix."""
+    os.makedirs(f'{D}/segs', exist_ok=True)
+    for s0 in range(0, NF, 120):
+        out = f'{D}/segs/seg_{s0:04d}.mp4'
+        if os.path.exists(out + '.ok'): continue
+        for attempt in range(3):
+            r = subprocess.run([FF, '-v', 'error', '-y', '-framerate', str(FPS), '-start_number', str(s0), '-i', f'{D}/fr/%05d.jpg', '-frames:v', str(min(120, NF - s0)),
+                                '-vf', 'noise=alls=4:allf=t', '-c:v', 'libx264', '-preset', 'fast', '-crf', '17', '-threads', '1', '-x264-params', 'rc-lookahead=6:ref=2:keyint=60',
+                                '-pix_fmt', 'yuv420p', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-an', out])
+            if r.returncode == 0: open(out + '.ok', 'w').write('1'); break
+        else:
+            return r.returncode
+    with open(f'{D}/segs/list.txt', 'w') as fp:
+        for s0 in range(0, NF, 120): fp.write(f"file '{D}/segs/seg_{s0:04d}.mp4'\n")
     a = f'{D}/aud/mix.wav'
-    cmd = [FF, '-v', 'error', '-y', '-framerate', str(FPS), '-i', f'{D}/fr/%05d.jpg'] + (['-i', a] if os.path.exists(a) else []) + \
-          ['-vf', 'noise=alls=4:allf=t', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-threads', '1', '-x264-params', 'rc-lookahead=10',
-           '-pix_fmt', 'yuv420p', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-movflags', '+faststart'] + \
-          (['-c:a', 'aac', '-b:a', '192k', '-shortest'] if os.path.exists(a) else []) + [f'{D}/out.mp4']
-    return subprocess.run(cmd).returncode
+    return subprocess.run([FF, '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', f'{D}/segs/list.txt', '-i', a, '-map', '0:v', '-map', '1:a',
+                           '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{D}/out.mp4']).returncode
 
 
 if __name__ == '__main__':
