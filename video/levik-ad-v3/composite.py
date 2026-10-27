@@ -1,4 +1,4 @@
-"""Footage compositor for ad v3 (runs on the 1-CPU editing box).
+"""Footage compositor for the ad (runs on the 1-CPU editing box).
 
   python3 composite.py proxies   -> cut a graded 9:16 proxy per shot from shots.json
   python3 composite.py render    -> A/B tracks + mask.mp4 + gfx.mp4 -> fr/*.jpg in resumable chunks, then out.mp4 with aud/mix.wav
@@ -28,7 +28,13 @@ GRADES = {  # baked into the proxy
     # 720p sources cropped to 9:16 get upscaled ~3x: sharpen after the scale
     'film_sharp': 'eq=contrast=1.08:saturation=1.06:gamma=0.98,unsharp=5:5:0.7:5:5:0.0',
     'warm_sharp': 'eq=contrast=1.10:saturation=1.05,colorbalance=rs=0.05:bs=-0.06:rm=0.03:bm=-0.04,unsharp=5:5:0.7:5:5:0.0',
+    # aura looks: hard black-and-white, and brand duotones (shadow colour -> highlight colour)
+    'bw': 'hue=s=0,eq=contrast=1.28:gamma=0.94',
+    'duo_pink': 'hue=s=0,eq=contrast=1.2,lutrgb=r=26+val*217/255:g=15+val*121/255:b=61+val*177/255',
+    'duo_cyan': 'hue=s=0,eq=contrast=1.2,lutrgb=r=8+val*139/255:g=18+val*195/255:b=40+val*192/255',
+    'duo_violet': 'hue=s=0,eq=contrast=1.2,lutrgb=r=13+val*192/255:g=7+val*153/255:b=38+val*217/255',
 }
+SHARP = 'unsharp=5:5:0.8:5:5:0.0'   # for 480p/720p sources blown up to the 9:16 proxy
 
 
 def handles(i):
@@ -49,34 +55,9 @@ def probe(path):
     return int(w), int(h)
 
 
-def make_card_proxy(i):
-    """A still portrait as a rounded card over its own blurred backdrop, with a slow push inside the card.
-    The card sits exactly where gfx.html draws its border (TL['card'], frame coords)."""
-    from PIL import ImageDraw, ImageFilter
-    sh = SH[i]; a, b = span(i); n = b - a
-    src = Image.open(f"{D}/src/{sh['src']}.jpg").convert('RGB').crop(tuple(sh['image']))
-    k = PW / W
-    cx, cy, cw, ch = [round(v * k) for v in TL['card']]
-    bg = src.resize((PW, round(PW * src.height / src.width)), Image.BICUBIC)
-    bg = bg.crop((0, (bg.height - PH) // 2, PW, (bg.height - PH) // 2 + PH)) if bg.height >= PH else bg.resize((PW, PH))
-    bg = Image.eval(bg.filter(ImageFilter.GaussianBlur(40)), lambda v: int(v * 0.42))
-    m = Image.new('L', (cw, ch), 0); ImageDraw.Draw(m).rounded_rectangle((0, 0, cw - 1, ch - 1), radius=round(36 * k), fill=255)
-    enc = subprocess.Popen([FF, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{PW}x{PH}', '-r', str(FPS), '-i', '-',
-                            '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-threads', '1', '-pix_fmt', 'yuv420p', f'{D}/px/{i:02d}.mp4'], stdin=subprocess.PIPE)
-    for j in range(n):
-        z = 1.0 + 0.07 * j / max(1, n - 1)
-        box_w = min(src.width, src.height * cw / ch) / z; box_h = box_w * ch / cw
-        x0 = (src.width - box_w) / 2; y0 = (src.height - box_h) * 0.35
-        card = src.resize((cw, ch), Image.BICUBIC, box=(x0, y0, x0 + box_w, y0 + box_h))
-        fr = bg.copy(); fr.paste(card, (cx, cy), m)
-        enc.stdin.write(fr.tobytes())
-    enc.stdin.close(); enc.wait()
-    return i, enc.returncode, ''
-
-
 def make_proxy(i):
     sh = SH[i]; a, b = span(i); n = b - a
-    if 'image' in sh: return make_card_proxy(i)
+    if 'stack' in sh: return make_stack_proxy(i)
     pre = SHOTS[i]['f0'] - a
     src = f"{D}/src/{sh['src']}.mp4"; sw, shh = probe(src)
     if sw / shh > 9 / 16: cw, ch = shh * 9 / 16, shh
@@ -85,10 +66,35 @@ def make_proxy(i):
     x = int(min(max(sh.get('cx', 0.5) * sw - cw / 2, 0), sw - cw)); y = int(min(max(sh.get('cy', 0.5) * shh - ch / 2, 0), shh - ch))
     speed = sh.get('speed', 1.0)
     t0 = max(0.0, sh['in'] - pre / FPS * speed)
-    vf = [f'setpts=PTS/{speed}' if speed != 1.0 else 'null', f'fps={FPS}', f'crop={cw}:{ch}:{x}:{y}', f'scale={PW}:{PH}:flags=lanczos', GRADES[sh.get('grade', 'film')], 'format=yuv420p']
+    vf = [f'setpts=PTS/{speed}' if speed != 1.0 else 'null', f'fps={FPS}', f'crop={cw}:{ch}:{x}:{y}', f'scale={PW}:{PH}:flags=lanczos', GRADES[sh.get('grade', 'film')],
+          SHARP if sh.get('sharp') else 'null', 'format=yuv420p']
     out = f'{D}/px/{i:02d}.mp4'
     r = subprocess.run([FF, '-v', 'error', '-y', '-ss', f'{t0:.3f}', '-i', src, '-frames:v', str(n), '-vf', ','.join(vf), '-an',
                         '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-threads', '1', out], capture_output=True, text=True)
+    return i, r.returncode, r.stderr[-300:]
+
+
+def make_stack_proxy(i):
+    """Three 16:9 clips stacked as panels on black (keeps 480p sources sharp in a 9:16 frame).
+    Panel 0 is there from the first frame; panels 1 and 2 slide in from alternating sides on beats 1 and 2."""
+    sh = SH[i]; a, b = span(i); n = b - a
+    pre = SHOTS[i]['f0'] - a
+    pw = 1150; ph = round(pw * 9 / 16) // 2 * 2; gap = (PH - 3 * ph) // 4; x0 = (PW - pw) // 2
+    ins, fc = [], [f'color=c=0x0A0A0C:s={PW}x{PH}:r={FPS}:d={n / FPS + 1:.3f}[bg]']
+    last = 'bg'
+    for k, p in enumerate(sh['stack']):
+        t0 = max(0.0, p['in'] - pre / FPS)
+        ins += ['-ss', f'{t0:.3f}', '-i', f"{D}/src/{p['src']}.mp4"]
+        fc.append(f"[{k + 1}:v]fps={FPS},scale={pw}:{ph}:flags=lanczos,{GRADES[p.get('grade', sh.get('grade', 'film'))]},{SHARP},setpts=PTS-STARTPTS[p{k}]")
+        y = gap + k * (ph + gap)
+        if k == 0: x = str(x0)
+        else:
+            tk = pre / FPS + k * TL['BB']; side = 1 if k % 2 else -1
+            x = f"{x0}+{side}*{PW}*pow(max(0,1-(t-{tk:.3f})/0.22),3)"
+        fc.append(f"[{last}][p{k}]overlay=x='{x}':y={y}:eof_action=repeat[o{k}]"); last = f'o{k}'
+    out = f'{D}/px/{i:02d}.mp4'
+    r = subprocess.run([FF, '-v', 'error', '-y'] + ins + ['-filter_complex', ';'.join(fc), '-map', f'[{last}]', '-frames:v', str(n), '-an',
+                        '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-threads', '1', '-pix_fmt', 'yuv420p', out], capture_output=True, text=True)
     return i, r.returncode, r.stderr[-300:]
 
 

@@ -47,8 +47,9 @@ tg = tg[:int(0.4 * SR)]
 place(boom, TD - 0.12, 0.26, 0, 0.3); place(wh, TD - 1.0, 0.45, 0.05, 0.05)
 place(boom2, tb(14) - 0.16, 0.45, 0, 0.4); place(bwh, tb(14) - 1.1, 0.35, 0.05, 0.1)
 place(bwh, tb(10) - 1.1, 0.45, 0.05, 0.1); place(boom2, tb(10) - 0.16, 0.4, 0, 0.4)
-for t, _ in TL['text']['silence']:
+for t, _, _ in TL['text']['cards']:
     place(tg, t - 0.07, 4.0, 0, 0.02)
+place(tg, TL['mode'][1] - 0.03, 3.0, 0, 0.02)                     # LEVIK MODE switches on
 # a soft whoosh under every designed transition, apex on the cut
 for k, tr in TL['trans'].items():
     if tr['D'] > 0 and tr['type'] != 'lv':

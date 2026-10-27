@@ -9,7 +9,7 @@ canvas{display:block}
 <canvas id="c" width="1080" height="1920"></canvas>
 <script src="timeline.js"></script>
 <script>
-// LEVIK PRODUCTION ad v3 — motion layer. Every pixel is a function of t (seconds).
+// LEVIK PRODUCTION ad v4 — motion layer. Every pixel is a function of t (seconds).
 // ?layer=gfx  -> RGBA graphics over footage
 // ?layer=mask -> white where footage track B shows, black where track A shows
 const TL = window.TL, FPS = TL.fps, W = 1080, H = 1920, TD = TL.TD, BB = TL.BB, TB = TL.tb;
@@ -40,6 +40,12 @@ window.ready = (async () => {
   await Promise.all(NAMES.map(async n => { const im = new Image(); im.src = 'assets/' + n + '.png'; await im.decode(); IMG[n] = im; }));
   await document.fonts.load('900 100px Rubik', 'אבג'); await document.fonts.load('700 100px Rubik', 'אבג ABC');
   await document.fonts.ready;
+  // dark copies of the wordmark pieces for the white end card
+  for (const n of NAMES.filter(n => /^(wm|pr)_/.test(n))) {
+    const im = IMG[n], c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
+    const g = c.getContext('2d'); g.drawImage(im, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = INK; g.fillRect(0, 0, c.width, c.height);
+    IMG[n + '_ink'] = c;
+  }
   return true;
 })();
 
@@ -63,7 +69,7 @@ function heroText(s, x, y, size, o = {}) {
   const sc = o.scale ?? 1, al = o.alpha ?? 1; if (al <= 0) return;
   ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y + (o.rise || 0)); ctx.scale(sc, sc);
   setFont(size, o.weight || 900);
-  ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = o.shadow ?? 28; ctx.shadowOffsetY = 4;
+  ctx.shadowColor = o.shadow === 0 ? 'transparent' : 'rgba(0,0,0,0.55)'; ctx.shadowBlur = o.shadow ?? 28; ctx.shadowOffsetY = 4;
   ctx.fillStyle = o.fill || CREAM; ctx.fillText(s, 0, 0);
   ctx.restore();
 }
@@ -119,19 +125,107 @@ function relayLine(xc, y, w, p, thick = 8, alpha = 1) {
   ctx.restore();
 }
 function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, Math.max(0, w), h, r); }
-function slamWord(s, t, t0, t1, x, y, size, line = true, face = 'cream') {
+// ---------- aura type ----------
+// The reference aura edit: one huge heavy word per beat, punched in, sitting on the footage.
+// Here every word lands with a short smear of brand-coloured copies and an RGB split that settle in ~9 frames.
+const PAL = ['#93D5E8', '#5CA7E8', '#A762DD', '#F388EE'];
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296; }
+const pool = [];
+function scratch(k, w, h) {
+  const c = pool[k] || (pool[k] = document.createElement('canvas'));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; } else c.getContext('2d').clearRect(0, 0, w, h);
+  return c;
+}
+// the word as a flat silhouette in one colour on a reusable canvas
+function wordSil(k, s, size, color, wt) {
+  setFont(size, wt); const w = Math.ceil(ctx.measureText(s).width + size * 0.6), h = Math.ceil(size * 1.7);
+  const c = scratch(k, w, h), g = c.getContext('2d');
+  g.font = `${wt} ${size}px Rubik`; g.direction = 'rtl'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = color; g.fillText(s, w / 2, h / 2);
+  return c;
+}
+// style: white (on footage) | glow (brand gradient, white rim, pink glow) | grad (brand gradient) | ink (black, for white cards)
+function auraWord(s, t, t0, t1, x, y, size, o = {}) {
   if (t < t0 || t >= t1) return;
-  const el = (t - t0) * FPS, k = expoOut(clamp(el / 20));
-  // slams in flat and tilted, then the block extrudes out of the screen and a sheen crosses it
-  text3D(s, x, y, size, { scale: mix(1.5, 1, k), skew: mix(-0.22, 0, k), k3: expoOut(clamp((el - 2) / 14)), sheen: clamp((el - 4) / 16),
-    ang: 1.0 + 0.22 * Math.sin(t * 1.4), face });
-  if (line) { const w = textW(s, size, 900); relayLine(x, y + size * 0.62, w * 0.9, expoOut(clamp((el - 3) / 10))); }
+  const wt = o.weight || 900, al = o.alpha ?? 1;
+  const w0 = textW(s, size, wt); if (w0 > (o.maxW || 1000)) size *= (o.maxW || 1000) / w0;
+  const el = (t - t0) * FPS, k = expoOut(clamp(el / 6)), sm = 1 - expoOut(clamp(el / 9));
+  const sc = mix(o.from ?? 1.32, 1, k) * (1 + 0.025 * clamp(el / 40)) * (o.mul ?? 1);
+  const style = o.style || 'white';
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0); ctx.scale(sc, sc);
+  if (sm > 0.02) {
+    const dir = o.dir ?? -1;
+    ctx.filter = `blur(${Math.round(size * 0.03)}px)`;
+    for (let j = 10; j >= 1; j--) {
+      const q = j / 10, sil = wordSil(1, s, size, PAL[j % 4], wt);
+      ctx.globalAlpha = al * sm * 0.5 * (1 - q * 0.6);
+      ctx.drawImage(sil, -sil.width / 2 + dir * q * size * 0.6 * sm, -sil.height / 2 + q * size * 0.12 * sm);
+    }
+    ctx.filter = 'none';
+    const d = size * 0.08 * sm;
+    ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = al * 0.9;
+    let sil = wordSil(1, s, size, PAL[0], wt); ctx.drawImage(sil, -sil.width / 2 - d, -sil.height / 2);
+    sil = wordSil(1, s, size, PAL[3], wt); ctx.drawImage(sil, -sil.width / 2 + d, -sil.height / 2);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  ctx.globalAlpha = al * clamp(el / 2 + 0.5);
+  setFont(size, wt);
+  const tw = ctx.measureText(s).width;
+  const gr = () => { const g = ctx.createLinearGradient(tw / 2, -size / 2, -tw / 2, size / 2); for (const [q, c] of STOPS) g.addColorStop(q, c); return g; };
+  if (style === 'glow') {
+    ctx.shadowColor = 'rgba(243,136,238,0.95)'; ctx.shadowBlur = size * 0.42;
+    ctx.lineJoin = 'round'; ctx.lineWidth = size * 0.085; ctx.strokeStyle = '#FFFFFF'; ctx.strokeText(s, 0, 0);
+    ctx.shadowColor = 'transparent'; ctx.fillStyle = gr(); ctx.fillText(s, 0, 0);
+  } else if (style === 'ink') {
+    ctx.fillStyle = INK; ctx.fillText(s, 0, 0);
+  } else {
+    ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = size * 0.2; ctx.shadowOffsetY = size * 0.03;
+    ctx.fillStyle = style === 'grad' ? gr() : '#FFFFFF'; ctx.fillText(s, 0, 0);
+  }
+  ctx.restore();
+}
+// small caption line, the aura edit's whisper above the big word
+function caption(s, t, t0, t1, y, o = {}) {
+  if (t < t0 || t >= t1) return;
+  heroText(s, 540, y, o.size || 44, { alpha: clamp((t - t0) * FPS / 3), weight: 600, shadow: 16, fill: o.fill });
+}
+// LEVIK MODE: the aura edit's corner switch, flipped on after the logo and left on
+function modeSwitch(t) {
+  const [a, on, b] = TL.mode; if (t < a || t >= b) return;
+  const k = expoOut(clamp((t - a) * FPS / 6)), ko = expoOut(clamp((t - on) * FPS / 5));
+  const w = 164, h = 84, x = 56, y = 96;
+  ctx.save(); ctx.globalAlpha = k; ctx.translate(x, y);
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 18;
+  roundRect(0, 0, w, h, h / 2); ctx.fillStyle = 'rgba(16,16,22,0.62)'; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  if (ko > 0) { ctx.globalAlpha = k * ko; roundRect(0, 0, w, h, h / 2); ctx.fillStyle = grad(0, 0, w, 0); ctx.fill(); ctx.shadowColor = 'rgba(243,136,238,0.8)'; ctx.shadowBlur = 26 * ko; ctx.fill(); ctx.shadowColor = 'transparent'; }
+  ctx.globalAlpha = k; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,0.75)'; roundRect(0, 0, w, h, h / 2); ctx.stroke();
+  const kx = mix(h / 2, w - h / 2, ko);
+  ctx.beginPath(); ctx.arc(kx, h / 2, h / 2 - 7, 0, Math.PI * 2); ctx.fillStyle = '#FFFFFF'; ctx.fill();
+  const iw = 42; ctx.drawImage(IMG.icon, kx - iw / 2, h / 2 - iw * 349 / 383 / 2, iw, iw * 349 / 383);
+  ctx.font = '800 36px Rubik'; ctx.direction = 'ltr'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = 10; ctx.fillStyle = `rgba(255,255,255,${mix(0.55, 1, ko)})`;
+  ctx.fillText('LEVIK', w + 20, h / 2 - 19); ctx.fillText('MODE', w + 20, h / 2 + 20);
+  ctx.restore();
+}
+// sun-ray burst behind the logo (the reference burst, in brand colours)
+function rays(cx, cy, t, t0, a) {
+  const el = (t - t0) * FPS; if (el < 0 || a <= 0) return;
+  const r = rng(11); ctx.save(); ctx.lineCap = 'round';
+  for (let j = 0; j < 46; j++) {
+    const ang = r() * Math.PI * 2 + t * 0.12, len = 280 + r() * 760, lw = 2 + r() * 5, col = r() < 0.3 ? '#FFFFFF' : PAL[Math.floor(r() * 4)], sp = 0.6 + r() * 0.8;
+    const g = expoOut(clamp(el / 10 * sp)), r0 = 250 + 60 * g, r1 = r0 + len * g;
+    ctx.globalAlpha = a * (0.85 - 0.4 * clamp((el - 10) / 30));
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(ang) * r0, cy + Math.sin(ang) * r0); ctx.lineTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1); ctx.stroke();
+  }
+  ctx.restore();
 }
 function riseWord(s, t, t0, t1, x, y, size, o = {}) {
   if (t < t0 || t >= t1) return;
   const el = (t - t0) * FPS, k = expoOut(clamp(el / 18));
   const out = o.fadeOut ? clamp((t1 - t) * FPS / 6) : 1;
-  if (o.flat) { heroText(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight }); return; }
+  if (o.flat) { heroText(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight, fill: o.fill, shadow: o.shadow }); return; }
   text3D(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight, k3: mix(0.25, 1, k),
     sheen: clamp((el - 6) / 18), ang: 1.0 + 0.22 * Math.sin(t * 1.4), face: o.face });
 }
@@ -167,7 +261,7 @@ function drawLogo(t, t0, cy, S = 1, o = {}) {
   const k = 2.0 * S, cxL = (242 + 570) / 2, yW = cy + ih / 2 + 105 * S + wy;
   SEG.levik.forEach(([x0, x1], i) => {
     const e = el - 9 - i * 3; if (e < 0) return;
-    const img = IMG['wm_' + i], s = mix(1.9, 1, expoOut(clamp(e / 18)));
+    const img = IMG['wm_' + i + (o.ink ? '_ink' : '')], s = mix(1.9, 1, expoOut(clamp(e / 18)));
     const w = img.width * k * s, h = img.height * k * s, cx = 540 + ((x0 + x1) / 2 - cxL) * k;
     ctx.save(); ctx.globalAlpha = wa; ctx.drawImage(img, cx - w / 2, yW - h / 2, w, h); ctx.restore();
   });
@@ -175,7 +269,7 @@ function drawLogo(t, t0, cy, S = 1, o = {}) {
   const ep = el - 20; if (ep >= 0) {
     const kk = expoOut(clamp(ep / 24)), cxP = (292 + 519) / 2, yP = yW + 77 * k;
     SEG.prod.forEach(([x0, x1], i) => {
-      const img = IMG['pr_' + i], w = img.width * k, h = img.height * k;
+      const img = IMG['pr_' + i + (o.ink ? '_ink' : '')], w = img.width * k, h = img.height * k;
       const cx = 540 + ((x0 + x1) / 2 - cxP) * k * mix(2.6, 1, kk);
       ctx.save(); ctx.globalAlpha = wa * clamp(ep / 4); ctx.drawImage(img, cx - w / 2, yP - h / 2, w, h); ctx.restore();
     });
@@ -255,74 +349,70 @@ function drawMask(t) {
 
 function drawGfx(t) {
   const T = TL.text, tb = TB;
-  // opaque stages
   if (t < 0.18) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
-  // ---- hook ----
-  T.hook.forEach(([a, b, s, y]) => slamWord(s, t, a + (y > 1000 && a > 1 ? 0.05 : 0), b, 540, y, s.length > 9 ? 150 : 170));
-  // ---- silence: three lines, then implode into the relay dot ----
+  // ---- hook: one huge word per shot ----
+  T.hook.forEach(([a, b, s, y, rot]) => auraWord(s, t, a + 0.03, b, 540, y, 200, { rot, dir: y > 1000 ? -1 : 1 }));
+  // ---- three cards, white / black / white, then the last word implodes into the drop ----
   if (t >= 4.85 && t < TD) {
-    ctx.fillStyle = STAGE; ctx.fillRect(0, 0, W, H);
-    const imp = expoIn(prog(t, TD - 0.42, 0.42));
-    T.silence.forEach(([a, s], i) => {
-      if (t < a) return;
-      const el = (t - a) * FPS, k = expoOut(clamp(el / 14)), y = 800 + i * 160;
-      const yy = mix(y, 960, imp), sc = mix(1, 0.05, imp);
-      ctx.save(); ctx.beginPath(); ctx.rect(0, y - 90, W, 180); if (imp <= 0) ctx.clip();
-      text3D(s, 540, yy + mix(70, 0, k) * (1 - imp), 118, { alpha: (1 - imp), scale: sc, k3: k, sheen: clamp((el - 4) / 16), ang: 1.0 + 0.22 * Math.sin(t * 1.4) });
-      ctx.restore();
-      const w = textW(s, 118, 900) * 0.92;
-      relayLine(mix(540, 540, imp), yy + 74 * (1 - imp), w * (1 - imp), expoOut(clamp((el - 6) / 12)), 7, 1 - imp);
-    });
+    const imp = expoIn(prog(t, TD - 0.36, 0.36));
+    let ci = 0; T.cards.forEach(([a], i) => { if (t >= a) ci = i; });
+    const [a, s, bg] = T.cards[ci], b = ci + 1 < T.cards.length ? T.cards[ci + 1][0] : TD;
+    ctx.fillStyle = bg === 'white' ? '#FFFFFF' : STAGE; ctx.fillRect(0, 0, W, H);
+    auraWord(s, t, a, b, 540, 960, 200, { style: bg === 'white' ? 'ink' : 'white', from: 1.25, mul: mix(1, 0.04, imp), alpha: 1 - imp * 0.6 });
     if (imp > 0) {
-      const r = mix(4, 22, imp); ctx.save(); ctx.fillStyle = '#fff'; ctx.shadowColor = '#F388EE'; ctx.shadowBlur = 50 * imp;
+      const r = mix(4, 26, imp); ctx.save(); ctx.fillStyle = '#F388EE'; ctx.shadowColor = '#A762DD'; ctx.shadowBlur = 50 * imp;
       ctx.beginPath(); ctx.arc(540, 960, r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
     }
   }
-  // ---- drop: logo sting over dimmed footage ----
+  // ---- drop: ray burst and logo over dimmed footage, then the zoom through the mark ----
   const lvT = TL.trans['4'], lvStart = SHOTS[4].t0 - F(lvT.D) / 2;
   if (t >= TD && t < SHOTS[4].t0 + F(lvT.D) / 2) {
     const pz = prog(t, lvStart, F(lvT.D));
-    // dark overlay, with the icon-shaped hole during the zoom-through
     const off = document.createElement('canvas'); off.width = W; off.height = H; const o = off.getContext('2d');
     o.fillStyle = 'rgba(8,8,12,0.62)'; o.fillRect(0, 0, W, H);
     if (pz > 0) { o.globalCompositeOperation = 'destination-out'; o.drawImage(IMG.icon, ...lvRect(pz)); if (pz > 0.92) o.clearRect(0, 0, W, H); }
     ctx.drawImage(off, 0, 0);
     radialGlow(540, 760, 620, 0.55 * (1 - pz));
+    rays(540, 760, t, TD, 1 - smooth(clamp(pz / 0.3)));
     const el = (t - TD) * FPS;
-    // ring burst from the relay dot
     if (el < 14) { const q = expoOut(el / 14); ctx.save(); ctx.globalAlpha = 1 - q; ctx.lineWidth = mix(26, 2, q); ctx.strokeStyle = grad(0, 0, W, 0); ctx.beginPath(); ctx.arc(540, 960, mix(10, 980, q), 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
     const wordOut = expoIn(clamp(pz / 0.45));
     drawLogo(t, TD, 760, 1, { iconAlpha: pz > 0 ? 0 : 1, wordAlpha: 1 - wordOut, wordRise: -60 * wordOut, still: true });
-    if (pz > 0 && pz < 0.45) { // the mark keeps its colour for a few frames while it grows, then becomes a pure window
-      ctx.save(); ctx.globalAlpha = 1 - smooth(clamp(pz / 0.45)); ctx.drawImage(IMG.icon, ...lvRect(pz)); ctx.restore();
-    }
+    if (pz > 0 && pz < 0.45) { ctx.save(); ctx.globalAlpha = 1 - smooth(clamp(pz / 0.45)); ctx.drawImage(IMG.icon, ...lvRect(pz)); ctx.restore(); }
     riseWord(T.studio, t, TD + 0.62, lvStart + 0.12, 540, 1440, 60, { weight: 700, fadeOut: true, flat: true });
   }
-  // ---- category bars ----
+  // ---- category bars: a tag and one huge word per bar ----
+  const BAR_STYLE = ['white', 'glow', 'white', 'white', 'glow', 'grad', 'glow'], BAR_ROT = [0, -0.06, 0, 0, 0.05, -0.05, 0];
   T.bars.forEach(([tag, word, wy], j) => {
     const a = tb[j + 1], b = tb[j + 2];
-    pill(tag, t, a, b, 1440);
-    slamWord(word, t, a + 0.05, b, 540, wy, 186, true, 'brand');
+    pill(tag, t, a, b, j === 3 ? 1640 : 1440);
+    auraWord(word, t, a + 0.04, b, 540, wy, 250, { style: BAR_STYLE[j], rot: BAR_ROT[j], dir: j % 2 ? 1 : -1 });
   });
+  // ---- half-beat montage: one word that kicks on every cut ----
+  let kick = 1;
+  for (let i = 23; i <= 30; i++) { const f = (t - SHOTS[i].t0) * FPS; if (f >= 0 && f < 3) kick = 1 + 0.07 * (1 - f / 3); }
+  auraWord(T.montage, t, tb[8] + 0.03, tb[9], 540, 960, 230, { mul: kick, style: 'white' });
   // ---- idea line ----
-  slamWord(T.idea[0][0], t, tb[9] + 0.05, tb[9] + 2 * BB, 540, T.idea[0][1], 168, true, 'brand');
-  slamWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 168, true, 'brand');
-  // ---- break: question and answer ----
-  riseWord(T.break[0][0], t, tb[10] + 0.25, tb[11], 540, T.break[0][1], 150, { fadeOut: true });
-  riseWord(T.break[1][0], t, tb[11] + 0.2, tb[12], 540, T.break[1][1], 150, { fadeOut: true });
-  riseWord(T.break[2][0], t, tb[12] + 0.2, tb[14], 540, T.break[2][1], 150, { fadeOut: true });
-  slamWord(T.break[3][0], t, tb[13], tb[14], 540, T.break[3][1], 160);
-  if (TL.face) faceTitle(t, TL.face[0], TL.face[1]);
-  // ---- end card ----
-  if (t >= tb[14]) {
-    const el = (t - tb[14]) * FPS;
-    ctx.fillStyle = 'rgba(8,8,12,0.66)'; ctx.fillRect(0, 0, W, H);
-    radialGlow(540, 700, 640, 0.6 * clamp(el / 10));
-    drawLogo(t, tb[14], 700, 0.92);
-    riseWord(T.end_line, t, tb[14] + 0.75, 99, 540, 1330, 62, { weight: 700, flat: true });
-    pill(T.cta, t, tb[14] + 1.1, 99, 1480);
-    const fo = prog(t, TL.dur - 0.45, 0.45); if (fo > 0) { ctx.fillStyle = `rgba(0,0,0,${smooth(fo)})`; ctx.fillRect(0, 0, W, H); }
+  auraWord(T.idea[0][0], t, tb[9] + 0.04, tb[9] + 2 * BB, 540, T.idea[0][1], 200, { style: 'glow' });
+  auraWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 200, { dir: 1 });
+  // ---- break: question, answer, the face, the offer ----
+  auraWord(T.break[0][0], t, tb[10] + 0.25, tb[11], 540, T.break[0][1], 190, { rot: -0.07 });
+  auraWord(T.break[1][0], t, tb[11] + 0.15, tb[12], 540, T.break[1][1], 180, { dir: 1 });
+  if (t >= TL.face[0] && t < TL.face[1]) {
+    auraWord(T.face_name, t, TL.face[0] + 0.2, TL.face[1], 540, 1480, 170, { style: 'grad' });
+    caption(T.face_role, t, TL.face[0] + 0.45, TL.face[1], 1610, { size: 42 });
   }
+  auraWord(T.break[2][0], t, tb[13] + 0.04, tb[13] + 2 * BB, 540, T.break[2][1], 210, {});
+  auraWord(T.break[3][0], t, tb[13] + 2 * BB + 0.02, tb[14], 540, T.break[3][1], 220, { style: 'glow', dir: 1 });
+  // ---- end card: the aura edit's white card ----
+  if (t >= tb[14]) {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H);
+    drawLogo(t, tb[14] + 0.1, 720, 0.92, { ink: true });
+    riseWord(T.end_line, t, tb[14] + 0.85, 99, 540, 1330, 64, { weight: 800, flat: true, fill: INK, shadow: 0 });
+    pill(T.cta, t, tb[14] + 1.2, 99, 1480);
+    caption('LEVIK PRODUCTION  ·  לויק כהן', t, tb[14] + 1.5, 99, 1790, { size: 30, fill: '#6b6b74' });
+  }
+  modeSwitch(t);
   // ---- transition graphics and flashes ----
   const at = activeTrans(t);
   if (at) { const ty = at.tr.type; if (ty === 'blade') gfxBlade(at.p, at.tr); else if (ty === 'bars') gfxBars(at.p, at.tr); else if (ty === 'iris') gfxIris(at.p, at.tr); }
@@ -334,14 +424,6 @@ function drawGfx(t) {
   }
   if (Math.round((t - TD) * FPS) >= 0 && Math.round((t - TD) * FPS) < 3) fl = Math.max(fl, [1, 0.55, 0.2][Math.round((t - TD) * FPS)]);
   if (fl > 0) { ctx.fillStyle = `rgba(255,255,255,${fl})`; ctx.fillRect(0, 0, W, H); }
-}
-function faceTitle(t, a, b) {
-  if (t < a || t >= b) return;
-  const el = (t - a) * FPS, out = clamp((b - t) * FPS / 5);
-  const y = 1060, kn = expoOut(clamp((el - 4) / 16));
-  text3D(TL.text.face_name, 540, y + mix(30, 0, kn), 112, { alpha: kn * out, face: 'brand', k3: kn, sheen: clamp((el - 8) / 16), ang: 1.0 + 0.22 * Math.sin(t * 1.4) });
-  relayLine(540, y + 78, 460, expoOut(clamp((el - 10) / 12)), 6, out);
-  heroText(TL.text.face_role, 540, y + 140, 42, { alpha: clamp((el - 12) / 10) * out, weight: 600, shadow: 14 });
 }
 
 window.seek = function (t) {
