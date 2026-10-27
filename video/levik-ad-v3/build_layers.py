@@ -25,7 +25,7 @@ with ThreadPoolExecutor(4) as ex:
 
 def enc(out, w, h, pix='rgb24'):
     return subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', pix, '-s', f'{w}x{h}', '-r', str(FPS), '-i', '-',
-                             '-c:v', 'libx264', '-preset', 'slow', '-crf', '14', '-pix_fmt', 'yuv420p', '-g', '30', out], stdin=subprocess.PIPE)
+                             '-c:v', 'libx264', '-preset', 'slow', '-crf', '14', '-x264-params', 'ref=1:bframes=0', '-pix_fmt', 'yuv420p', '-g', '30', out], stdin=subprocess.PIPE)
 
 
 os.makedirs('out', exist_ok=True)

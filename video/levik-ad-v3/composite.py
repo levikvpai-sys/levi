@@ -192,7 +192,9 @@ if __name__ == '__main__':
         for n0 in range(0, NF, CH):
             ok = f'{D}/fr/chunk_{n0}.ok'
             if os.path.exists(ok): continue
-            r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
+            for attempt in range(3):   # the box is small; a decoder can get OOM-killed, so retry the chunk
+                r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
+                if r.returncode == 0: break
             if r.returncode == 0: open(ok, 'w').write('1')
             else: sys.exit(r.returncode)
         sys.exit(encode())
