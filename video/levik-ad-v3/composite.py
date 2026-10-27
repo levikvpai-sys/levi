@@ -85,7 +85,7 @@ def make_stack_proxy(i):
     for k, p in enumerate(sh['stack']):
         t0 = max(0.0, p['in'] - pre / FPS)
         ins += ['-ss', f'{t0:.3f}', '-i', f"{D}/src/{p['src']}.mp4"]
-        fc.append(f"[{k + 1}:v]fps={FPS},scale={pw}:{ph}:flags=lanczos,{GRADES[p.get('grade', sh.get('grade', 'film'))]},{SHARP},setpts=PTS-STARTPTS[p{k}]")
+        fc.append(f"[{k}:v]fps={FPS},scale={pw}:{ph}:flags=lanczos,{GRADES[p.get('grade', sh.get('grade', 'film'))]},{SHARP},setpts=PTS-STARTPTS[p{k}]")
         y = gap + k * (ph + gap)
         if k == 0: x = str(x0)
         else:
