@@ -203,9 +203,9 @@ def build_assets():
     A['end']=text_layer('LEVIK PRODUCTION  ·  לויק כהן','Rubik.ttf',30,var=b'Medium',fill=(15,15,15),direction=None)
     ic=A['icon']; A['end_icon']=ic.resize((84,int(84*ic.height/ic.width)),Image.LANCZOS)
     # brand glow: sky blue from the left, pink from the right (the logo's own gradient)
-    yy_,xx_=np.mgrid[0:700,0:1000].astype(np.float32)
+    yy_,xx_=np.mgrid[0:1000,0:1400].astype(np.float32)
     def blob(cx,cy,r): return np.exp(-(((xx_-cx)/r)**2+((yy_-cy)/(r*0.8))**2))
-    b1=blob(380,350,300); b2=blob(620,350,300)
+    b1=blob(580,500,300); b2=blob(820,500,300)
     rgb=(np.array([92,167,232],np.float32)*b1[...,None]+np.array([224,110,237],np.float32)*b2[...,None])/np.maximum(1e-3,(b1+b2)[...,None])
     al=np.clip((b1+b2)*0.75,0,1)*255
     A['disc']=Image.fromarray(np.concatenate([rgb,al[...,None]],-1).astype(np.uint8),'RGBA')
