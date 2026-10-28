@@ -1,0 +1,1514 @@
+{
+ "_doc": "Source catalogue for LEVIK PRODUCTION edits. key -> url (null = fetch a fresh signed URL), owner (levik|gal), use (yes|check|avoid|never), note (in-points in seconds and what is there). fetch_sources.py downloads what shots.json needs.",
+ "sources": {
+  "perfectme": {
+   "url": "https://drive.usercontent.google.com/download?id=15QT2CevWVUVe3FL6MLMvfvGOKI0n35kS&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "Perfect for Me. 0.3 seaplane over Machu Picchu; 105.2 holographic globe; 137.3 the cow licks her face (close-up only, he can't believe it: the hook). The couple shots show a woman in shorts: never use them."
+  },
+  "titan": {
+   "url": "https://drive.usercontent.google.com/download?id=1aeWPzxAUt3s41gaM2N8-csgCc0VW2B7Z&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "13.0 jet between skyscrapers; 23.3 typing the idea; 28.8 particle burst (behind the logo). 44.3 command centre has a woman: avoid."
+  },
+  "america": {
+   "url": "https://drive.usercontent.google.com/download?id=1KJCLdtgMJsEvmI65Gz8BECVBKkjNLsh4&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "0.2 canyon + eagle"
+  },
+  "kol": {
+   "url": "https://drive.usercontent.google.com/download?id=1EF4YZltpVF867WIks37EFuv8gZZ8pPaR&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "Hakol Hapnimi (the moganut film). 97.1 boy smiles"
+  },
+  "army": {
+   "url": "https://drive.usercontent.google.com/download?id=1yufzdEI-a-12KsAXLI7uSW7yoNjnYyX5&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "Pixar-style army film. 40.0 panic; 67.0 jeep, arm up"
+  },
+  "samerica": {
+   "url": "https://drive.usercontent.google.com/download?id=1LDV2gIcIpk2toUnk3DPY4rdJyJDu8SFl&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "panther: 11.8 with brush, 13.8, 15.8 teeth"
+  },
+  "africa": {
+   "url": "https://drive.usercontent.google.com/download?id=1X95dczq5by-INsl5NuSiRC1-YiAGnuDf&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "30.2 zebra"
+  },
+  "plutex": {
+   "url": "https://drive.usercontent.google.com/download?id=1ZYFBwWtIOisp4CSMhtsfNDp_RBAdN5Fj&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "26.6 golden retriever"
+  },
+  "antarctica": {
+   "url": "https://drive.usercontent.google.com/download?id=1lNT1iFF_8e1pCgSCRMSvfjM4-pece3Uc&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "30.05 manta through the window. The icebergs were 'סבבה, לא וואו': don't lead with them."
+  },
+  "miami": {
+   "url": "https://drive.usercontent.google.com/download?id=134-hS50Rob1R3VnwnRqxXL78GFk0PR3k&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "vertical source. 12.2 kids + flying mascot"
+  },
+  "mikveh": {
+   "url": "https://drive.usercontent.google.com/download?id=1VfKQ5KeTymu1dTTYyuJsVgIqG5_jfmfb&export=download&confirm=t",
+   "owner": "levik",
+   "use": "yes",
+   "note": "Mikve film (Tal Caen, Hebrew)"
+  },
+  "indians": {
+   "url": "https://drive.usercontent.google.com/download?id=1QjydsYbpNjaZwzRhCLgKFSyPI477xnVW&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "madison": {
+   "url": "https://drive.usercontent.google.com/download?id=1yIWdfAMy-KMVrVGf1uzdeq9W9qosdLbg&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "mcd4k": {
+   "url": "https://drive.usercontent.google.com/download?id=1BiItM6eP18fKWjv8QXHiAWODS-oNxx54&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "terra": {
+   "url": "https://drive.usercontent.google.com/download?id=1_458qK1_m0Lu1zGOU45T_UJVAW1-TQml&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "sweden": {
+   "url": "https://drive.usercontent.google.com/download?id=17prA0FTjF82tH_k8qGZcFNENG386f_j5&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "horse": {
+   "url": "https://drive.usercontent.google.com/download?id=1FxPGzscCRKfg_iQFH9hYr6pVlQF-r12m&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "oil": {
+   "url": "https://drive.usercontent.google.com/download?id=1WBcViYwnqc-fJfKp1tGeiHpIUtLpa6Ay&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "ugc": {
+   "url": "https://drive.usercontent.google.com/download?id=1xCdJc9tBvgLDFzOsYDUESRz2WhKvcgy6&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "ugc1080": {
+   "url": "https://drive.usercontent.google.com/download?id=1WiRGACZ3_EWC_LPhezI_R1D0HGjTciqu&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "ndcubho": {
+   "url": "https://drive.usercontent.google.com/download?id=1ipUmdxKwfrCw3h80d6t2YoEZrCUO29_z&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "wa0037": {
+   "url": "https://drive.usercontent.google.com/download?id=1aVvcVJSatrgnbaamkbcGN8PP4D_yx0Pt&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "wa0702": {
+   "url": "https://drive.usercontent.google.com/download?id=1csCkuxRZBhxslTwfkMPmLnXowJbGj6K5&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "lv0811a": {
+   "url": "https://drive.usercontent.google.com/download?id=1IGD3itAiplnsAssQXJTg-NsU1EUvYVYq&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "lv0811b": {
+   "url": "https://drive.usercontent.google.com/download?id=1f6tCE5BDzmUpCuIwdBnboC-n888f0siV&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "mcdfinal": {
+   "url": "https://drive.usercontent.google.com/download?id=1f1NpAnuomoI_lZdrgqr8LeBJsjHWRg5I&export=download&confirm=t",
+   "owner": "levik",
+   "use": "check",
+   "note": "not yet surveyed frame by frame: check modesty before use"
+  },
+  "tibet": {
+   "url": "https://drive.usercontent.google.com/download?id=1ji-C3sE3bvF7ZyMvwcNPecQCtYCCZTfI&export=download&confirm=t",
+   "owner": "levik",
+   "use": "avoid",
+   "note": "women in frame (4.7)"
+  },
+  "japan": {
+   "url": "https://drive.usercontent.google.com/download?id=1VMtG__yeAVeONZ74jtQUrrxaRWoQ9rZ5&export=download&confirm=t",
+   "owner": "levik",
+   "use": "avoid",
+   "note": "woman in a kimono"
+  },
+  "greeks4k": {
+   "url": "https://drive.usercontent.google.com/download?id=1RhKVwYT7eeMfGePm533-xICe-34gkedr&export=download&confirm=t",
+   "owner": "levik",
+   "use": "never",
+   "note": "immodest"
+  },
+  "tiger": {
+   "url": "https://drive.usercontent.google.com/download?id=1HuNJgGsyDntMkCI4yixdRvqH4PLvgpzw&export=download&confirm=t",
+   "owner": "gal",
+   "use": "never",
+   "note": "Gal Edri's file, not Levik's (also Josalle). Never use."
+  },
+  "getpicks": {
+   "url": "https://drive.usercontent.google.com/download?id=1eBv2zCWGdYUuSLwvFbNy5PchRi14BQek&export=download&confirm=t",
+   "owner": "gal",
+   "use": "never",
+   "note": "Gal Edri's file, not Levik's (also Josalle). Never use."
+  },
+  "bonus": {
+   "url": "https://drive.usercontent.google.com/download?id=1iSxCoqqDlqiq5Gjm-iNAoY-dKEdQQJvT&export=download&confirm=t",
+   "owner": "gal",
+   "use": "never",
+   "note": "Gal Edri's file, not Levik's (also Josalle). Never use."
+  },
+  "babar": {
+   "url": "https://drive.usercontent.google.com/download?id=1cyjJjpRRf6Q0TYAGxo_L3oD1cs9uTXm9&export=download&confirm=t",
+   "owner": "gal",
+   "use": "never",
+   "note": "Gal Edri's file, not Levik's (also Josalle). Never use."
+  },
+  "gigi": {
+   "url": "https://drive.usercontent.google.com/download?id=1stQKHGKSi1h8-BoBoVQ2QsQiH4kDVlM_&export=download&confirm=t",
+   "owner": "gal",
+   "use": "never",
+   "note": "Gal Edri's file, not Levik's (also Josalle). Never use."
+  },
+  "levik": {
+   "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/79dd800d-93d8-4841-bc00-1c97a6b5fde4.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "Levik's 60 s film, 1332x720. 13.0 facing Jerusalem at sunset; 29.0 reading with his son; 32.7 editing the panther film (the ONE at-the-computer shot); 41.0 synagogue, tallit and tefillin; 50.0 the shofar, tilting up to his face; 55.5 suit at the white wall"
+  },
+  "action": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793059458092-LEVIK_ACTION_wide.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "LEVIK ACTION, 54 s, 2478x1080 (9:16 crop = 24.5% of the width: frame every crop). His film, NOT GET PICKS. 2.0 headlight in the rain; 3.9 jump between skyscrapers (cx .53); 10.0 Levik on the bike in the LV cap, sliding (cx .52); 21.0 the SUV explodes (cx .45); 22.3 car flips in the fireball (cx .47); 24.6-27.6 bike with the burning wreck behind; 29.0 wheelie over the wreck (cx .39); 30.6 sparks; 41.2 Levik by the film camera (cx .5); 44.9 teal LEVIK beam; 49.8- LEVIK PRODUCTION logo end"
+  },
+  "reel": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793059163735-LEVIK_CINEMA_reel_v5.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "LEVIK CINEMA reel v5"
+  },
+  "mikve_ig": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793058527046-Mikve_Tal_Caen_HEB_instagram_1080p.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Mikve film, Instagram cut"
+  },
+  "c1": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793094599836-c1.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "c2": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793094612299-c2.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "c3": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793094624530-c3.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "c4": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793094640987-c4.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "m7": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793055144555-m7.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "m8": {
+   "url": "https://media.kolbo.ai/kolboai-media/uploaded-videos/69ac7656803a390b5c907794/6ac40e53d862667a57d48d80/1793055181744-m8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "clip uploaded to Kolbo; survey before use"
+  },
+  "hfg/042ae152": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171250_042ae152-e377-40d4-a459-e705541a72a0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a4a498a2": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171250_a4a498a2-b2ba-4ef1-9081-effcd7b1bb28.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/acde1db7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171250_acde1db7-f8a2-485c-99e1-fdce907bb3b5.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f0ccf347": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171250_f0ccf347-f317-46a8-9f34-09c41beca165.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/086a1ac2": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_086a1ac2-7f4a-42eb-a6df-e016eb08ca0c.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/361a4da5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_361a4da5-9587-4bab-98c5-c8136ebc351e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/73389c39": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_73389c39-6545-438e-bcba-55729c860b1e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7a59f350": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_7a59f350-440a-4d11-8706-bfd96938fcd0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/d47b678d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_d47b678d-d14b-4769-ad12-07293a1a2804.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f763d63b": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_171251_f763d63b-842c-495b-97ed-0eb5183cdc69.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1c81ec7e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260831_173145_1c81ec7e-b695-48c3-9d83-aa4581b20276.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/72590312": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_103158_72590312-87b9-46e5-86ea-521e559dd26e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/b9b0704d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_103158_b9b0704d-4fc2-454e-b275-6727f217b96f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/39424572": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_133409_39424572-baa4-4368-a438-eca485d56fc6.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ef8a4d00": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_133409_ef8a4d00-e9f6-4355-a124-20d37903977e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/55c5d7c1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_133440_55c5d7c1-26be-41be-9ee1-93e59a9423a9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9917324d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_133440_9917324d-d98a-419b-ae37-6f7eac265e75.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/0cee15e8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_135216_0cee15e8-56d5-4295-88f2-b40847e7ef85.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/fb21e07d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_135216_fb21e07d-fd03-4698-91bb-06dd349061af.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1bcf32c3": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_135434_1bcf32c3-0070-4b59-bd66-3cb464a2d7a4.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9e49aba5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_164920_9e49aba5-8d1b-45ac-93d2-ee5e8870bd6f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/65533103": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_172133_65533103-3701-478f-9099-e37ef28e024f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/435caa16": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_175553_435caa16-f85a-4de1-aa73-50699b242928.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7554b160": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_184747_7554b160-73df-44ee-988b-cd6d47a0e2e3.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3a1ebc60": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260901_194731_3a1ebc60-5c06-4b9e-ab05-45f1c75d31ed.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3668b6b3": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075424_3668b6b3-46a0-468b-a19c-1bc934d9ed29.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/191d80b7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_191d80b7-2400-4e6e-bac9-2654b94ec903.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3538385c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_3538385c-1f3d-4db0-87c8-e284515c897e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/668dbb8c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_668dbb8c-3189-4211-9c87-2e8662eef308.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/6d2b6fd7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_6d2b6fd7-1ed4-4040-b36b-521208a941fc.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/b16bbc9e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_b16bbc9e-8e70-498a-97e4-299bb5101486.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/bf8606c9": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_075425_bf8606c9-0fb5-45ce-a109-80277ebcfd01.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/6a7092f9": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_093344_6a7092f9-afa8-40ce-bf4c-cf5c38253c97.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/dcd60ce7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_093344_dcd60ce7-00b3-49c1-abb1-67b6d341bb1b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7c6a8d9d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_093345_7c6a8d9d-d1d6-4e84-af69-48bcf6606b93.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/831bde9d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_093803_831bde9d-ae1b-43c0-9c17-540e70c719c9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/298c9eb1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_110015_298c9eb1-2fd2-485c-b69d-8507b966a906.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/bc64faf8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_110015_bc64faf8-0d7b-4338-bfab-e85e91afc01d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/5757ffbe": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_110016_5757ffbe-34e3-4577-8c5f-c80375aad678.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/602c3a28": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260902_144128_602c3a28-b529-4b29-84fa-8196c2be7131.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1803a7ac": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125655_1803a7ac-d92b-4d01-80fa-d6b6e7d94b45.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/31d06753": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125656_31d06753-e7af-4bfa-9388-bde9bbfb1b13.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/dc45b2aa": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125656_dc45b2aa-e4c0-4b14-9266-4a7b8fede5c8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f6a38216": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125656_f6a38216-4154-4412-8819-bde3769bde95.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/13f78ea1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125821_13f78ea1-cb18-4e28-bdef-dc554e402d52.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/998941cc": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125821_998941cc-7ad9-424f-bd5b-c3e0d5e85fdf.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/8dabe989": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_125822_8dabe989-cce4-4f55-a6c5-54e01a1db514.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/d6892767": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130004_d6892767-cebf-4a0f-ad1b-4edf2ab96149.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f4efae29": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130004_f4efae29-b7b0-4a51-9186-123c09e2b61a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/cc195663": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130005_cc195663-48a4-45b6-8187-8af866bd1333.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e5af45ee": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130007_e5af45ee-67ff-4adf-b202-a44d6529fedd.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/40586bf5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130247_40586bf5-c7af-4216-9df4-01f00bb26e9c.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/496c71a8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130247_496c71a8-ca01-408b-b335-28ba2aee4e9f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a22f7638": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130249_a22f7638-5642-4528-b881-78ba1a59d290.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/01a7bfb1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_01a7bfb1-836c-4148-8c82-fb918cd40b77.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/0ba4b035": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_0ba4b035-5fa5-40bd-a12a-e29e8c61de2d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3d03670e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_3d03670e-c94e-4fb5-800b-3123e0bd276b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/73377fee": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_73377fee-ccc3-4d8f-b4da-4e7a301be39d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/736bebeb": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_736bebeb-8675-4974-a271-3d0111703dc5.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/bb8ef0db": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130444_bb8ef0db-1c95-4407-b536-bd140a76ef2e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9ccca3c4": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130531_9ccca3c4-5d15-4053-989a-c2457ab0b164.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/231546ed": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130721_231546ed-1527-40f7-b8f0-ef1dd43c9c69.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/351b7316": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130721_351b7316-2d39-4fb7-a2d5-367a6a6e8dd0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1674ba78": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130722_1674ba78-0e0a-4ec8-b26f-fcbe6403368b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c62701bd": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130722_c62701bd-2582-433b-99fb-49b6412260c5.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7e3fcd01": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_130723_7e3fcd01-8eb3-49b1-87b2-f77800149075.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f854a987": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131352_f854a987-7ccd-4bcd-8ff4-a121ac5f07b4.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4e48f5b5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131353_4e48f5b5-95fe-440e-b957-76768018e054.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4f85a8c9": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131353_4f85a8c9-6a38-4a92-87c8-1d3ead00b023.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/54064a68": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131943_54064a68-9789-43cd-a279-7f47a444adee.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/365167fb": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131944_365167fb-535f-444e-8637-ad525a518f26.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/580980e4": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131945_580980e4-013f-4ac3-af80-657e8db31050.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7524d467": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131945_7524d467-0301-4f71-99bf-b22db0d0d3d9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a8778954": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131945_a8778954-f480-4a3d-b2cc-546dbfafea92.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c70d6aa6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131945_c70d6aa6-4aea-429a-942b-0e5582bd3614.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/fabd9cba": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_131945_fabd9cba-fb1c-41d8-b978-cb7eca2188b9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/283823e8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133913_283823e8-088e-438c-bfe1-7995fee5fe2b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/30e42969": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133913_30e42969-fdb6-4b1d-9a55-bf9b8e2c8889.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/530c5d11": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133913_530c5d11-7f0e-48d3-90f0-fdf3cfe48258.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/64960fb4": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133913_64960fb4-3990-4d79-aad1-3efe5df115a0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/6c0ceeb8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133913_6c0ceeb8-4060-4490-ad57-b4a9e1fbf392.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/afc4ec88": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_133914_afc4ec88-fc5e-4422-a459-4954ec5ebe26.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/5ffccee8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_134857_5ffccee8-2150-41fb-907a-c287afbd6d2c.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/44a68c05": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260903_142939_44a68c05-d5c1-44fa-a60a-6bc72f93a33b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/55cf069f": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_072830_55cf069f-9162-4e5e-a174-b9556d2ff55e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1e3ac3c3": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_115414_1e3ac3c3-42b6-4d18-857d-0012ecdcfe09.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/92626575": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_120114_92626575-b871-44bc-bd3a-406f6331c0c8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/17eb2a42": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_120205_17eb2a42-66be-49d3-8179-b58ff7bfbdc9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f0771df5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_122029_f0771df5-caa6-44be-89f1-f5b9051c316b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/695f3c17": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_122053_695f3c17-d65b-4b4c-9c0c-c6cb26c62fca.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9349d183": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_151231_9349d183-f79e-4afa-b23f-9bdac3bc71a1.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/0a4fac56": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260904_152053_0a4fac56-7662-40b5-9a3e-30123a7bd861.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/6ecc85e8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260906_011229_6ecc85e8-321a-4f00-8e8c-0fbabb145f9e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4965502b": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260906_144928_4965502b-442c-4be2-922e-0dbfbfe566b1.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7c10b13f": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260906_152900_7c10b13f-4213-43d2-a0d9-7959632386cd.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/dc735aab": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_091320_dc735aab-e9c0-4ef7-9a4b-3106fa6d1a79.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/aa44c3e1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_093713_aa44c3e1-c73e-4d15-938b-4305a95222cd.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/0d4b1757": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_100651_0d4b1757-dd77-450d-8529-ac9183bf317a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/fd35c719": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_104218_fd35c719-bcb3-4053-a692-c3474b96bfd6.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4c42d030": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_104616_4c42d030-b595-4fe1-a29d-11802a9b516d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/348122fe": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_121131_348122fe-ca53-4e88-b9d7-eb4c79a6fc67.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7312713a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_124525_7312713a-06c5-4c78-af10-4478f79d7037.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/700cd1b8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_130512_700cd1b8-6cf2-4169-842f-6fe8e81c3431.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c6079d15": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_131744_c6079d15-a07c-4899-bcfa-3284689bd581.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/7fa2416c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_173901_7fa2416c-b875-4560-9f45-d1d985b4b76a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ca8001c6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_182414_ca8001c6-8859-4e5e-87ef-60d11a265e60.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f253be3d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_183745_f253be3d-86e3-4b03-8acb-8ad0654f7fb6.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/81b13c3a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_185514_81b13c3a-5e08-4434-a389-194e3c82f270.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c72d7ff8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_192102_c72d7ff8-1d0a-487d-9c08-c0642f888272.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e809dd48": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_224845_e809dd48-853e-4b31-8546-c0beade6b4af.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/814a4152": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_225233_814a4152-6a94-478a-8e81-ba2a25e547d0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4db47a00": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260907_230813_4db47a00-7c6a-4cf1-8b09-303346079e12.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/091c8486": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_004821_091c8486-fc59-4bc9-884b-d462226af3b6.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/87cdc04e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_011220_87cdc04e-420a-491d-b502-c46096dcd13d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a25b761f": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_013342_a25b761f-45c7-4adb-a6f3-af48f44714af.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ce98c3a9": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_093132_ce98c3a9-49d4-498e-bec6-57430ef3abbf.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/dcbf6f21": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_190150_dcbf6f21-d73f-4c32-a622-1a7a6702a776.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/18cbc9ed": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_220750_18cbc9ed-92cd-4e90-8fb2-e853416e2222.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/29b28e51": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_221318_29b28e51-7fd7-46ef-b184-a6e0dbbc0905.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e98311a4": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_223220_e98311a4-5477-425f-a9f5-e14f1b3f0753.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/26437521": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_225433_26437521-ca82-44ee-9f76-e4f39fa14ff0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/8840f37d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260908_235045_8840f37d-b096-406d-9924-b85a9acf8ea5.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/99d7cb9e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260909_001305_99d7cb9e-1d13-4fb6-ba32-b7dfea5d5439.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1bbe1ee6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260909_002557_1bbe1ee6-1bde-4756-8300-119a2d3d049f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/d7bfc2fb": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260909_193345_d7bfc2fb-608b-44f6-ac57-a164ba216a21.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "9.0 balloon burst over the Arc de Triomphe (vertical ad)"
+  },
+  "hfg/b4e10355": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260909_202725_b4e10355-9a8b-4d84-9287-909d83c1ae26.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ad8d3662": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260909_204809_ad8d3662-e52c-4f1f-8649-5d8de3f133a6.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/326a9c1b": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260910_102551_326a9c1b-b4ea-4974-b53b-544604034347.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/b114521c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260910_103537_b114521c-fb48-4009-8574-a6c3d14278de.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/2b354721": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260910_113945_2b354721-7260-4a64-8a2b-841f96996ec8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/687fe9ae": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260910_132844_687fe9ae-fd22-405f-aa27-1108294b14c8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f7472e31": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260911_103950_f7472e31-8b28-4272-83bf-a11a15a9c54e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/26b725c6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_010613_26b725c6-2d36-48f8-9daf-806738f5eef8.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c7c099dc": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_010613_c7c099dc-6aec-4251-b8fb-0e649396869a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1b6f5fc8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_111502_1b6f5fc8-d558-46a9-8dd6-c2f140db86d1.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3a21f48a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_114222_3a21f48a-da33-4ccd-9491-7aefc52bc36a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3f634fea": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_125547_3f634fea-9a26-4312-910d-20e84fd4b84f.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "8.6 giant aligner in the London arch (vertical ad)"
+  },
+  "hfg/483691d7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260914_125653_483691d7-eba9-4ea2-b4a6-eb0693efe745.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "10.9 gold confetti in the car"
+  },
+  "hfg/d4773631": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260917_042828_d4773631-f584-49af-8e0b-985f6c2c42ab.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/53eb6a72": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260917_223347_53eb6a72-4445-4dd3-bf31-737582818def.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ba7b5f6b": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260917_225755_ba7b5f6b-d09c-4108-81df-68f384b0ea98.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/2bd30b83": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_020900_2bd30b83-cd78-4fc3-a881-22b54cb75566.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/4b5d9b43": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_025729_4b5d9b43-76df-4d88-b8b5-7a943256642c.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/2d87c5c8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_030225_2d87c5c8-0528-4530-94fd-bdce44bfdf2c.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/d5ec1c10": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_035714_d5ec1c10-ae91-4c28-8b4e-5d357180b1e9.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/319098e6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_040926_319098e6-c789-4594-9b88-34c991423336.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/23bf750e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_041722_23bf750e-dbe3-4443-9193-ebd13278da1d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/263ef16c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_041722_263ef16c-7a86-4813-8aa0-79e94dbdfcba.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9b641e1d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_044554_9b641e1d-7a54-4db3-ae91-f49f885cb9d7.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1f1ed77a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_051144_1f1ed77a-b7e3-4366-9fea-608fa2abfd51.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ad47909d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260918_052951_ad47909d-3f43-481b-9c64-50adb05c6f2a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/042bab7d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_031451_042bab7d-5a61-4033-bbef-494209944b6f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ba7a3888": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_031451_ba7a3888-0364-4a4a-8fe5-5ecb6a9f7296.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/db6fbfee": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_031451_db6fbfee-6fea-49a6-9c64-b098d1433106.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "15.2 plane over the jungle; 22.0 kid pilot in goggles"
+  },
+  "hfg/3ae8561e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_032410_3ae8561e-4c24-4655-8a70-698ebd2b9292.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/126e9f62": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_035748_126e9f62-4c46-4356-9637-7d5f536aa267.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/eb4c8939": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_035748_eb4c8939-fe8c-4b10-ba34-16a2f3ebc371.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "27.4 seaplane over Manhattan at sunset; 15.2 boy pilot, excited; 2.0 pilot in the leather helmet"
+  },
+  "hfg/7e4b9355": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260920_040018_7e4b9355-e90f-4f55-9e2d-05b5a800ab3b.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "18.4 jungle waterfall, wide; 5.6 warthog charging over the bridge"
+  },
+  "hfg/c4c06d74": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260922_013203_c4c06d74-ffb9-4833-a57b-c3d8e8f5f147.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/9ca0aa18": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_075451_9ca0aa18-be62-4f28-b955-aa3cbb5f0e86.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/0627f775": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_083533_0627f775-ad55-4a7b-ae69-8464748c8c59.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3135992a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090423_3135992a-d521-4dd0-8cd9-547a4ee50f21.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/24060e2a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090626_24060e2a-87dd-44c6-b0bc-181c6f135091.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a0874f67": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090626_a0874f67-ff8b-4f27-9ec4-c1e1140ca545.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e031035b": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090626_e031035b-c5ec-49a9-9c6a-e03548018135.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e79640cb": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090627_e79640cb-aebc-4828-92f1-996f23178354.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/70239bec": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090628_70239bec-96f1-439c-95fe-0718a2cc31f6.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "10.0 Pixar-style Levites with trumpets"
+  },
+  "hfg/bb234bf7": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_090628_bb234bf7-0dcd-48a4-b890-a109b3351630.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "0.5 Temple: the night concert"
+  },
+  "hfg/5f08d050": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_091027_5f08d050-7177-4950-974d-526ea1ab1410.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/a79672af": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_091203_a79672af-e5cc-49f1-adba-4dfb388af889.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/f6b3e27d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_094608_f6b3e27d-f0d8-4769-a46d-53efd8c21f3a.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/fe2ff4ec": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_094740_fe2ff4ec-71f7-495d-8053-7804e476b63d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/38c7f769": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_100508_38c7f769-4f16-46ce-b095-10d5764af4fa.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/2b1c907e": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102710_2b1c907e-7f32-4e7e-a05b-552e0bb0bb35.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/3d3f2a80": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102711_3d3f2a80-42d3-4a88-a02c-5e90af4e260e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/8531aed8": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102711_8531aed8-a9ac-4fa5-80d0-b6db359bcad4.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/31fbd2e2": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102712_31fbd2e2-61a5-4624-9899-a543324eba42.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/74ed36cc": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102712_74ed36cc-ae05-46fa-9827-13d69a9215b7.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/99b9828c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102714_99b9828c-534f-4cd4-8cde-9fee16a226f3.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1f3ff754": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_102733_1f3ff754-ce0f-40a1-8e56-20b9a362633e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/2e1ecd2c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_103950_2e1ecd2c-781b-4a04-b412-701f145b97d3.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/b579052c": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_103950_b579052c-13c9-46a1-b8a8-dc8b9c239d1b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/e12638d6": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_103953_e12638d6-bac5-4d5f-a7ef-bef95b08baa0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/1372e325": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_104209_1372e325-e961-4403-b228-1e3dcb4c00e7.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/78e63022": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_104211_78e63022-bec5-43e4-b899-33a677f2d186.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/b8a2d089": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_104212_b8a2d089-fd1d-4f40-8db3-bda2bb76338f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/da1a86b4": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_110316_da1a86b4-335f-43bc-8bf0-ea6309d94aa0.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/660810b5": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_110512_660810b5-2b1c-4a22-b253-f6945414f83e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/ad7709c1": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_111445_ad7709c1-047d-46f9-83ca-8d831946469b.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/280cade3": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_111448_280cade3-f7ea-49d2-a2b4-a666b7c1806f.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/78eb482a": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_111538_78eb482a-9037-4301-af8b-77f5db7dc97e.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/45a98b74": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_113220_45a98b74-4042-41f0-bee5-de29a36ab319.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/929d469d": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_113223_929d469d-ec91-4011-bde4-690e6ed7ab4d.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/07ac45af": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_113347_07ac45af-c00f-44dc-9f6d-3a45ef6ade68.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/24a2907f": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_114158_24a2907f-237b-4b63-bb27-fda373d4444f.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "0.6 Temple: menorah ladders"
+  },
+  "hfg/c6b47165": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_114202_c6b47165-aabc-478c-81b2-3acef7bed866.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c675a691": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_114542_c675a691-a116-4700-889c-a62976fca866.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c43b0724": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_140717_c43b0724-9ffe-46db-b3d7-639c316d1eea.mp4",
+   "owner": "levik",
+   "use": "yes",
+   "note": "1.6 Temple: priests at the altar"
+  },
+  "hfg/09895046": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20260929_143732_09895046-9de0-4ca0-b669-ed8686dfd5bc.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "hfg/c64b4c25": {
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3AXs3WVAd5xBb16uUCxcm5dZcnJ/hf_20261001_010343_c64b4c25-0b39-45fb-b777-c80dd10ef586.mp4",
+   "owner": "levik",
+   "use": "check",
+   "note": "Higgsfield generation: survey before use"
+  },
+  "mag/s7DyTOsl8e": {
+   "url": null,
+   "owner": "levik",
+   "use": "yes",
+   "note": "Magnific One: Levik presenting in the LEVIK studio, to camera. Presenter shots: at most one per film.",
+   "magnific": "s7DyTOsl8e"
+  },
+  "mag/P3m28Bh42C": {
+   "url": null,
+   "owner": "levik",
+   "use": "yes",
+   "note": "Magnific One: studio wide, presenting. Presenter shots: at most one per film.",
+   "magnific": "P3m28Bh42C"
+  },
+  "mag/P3m280e42C": {
+   "url": null,
+   "owner": "levik",
+   "use": "yes",
+   "note": "Magnific One: close-up in the studio. Presenter shots: at most one per film.",
+   "magnific": "P3m280e42C"
+  },
+  "mag/KLYgG7Rkqp": {
+   "url": null,
+   "owner": "levik",
+   "use": "yes",
+   "note": "Magnific One: studio, side angle. Presenter shots: at most one per film.",
+   "magnific": "KLYgG7Rkqp"
+  },
+  "mag/yitZoMrPW9": {
+   "url": null,
+   "owner": "levik",
+   "use": "yes",
+   "note": "Magnific One: studio wide. Presenter shots: at most one per film.",
+   "magnific": "yitZoMrPW9"
+  }
+ },
+ "music": {
+  "detonation": {
+   "url": "https://kolbo-general-media.fra1.cdn.digitaloceanspaces.com/stock-music/epic-metal/audio/trailer-detonation-5a6d2d90.mp3",
+   "note": "Trailer Detonation (the ad). Drop at 52.651 s lands on TD; 132 BPM"
+  },
+  "cowbell_menace": {
+   "url": "https://media.kolbo.ai/kolboai-media/stock-imports/kolbo-ai/69ac7656803a390b5c907794/Cowbell-Menace-cfea3ee6-de34-47ea-b367-3b4b9895abb0.mp3",
+   "note": "Cowbell Menace (the aura edit)"
+  }
+ }
+}

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="he"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Rubik;font-weight:300 900;src:url(assets/rubik-hebrew-wght-normal.woff2) format('woff2');unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Rubik;font-weight:300 900;src:url(assets/rubik-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+html,body{margin:0;background:transparent;overflow:hidden}
+canvas{display:block}
+</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="timeline.js"></script>
+<script>
+// LEVIK PRODUCTION ad v4 — motion layer. Every pixel is a function of t (seconds).
+// ?layer=gfx  -> RGBA graphics over footage
+// ?layer=mask -> white where footage track B shows, black where track A shows
+const TL = window.TL, FPS = TL.fps, W = 1080, H = 1920, TD = TL.TD, BB = TL.BB, TB = TL.tb;
+const LAYER = new URLSearchParams(location.search).get('layer') || 'gfx';
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const STOPS = [[0, '#93D5E8'], [0.36, '#5CA7E8'], [0.68, '#A762DD'], [1, '#F388EE']];
+const CREAM = '#F3F1EC', INK = '#121216', STAGE = '#0A0A0C';
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, t0, d) => clamp((t - t0) / d);
+const expoOut = x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x);
+const expoIn = x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10);
+const inOut = x => x <= 0 ? 0 : x >= 1 ? 1 : x < .5 ? Math.pow(2, 20 * x - 10) / 2 : (2 - Math.pow(2, -20 * x + 10)) / 2;
+const smooth = x => x * x * (3 - 2 * x);
+const mix = (a, b, p) => a + (b - a) * p;
+const F = n => n / FPS;
+
+function grad(x0, y0, x1, y1) {
+  const g = ctx.createLinearGradient(x0, y0, x1, y1);
+  for (const [o, c] of STOPS) g.addColorStop(o, c);
+  return g;
+}
+
+// ---------- assets ----------
+const IMG = {};
+const NAMES = ['icon', 'icon_L', 'icon_V', 'logo_full'].concat([0, 1, 2, 3, 4].map(i => 'wm_' + i), [...Array(10).keys()].map(i => 'pr_' + i));
+window.ready = (async () => {
+  await Promise.all(NAMES.map(async n => { const im = new Image(); im.src = 'assets/' + n + '.png'; await im.decode(); IMG[n] = im; }));
+  await document.fonts.load('900 100px Rubik', 'אבג'); await document.fonts.load('700 100px Rubik', 'אבג ABC');
+  await document.fonts.ready;
+  // dark copies of the wordmark pieces for the white end card
+  for (const n of NAMES.filter(n => /^(wm|pr)_/.test(n))) {
+    const im = IMG[n], c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
+    const g = c.getContext('2d'); g.drawImage(im, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = INK; g.fillRect(0, 0, c.width, c.height);
+    IMG[n + '_ink'] = c;
+  }
+  return true;
+})();
+
+// ---------- timeline helpers ----------
+const SHOTS = TL.shots;
+function shotIndexAt(t) { for (const s of SHOTS) if (t >= s.t0 && t < s.t1) return s.i; return -1; }
+function activeTrans(t) {
+  for (const k in TL.trans) {
+    const tr = TL.trans[k]; if (!tr.D) continue;
+    const c = SHOTS[k].t0, h = F(tr.D) / 2;
+    if (t >= c - h && t < c + h) return { i: +k, tr, p: (t - (c - h)) / (2 * h), c };
+  }
+  return null;
+}
+function inOpaque(t) { return TL.opaque.some(([a, b]) => t >= a && t < b); }
+
+// ---------- text ----------
+function setFont(size, weight) { ctx.font = `${weight} ${size}px Rubik`; ctx.direction = 'rtl'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; }
+function textW(s, size, weight) { setFont(size, weight); return ctx.measureText(s).width; }
+function heroText(s, x, y, size, o = {}) {
+  const sc = o.scale ?? 1, al = o.alpha ?? 1; if (al <= 0) return;
+  ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y + (o.rise || 0)); ctx.scale(sc, sc);
+  setFont(size, o.weight || 900);
+  ctx.shadowColor = o.shadow === 0 ? 'transparent' : 'rgba(0,0,0,0.55)'; ctx.shadowBlur = o.shadow ?? 28; ctx.shadowOffsetY = 4;
+  ctx.fillStyle = o.fill || CREAM; ctx.fillText(s, 0, 0);
+  ctx.restore();
+}
+// 3D type: an extruded block in the brand's deep tones under a lit face, with a sheen that sweeps across on arrival.
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const lerpCol = (a, b, q) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * q)).join(',')})`; };
+function text3D(s, x, y, size, o = {}) {
+  const sc = o.scale ?? 1, al = o.alpha ?? 1; if (al <= 0 || sc <= 0) return;
+  const depth = Math.max(0, (o.depth ?? size * 0.17) * (o.k3 ?? 1));
+  const ang = o.ang ?? 1.0, dx = Math.cos(ang), dy = Math.sin(ang);
+  setFont(size, o.weight || 900);
+  const w = ctx.measureText(s).width, pw = Math.ceil(w + size * 0.6), ph = Math.ceil(size * 1.7);
+  // the lit face on its own canvas so the sheen and bevel shading stay inside the glyphs
+  const off = document.createElement('canvas'); off.width = pw; off.height = ph; const c = off.getContext('2d');
+  c.font = `${o.weight || 900} ${size}px Rubik`; c.direction = 'rtl'; c.textAlign = 'center'; c.textBaseline = 'middle';
+  let face;
+  if (o.face === 'brand') { face = c.createLinearGradient(pw / 2 + w / 2, 0, pw / 2 - w / 2, 0); for (const [q, col] of STOPS) face.addColorStop(q, col); }
+  else { face = c.createLinearGradient(0, ph / 2 - size / 2, 0, ph / 2 + size / 2); face.addColorStop(0, '#FFFFFF'); face.addColorStop(0.55, '#F3F1EC'); face.addColorStop(1, '#D9D2F2'); }
+  c.fillStyle = face; c.fillText(s, pw / 2, ph / 2);
+  c.globalCompositeOperation = 'source-atop';
+  const shade = c.createLinearGradient(0, ph / 2 - size / 2, 0, ph / 2 + size / 2);
+  shade.addColorStop(0, 'rgba(255,255,255,0.35)'); shade.addColorStop(0.45, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(20,10,50,0.28)');
+  c.fillStyle = shade; c.fillRect(0, 0, pw, ph);
+  if (o.sheen > 0 && o.sheen < 1) {
+    const bx = mix(pw + size, -size, o.sheen), g = c.createLinearGradient(bx - size * 0.5, 0, bx + size * 0.5, 0);
+    g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,0.85)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    c.save(); c.translate(bx, ph / 2); c.transform(1, 0, -0.45, 1, 0, 0); c.translate(-bx, -ph / 2); c.fillStyle = g; c.fillRect(0, 0, pw, ph); c.restore();
+  }
+  ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y + (o.rise || 0)); ctx.scale(sc, sc);
+  if (o.skew) ctx.transform(1, 0, o.skew, 1, 0, 0);
+  // soft contact shadow, then the extrusion from the back layer forward
+  ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = size * 0.28; ctx.shadowOffsetY = 8;
+  const front = o.face === 'brand' ? '#4b3a9e' : '#7a63d8', back = o.face === 'brand' ? '#0d0726' : '#1a0f3d';
+  const n = Math.round(depth);
+  for (let i = n; i >= 1; i--) {
+    ctx.fillStyle = lerpCol(front, back, i / n); ctx.fillText(s, i * dx, i * dy);
+    if (i === n) { ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; }
+  }
+  ctx.shadowColor = 'transparent';
+  ctx.drawImage(off, -pw / 2, -ph / 2);
+  // rim light along the glyph edges
+  ctx.lineWidth = Math.max(1.5, size * 0.012); ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.strokeText(s, -0.6, -0.6);
+  ctx.restore();
+}
+// relay line: draws right-to-left under a word, the film's travelling device
+function relayLine(xc, y, w, p, thick = 8, alpha = 1) {
+  if (p <= 0 || alpha <= 0) return;
+  const x1 = xc + w / 2, x0 = x1 - w * p;
+  ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = grad(xc + w / 2, 0, xc - w / 2, 0);
+  ctx.shadowColor = 'rgba(167,98,221,0.55)'; ctx.shadowBlur = 16;
+  roundRect(x0, y - thick / 2, x1 - x0, thick, thick / 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x0, y, thick * 0.95, 0, Math.PI * 2); ctx.fillStyle = '#ffffff'; ctx.fill();
+  ctx.restore();
+}
+function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, Math.max(0, w), h, r); }
+// ---------- aura type ----------
+// The reference aura edit: one huge heavy word per beat, punched in, sitting on the footage.
+// Here every word lands with a short smear of brand-coloured copies and an RGB split that settle in ~9 frames.
+const PAL = ['#93D5E8', '#5CA7E8', '#A762DD', '#F388EE'];
+function rng(seed) { let s = seed >>> 0 || 1; return () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296; }
+const pool = [];
+function scratch(k, w, h) {
+  const c = pool[k] || (pool[k] = document.createElement('canvas'));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; } else c.getContext('2d').clearRect(0, 0, w, h);
+  return c;
+}
+// the word as a flat silhouette in one colour on a reusable canvas
+function wordSil(k, s, size, color, wt) {
+  setFont(size, wt); const w = Math.ceil(ctx.measureText(s).width + size * 0.6), h = Math.ceil(size * 1.7);
+  const c = scratch(k, w, h), g = c.getContext('2d');
+  g.font = `${wt} ${size}px Rubik`; g.direction = 'rtl'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = color; g.fillText(s, w / 2, h / 2);
+  return c;
+}
+// style: white (on footage) | glow (brand gradient, white rim, pink glow) | grad (brand gradient) | ink (black, for white cards)
+function auraWord(s, t, t0, t1, x, y, size, o = {}) {
+  if (t < t0 || t >= t1) return;
+  const wt = o.weight || 900, al = o.alpha ?? 1;
+  const w0 = textW(s, size, wt); if (w0 > (o.maxW || 1000)) size *= (o.maxW || 1000) / w0;
+  const el = (t - t0) * FPS, k = expoOut(clamp(el / 6)), sm = 1 - expoOut(clamp(el / 9));
+  const sc = mix(o.from ?? 1.32, 1, k) * (1 + 0.025 * clamp(el / 40)) * (o.mul ?? 1);
+  const style = o.style || 'white';
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0); ctx.scale(sc, sc);
+  if (sm > 0.02) {
+    const dir = o.dir ?? -1;
+    ctx.filter = `blur(${Math.round(size * 0.03)}px)`;
+    for (let j = 10; j >= 1; j--) {
+      const q = j / 10, sil = wordSil(1, s, size, PAL[j % 4], wt);
+      ctx.globalAlpha = al * sm * 0.5 * (1 - q * 0.6);
+      ctx.drawImage(sil, -sil.width / 2 + dir * q * size * 0.6 * sm, -sil.height / 2 + q * size * 0.12 * sm);
+    }
+    ctx.filter = 'none';
+    const d = size * 0.08 * sm;
+    ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = al * 0.9;
+    let sil = wordSil(1, s, size, PAL[0], wt); ctx.drawImage(sil, -sil.width / 2 - d, -sil.height / 2);
+    sil = wordSil(1, s, size, PAL[3], wt); ctx.drawImage(sil, -sil.width / 2 + d, -sil.height / 2);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  ctx.globalAlpha = al * clamp(el / 2 + 0.5);
+  setFont(size, wt);
+  const tw = ctx.measureText(s).width;
+  const gr = () => { const g = ctx.createLinearGradient(tw / 2, -size / 2, -tw / 2, size / 2); for (const [q, c] of STOPS) g.addColorStop(q, c); return g; };
+  if (style === 'glow') {
+    ctx.shadowColor = 'rgba(243,136,238,0.95)'; ctx.shadowBlur = size * 0.42;
+    ctx.lineJoin = 'round'; ctx.lineWidth = size * 0.085; ctx.strokeStyle = '#FFFFFF'; ctx.strokeText(s, 0, 0);
+    ctx.shadowColor = 'transparent'; ctx.fillStyle = gr(); ctx.fillText(s, 0, 0);
+  } else if (style === 'ink') {
+    ctx.fillStyle = INK; ctx.fillText(s, 0, 0);
+  } else {
+    ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = size * 0.2; ctx.shadowOffsetY = size * 0.03;
+    ctx.fillStyle = style === 'grad' ? gr() : '#FFFFFF'; ctx.fillText(s, 0, 0);
+  }
+  ctx.restore();
+}
+// small caption line, the aura edit's whisper above the big word
+function fitSize(s, size, maxW, wt = 900) { const w = textW(s, size, wt); return w > maxW ? size * maxW / w : size; }
+function caption(s, t, t0, t1, y, o = {}) {
+  if (t < t0 || t >= t1) return;
+  heroText(s, 540, y, o.size || 44, { alpha: clamp((t - t0) * FPS / 3), weight: 600, shadow: 16, fill: o.fill });
+}
+// LEVIK MODE: the aura edit's corner switch, flipped on after the logo and left on
+function modeSwitch(t) {
+  const [a, on, b] = TL.mode; if (t < a || t >= b) return;
+  const k = expoOut(clamp((t - a) * FPS / 6)), ko = expoOut(clamp((t - on) * FPS / 5));
+  const w = 164, h = 84, x = 56, y = 96;
+  ctx.save(); ctx.globalAlpha = k; ctx.translate(x, y);
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 18;
+  roundRect(0, 0, w, h, h / 2); ctx.fillStyle = 'rgba(16,16,22,0.62)'; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  if (ko > 0) { ctx.globalAlpha = k * ko; roundRect(0, 0, w, h, h / 2); ctx.fillStyle = grad(0, 0, w, 0); ctx.fill(); ctx.shadowColor = 'rgba(243,136,238,0.8)'; ctx.shadowBlur = 26 * ko; ctx.fill(); ctx.shadowColor = 'transparent'; }
+  ctx.globalAlpha = k; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,0.75)'; roundRect(0, 0, w, h, h / 2); ctx.stroke();
+  const kx = mix(h / 2, w - h / 2, ko);
+  ctx.beginPath(); ctx.arc(kx, h / 2, h / 2 - 7, 0, Math.PI * 2); ctx.fillStyle = '#FFFFFF'; ctx.fill();
+  const iw = 42; ctx.drawImage(IMG.icon, kx - iw / 2, h / 2 - iw * 349 / 383 / 2, iw, iw * 349 / 383);
+  ctx.font = '800 36px Rubik'; ctx.direction = 'ltr'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = 10; ctx.fillStyle = `rgba(255,255,255,${mix(0.55, 1, ko)})`;
+  ctx.fillText('LEVIK', w + 20, h / 2 - 19); ctx.fillText('MODE', w + 20, h / 2 + 20);
+  ctx.restore();
+}
+// sun-ray burst behind the logo (the reference burst, in brand colours)
+function rays(cx, cy, t, t0, a) {
+  const el = (t - t0) * FPS; if (el < 0 || a <= 0) return;
+  const r = rng(11); ctx.save(); ctx.lineCap = 'round';
+  for (let j = 0; j < 46; j++) {
+    const ang = r() * Math.PI * 2 + t * 0.12, len = 280 + r() * 760, lw = 2 + r() * 5, col = r() < 0.3 ? '#FFFFFF' : PAL[Math.floor(r() * 4)], sp = 0.6 + r() * 0.8;
+    const g = expoOut(clamp(el / 10 * sp)), r0 = 250 + 60 * g, r1 = r0 + len * g;
+    ctx.globalAlpha = a * (0.85 - 0.4 * clamp((el - 10) / 30));
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(ang) * r0, cy + Math.sin(ang) * r0); ctx.lineTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1); ctx.stroke();
+  }
+  ctx.restore();
+}
+function riseWord(s, t, t0, t1, x, y, size, o = {}) {
+  if (t < t0 || t >= t1) return;
+  const el = (t - t0) * FPS, k = expoOut(clamp(el / 18));
+  const out = o.fadeOut ? clamp((t1 - t) * FPS / 6) : 1;
+  if (o.flat) { heroText(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight, fill: o.fill, shadow: o.shadow }); return; }
+  text3D(s, x, y, size, { alpha: mix(0.4, 1, k) * out * clamp(el / 2), rise: mix(28, 0, k), weight: o.weight, k3: mix(0.25, 1, k),
+    sheen: clamp((el - 6) / 18), ang: 1.0 + 0.22 * Math.sin(t * 1.4), face: o.face });
+}
+function pill(s, t, t0, t1, y) {
+  if (t < t0 || t >= t1) return;
+  const el = (t - t0) * FPS, k = expoOut(clamp(el / 6));
+  const size = 62, w = textW(s, size, 700) + 76, h = size + 34;
+  ctx.save(); ctx.globalAlpha = k; ctx.translate(540, y); ctx.scale(mix(0.86, 1, k), mix(0.86, 1, k));
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 6;
+  roundRect(-w / 2, -h / 2, w, h, h / 2); ctx.fillStyle = grad(w / 2, 0, -w / 2, 0); ctx.fill();
+  ctx.shadowColor = 'transparent'; setFont(size, 700); ctx.fillStyle = INK; ctx.fillText(s, 0, 4);
+  ctx.restore();
+}
+
+// ---------- logo ----------
+// stacked lockup: icon above the LEVIK wordmark, PRODUCTION under it. All pieces are crops of the supplied logo files.
+const SEG = { levik: [[242, 290], [312, 362], [380, 446], [467, 484], [510, 570]], prod: [[292, 304], [317, 329], [340, 354], [366, 378], [390, 403], [415, 428], [439, 452], [464, 467], [479, 493], [505, 519]] };
+function drawLogo(t, t0, cy, S = 1, o = {}) {
+  const el = (t - t0) * FPS; if (el < 0) return;
+  const breath = o.still ? 1 : 1 + 0.03 * clamp((t - t0 - 0.6) / 1.4);
+  const iw = 500 * S * breath, ih = iw * 349 / 383, ix = 540 - iw / 2, iy = cy - ih / 2;
+  const ia = o.iconAlpha ?? 1;
+  // icon: L rises in, V drops in 2 frames later, then the exact full icon
+  if (el < 10) {
+    const kL = expoOut(clamp(el / 7)), kV = expoOut(clamp((el - 2) / 7));
+    ctx.save(); ctx.globalAlpha = kL * ia; ctx.translate(540, cy); ctx.scale(mix(1.25, 1, kL), mix(1.25, 1, kL));
+    ctx.drawImage(IMG.icon_L, -iw / 2 - mix(70, 0, kL), -ih / 2 + mix(90, 0, kL), iw, ih); ctx.restore();
+    ctx.save(); ctx.globalAlpha = kV * ia; ctx.translate(540, cy); ctx.scale(mix(1.25, 1, kV), mix(1.25, 1, kV));
+    ctx.drawImage(IMG.icon_V, -iw / 2 + mix(70, 0, kV), -ih / 2 - mix(90, 0, kV), iw, ih); ctx.restore();
+  } else if (ia > 0) { ctx.save(); ctx.globalAlpha = ia; ctx.drawImage(IMG.icon, ix, iy, iw, ih); ctx.restore(); }
+  const wa = o.wordAlpha ?? 1, wy = o.wordRise || 0; if (wa <= 0) return;
+  // LEVIK letters slam 1.9 -> 1, 3 frames apart (left to right, it is Latin)
+  const k = 2.0 * S, cxL = (242 + 570) / 2, yW = cy + ih / 2 + 105 * S + wy;
+  SEG.levik.forEach(([x0, x1], i) => {
+    const e = el - 9 - i * 3; if (e < 0) return;
+    const img = IMG['wm_' + i + (o.ink ? '_ink' : '')], s = mix(1.9, 1, expoOut(clamp(e / 18)));
+    const w = img.width * k * s, h = img.height * k * s, cx = 540 + ((x0 + x1) / 2 - cxL) * k;
+    ctx.save(); ctx.globalAlpha = wa; ctx.drawImage(img, cx - w / 2, yW - h / 2, w, h); ctx.restore();
+  });
+  // PRODUCTION: tracking collapse 3x -> 1
+  const ep = el - 20; if (ep >= 0) {
+    const kk = expoOut(clamp(ep / 24)), cxP = (292 + 519) / 2, yP = yW + 77 * k;
+    SEG.prod.forEach(([x0, x1], i) => {
+      const img = IMG['pr_' + i + (o.ink ? '_ink' : '')], w = img.width * k, h = img.height * k;
+      const cx = 540 + ((x0 + x1) / 2 - cxP) * k * mix(2.6, 1, kk);
+      ctx.save(); ctx.globalAlpha = wa * clamp(ep / 4); ctx.drawImage(img, cx - w / 2, yP - h / 2, w, h); ctx.restore();
+    });
+  }
+}
+function radialGlow(cx, cy, r, a) {
+  ctx.save(); ctx.globalAlpha = a;
+  let g = ctx.createRadialGradient(cx - r * 0.25, cy, 0, cx - r * 0.25, cy, r); g.addColorStop(0, 'rgba(92,167,232,0.55)'); g.addColorStop(1, 'rgba(92,167,232,0)');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  g = ctx.createRadialGradient(cx + r * 0.25, cy, 0, cx + r * 0.25, cy, r); g.addColorStop(0, 'rgba(224,110,237,0.5)'); g.addColorStop(1, 'rgba(224,110,237,0)');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore();
+}
+
+// ---------- transitions: shapes shared by mask and gfx ----------
+// Each fills the INCOMING region for progress p in the current fill style.
+function bladeEdge(p, dir) { return mix(1500, -1500, inOut(p)) * 1; }
+function shapeBlade(p, tr) {
+  const e = bladeEdge(p, tr.dir); ctx.save(); ctx.translate(540, 960); ctx.rotate(tr.dir > 0 ? -0.32 : Math.PI - 0.32);
+  ctx.fillRect(-2400, e, 4800, 4000); ctx.restore();
+}
+function gfxBlade(p, tr) {
+  const e = bladeEdge(p, tr.dir), a = Math.sin(Math.PI * clamp(p)); if (a <= 0.01) return;
+  ctx.save(); ctx.translate(540, 960); ctx.rotate(tr.dir > 0 ? -0.32 : Math.PI - 0.32); ctx.globalAlpha = a;
+  ctx.fillStyle = grad(-1200, 0, 1200, 0); ctx.shadowColor = 'rgba(243,136,238,0.8)'; ctx.shadowBlur = 40;
+  ctx.fillRect(-2400, e - 34, 4800, 34); ctx.shadowBlur = 0; ctx.fillStyle = '#ffffff'; ctx.fillRect(-2400, e - 4, 4800, 5);
+  ctx.restore();
+}
+function barP(p, j, n) { const st = 0.55 / n; return inOut(clamp((p * (1 + st * (n - 1)) - j * st))); }
+function shapeBars(p, tr) {
+  const n = tr.n, bw = W / n;
+  for (let j = 0; j < n; j++) { const q = barP(p, j, n), x = tr.dir < 0 ? W - (j + 1) * bw : j * bw; ctx.fillRect(x - 1, 0, bw + 2, H * q); }
+}
+function gfxBars(p, tr) {
+  const n = tr.n, bw = W / n;
+  for (let j = 0; j < n; j++) {
+    const q = barP(p, j, n); if (q <= 0 || q >= 1) continue;
+    const x = tr.dir < 0 ? W - (j + 1) * bw : j * bw;
+    ctx.save(); ctx.fillStyle = grad(x, 0, x + bw, 0); ctx.shadowColor = 'rgba(92,167,232,0.8)'; ctx.shadowBlur = 24;
+    ctx.fillRect(x, H * q - 10, bw, 10); ctx.restore();
+  }
+}
+const irisR = (p) => 2300 * expoIn(mix(0.35, 1, inOut(p))) * (p > 0 ? 1 : 0);
+function shapeIris(p, tr) { ctx.beginPath(); ctx.arc(tr.cx, tr.cy, irisR(p), 0, Math.PI * 2); ctx.fill(); }
+function gfxIris(p, tr) {
+  const r = irisR(p), a = Math.sin(Math.PI * clamp(p)); if (a <= 0.01 || r < 2) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.lineWidth = 16; ctx.strokeStyle = grad(tr.cx - r, tr.cy - r, tr.cx + r, tr.cy + r);
+  ctx.shadowColor = 'rgba(167,98,221,0.9)'; ctx.shadowBlur = 30; ctx.beginPath(); ctx.arc(tr.cx, tr.cy, r, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+}
+// LV zoom-through: the icon silhouette becomes the window into the next shot
+// zoom anchor: the deepest point of the V, so the last frames sit fully inside the mark
+const LVA = { ax: 0.587, ay: 0.759 }, LV0 = { w: 500, h: 500 * 349 / 383, cx: 540, cy: 760 };
+const LVP = { x: LV0.cx - LV0.w / 2 + LVA.ax * LV0.w, y: LV0.cy - LV0.h / 2 + LVA.ay * LV0.h };
+function lvXform(p) { return mix(1, 22, expoIn(clamp(p))); }
+function lvRect(p) { const s = lvXform(p), w = LV0.w * s, h = LV0.h * s; return [LVP.x - LVA.ax * w, LVP.y - LVA.ay * h, w, h]; }
+function shapeLV(p, color) {
+  const off = document.createElement('canvas'); off.width = W; off.height = H; const o = off.getContext('2d');
+  o.drawImage(IMG.icon, ...lvRect(p));
+  o.globalCompositeOperation = 'source-in'; o.fillStyle = color; o.fillRect(0, 0, W, H);
+  ctx.drawImage(off, 0, 0);
+  if (p > 0.92) { ctx.fillStyle = color; ctx.fillRect(0, 0, W, H); }
+}
+
+// ---------- layers ----------
+function drawMask(t) {
+  const col = tr => tr ? '#ffffff' : '#000000';
+  let si = shotIndexAt(t); if (si < 0) si = 0;
+  const at = activeTrans(t);
+  if (!at) { ctx.fillStyle = col(SHOTS[si].track); ctx.fillRect(0, 0, W, H); return; }
+  const inc = SHOTS[at.i].track, outg = SHOTS[at.i - 1].track;
+  ctx.fillStyle = col(outg); ctx.fillRect(0, 0, W, H); ctx.fillStyle = col(inc);
+  const ty = at.tr.type;
+  if (ty === 'blade') shapeBlade(at.p, at.tr);
+  else if (ty === 'bars') shapeBars(at.p, at.tr);
+  else if (ty === 'iris') shapeIris(at.p, at.tr);
+  else if (ty === 'lv') shapeLV(at.p, col(inc));
+}
+
+function drawGfx(t) {
+  const T = TL.text, tb = TB;
+  if (t < 0.18) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+  // ---- hook: one huge word per shot ----
+  T.hook.forEach(([a, b, s, y, rot]) => auraWord(s, t, a + 0.03, b, 540, y, 200, { rot, dir: y > 1000 ? -1 : 1 }));
+  // ---- three cards, white / black / white, then the last word implodes into the drop ----
+  if (t >= 4.85 && t < TD) {
+    const imp = expoIn(prog(t, TD - 0.36, 0.36));
+    let ci = 0; T.cards.forEach(([a], i) => { if (t >= a) ci = i; });
+    const [a, s, bg] = T.cards[ci], b = ci + 1 < T.cards.length ? T.cards[ci + 1][0] : TD;
+    ctx.fillStyle = bg === 'white' ? '#FFFFFF' : STAGE; ctx.fillRect(0, 0, W, H);
+    auraWord(s, t, a, b, 540, 960, 200, { style: bg === 'white' ? 'ink' : 'white', from: 1.25, mul: mix(1, 0.04, imp), alpha: 1 - imp * 0.6 });
+    if (imp > 0) {
+      const r = mix(4, 26, imp); ctx.save(); ctx.fillStyle = '#F388EE'; ctx.shadowColor = '#A762DD'; ctx.shadowBlur = 50 * imp;
+      ctx.beginPath(); ctx.arc(540, 960, r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+  }
+  // ---- drop: ray burst and logo over dimmed footage, then the zoom through the mark ----
+  const lvT = TL.trans['4'], lvStart = SHOTS[4].t0 - F(lvT.D) / 2;
+  if (t >= TD && t < SHOTS[4].t0 + F(lvT.D) / 2) {
+    const pz = prog(t, lvStart, F(lvT.D));
+    const off = document.createElement('canvas'); off.width = W; off.height = H; const o = off.getContext('2d');
+    o.fillStyle = 'rgba(8,8,12,0.62)'; o.fillRect(0, 0, W, H);
+    if (pz > 0) { o.globalCompositeOperation = 'destination-out'; o.drawImage(IMG.icon, ...lvRect(pz)); if (pz > 0.92) o.clearRect(0, 0, W, H); }
+    ctx.drawImage(off, 0, 0);
+    radialGlow(540, 760, 620, 0.55 * (1 - pz));
+    rays(540, 760, t, TD, 1 - smooth(clamp(pz / 0.3)));
+    const el = (t - TD) * FPS;
+    if (el < 14) { const q = expoOut(el / 14); ctx.save(); ctx.globalAlpha = 1 - q; ctx.lineWidth = mix(26, 2, q); ctx.strokeStyle = grad(0, 0, W, 0); ctx.beginPath(); ctx.arc(540, 960, mix(10, 980, q), 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
+    const wordOut = expoIn(clamp(pz / 0.45));
+    drawLogo(t, TD, 760, 1, { iconAlpha: pz > 0 ? 0 : 1, wordAlpha: 1 - wordOut, wordRise: -60 * wordOut, still: true });
+    if (pz > 0 && pz < 0.45) { ctx.save(); ctx.globalAlpha = 1 - smooth(clamp(pz / 0.45)); ctx.drawImage(IMG.icon, ...lvRect(pz)); ctx.restore(); }
+    riseWord(T.studio, t, TD + 0.62, lvStart + 0.12, 540, 1440, 60, { weight: 700, fadeOut: true, flat: true });
+  }
+  // ---- category bars: a tag and one huge word per bar ----
+  const BAR_STYLE = ['white', 'glow', 'white', 'white', 'glow', 'grad', 'glow'], BAR_ROT = [0, -0.06, 0, 0, 0.05, -0.05, 0];
+  T.bars.forEach(([tag, word, wy], j) => {
+    const a = tb[j + 1], b = tb[j + 2];
+    pill(tag, t, a, b, j === 3 ? 1640 : wy > 1000 ? 1420 : 1440);
+    auraWord(word, t, a + 0.04, b, 540, wy, 250, { style: BAR_STYLE[j], rot: BAR_ROT[j], dir: j % 2 ? 1 : -1 });
+  });
+  // ---- half-beat montage seen only through the letters of a white card (the aura edit's knockout word) ----
+  if (t >= tb[8] && t < tb[9]) {
+    let kick = 1;
+    for (let i = 23; i <= 30; i++) { const f = (t - SHOTS[i].t0) * FPS; if (f >= 0 && f < 3) kick = 1 + 0.05 * (1 - f / 3); }
+    const off = scratch(3, W, H), o = off.getContext('2d');
+    o.fillStyle = '#FFFFFF'; o.fillRect(0, 0, W, H);
+    o.globalCompositeOperation = 'destination-out';
+    const [w1, w2] = T.montage.split(' '), s1 = fitSize(w1, 640, 1010), s2 = fitSize(w2, 360, 1010);
+    const sc = (1 + 0.05 * prog(t, tb[8], tb[9] - tb[8])) * kick;
+    o.save(); o.translate(540, 960); o.scale(sc, sc); o.direction = 'rtl'; o.textAlign = 'center'; o.textBaseline = 'middle';
+    o.font = `900 ${s1}px Rubik`; o.fillText(w1, 0, -s1 * 0.36);
+    o.font = `900 ${s2}px Rubik`; o.fillText(w2, 0, s1 * 0.42);
+    o.restore(); o.globalCompositeOperation = 'source-over';
+    ctx.drawImage(off, 0, 0);
+  }
+  // ---- idea line ----
+  auraWord(T.idea[0][0], t, tb[9] + 0.04, tb[9] + 2 * BB, 540, T.idea[0][1], 200, { style: 'glow' });
+  auraWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 200, { dir: 1 });
+  // ---- break: question, answer, the face, the offer ----
+  auraWord(T.break[0][0], t, tb[10] + 0.25, tb[11], 540, T.break[0][1], 190, { rot: -0.07 });
+  auraWord(T.break[1][0], t, tb[11] + 0.15, tb[12], 540, T.break[1][1], 180, { dir: 1 });
+  if (t >= TL.face[0] && t < TL.face[1]) {
+    auraWord(T.face_name, t, TL.face[0] + 0.2, TL.face[1], 540, 1480, 170, { style: 'grad' });
+    caption(T.face_role, t, TL.face[0] + 0.45, TL.face[1], 1610, { size: 42 });
+  }
+  auraWord(T.break[2][0], t, tb[13] + 0.04, tb[13] + 2 * BB, 540, T.break[2][1], 210, {});
+  auraWord(T.break[3][0], t, tb[13] + 2 * BB + 0.02, tb[14], 540, T.break[3][1], 220, { style: 'glow', dir: 1 });
+  // ---- end card: the aura edit's white card ----
+  if (t >= tb[14]) {
+    ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H);
+    drawLogo(t, tb[14] + 0.1, 720, 0.92, { ink: true });
+    riseWord(T.end_line, t, tb[14] + 0.85, 99, 540, 1330, 64, { weight: 800, flat: true, fill: INK, shadow: 0 });
+    pill(T.cta, t, tb[14] + 1.2, 99, 1480);
+    caption('LEVIK PRODUCTION  ·  לויק כהן', t, tb[14] + 1.5, 99, 1790, { size: 30, fill: '#6b6b74' });
+  }
+  modeSwitch(t);
+  // ---- transition graphics and flashes ----
+  const at = activeTrans(t);
+  if (at) { const ty = at.tr.type; if (ty === 'blade') gfxBlade(at.p, at.tr); else if (ty === 'bars') gfxBars(at.p, at.tr); else if (ty === 'iris') gfxIris(at.p, at.tr); }
+  let fl = 0, pk = 0;
+  for (const k in TL.trans) {
+    const tr = TL.trans[k], c = SHOTS[k].t0, fi = Math.round((t - c) * FPS);
+    if (tr.type === 'flashcut' && fi >= 0 && fi < 3) fl = Math.max(fl, [0.85, 0.45, 0.15][fi]);
+    if (tr.type === 'pinkflash' && fi >= 0 && fi < 2) pk = Math.max(pk, [0.72, 0.3][fi]);
+    if (tr.type === 'whiteramp') { if (fi >= -3 && fi < 0) fl = Math.max(fl, (fi + 4) / 4); if (fi >= 0 && fi < 3) fl = Math.max(fl, [1, 0.6, 0.25][fi]); }
+  }
+  if (Math.round((t - TD) * FPS) >= 0 && Math.round((t - TD) * FPS) < 3) fl = Math.max(fl, [1, 0.55, 0.2][Math.round((t - TD) * FPS)]);
+  if (pk > 0) { ctx.fillStyle = `rgba(243,136,238,${pk})`; ctx.fillRect(0, 0, W, H); }
+  if (fl > 0) { ctx.fillStyle = `rgba(255,255,255,${fl})`; ctx.fillRect(0, 0, W, H); }
+}
+
+window.seek = function (t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  if (LAYER === 'mask') drawMask(t); else drawGfx(t);
+};
+window.grab = function () { return cv.toDataURL('image/png'); };
+</script></body></html>
