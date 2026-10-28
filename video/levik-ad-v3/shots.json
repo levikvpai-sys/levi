@@ -32,7 +32,7 @@
  {"i": 30, "src": "miami", "in": 12.2, "cx": 0.5, "z0": 1.0, "z1": 1.08, "grade": "punch", "note": "kids + flying mascot (vertical source)"},
  {"i": 31, "src": "titan", "in": 23.3, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "note": "typing the idea"},
  {"i": 32, "src": "levik", "in": 32.7, "cx": 0.66, "z0": 1.06, "z1": 1.0, "grade": "film", "note": "Levik editing the panther film", "sharp": true},
- {"i": 33, "src": "action", "in": 9.0, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "sharp": true, "note": "Levik's motorcycle slides through the neon rain (LEVIK ACTION)"},
+ {"i": 33, "src": "action", "in": 10.0, "cx": 0.52, "z0": 1.0, "z1": 1.06, "grade": "film", "sharp": true, "note": "Levik on the motorcycle, sliding through the neon rain (LEVIK ACTION)"},
  {"i": 34, "src": "action", "in": 3.9, "cx": 0.53, "z0": 1.08, "z1": 1.0, "grade": "film", "sharp": true, "note": "the motorcycle jumps between the skyscrapers"},
  {"i": 35, "src": "action", "in": 21.0, "cx": 0.45, "z0": 1.0, "z1": 1.1, "grade": "film", "sharp": true, "note": "the SUV explodes"},
  {"i": 36, "src": "action", "in": 41.2, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "film", "sharp": true, "note": "Levik by the film camera and the motorcycle, under his name"},
