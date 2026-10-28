@@ -385,7 +385,7 @@ function drawGfx(t) {
   const BAR_STYLE = ['white', 'glow', 'white', 'white', 'glow', 'grad', 'glow'], BAR_ROT = [0, -0.06, 0, 0, 0.05, -0.05, 0];
   T.bars.forEach(([tag, word, wy], j) => {
     const a = tb[j + 1], b = tb[j + 2];
-    pill(tag, t, a, b, j === 3 ? 1640 : 1440);
+    pill(tag, t, a, b, j === 3 ? 1640 : wy > 1000 ? 1420 : 1440);
     auraWord(word, t, a + 0.04, b, 540, wy, 250, { style: BAR_STYLE[j], rot: BAR_ROT[j], dir: j % 2 ? 1 : -1 });
   });
   // ---- half-beat montage: one word that kicks on every cut ----
