@@ -2,6 +2,7 @@
 
   python3 composite.py proxies   -> cut a graded 9:16 proxy per shot from shots.json
   python3 composite.py render    -> A/B tracks + mask.mp4 + gfx.mp4 -> fr/*.jpg in resumable chunks, then out.mp4 with aud/mix.wav
+  python3 composite.py patch BASE N0 -> re-composite frames N0.. over an earlier render BASE (its other frames and its mix are kept)
 
 Track A holds even shots, track B odd shots. mask.mp4 is white where B shows.
 gfx.mp4 is 1080x3840: premultiplied RGB on top, alpha (as grey) underneath.
@@ -134,10 +135,10 @@ class Seq:
         pass
 
 
-def explode():
-    """Decode every proxy and both layers to images, one decoder at a time."""
+def explode(only=None):
+    """Decode the proxies (all, or only those listed) and both layers to images, one decoder at a time."""
     jobs = [(f'{D}/gfx.mp4', f'{D}/g', '%05d.jpg'), (f'{D}/mask.mp4', f'{D}/m', '%05d.png')] + \
-           [(f'{D}/px/{i:02d}.mp4', f'{D}/px/{i:02d}', '%04d.jpg') for i in sorted(SH)]
+           [(f'{D}/px/{i:02d}.mp4', f'{D}/px/{i:02d}', '%04d.jpg') for i in sorted(SH if only is None else only)]
     for src, out, pat in jobs:
         if os.path.exists(out + '/done'): continue
         os.makedirs(out, exist_ok=True)
@@ -263,6 +264,34 @@ def encode():
                            '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{D}/out.mp4']).returncode
 
 
+def render_chunks(start=0, CH=150):
+    for n0 in range(start, NF, CH):
+        ok = f'{D}/fr/chunk_{n0}.ok'
+        if os.path.exists(ok): continue
+        for attempt in range(3):   # the box is small; a decoder can get OOM-killed, so retry the chunk
+            subprocess.run(['pkill', '-f', 'rawvideo -pix_fmt'])   # stray decoders from a failed chunk hold memory
+            r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
+            if r.returncode == 0: break
+        if r.returncode == 0: open(ok, 'w').write('1')
+        else: return r.returncode
+    return 0
+
+
+def patch(base, n0):
+    """Keep frames [0, n0) and the mix of an earlier render; re-composite [n0, NF) from the current shots.json."""
+    os.makedirs(f'{D}/fr', exist_ok=True); os.makedirs(f'{D}/aud', exist_ok=True); os.makedirs(f'{D}/px', exist_ok=True)
+    if not os.path.exists(f'{D}/fr/base.ok'):
+        subprocess.run([FF, '-v', 'error', '-y', '-threads', '1', '-i', base, '-start_number', '0', '-q:v', '2', f'{D}/fr/%05d.jpg'], check=True)
+        open(f'{D}/fr/base.ok', 'w').write('1')
+    if not os.path.exists(f'{D}/aud/mix.wav'):
+        subprocess.run([FF, '-v', 'error', '-y', '-i', base, '-vn', '-ac', '2', '-ar', '48000', f'{D}/aud/mix.wav'], check=True)
+    need = [i for i in sorted(SH) if span(i)[1] > n0]
+    for i in need:
+        if not os.path.exists(f'{D}/px/{i:02d}.mp4'): print(*make_proxy(i), flush=True)
+    explode(need)
+    return render_chunks(n0) or encode()
+
+
 if __name__ == '__main__':
     if sys.argv[1] == 'proxies':
         os.makedirs(f'{D}/px', exist_ok=True)
@@ -271,17 +300,9 @@ if __name__ == '__main__':
             print(*make_proxy(i), flush=True)
     elif sys.argv[1] == 'render':
         explode()
-        CH = 150
-        for n0 in range(0, NF, CH):
-            ok = f'{D}/fr/chunk_{n0}.ok'
-            if os.path.exists(ok): continue
-            for attempt in range(3):   # the box is small; a decoder can get OOM-killed, so retry the chunk
-                subprocess.run(['pkill', '-f', 'rawvideo -pix_fmt'])   # stray decoders from a failed chunk hold memory
-                r = subprocess.run([sys.executable, __file__, 'chunk', str(n0), str(min(NF, n0 + CH))])
-                if r.returncode == 0: break
-            if r.returncode == 0: open(ok, 'w').write('1')
-            else: sys.exit(r.returncode)
-        sys.exit(encode())
+        sys.exit(render_chunks() or encode())
+    elif sys.argv[1] == 'patch':
+        sys.exit(patch(sys.argv[2], int(sys.argv[3])))
     elif sys.argv[1] == 'chunk':
         try:
             render(int(sys.argv[2]), int(sys.argv[3]))

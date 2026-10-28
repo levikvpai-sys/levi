@@ -32,11 +32,11 @@
  {"i": 30, "src": "miami", "in": 12.2, "cx": 0.5, "z0": 1.0, "z1": 1.08, "grade": "punch", "note": "kids + flying mascot (vertical source)"},
  {"i": 31, "src": "titan", "in": 23.3, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "note": "typing the idea"},
  {"i": 32, "src": "levik", "in": 32.7, "cx": 0.66, "z0": 1.06, "z1": 1.0, "grade": "film", "note": "Levik editing the panther film", "sharp": true},
- {"i": 33, "src": "mag/P3m28Bh42C", "in": 0.3, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "none", "note": "Levik in the LEVIK PRODUCTION studio, wide"},
- {"i": 34, "src": "levik", "in": 13.0, "cx": 0.66, "z0": 1.0, "z1": 1.06, "grade": "warm", "note": "Levik facing Jerusalem at sunset", "sharp": true},
- {"i": 35, "src": "levik", "in": 41.0, "cx": 0.5, "z0": 1.06, "z1": 1.0, "grade": "bw", "note": "Levik in the synagogue, tallit and tefillin", "sharp": true},
- {"i": 36, "src": "mag/P3m280e42C", "in": 1.0, "cx": 0.5, "z0": 1.0, "z1": 1.07, "grade": "none", "note": "Levik close-up in the studio"},
- {"i": 37, "src": "mag/KLYgG7Rkqp", "in": 0.8, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "none", "note": "Levik in the studio, side angle"},
- {"i": 38, "src": "levik", "in": 55.5, "cx": 0.52, "z0": 1.0, "z1": 1.07, "grade": "film", "note": "Levik in the suit at the white wall", "sharp": true},
- {"i": 39, "src": "mag/yitZoMrPW9", "in": 0.2, "cx": 0.5, "z0": 1.0, "z1": 1.04, "grade": "none", "note": "studio wide under the white end card"}
+ {"i": 33, "src": "action", "in": 9.0, "cx": 0.55, "z0": 1.0, "z1": 1.08, "grade": "film", "sharp": true, "note": "Levik's motorcycle slides through the neon rain (LEVIK ACTION)"},
+ {"i": 34, "src": "action", "in": 3.9, "cx": 0.53, "z0": 1.08, "z1": 1.0, "grade": "film", "sharp": true, "note": "the motorcycle jumps between the skyscrapers"},
+ {"i": 35, "src": "action", "in": 21.0, "cx": 0.45, "z0": 1.0, "z1": 1.1, "grade": "film", "sharp": true, "note": "the SUV explodes"},
+ {"i": 36, "src": "action", "in": 41.2, "cx": 0.5, "z0": 1.0, "z1": 1.06, "grade": "film", "sharp": true, "note": "Levik by the film camera and the motorcycle, under his name"},
+ {"i": 37, "src": "action", "in": 22.3, "cx": 0.47, "z0": 1.0, "z1": 1.1, "grade": "film", "sharp": true, "note": "the car flips in the fireball"},
+ {"i": 38, "src": "action", "in": 29.0, "cx": 0.39, "z0": 1.06, "z1": 1.0, "grade": "film", "sharp": true, "note": "wheelie over the burning wreck"},
+ {"i": 39, "src": "action", "in": 44.9, "cx": 0.5, "z0": 1.0, "z1": 1.04, "grade": "film", "sharp": true, "note": "the LEVIK beam, under the white end card"}
 ]
