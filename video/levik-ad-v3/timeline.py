@@ -49,10 +49,11 @@ TRANS = {
     36: ('bars', 12, {'n': 6, 'dir': 1}), 37: ('flashcut', 0, {}), 38: ('cut', 0, {}),
     39: ('whiteramp', 0, {}),
 }
-for first in (4, 7, 10, 14, 17, 20):                      # inside a bar: flash, then cut / invert
-    TRANS[first + 1] = ('flashcut', 0, {})
-    TRANS[first + 2] = ('invertcut', 0, {}) if first in (7, 17, 20) else ('cut', 0, {})
-for j, ty in enumerate(['invertcut', 'flashcut', 'cut', 'flashcut', 'invertcut', 'cut', 'flashcut', 'cut']):
+# inside a bar: a white or brand-pink flash, then a split-cut (pink half of the outgoing shot), an invert or a plain cut
+for first, b, c in [(4, 'flashcut', 'splitcut'), (7, 'pinkflash', 'invertcut'), (10, 'flashcut', 'splitcut'),
+                    (14, 'pinkflash', 'cut'), (17, 'flashcut', 'invertcut'), (20, 'pinkflash', 'splitcut')]:
+    TRANS[first + 1] = (b, 0, {}); TRANS[first + 2] = (c, 0, {})
+for j, ty in enumerate(['invertcut', 'flashcut', 'cut', 'pinkflash', 'invertcut', 'cut', 'flashcut', 'cut']):
     TRANS[23 + j] = (ty, 0, {})
 
 # Copy. Hebrew strings are stored in logical order and shaped by the browser.

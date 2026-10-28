@@ -185,6 +185,7 @@ function auraWord(s, t, t0, t1, x, y, size, o = {}) {
   ctx.restore();
 }
 // small caption line, the aura edit's whisper above the big word
+function fitSize(s, size, maxW, wt = 900) { const w = textW(s, size, wt); return w > maxW ? size * maxW / w : size; }
 function caption(s, t, t0, t1, y, o = {}) {
   if (t < t0 || t >= t1) return;
   heroText(s, 540, y, o.size || 44, { alpha: clamp((t - t0) * FPS / 3), weight: 600, shadow: 16, fill: o.fill });
@@ -388,10 +389,21 @@ function drawGfx(t) {
     pill(tag, t, a, b, j === 3 ? 1640 : wy > 1000 ? 1420 : 1440);
     auraWord(word, t, a + 0.04, b, 540, wy, 250, { style: BAR_STYLE[j], rot: BAR_ROT[j], dir: j % 2 ? 1 : -1 });
   });
-  // ---- half-beat montage: one word that kicks on every cut ----
-  let kick = 1;
-  for (let i = 23; i <= 30; i++) { const f = (t - SHOTS[i].t0) * FPS; if (f >= 0 && f < 3) kick = 1 + 0.07 * (1 - f / 3); }
-  auraWord(T.montage, t, tb[8] + 0.03, tb[9], 540, 960, 230, { mul: kick, style: 'white' });
+  // ---- half-beat montage seen only through the letters of a white card (the aura edit's knockout word) ----
+  if (t >= tb[8] && t < tb[9]) {
+    let kick = 1;
+    for (let i = 23; i <= 30; i++) { const f = (t - SHOTS[i].t0) * FPS; if (f >= 0 && f < 3) kick = 1 + 0.05 * (1 - f / 3); }
+    const off = scratch(3, W, H), o = off.getContext('2d');
+    o.fillStyle = '#FFFFFF'; o.fillRect(0, 0, W, H);
+    o.globalCompositeOperation = 'destination-out';
+    const [w1, w2] = T.montage.split(' '), s1 = fitSize(w1, 640, 1010), s2 = fitSize(w2, 360, 1010);
+    const sc = (1 + 0.05 * prog(t, tb[8], tb[9] - tb[8])) * kick;
+    o.save(); o.translate(540, 960); o.scale(sc, sc); o.direction = 'rtl'; o.textAlign = 'center'; o.textBaseline = 'middle';
+    o.font = `900 ${s1}px Rubik`; o.fillText(w1, 0, -s1 * 0.36);
+    o.font = `900 ${s2}px Rubik`; o.fillText(w2, 0, s1 * 0.42);
+    o.restore(); o.globalCompositeOperation = 'source-over';
+    ctx.drawImage(off, 0, 0);
+  }
   // ---- idea line ----
   auraWord(T.idea[0][0], t, tb[9] + 0.04, tb[9] + 2 * BB, 540, T.idea[0][1], 200, { style: 'glow' });
   auraWord(T.idea[1][0], t, tb[9] + 2 * BB + 0.02, tb[10], 540, T.idea[1][1], 200, { dir: 1 });
@@ -416,13 +428,15 @@ function drawGfx(t) {
   // ---- transition graphics and flashes ----
   const at = activeTrans(t);
   if (at) { const ty = at.tr.type; if (ty === 'blade') gfxBlade(at.p, at.tr); else if (ty === 'bars') gfxBars(at.p, at.tr); else if (ty === 'iris') gfxIris(at.p, at.tr); }
-  let fl = 0;
+  let fl = 0, pk = 0;
   for (const k in TL.trans) {
     const tr = TL.trans[k], c = SHOTS[k].t0, fi = Math.round((t - c) * FPS);
     if (tr.type === 'flashcut' && fi >= 0 && fi < 3) fl = Math.max(fl, [0.85, 0.45, 0.15][fi]);
+    if (tr.type === 'pinkflash' && fi >= 0 && fi < 2) pk = Math.max(pk, [0.72, 0.3][fi]);
     if (tr.type === 'whiteramp') { if (fi >= -3 && fi < 0) fl = Math.max(fl, (fi + 4) / 4); if (fi >= 0 && fi < 3) fl = Math.max(fl, [1, 0.6, 0.25][fi]); }
   }
   if (Math.round((t - TD) * FPS) >= 0 && Math.round((t - TD) * FPS) < 3) fl = Math.max(fl, [1, 0.55, 0.2][Math.round((t - TD) * FPS)]);
+  if (pk > 0) { ctx.fillStyle = `rgba(243,136,238,${pk})`; ctx.fillRect(0, 0, W, H); }
   if (fl > 0) { ctx.fillStyle = `rgba(255,255,255,${fl})`; ctx.fillRect(0, 0, W, H); }
 }
 

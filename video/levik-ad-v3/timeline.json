@@ -441,11 +441,11 @@
    "D": 0
   },
   "6": {
-   "type": "cut",
+   "type": "splitcut",
    "D": 0
   },
   "8": {
-   "type": "flashcut",
+   "type": "pinkflash",
    "D": 0
   },
   "9": {
@@ -457,11 +457,11 @@
    "D": 0
   },
   "12": {
-   "type": "cut",
+   "type": "splitcut",
    "D": 0
   },
   "15": {
-   "type": "flashcut",
+   "type": "pinkflash",
    "D": 0
   },
   "16": {
@@ -477,11 +477,11 @@
    "D": 0
   },
   "21": {
-   "type": "flashcut",
+   "type": "pinkflash",
    "D": 0
   },
   "22": {
-   "type": "invertcut",
+   "type": "splitcut",
    "D": 0
   },
   "23": {
@@ -497,7 +497,7 @@
    "D": 0
   },
   "26": {
-   "type": "flashcut",
+   "type": "pinkflash",
    "D": 0
   },
   "27": {

@@ -161,6 +161,11 @@ def shake(n):
     return dx, dy
 
 
+# hard cuts that land with an impact: a zoom-blur punch, an RGB split, and for splitcut a pink half-frame of the outgoing shot
+HIT = {'cut', 'flashcut', 'invertcut', 'pinkflash', 'splitcut'}
+CUTS = {SHOTS[int(k)]['f0']: tr['type'] for k, tr in TL['trans'].items() if tr['type'] in HIT}
+
+
 def frame_for(i, n, img):
     sh = SH[i]; s = SHOTS[i]
     u = min(1, max(0, (n - s['f0']) / max(1, s['f1'] - s['f0'])))
@@ -172,7 +177,30 @@ def frame_for(i, n, img):
     x0 = (PW - bw) / 2 * (1 + ox) + dx; y0 = (PH - bh) / 2 * (1 + oy) + dy
     x0 = min(max(x0, 0), PW - bw); y0 = min(max(y0, 0), PH - bh)
     im = Image.fromarray(img)
+    fi = n - s['f0']
+    zb = sh.get('zb', 2 if TL['trans'].get(str(i), {}).get('type') in HIT else 0)
+    if 0 <= fi < zb:   # zoom-blur: the first frames of a punch are an average of four zoom levels
+        acc = np.zeros((H, W, 3), np.float32)
+        for q in (1.0, 1.05, 1.10, 1.16):
+            cw, ch = bw / q, bh / q; cx, cy = x0 + bw / 2, y0 + bh / 2
+            acc += np.asarray(im.resize((W, H), Image.BILINEAR, box=(cx - cw / 2, cy - ch / 2, cx + cw / 2, cy + ch / 2)), np.float32)
+        return (acc / 4).astype(np.uint8)
     return np.asarray(im.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + bw, y0 + bh)))
+
+
+def hit_fx(n, base, prev):
+    """RGB split on the first frames after a hard cut (and while the frame shakes); splitcut keeps a pink half of the outgoing shot."""
+    c = max((c for c in CUTS if c <= n), default=None)
+    f = n - c if c is not None else 99
+    if CUTS.get(c) == 'splitcut' and f < 4 and prev is not None:
+        L = (prev.astype(np.float32) @ np.array([0.299, 0.587, 0.114], np.float32)) / 255.0
+        duo = np.stack([26 + L * 217, 15 + L * 121, 61 + L * 177], -1).astype(np.uint8)
+        cut = int(W * 0.42); base = base.copy(); base[:, :cut] = duo[:, :cut]
+    k = [12, 7, 3][f] if f < 3 else 0
+    amp = math.hypot(*shake(n)); k = int(round(k + amp * 0.5))
+    if k:
+        base = base.copy(); base[..., 0] = np.roll(base[..., 0], k, axis=1); base[..., 2] = np.roll(base[..., 2], -k, axis=1)
+    return base
 
 
 def render(n0, n1):
@@ -183,6 +211,8 @@ def render(n0, n1):
     gfx = Seq(f'{D}/g/%05d.jpg', n0); mask = Seq(f'{D}/m/%05d.png', n0, 'L')
     readers = {}; t0 = time.time()
     black = np.zeros((H, W, 3), np.uint8)
+    prev = np.asarray(Image.open(f'{D}/fr/{n0 - 1:05d}.jpg').convert('RGB')) if n0 > 0 and os.path.exists(f'{D}/fr/{n0 - 1:05d}.jpg') else None
+    held = None   # the outgoing shot, kept for a splitcut
     for n in range(n0, n1):
         tracks = [None, None]
         for i, (a, b) in spans.items():
@@ -201,6 +231,9 @@ def render(n0, n1):
         else:
             mm = m.astype(np.uint16)[..., None]
             base = ((A.astype(np.uint16) * (255 - mm) + B.astype(np.uint16) * mm) // 255).astype(np.uint8)
+        if n in CUTS: held = prev
+        prev = base
+        base = hit_fx(n, base, held)
         if n in inv: base = 255 - base
         rgb, al = g[:H], g[H:, :, :1].astype(np.uint16)
         out = (base.astype(np.uint16) * (255 - al) // 255 + rgb).clip(0, 255).astype(np.uint8)
