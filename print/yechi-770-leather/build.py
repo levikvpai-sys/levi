@@ -49,10 +49,17 @@ TEXT_LINES = [
     ("L1 Yechi ... LeOlam VaEd (arc)", "יחי אדוננו מורנו ורבינו מלך המשיח לעולם ועד",
                                                                   50, 836, 227, 255.5, 1650, 0.02),
     ("L2 LeZechut",      "לזכות",                    349, 539, 1398, 1451, None, 0.045),
-    ("L3 Names",         "ר לוי יצחק ושיר הכהן כהן", 97, 796, 1489, 1538, None, 0.045),
+    ("L3 Names",         "ר׳ לוי יצחק ושיר הכהן כהן", 97, 796, 1489, 1538, None, 0.045),
     ("L4 UMishpachto",   "ומשפחתו",                  299, 586, 1581, 1634, None, 0.045),
 ]
 BODY_REF_CHAR = "מ"   # glyph used to measure body height (top bar to baseline)
+
+# Lines whose wording changed after the reference was drawn: letters are scaled to
+# fit the ORIGINAL wording into the measured box, then the new wording is centred
+# on it, so letter size stays identical and the line just grows a little.
+FIT_TEXT = {
+    "L3 Names": "ר לוי יצחק ושיר הכהן כהן",     # reference had no geresh after ר
+}
 
 # Building crop from the reference (x0, y0, x1, y1) - matches source/building_crop.png
 BUILDING_BOX = (0, 420, 887, 1350)
@@ -309,7 +316,7 @@ def glyph_bounds(placed):
     return bp.bounds
 
 
-def layout_line(text, x0, x1, ytop, ybase, arc=None, weight=0.045):
+def layout_line(text, x0, x1, ytop, ybase, arc=None, weight=0.045, fit_text=None):
     """Fit a line into the reference box and return emboldened polygons (int, x CS)."""
     import pyclipper
     f = _font()
@@ -325,8 +332,10 @@ def layout_line(text, x0, x1, ytop, ybase, arc=None, weight=0.045):
     k = (target_body - 2 * r) / body_units
     placed = shape(text)
     xmin, ymin, xmax, ymax = glyph_bounds(placed)
-    sx = (target_w - 2 * r) / ((xmax - xmin) * k)
-    left_px = cx - target_w / 2 + r
+    fx0, _, fx1, _ = glyph_bounds(shape(fit_text)) if fit_text else (xmin, 0, xmax, 0)
+    sx = (target_w - 2 * r) / ((fx1 - fx0) * k)
+    actual_w = (xmax - xmin) * k * sx + 2 * r
+    left_px = cx - actual_w / 2 + r
     base_px = ybase * S - r
     polys = []
     for g, gx, gy in placed:
@@ -441,7 +450,7 @@ def main():
     log("text ...")
     texts = []
     for name, txt, x0, x1, ytop, ybase, arc, wt in TEXT_LINES:
-        polys, k, sx = layout_line(txt, x0, x1, ytop, ybase, arc, wt)
+        polys, k, sx = layout_line(txt, x0, x1, ytop, ybase, arc, wt, FIT_TEXT.get(name))
         mask, left, top = rasterize(polys)
         body_px = (ybase - ytop) * S
         gold = gold_shade(mask, body_px)
