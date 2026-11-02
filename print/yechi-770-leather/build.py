@@ -35,8 +35,12 @@ Q = 4 if PREVIEW else 1                      # downscale for quick iterations
 W_IN, H_IN, DPI = 12, 24, 300                # 30.48 x 60.96 cm
 W, H = W_IN * DPI // Q, H_IN * DPI // Q      # 3600 x 7200 px at full res
 REF_W = 887                                  # width of the reference artwork
-S = W / REF_W                                # reference px -> canvas px
-NAME = "YECHI-770_navy-leather_12x24in"
+S = W / REF_W                                # reference px -> trim px
+BLEED_MM = 3.0                               # bleed on every side
+B = int(np.ceil(BLEED_MM / 25.4 * DPI)) // Q   # 36 px = 3.05 mm at 300 dpi
+CW, CH = W + 2 * B, H + 2 * B                # document incl. bleed: 3672 x 7272 px
+SLUG_MM = 10.0                               # PDF margin outside the bleed for crop marks
+NAME = "YECHI-770_navy-leather_12x24in_bleed-3mm"
 
 # ---------------------------------------------------------------------------
 # Text: (layer name, text, ink x-left, ink x-right, body-top y, baseline y, arc, weight)
@@ -439,13 +443,16 @@ def overlay_blend(base, grey, opacity):
 # ---------------------------------------------------------------------------
 def main():
     os.makedirs(OUT, exist_ok=True)
-    log(f"canvas {W}x{H}px  ({W_IN}x{H_IN} in @ {DPI // Q} dpi)")
+    log(f"trim {W}x{H}px ({W_IN}x{H_IN} in @ {DPI // Q} dpi) + {B}px bleed -> {CW}x{CH}px")
 
-    dye = leather_dye(H, W)
-    height = leather_height(H, W)
+    dye = leather_dye(CH, CW)
+    height = leather_height(CH, CW)
     grain = grain_overlay(height)
 
     b_rgba, b_top, b_left = building_layer()
+    # the painting's brush strokes run to the side edges: mirror them into the bleed
+    b_rgba = cv2.copyMakeBorder(b_rgba, 0, 0, B, B, cv2.BORDER_REFLECT)
+    b_top += B
 
     log("text ...")
     texts = []
@@ -457,22 +464,24 @@ def main():
         g_rgba = np.dstack([gold, mask * 255])
         sh, pad = shadow_of(mask, body_px)
         s_rgba = np.dstack([np.zeros(sh.shape + (3,), np.float32), sh * 255])
+        left, top = left + B, top + B                       # trim -> bleed canvas
+        polys = [[(x + B * CS, y + B * CS) for x, y in p] for p in polys]
         texts.append(dict(name=name, text=txt, mask=mask, gold=g_rgba, left=left, top=top,
                           shadow=s_rgba, s_left=left - pad, s_top=top - pad, polys=polys))
         log(f"  {name}: stretch {sx:.3f}, {len(polys)} contours")
 
     # combined foil mask
-    foil = np.zeros((H, W), np.float32)
+    foil = np.zeros((CH, CW), np.float32)
     for t in texts:
         h, w = t["mask"].shape
         y0, x0 = max(t["top"], 0), max(t["left"], 0)
-        y1, x1 = min(t["top"] + h, H), min(t["left"] + w, W)
+        y1, x1 = min(t["top"] + h, CH), min(t["left"] + w, CW)
         foil[y0:y1, x0:x1] = np.maximum(foil[y0:y1, x0:x1],
                                         t["mask"][y0 - t["top"]:y1 - t["top"], x0 - t["left"]:x1 - t["left"]])
 
     # grain strength: full on bare leather, softer on the painting, light on gold
     bh_, bw_ = b_rgba.shape[:2]
-    factor = np.ones((H, W), np.float32)
+    factor = np.ones((CH, CW), np.float32)
     factor[b_top:b_top + bh_, b_left:b_left + bw_] -= 0.62 * b_rgba[..., 3] / 255.0
     factor = np.minimum(factor, 1.0 - 0.85 * cv2.GaussianBlur(foil, (0, 0), 2.0))
     grain = 0.5 + (grain - 0.5) * factor
@@ -493,7 +502,7 @@ def main():
     suffix = "_PREVIEW-LOWRES" if PREVIEW else ""
     full_img.save(os.path.join(OUT, f"{NAME}_FULL-COLOR_300dpi{suffix}.jpg"), quality=95,
                   dpi=(DPI // Q, DPI // Q), subsampling=0)
-    prev = full_img.resize((900, 1800), Image.LANCZOS)
+    prev = full_img.crop((B, B, B + W, B + H)).resize((900, 1800), Image.LANCZOS)   # trimmed look
     prev.save(os.path.join(OUT, f"{NAME}_preview{suffix}.jpg"), quality=90)
     if PREVIEW:
         log("preview done")
@@ -517,10 +526,11 @@ def write_vectors(texts):
         f'  <g id="{t["name"].replace(" ", "_")}">\n'
         f'    <path d="{" ".join(poly_d(p) for p in t["polys"])}"/>\n  </g>' for t in texts)
     svg = (f'<?xml version="1.0" encoding="UTF-8"?>\n'
-           f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * mm:.1f}mm" height="{H * mm:.1f}mm" '
-           f'viewBox="0 0 {W} {H}">\n'
-           f'  <title>GOLD FOIL / EMBOSS - {NAME} - 1:1 scale, outlines (fill = foil)</title>\n'
-           f'  <rect id="TRIM_do_not_print" x="0" y="0" width="{W}" height="{H}" fill="none" '
+           f'<svg xmlns="http://www.w3.org/2000/svg" width="{CW * mm:.2f}mm" height="{CH * mm:.2f}mm" '
+           f'viewBox="0 0 {CW} {CH}">\n'
+           f'  <title>GOLD FOIL / EMBOSS - {NAME} - 1:1 scale, outlines (fill = foil). '
+           f'Artboard includes {B * mm:.2f} mm bleed; blue rect = trim.</title>\n'
+           f'  <rect id="TRIM_do_not_print" x="{B}" y="{B}" width="{W}" height="{H}" fill="none" '
            f'stroke="#00a0e0" stroke-width="2"/>\n'
            f'  <g id="GOLD_FOIL" fill="#000000" fill-rule="evenodd">\n{groups}\n  </g>\n</svg>\n')
     with open(os.path.join(OUT, f"{NAME}_GOLD-FOIL_vector.svg"), "w", encoding="utf-8") as f:
@@ -529,20 +539,42 @@ def write_vectors(texts):
 
 def write_pdf(full_img, print_img, texts):
     log("pdf ...")
-    from reportlab.lib.colors import CMYKColorSep
+    from reportlab.lib.colors import CMYKColor, CMYKColorSep
     from reportlab.lib.utils import ImageReader
     from reportlab.pdfgen import canvas
 
-    pw, ph = W_IN * 72, H_IN * 72
-    k = 72.0 / DPI
+    k = 72.0 / DPI                          # px -> pt
+    sl = SLUG_MM / 25.4 * 72                # slug (crop-mark margin)
+    bw, bh = CW * k, CH * k                 # bleed box size
+    pw, ph = bw + 2 * sl, bh + 2 * sl       # media box
+    tx0, ty0 = sl + B * k, sl + B * k       # trim box origin
+    tx1, ty1 = tx0 + W * k, ty0 + H * k
     foil_col = CMYKColorSep(0.0, 0.25, 0.80, 0.10, spotName="GOLD_FOIL", density=1)
+    reg = CMYKColor(1, 1, 1, 1)             # registration black for marks
+
+    def page_setup(c, label):
+        c.setTrimBox((tx0, ty0, tx1, ty1))
+        c.setBleedBox((sl, sl, sl + bw, sl + bh))
+        # crop marks: start at the bleed edge, 5 mm long, in the slug
+        L = 5 / 25.4 * 72
+        c.setStrokeColor(reg)
+        c.setLineWidth(0.25)
+        for x in (tx0, tx1):
+            c.line(x, sl - L, x, sl)
+            c.line(x, sl + bh, x, sl + bh + L)
+        for y in (ty0, ty1):
+            c.line(sl - L, y, sl, y)
+            c.line(sl + bw, y, sl + bw + L, y)
+        c.setFillColor(reg)
+        c.setFont("Helvetica", 6)
+        c.drawString(sl, 3, f"{NAME}  |  {label}  |  TRIM 304.8 x 609.6 mm  |  BLEED 3 mm  |  300 dpi")
 
     def foil_paths(c):
         c.setFillColor(foil_col)
         for t in texts:
             p = c.beginPath()
             for poly in t["polys"]:
-                pts = [(x / CS * k, (H - y / CS) * k) for x, y in poly]
+                pts = [(sl + x / CS * k, sl + (CH - y / CS) * k) for x, y in poly]
                 p.moveTo(*pts[0])
                 for q in pts[1:]:
                     p.lineTo(*q)
@@ -560,17 +592,21 @@ def write_pdf(full_img, print_img, texts):
     # print file: 3 pages
     c = canvas.Canvas(os.path.join(OUT, f"{NAME}_PRINT.pdf"), pagesize=(pw, ph))
     c.setTitle(f"{NAME} - print file")
-    c.drawImage(ImageReader(tmp_full), 0, 0, pw, ph)               # p1 full colour
+    page_setup(c, "PAGE 1: FULL COLOUR")
+    c.drawImage(ImageReader(tmp_full), sl, sl, bw, bh)
     c.showPage()
-    c.drawImage(ImageReader(tmp_print), 0, 0, pw, ph)              # p2 print layer (no text)
+    page_setup(c, "PAGE 2: PRINT LAYER (no text)")
+    c.drawImage(ImageReader(tmp_print), sl, sl, bw, bh)
     c.showPage()
-    foil_paths(c)                                                  # p3 foil / emboss vector
+    page_setup(c, "PAGE 3: GOLD FOIL / EMBOSS (spot GOLD_FOIL)")
+    foil_paths(c)
     c.showPage()
     c.save()
 
     # standalone foil vector PDF
     c = canvas.Canvas(os.path.join(OUT, f"{NAME}_GOLD-FOIL_vector.pdf"), pagesize=(pw, ph))
     c.setTitle(f"{NAME} - GOLD FOIL / EMBOSS vector (1:1)")
+    page_setup(c, "GOLD FOIL / EMBOSS (spot GOLD_FOIL)")
     foil_paths(c)
     c.showPage()
     c.save()
@@ -584,7 +620,14 @@ def write_psd(dye, grain, grain_opacity, b_rgba, b_top, b_left, texts, foil):
     from psd_tools.constants import BlendMode, Compression, Resource
     from psd_tools.psd.image_resources import ImageResource
 
-    psd = PSDImage.new("RGB", (W, H), color=(8, 26, 64), depth=8)
+    from psd_tools.psd.image_resources import GridGuidesInfo
+
+    psd = PSDImage.new("RGB", (CW, CH), color=(8, 26, 64), depth=8)
+    # guides on the trim line (resource 1032; positions in 1/32 px, 0 = vertical)
+    psd.image_resources[Resource.GRID_AND_GUIDES_INFO] = ImageResource(
+        key=Resource.GRID_AND_GUIDES_INFO,
+        data=GridGuidesInfo(version=1, horizontal=576, vertical=576,
+                            data=[(B * 32, 0), ((B + W) * 32, 0), (B * 32, 1), ((B + H) * 32, 1)]))
     # 300 dpi resolution info (resource 1005)
     fixed = int(DPI * 65536)
     res = struct.pack(">IHHIHH", fixed, 1, 1, fixed, 1, 1)
@@ -603,7 +646,7 @@ def write_psd(dye, grain, grain_opacity, b_rgba, b_top, b_left, texts, foil):
 
     C = Compression.RLE
     Z = Compression.ZIP_WITH_PREDICTION     # Photoshop-readable; keeps the PSD < 100 MB
-    flat = psd.create_pixel_layer_from_array(rgb_u8(np.broadcast_to(np.array([8, 26, 64], np.float32), (H, W, 3))),
+    flat = psd.create_pixel_layer_from_array(rgb_u8(np.broadcast_to(np.array([8, 26, 64], np.float32), (CH, CW, 3))),
                                   name="BG - flat navy (alternative)", compression=C)
     flat.visible = False
     dye_l = psd.create_pixel_layer_from_array(rgb_u8(dye), name="BG - navy leather dye colour", compression=Z)
@@ -627,7 +670,7 @@ def write_psd(dye, grain, grain_opacity, b_rgba, b_top, b_left, texts, foil):
     # one grey Overlay layer, but stores ~1/3 of the data (solid RGB + one alpha).
     hi = np.clip(2 * grain - 1, 0, 1) * 255
     lo = np.clip(1 - 2 * grain, 0, 1) * 255
-    white = np.full((H, W, 3), 255, np.float32)
+    white = np.full((CH, CW, 3), 255, np.float32)
     g_hi = psd.create_pixel_layer_from_array(rgba_u8(np.dstack([white, hi]), clear=False), name="LEATHER GRAIN - light (Overlay)",
                                   compression=Z, opacity=int(round(255 * grain_opacity)),
                                   blend_mode=BlendMode.OVERLAY)
@@ -636,7 +679,7 @@ def write_psd(dye, grain, grain_opacity, b_rgba, b_top, b_left, texts, foil):
                                   blend_mode=BlendMode.OVERLAY)
     psd.create_group([g_lo, g_hi], name="LEATHER GRAIN - hide when printing on real leather")
 
-    fm = np.dstack([np.zeros((H, W, 3), np.float32), foil * 255])
+    fm = np.dstack([np.zeros((CH, CW, 3), np.float32), foil * 255])
     fl = psd.create_pixel_layer_from_array(rgba_u8(fm), name="PRODUCTION - gold foil / emboss mask (black = foil)",
                                 compression=C)
     fl.visible = False
