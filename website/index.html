@@ -72,8 +72,8 @@ section{padding-block:clamp(72px,10vw,128px)}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,var(--bg) 8%,rgba(11,11,16,.75) 45%,rgba(11,11,16,.45))}
 .hero-in{position:relative;z-index:2;padding-block:120px clamp(56px,10vh,110px)}
 .hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(64px,14vw,150px);line-height:.88;margin:0 0 24px;text-wrap:balance}
-.hero h1 .cine{display:block;font-style:normal;font-size:1.75em;line-height:.82;color:transparent;-webkit-background-clip:text;background-clip:text;background-color:#A23BFF;background-size:cover;background-position:center;-webkit-text-stroke:1px rgba(245,240,230,.35);filter:drop-shadow(0 0 28px rgba(20,224,224,.25));animation:kb 6s ease-in-out infinite alternate}
-@keyframes kb{from{background-size:110%}to{background-size:135%}}
+.hero h1 .cine{position:relative;display:block;font-style:normal;font-size:1.75em;line-height:.85;color:transparent;background:url(assets/video/sea-poster.jpg) center/cover;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 30px rgba(20,224,224,.35))}
+.hero h1 .cine canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero .presents{display:block;font:700 13px var(--f-body);letter-spacing:.45em;color:var(--teal);margin-bottom:14px}
 .hero p{font-size:clamp(18px,2.2vw,22px);color:#D9D3E2;max-width:44ch;margin:0 0 32px}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
@@ -213,7 +213,7 @@ footer a:hover{color:var(--fg)}
   <span class="ph wall-note">מקום שמור: קיר וידאו מהעבודות</span>
   <div class="wrap hero-in">
     <span class="presents">LEVIK PRODUCTION מציגה</span>
-    <h1>הופכים את הסיפור שלכם <span class="cine" id="cine">לקולנוע.</span></h1>
+    <h1>הופכים את הסיפור שלכם <span class="cine" id="cine">לקולנוע.<canvas aria-hidden="true"></canvas></span></h1>
     <p>סרטי AI ברמה קולנועית לעסקים, למותגים ולרגעים הכי חשובים שלכם. בלי צילומים, בלי שחקנים, בלי לוקיישן.</p>
     <div class="ctas">
       <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%A1%D7%A8%D7%98%20AI" target="_blank" rel="noopener">בואו נדבר בוואטסאפ ←</a>
@@ -379,14 +379,27 @@ footer a:hover{color:var(--fg)}
   })});
   document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();
     document.getElementById('formMsg').textContent='הטופס יחובר למייל ולגוגל שיטס בשלב הבא. בינתיים אפשר לכתוב לנו בוואטסאפ.';});
-  // Hero: אפקט "מרוול" – פריימים מתחלפים מהר בתוך המילה, ואז נעצרים על פריים אחד
-  var cine=document.getElementById('cine'),F=[];for(var i=0;i<8;i++)F.push('assets/img/frames/f'+i+'.jpg');
-  F.forEach(function(u){var im=new Image();im.src=u});
-  var still=matchMedia('(prefers-reduced-motion: reduce)').matches,idx=0;
-  function show(i){cine.style.backgroundImage='url('+F[i%F.length]+')'}
-  show(0);
-  function burst(){if(still)return;var n=0,t=setInterval(function(){show(++idx);if(++n>14){clearInterval(t);setTimeout(burst,4200)}},90)}
-  setTimeout(burst,600);
+  // Hero: וידאו של ים שמתנגן בתוך המילה "לקולנוע."
+  var cine=document.getElementById('cine'),cv=cine.querySelector('canvas'),cx=cv.getContext('2d');
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!still){
+    var vid=document.createElement('video');vid.src='assets/video/sea.mp4';vid.muted=true;vid.loop=true;vid.playsInline=true;vid.setAttribute('playsinline','');vid.autoplay=true;
+    var W=0,H=0,fs=0;
+    function size(){var r=cine.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);fs=parseFloat(getComputedStyle(cine).fontSize)}
+    function draw(){
+      if(vid.readyState>=2&&W){
+        cx.globalCompositeOperation='source-over';cx.clearRect(0,0,W,H);
+        var vr=vid.videoWidth/vid.videoHeight,cr=W/H,dw,dh;if(vr>cr){dh=H;dw=H*vr}else{dw=W;dh=W/vr}
+        cx.drawImage(vid,(W-dw)/2,(H-dh)/2,dw,dh);
+        cx.globalCompositeOperation='destination-in';cx.font='700 '+fs+'px Karantina';cx.direction='rtl';cx.textAlign='right';cx.textBaseline='alphabetic';
+        cx.fillText(cine.firstChild.textContent,W,H*0.86);
+        cine.style.webkitTextFillColor='transparent';cine.style.backgroundImage='none';
+      }
+      requestAnimationFrame(draw);
+    }
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){size();vid.play().catch(function(){});draw()});
+    addEventListener('resize',size);
+  }
   var ck=document.getElementById('cookie'),k='levik-consent',v=null;
   try{v=localStorage.getItem(k)}catch(e){}
   if(!v)ck.hidden=false;
