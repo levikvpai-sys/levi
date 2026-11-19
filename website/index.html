@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEVIK Production | סרטי AI ברמה קולנועית</title>
+<meta name="description" content="סרטי AI ברמה קולנועית לעסקים, למותגים ולרגעים הכי חשובים שלכם. בלי צילומים, בלי שחקנים, בלי לוקיישן.">
+<meta name="theme-color" content="#0B0B10">
+<link rel="icon" href="assets/img/logo-lv.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Karantina:wght@700&display=swap">
+<style>
+:root{
+  --bg:#0B0B10; --surface:#14131B; --line:#27242F; --fg:#F5F0E6; --muted:#A8A2B4;
+  --teal:#14E0E0; --violet:#A23BFF; --grad:linear-gradient(90deg,var(--teal),var(--violet));
+  --f-display:"Karantina","Heebo",system-ui,sans-serif; --f-body:"Heebo",system-ui,sans-serif;
+  --wrap:1200px; --gut:clamp(16px,4vw,40px); --radius:16px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.skip{position:absolute;inset-inline-start:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{inset-inline-start:8px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+
+/* כפתורים */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:99px;font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .2s}
+.btn-primary{background:var(--grad);color:#0B0B10;box-shadow:0 0 32px rgba(20,224,224,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(162,59,255,.4)}
+.btn-ghost{border:1px solid rgba(245,240,230,.35);color:var(--fg);background:rgba(11,11,16,.35)}
+.btn-ghost:hover{border-color:var(--teal)}
+
+/* כותרות סקשנים */
+section{padding-block:clamp(72px,10vw,128px)}
+.eyebrow{display:block;color:var(--teal);font-weight:700;font-size:14px;letter-spacing:.2em;margin-bottom:12px}
+.h2{font-family:var(--f-display);font-weight:700;font-size:clamp(48px,8vw,92px);line-height:.95;margin:0 0 20px;text-wrap:balance}
+.lead{color:var(--muted);font-size:clamp(17px,2vw,20px);max-width:60ch;margin:0}
+.ph{border:1px dashed rgba(20,224,224,.5);color:var(--teal);font-size:13px;padding:2px 8px;border-radius:6px;display:inline-block}
+
+/* 5.0 תפריט */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(11,11,16,.85);backdrop-filter:blur(10px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:900;letter-spacing:.06em}
+.logo img{width:40px;height:40px;border-radius:10px}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:28px}
+.nav ul a{text-decoration:none;color:var(--muted);font-weight:500}
+.nav ul a:hover{color:var(--fg)}
+.nav .btn{min-height:42px;padding:0 18px;font-size:15px}
+.nav-cta{display:none}
+.menu-btn{background:none;border:1px solid var(--line);color:var(--fg);border-radius:99px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.mobile-menu{display:none;position:fixed;inset:68px 0 auto;background:rgba(11,11,16,.97);border-bottom:1px solid var(--line);padding:16px var(--gut) 24px}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:20px;font-weight:700}
+@media(min-width:960px){.nav ul{display:flex}.nav-cta{display:inline-flex}.menu-btn{display:none}}
+
+/* 5.1 Hero */
+.hero{position:relative;min-height:100svh;display:grid;align-items:end;padding:0;overflow:hidden}
+.wall{position:absolute;inset:-4%;display:grid;grid-template-columns:repeat(2,1fr);gap:6px;transform:rotate(-4deg) scale(1.1)}
+.wall .tile{aspect-ratio:9/12;border-radius:10px;background:var(--surface);position:relative;overflow:hidden;box-shadow:0 0 34px rgba(20,224,224,.12)}
+.wall .tile::after{content:attr(data-name);position:absolute;inset:auto 10px 8px;font-size:12px;color:rgba(245,240,230,.35)}
+.wall .tile:nth-child(3n+1){background:linear-gradient(160deg,#103236,#0d0d14)}
+.wall .tile:nth-child(3n+2){background:linear-gradient(160deg,#2a1240,#0d0d14)}
+.wall .tile:nth-child(3n){background:linear-gradient(160deg,#1c1b26,#0d0d14)}
+.wall .tile:nth-child(n+7){display:none}
+@media(min-width:700px){.wall{grid-template-columns:repeat(4,1fr)}.wall .tile{aspect-ratio:16/11}.wall .tile:nth-child(n+7){display:block}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,var(--bg) 8%,rgba(11,11,16,.75) 45%,rgba(11,11,16,.45))}
+.hero-in{position:relative;z-index:2;padding-block:120px clamp(56px,10vh,110px)}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(64px,14vw,150px);line-height:.88;margin:0 0 24px;text-wrap:balance}
+.hero h1 .cine{position:relative;display:block;font-style:normal;font-size:1.75em;line-height:.85;color:transparent;background:url(assets/video/sea-poster.jpg) center/cover;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 30px rgba(20,224,224,.35))}
+.hero h1 .cine canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .presents{display:block;font:700 13px var(--f-body);letter-spacing:.45em;color:var(--teal);margin-bottom:14px}
+.hero p{font-size:clamp(18px,2.2vw,22px);color:#D9D3E2;max-width:44ch;margin:0 0 32px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.wall-note{position:absolute;z-index:2;top:84px;inset-inline-end:var(--gut)}
+
+/* 5.2 עבודות */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 28px}
+.chip{border:1px solid var(--line);background:none;color:var(--muted);border-radius:99px;padding:8px 18px;font:inherit;font-weight:500;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--teal);color:var(--fg);background:rgba(20,224,224,.08)}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}.work.big{grid-column:span 2}}
+.work{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);aspect-ratio:16/10;text-decoration:none;display:block;border:1px solid var(--line)}
+.work .poster{position:absolute;inset:0;background:linear-gradient(150deg,#16343a,#14131b 60%)}
+.work:nth-child(even) .poster{background:linear-gradient(150deg,#2b1546,#14131b 60%)}
+.work .info{position:absolute;inset:auto 0 0;padding:18px;background:linear-gradient(to top,rgba(11,11,16,.9),transparent)}
+.work h3{margin:0;font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1.2}
+.work span{color:var(--muted);font-size:14px}
+.work .play{position:absolute;top:14px;inset-inline-start:14px;width:44px;height:44px;border-radius:50%;background:rgba(245,240,230,.12);display:grid;place-items:center;transition:background .2s}
+.work:hover .play{background:var(--grad)}
+.work[hidden]{display:none}
+.more{display:inline-block;margin-top:28px;color:var(--teal);font-weight:700;text-decoration:none}
+
+/* 5.3 אמון */
+.trust{background:var(--surface)}
+.trust-in{display:grid;gap:32px}
+@media(min-width:960px){.trust-in{grid-template-columns:1.3fr 1fr;align-items:center}}
+.client-video{aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(150deg,#16343a,#2b1546);display:grid;place-items:center;text-align:center;border:1px solid var(--line);padding:16px}
+.client-video b{display:block;font-family:var(--f-display);font-size:40px;margin-top:10px}
+.quotes{display:grid;gap:14px}
+blockquote{margin:0;padding:20px;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg)}
+blockquote p{margin:0 0 8px;font-size:18px}
+blockquote cite{color:var(--muted);font-style:normal;font-size:14px}
+
+/* 5.4 שירותים */
+.tracks{display:grid;gap:16px;margin-top:40px}
+@media(min-width:900px){.tracks{grid-template-columns:1fr 1fr}}
+.track{border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,4vw,40px);background:var(--surface);display:flex;flex-direction:column;gap:16px}
+.track h3{font-family:var(--f-display);font-weight:700;font-size:clamp(38px,4vw,52px);margin:0;line-height:1.15}
+.track ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.track li{padding-inline-start:26px;position:relative}
+.track li::before{content:"";position:absolute;inset-inline-start:0;top:.7em;width:12px;height:2px;background:var(--grad)}
+.track .note{color:var(--muted);margin:0}
+.track .btn{align-self:flex-start;margin-top:auto}
+
+/* 5.5 תהליך */
+.steps{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:14px;counter-reset:s}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}}
+.steps li{counter-increment:s;border-top:2px solid var(--line);padding-top:18px}
+.steps li::before{content:"0" counter(s);font-family:var(--f-display);font-weight:700;font-size:64px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.steps h3{margin:10px 0 4px;font-size:22px}
+.steps p{margin:0;color:var(--muted)}
+
+/* 5.6 שאלות */
+.faq{margin-top:32px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-size:19px;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--teal);font-size:26px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--muted);max-width:65ch}
+
+/* 5.7 צור קשר */
+.contact{background:radial-gradient(70% 60% at 50% 0%,rgba(162,59,255,.18),transparent 70%),radial-gradient(60% 50% at 80% 100%,rgba(20,224,224,.12),transparent 70%)}
+.contact-in{display:grid;gap:40px}
+@media(min-width:960px){.contact-in{grid-template-columns:1fr 1fr;align-items:start}}
+.contact .h2 em{font-family:inherit;font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.direct{display:flex;flex-direction:column;gap:12px;margin-top:28px;align-items:flex-start}
+.direct a.tel{color:var(--muted);text-decoration:none;font-size:18px}
+form{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,32px)}
+label{font-weight:500;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-height:50px;width:100%}
+textarea{min-height:100px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:var(--muted);font-size:14px}
+.check input{width:20px;min-height:20px;height:20px;margin-top:3px;flex:none}
+.form-msg{color:var(--teal);margin:0;min-height:1em}
+
+/* 5.8 פוטר */
+footer{border-top:1px solid var(--line);padding-block:40px 120px;color:var(--muted);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+footer nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--fg)}
+@media(min-width:960px){footer{padding-bottom:40px}}
+
+/* קבועים: וואטסאפ צף, בר תחתון, עוגיות */
+.wa-float{position:fixed;bottom:24px;inset-inline-start:24px;z-index:40;width:60px;height:60px;border-radius:50%;background:#25D366;display:none;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@media(min-width:960px){.wa-float{display:grid}}
+.bar{position:fixed;inset:auto 0 0;z-index:40;display:grid;grid-template-columns:2fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(11,11,16,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.bar a{min-height:48px;font-size:16px}
+.bar .wa{background:#25D366;color:#0B0B10}
+@media(min-width:960px){.bar{display:none}}
+.cookie{position:fixed;z-index:60;inset:auto 12px calc(84px + env(safe-area-inset-bottom)) 12px;max-width:520px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.5);font-size:15px}
+.cookie p{margin:0 0 12px;color:var(--muted)}
+.cookie div{display:flex;gap:10px;flex-wrap:wrap}
+.cookie .btn{min-height:42px;padding:0 18px;font-size:15px}
+.cookie[hidden]{display:none}
+@media(min-width:960px){.cookie{bottom:24px;inset-inline:auto 24px}}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן</a>
+
+<!-- 5.0 תפריט -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="LEVIK Production, לראש העמוד"><img src="assets/img/logo-lv.jpg" alt="" width="40" height="40">LEVIK</a>
+    <nav aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="#works">עבודות</a></li>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#process">איך זה עובד</a></li>
+        <li><a href="#faq">שאלות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-ghost nav-cta" href="#contact">בואו נדבר</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">תפריט</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#works">עבודות</a><a href="#services">שירותים</a><a href="#process">איך זה עובד</a><a href="#faq">שאלות</a><a href="#contact">צור קשר</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- 5.1 Hero: קיר וידאו -->
+<section class="hero" id="top" aria-label="פתיח">
+  <div class="wall" aria-hidden="true">
+    <div class="tile" data-name="Swabson"></div><div class="tile" data-name="Terra Energy"></div><div class="tile" data-name="LA GLACE"></div>
+    <div class="tile" data-name="Titan"></div><div class="tile" data-name="Meat-Or"></div><div class="tile" data-name="Prevou Madison"></div>
+    <div class="tile" data-name="McDonald's"></div><div class="tile" data-name="La Lumière"></div><div class="tile" data-name="הקול הפנימי"></div>
+    <div class="tile" data-name="אנימציה"></div><div class="tile" data-name="Swabson"></div><div class="tile" data-name="Terra Energy"></div>
+  </div>
+  <span class="ph wall-note">מקום שמור: קיר וידאו מהעבודות</span>
+  <div class="wrap hero-in">
+    <span class="presents">LEVIK PRODUCTION מציגה</span>
+    <h1>הופכים את הסיפור שלכם <span class="cine" id="cine">לקולנוע.<canvas aria-hidden="true"></canvas></span></h1>
+    <p>סרטי AI ברמה קולנועית לעסקים, למותגים ולרגעים הכי חשובים שלכם. בלי צילומים, בלי שחקנים, בלי לוקיישן.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%A1%D7%A8%D7%98%20AI" target="_blank" rel="noopener">בואו נדבר בוואטסאפ ←</a>
+      <a class="btn btn-ghost" href="#works">לצפייה בעבודות</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5.2 עבודות נבחרות -->
+<section id="works">
+  <div class="wrap">
+    <span class="eyebrow">עבודות</span>
+    <h2 class="h2">מפרסומת למותג עד סרט שמרגש את כל האולם.</h2>
+    <div class="filters" role="group" aria-label="סינון עבודות">
+      <button class="chip" aria-pressed="true" data-f="all">הכול</button>
+      <button class="chip" aria-pressed="false" data-f="biz">עסקים</button>
+      <button class="chip" aria-pressed="false" data-f="event">אירועים ואנימציה</button>
+    </div>
+    <div class="grid" id="grid">
+      <a class="work big" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson</h3><span>פרסומת · ג'ונגל, הימלאיה, חוף, מסאי</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Prevou Madison</h3><span>סדרת סרטי מותג</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Lumière Continue</h3><span>סיפור מותג</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Terra Energy</h3><span>מותג אנרגיה</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Titan</h3><span>פרסומת מוצר</span></div></a>
+      <a class="work big" href="#" data-c="event"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>הקול הפנימי</h3><span>סרט אישי</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Meat-Or</h3><span>מזון</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>McDonald's</h3><span>פרסומת</span></div></a>
+      <a class="work" href="#" data-c="biz"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LA GLACE</h3><span>Mikve Paris</span></div></a>
+      <a class="work" href="#" data-c="event"><div class="poster"></div><div class="play" aria-hidden="true">▶</div><div class="info"><h3>הרב ושלושת הילדים</h3><span>אנימציה ודמויות</span></div></a>
+    </div>
+    <a class="more" href="#">לכל הפרויקטים ←</a> <span class="ph">מקום שמור: פוסטרים וסרטים</span>
+  </div>
+</section>
+
+<!-- 5.3 אמון -->
+<section class="trust" aria-labelledby="trust-h">
+  <div class="wrap trust-in">
+    <div>
+      <span class="eyebrow">לקוחות</span>
+      <h2 class="h2" id="trust-h">הם כבר ראו את הסיפור שלהם על המסך.</h2>
+      <div class="client-video"><div><span class="ph">מקום שמור: הסרטון Meet My Client</span><b>▶ Meet My Client</b></div></div>
+    </div>
+    <div class="quotes">
+      <blockquote><p>"מקום שמור להמלצה כתובה קצרה."</p><cite>שם הלקוח · תפקיד / אירוע</cite></blockquote>
+      <blockquote><p>"מקום שמור להמלצה כתובה קצרה."</p><cite>שם הלקוח · תפקיד / אירוע</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 5.4 שירותים -->
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">שירותים</span>
+    <h2 class="h2">מה אנחנו מפיקים.</h2>
+    <div class="tracks">
+      <article class="track">
+        <h3>לעסקים ומותגים</h3>
+        <ul><li>פרסומות AI</li><li>סרט תדמית / סיפור מותג</li><li>רילס וסרטונים לרשתות</li><li>אנימציית לוגו ופתיחים</li></ul>
+        <p class="note">כל פרויקט מתומחר לפי הסיפור. שלחו הודעה ותקבלו הצעה.</p>
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%A1%D7%A8%D7%98%20%D7%9C%D7%A2%D7%A1%D7%A7" target="_blank" rel="noopener">סרט לעסק בוואטסאפ ←</a>
+      </article>
+      <article class="track">
+        <h3>לאירועים ולרגעים אישיים</h3>
+        <ul><li>סרטי בר/בת מצווה, חתונה ומחווה</li><li>אנימציה ודמויות</li></ul>
+        <p class="note">מה מקבלים: תסריט אישי, סרט מוכן להקרנה, סבב תיקונים.</p>
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%A1%D7%A8%D7%98%20%D7%9C%D7%90%D7%99%D7%A8%D7%95%D7%A2" target="_blank" rel="noopener">סרט לאירוע בוואטסאפ ←</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5.5 איך זה עובד -->
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">איך זה עובד</span>
+    <h2 class="h2">ארבעה צעדים מהשיחה ועד המסך.</h2>
+    <ol class="steps">
+      <li><h3>שיחה</h3><p>מספרים לנו את הסיפור.</p></li>
+      <li><h3>תסריט ולוק</h3><p>מקבלים תסריט ותמונות לדוגמה לאישור.</p></li>
+      <li><h3>הפקה</h3><p>אנחנו מפיקים את הסרט ב-AI.</p></li>
+      <li><h3>מסירה</h3><p>סרט מוכן, עם סבב תיקונים.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5.6 שאלות נפוצות -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">שאלות</span>
+    <h2 class="h2">שאלות נפוצות.</h2>
+    <div class="faq">
+      <details><summary>כמה זמן לוקח?</summary><p>תלוי באורך ובמורכבות. ברוב הפרויקטים מדובר בימים עד שבועות בודדים. נגיד לכם לוח זמנים מדויק כבר בשיחה הראשונה.</p></details>
+      <details><summary>כמה זה עולה?</summary><p>כל פרויקט מתומחר לפי הסיפור. אחרי שיחה קצרה תקבלו הצעת מחיר ברורה.</p></details>
+      <details><summary>מה אני צריך לשלוח?</summary><p>את הסיפור, ואם יש: תמונות, לוגו, שמות ופרטים חשובים. את כל השאר אנחנו בונים.</p></details>
+      <details><summary>אפשר לשלב תמונות אמיתיות של המשפחה או העסק?</summary><p>כן. אפשר לבנות דמויות ומקומות על בסיס תמונות שתשלחו.</p></details>
+      <details><summary>למי שייכות הזכויות?</summary><p>הסרט שלכם לשימוש. את התנאים המדויקים נסכם מראש בהצעה.</p></details>
+      <details><summary>כמה סבבי תיקונים יש?</summary><p>כל פרויקט כולל סבב תיקונים. את המספר המדויק נקבע בהצעה.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 5.7 צור קשר -->
+<section class="contact" id="contact">
+  <div class="wrap contact-in">
+    <div>
+      <span class="eyebrow">צור קשר</span>
+      <h2 class="h2">הסיפור הבא שלכם <em>מתחיל בשיחה.</em></h2>
+      <p class="lead">כתבו לנו בוואטסאפ, התקשרו, או השאירו פרטים ונחזור אליכם.</p>
+      <div class="direct">
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%A1%D7%A8%D7%98%20AI" target="_blank" rel="noopener">בואו נדבר בוואטסאפ ←</a>
+        <a class="tel" href="tel:+972586255511">או בטלפון: 058-625-5511</a>
+      </div>
+    </div>
+    <form id="form" novalidate>
+      <label>שם<input name="name" autocomplete="name" required></label>
+      <label>טלפון<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      <label>סוג הפרויקט<select name="type"><option>עסק / מותג</option><option>אירוע</option><option>אחר</option></select></label>
+      <label>הודעה (לא חובה)<textarea name="msg"></textarea></label>
+      <label class="check"><input type="checkbox" name="marketing">אשמח לקבל עדכונים ודוגמאות חדשות (לא חובה)</label>
+      <button class="btn btn-primary" type="submit">שלחו פרטים</button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- 5.8 פוטר -->
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="assets/img/logo-lv.jpg" alt="" width="40" height="40">LEVIK Production</a>
+    <nav aria-label="קישורים בפוטר">
+      <a href="https://instagram.com/levikproduction.ai" target="_blank" rel="noopener">אינסטגרם</a>
+      <a href="https://wa.me/972586255511" target="_blank" rel="noopener">וואטסאפ</a>
+      <a href="#">הצהרת נגישות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <span class="ph">מקום שמור: מייל</span>
+    </nav>
+    <span>© 2026 LEVIK Production</span>
+  </div>
+</footer>
+
+<!-- קבועים -->
+<a class="wa-float" href="https://wa.me/972586255511" target="_blank" rel="noopener" aria-label="שלחו הודעה בוואטסאפ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg></a>
+<div class="bar">
+  <a class="btn wa" href="https://wa.me/972586255511" target="_blank" rel="noopener">וואטסאפ</a>
+  <a class="btn btn-ghost" href="tel:+972586255511">התקשרו</a>
+</div>
+<div class="cookie" id="cookie" hidden role="dialog" aria-label="הסכמה לעוגיות">
+  <p>אנחנו משתמשים בעוגיות למדידה ושיפור האתר, רק באישורכם. <a href="#">מדיניות פרטיות</a></p>
+  <div><button class="btn btn-primary" data-consent="yes">מאשר</button><button class="btn btn-ghost" data-consent="no">רק הכרחיות</button></div>
+</div>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var mb=document.getElementById('menuBtn'),mm=document.getElementById('mobileMenu');
+  mb.addEventListener('click',function(){var o=mm.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  mm.addEventListener('click',function(e){if(e.target.tagName==='A'){mm.classList.remove('open');mb.setAttribute('aria-expanded',false)}});
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f;document.querySelectorAll('.work').forEach(function(w){w.hidden=!(f==='all'||w.dataset.c===f)});
+  })});
+  document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();
+    document.getElementById('formMsg').textContent='הטופס יחובר למייל ולגוגל שיטס בשלב הבא. בינתיים אפשר לכתוב לנו בוואטסאפ.';});
+  // Hero: וידאו של ים שמתנגן בתוך המילה "לקולנוע."
+  var cine=document.getElementById('cine'),cv=cine.querySelector('canvas'),cx=cv.getContext('2d');
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!still){
+    var vid=document.createElement('video');vid.src='assets/video/sea.mp4';vid.muted=true;vid.loop=true;vid.playsInline=true;vid.setAttribute('playsinline','');vid.autoplay=true;
+    var W=0,H=0,fs=0;
+    function size(){var r=cine.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);fs=parseFloat(getComputedStyle(cine).fontSize)}
+    function draw(){
+      if(vid.readyState>=2&&W){
+        cx.globalCompositeOperation='source-over';cx.clearRect(0,0,W,H);
+        var vr=vid.videoWidth/vid.videoHeight,cr=W/H,dw,dh;if(vr>cr){dh=H;dw=H*vr}else{dw=W;dh=W/vr}
+        cx.drawImage(vid,(W-dw)/2,(H-dh)/2,dw,dh);
+        cx.globalCompositeOperation='destination-in';cx.font='700 '+fs+'px Karantina';cx.direction='rtl';cx.textAlign='right';cx.textBaseline='alphabetic';
+        cx.fillText(cine.firstChild.textContent,W,H*0.86);
+        cine.style.webkitTextFillColor='transparent';cine.style.backgroundImage='none';
+      }
+      requestAnimationFrame(draw);
+    }
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){size();vid.play().catch(function(){});draw()});
+    addEventListener('resize',size);
+  }
+  var ck=document.getElementById('cookie'),k='levik-consent',v=null;
+  try{v=localStorage.getItem(k)}catch(e){}
+  if(!v)ck.hidden=false;
+  ck.addEventListener('click',function(e){var b=e.target.dataset.consent;if(!b)return;try{localStorage.setItem(k,b)}catch(e){}ck.hidden=true;});
+})();
+</script>
+</body>
+</html>
