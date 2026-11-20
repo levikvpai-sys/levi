@@ -81,8 +81,21 @@ section{padding-block:clamp(72px,10vw,128px)}
 
 /* 5.2 עבודות */
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 28px}
-.chip{border:1px solid var(--line);background:none;color:var(--muted);border-radius:99px;padding:8px 18px;font:inherit;font-weight:500;cursor:pointer}
-.chip[aria-pressed="true"]{border-color:var(--teal);color:var(--fg);background:rgba(47,198,194,.08)}
+/* כפתורי סינון: לכל אחד גוון משלו מהפלטה, נקודת אור קטנה ואור דק שרץ סביב המסגרת */
+.chip{--c:228,190,116;position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(var(--c),.2);background:rgba(var(--c),.03);color:var(--muted);border-radius:99px;padding:9px 20px;font:inherit;font-weight:500;cursor:pointer;transition:color .3s,background .3s,border-color .3s,box-shadow .3s}
+.chip[data-f="biz"]{--c:47,198,194}
+.chip[data-f="event"]{--c:226,150,118}
+.chip .cd{width:6px;height:6px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 8px 1px rgba(var(--c),.7);opacity:.55;transition:opacity .3s,transform .3s}
+.chip::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;z-index:-1;background:conic-gradient(from var(--a,0deg),transparent 0deg 290deg,rgba(var(--c),.9) 330deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;animation:iring 5s linear infinite;transition:opacity .3s}
+.chip[data-f="biz"]::before{animation-delay:-1.7s}
+.chip[data-f="event"]::before{animation-delay:-3.4s}
+.chip:hover{color:var(--fg)}
+.chip:hover::before{opacity:.8}
+.chip[aria-pressed="true"]{color:var(--fg);background:rgba(var(--c),.1);border-color:rgba(var(--c),.45);box-shadow:0 0 22px rgba(var(--c),.18)}
+.chip[aria-pressed="true"]::before{opacity:1}
+.chip[aria-pressed="true"] .cd{opacity:1;transform:scale(1.25)}
+.chip:focus-visible{outline:2px solid rgba(var(--c),.8);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.chip::before{animation:none}}
 .grid{display:grid;grid-template-columns:1fr;gap:14px;grid-auto-flow:dense}
 @media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.work.big{grid-column:span 2}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}.work.big{grid-row:span 2;aspect-ratio:auto}}
@@ -538,6 +551,8 @@ footer a:hover{color:var(--fg)}
 .fcard .play::before{width:15px;height:18px;margin-left:4px}
 .fcard .ov b{font-size:16px;font-weight:700}
 .sdots{display:none}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes iring{to{--a:360deg}}
 </style>
 </head>
 <body>
@@ -735,9 +750,9 @@ footer a:hover{color:var(--fg)}
     <span class="eyebrow">עבודות</span>
     <h2 class="h2">מפרסומת למותג עד סרט שמרגש את כל האולם.</h2>
     <div class="filters" role="group" aria-label="סינון עבודות">
-      <button class="chip" aria-pressed="true" data-f="all">הכול</button>
-      <button class="chip" aria-pressed="false" data-f="biz">עסקים</button>
-      <button class="chip" aria-pressed="false" data-f="event">אירועים ואנימציה</button>
+      <button class="chip" aria-pressed="true" data-f="all"><span class="cd" aria-hidden="true"></span>הכול</button>
+      <button class="chip" aria-pressed="false" data-f="biz"><span class="cd" aria-hidden="true"></span>עסקים</button>
+      <button class="chip" aria-pressed="false" data-f="event"><span class="cd" aria-hidden="true"></span>אירועים ואנימציה</button>
     </div>
     <div class="grid" id="grid">
       <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/36-full.mp4" data-c="biz"><img class="poster" src="assets/works/36.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/36.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEGACY</h3><span dir="ltr">McDonald's · Bell · Maryland</span></div></a>
