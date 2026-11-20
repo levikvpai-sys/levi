@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEVIK Production | Films IA de qualité cinéma</title>
+<meta name="description" content="Des films IA de qualité cinéma pour entreprises, marques et vos moments les plus importants. Sans tournage, sans acteurs.">
+<meta name="theme-color" content="#0B0B10">
+<link rel="icon" href="assets/img/favicon-p.png">
+<link rel="preload" href="assets/fonts/heebo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+:root{
+  --bg:#0D0C0A; --surface:#191714; --line:#2E2A25; --fg:#F4EDE0; --muted:#AEA394;
+  --teal:#2AA6A3; --violet:#D9A24F; --gold-p:#E4BE74; --grad:linear-gradient(90deg,#EECD8A,#D9A24F);
+  --f-display:"Karantina","Heebo",system-ui,sans-serif; --f-body:"Heebo",system-ui,sans-serif;
+  --wrap:1200px; --gut:clamp(16px,4vw,40px); --radius:16px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-he-300.woff2) format("woff2");font-weight:300;font-display:swap;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+0020-0040,U+005B-0060,U+007B-007E,U+00A0,U+00B7,U+2013-2014,U+2018-201D,U+2022,U+2026,U+20AA}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-lat-300.woff2) format("woff2");font-weight:300;font-display:swap;unicode-range:U+0041-005A,U+0061-007A,U+00C0-00FF,U+0152-0153,U+0178}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-he-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+0020-0040,U+005B-0060,U+007B-007E,U+00A0,U+00B7,U+2013-2014,U+2018-201D,U+2022,U+2026,U+20AA}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-lat-500.woff2) format("woff2");font-weight:500;font-display:swap;unicode-range:U+0041-005A,U+0061-007A,U+00C0-00FF,U+0152-0153,U+0178}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-he-900.woff2) format("woff2");font-weight:900;font-display:swap;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+0020-0040,U+005B-0060,U+007B-007E,U+00A0,U+00B7,U+2013-2014,U+2018-201D,U+2022,U+2026,U+20AA}
+@font-face{font-family:"LEVIK Display";src:url(assets/fonts/levik-display-lat-900.woff2) format("woff2");font-weight:900;font-display:swap;unicode-range:U+0041-005A,U+0061-007A,U+00C0-00FF,U+0152-0153,U+0178}
+@font-face{font-family:Heebo;src:url(assets/fonts/heebo.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Karantina;src:url(assets/fonts/karantina-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"LEVIK Cine";src:url(assets/fonts/anton.woff2) format("woff2");font-weight:400;font-display:swap}
+html:not([lang=he]){--f-display:"LEVIK Display",Georgia,serif}
+html:not([lang=he]) .h2,html:not([lang=he]) .hero h1,html:not([lang=he]) .work h3,html:not([lang=he]) .aw-h,html:not([lang=he]) .aw-stats b,html:not([lang=he]) .client-video b,html:not([lang=he]) .track h3,html:not([lang=he]) .steps li::before,html:not([lang=he]) .say p,html:not([lang=he]) .stamp b,html:not([lang=he]) .aw h2,html:not([lang=he]) .facts b,html:not([lang=he]) .fhead h3,html:not([lang=he]) .reels-h{font-weight:900;letter-spacing:-.015em}
+html:not([lang=he]) .h2,html:not([lang=he]) .say p,html:not([lang=he]) .aw h2,html:not([lang=he]) .fhead h3,html:not([lang=he]) .track h3{line-height:.98}
+html:not([lang=he]) .hero h1{font-size:clamp(42px,7.6vw,100px);line-height:.96;letter-spacing:-.02em}
+html:not([lang=he]) .hero h1 .cine{font-family:"LEVIK Cine",Impact,sans-serif;font-weight:400;line-height:1.02;letter-spacing:.01em;margin-top:.06em}
+html:not([lang=he]) .s0 .say p{font-weight:900;font-size:clamp(28px,3.8vw,56px);line-height:1.02}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.skip{position:absolute;inset-inline-start:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{inset-inline-start:8px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+
+/* כפתורים */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:99px;font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .2s}
+.btn-primary{background:var(--grad);color:#0B0B10;box-shadow:0 0 32px rgba(47,198,194,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(217,162,79,.4)}
+.btn-ghost{border:1px solid rgba(245,240,230,.35);color:var(--fg);background:rgba(13,12,10,.35)}
+.btn-ghost:hover{border-color:var(--teal)}
+
+/* כותרות סקשנים */
+section{padding-block:clamp(48px,6vw,84px)}
+.eyebrow{display:block;color:var(--teal);font-weight:700;font-size:14px;letter-spacing:.02em;margin-bottom:12px}
+.h2{font-family:var(--f-display);font-weight:700;font-size:clamp(48px,8vw,92px);line-height:.95;margin:0 0 20px;text-wrap:balance}
+.lead{color:var(--muted);font-size:clamp(17px,2vw,20px);max-width:60ch;margin:0}
+.ph{border:1px dashed rgba(47,198,194,.5);color:var(--teal);font-size:13px;padding:2px 8px;border-radius:6px;display:inline-block}
+
+/* 5.0 תפריט */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(13,12,10,.85);backdrop-filter:blur(10px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:900;letter-spacing:.06em}
+.logo img{width:40px;height:40px;border-radius:10px}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:28px}
+.nav ul a{text-decoration:none;color:var(--muted);font-weight:500}
+.nav ul a:hover{color:var(--fg)}
+.nav .btn{min-height:42px;padding:0 18px;font-size:15px}
+.nav-cta{display:none}
+.menu-btn{background:none;border:1px solid var(--line);color:var(--fg);border-radius:99px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.mobile-menu{display:none;position:fixed;inset:68px 0 auto;background:rgba(13,12,10,.97);border-bottom:1px solid var(--line);padding:16px var(--gut) 24px}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:20px;font-weight:700}
+@media(min-width:960px){.nav ul{display:flex}.nav-cta{display:inline-flex}.menu-btn{display:none}}
+/* מתג שפה: שלושה קודים, הפעיל בזהב עם נקודת אור בצבע של השפה */
+.nav-end{display:flex;align-items:center;gap:clamp(8px,1.4vw,18px)}
+.lang{display:flex;align-items:center;font-size:13px;font-weight:700;letter-spacing:.1em;line-height:1}
+.lang a{position:relative;padding:10px 8px 12px;text-decoration:none;color:rgba(244,237,224,.5);transition:color .25s}
+.lang a+a::before{content:"";position:absolute;inset-inline-start:-1.5px;top:50%;width:3px;height:3px;margin-top:-3px;border-radius:50%;background:rgba(244,237,224,.25)}
+.lang a:hover,.lang a:focus-visible{color:var(--teal)}
+.lang a.on{color:var(--gold-p)}
+.lang a::after{content:"";position:absolute;left:50%;bottom:2px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--lc);box-shadow:0 0 8px var(--lc),0 0 2px var(--lc);opacity:0;transform:scale(.3);transition:opacity .3s,transform .3s}
+.lang a.on::after{opacity:1;transform:none}
+@media(max-width:380px){.lang a{padding-inline:6px}}
+/* כיוון שמאל-לימין לאנגלית ולצרפתית */
+[dir=ltr] .rn.prev::before{transform:translateX(2px) rotate(-135deg)}
+[dir=ltr] .rn.next::before{transform:translateX(-2px) rotate(45deg)}
+[dir=ltr] .aw-en,[dir=ltr] .aw .en{text-align:left}
+[dir=ltr] .hero h1 .cine{font-size:min(2.7em,calc((100vw - 40px)/3.6))}
+@media(max-width:600px){[dir=ltr] .hero h1 .cine{font-size:calc((100vw - 40px)/3.6)}}
+[dir=ltr] .tk::before{clip-path:inset(0 87px 0 0)}
+[dir=ltr] .tk:hover::before{clip-path:inset(0 100% 0 0)}
+[dir=ltr] .tk span{padding:0 20px 0 26px}
+@media (max-width:420px){[dir=ltr] .tk::before{clip-path:inset(0 69px 0 0)}[dir=ltr] .tk span{padding:0 14px 0 18px}}
+
+/* 5.1 Hero */
+.arc{position:absolute;inset:auto 0 -1px;height:clamp(46px,7vw,110px);z-index:2;pointer-events:none}
+.arc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 -2px 10px rgba(228,190,116,.45))}
+.arc::after{content:"";position:absolute;left:8%;right:8%;top:22%;bottom:0;background:radial-gradient(ellipse 50% 100% at 50% 0,rgba(217,162,79,.22),rgba(47,198,194,.06) 50%,transparent 80%);z-index:1}
+.hero{position:relative;min-height:100svh;display:grid;align-items:end;padding:0;overflow:hidden}
+.wall{position:absolute;inset:-4%;transform:rotate(-4deg) scale(1.1);filter:brightness(.45) saturate(.85)}
+.wall>div{position:relative;overflow:hidden;background:linear-gradient(160deg,#103236,#0D0C0A)}
+.wall>div:nth-child(3n+2){background:linear-gradient(160deg,#2A2012,#0D0C0A)}
+.wall>div:nth-child(3n){background:linear-gradient(160deg,#1A1714,#0D0C0A)}
+.wall video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wall .tile{display:none;aspect-ratio:16/11;border-radius:10px;box-shadow:0 0 34px rgba(47,198,194,.12)}
+.wall .one{position:absolute;inset:0}
+@media(min-width:700px){.wall{display:grid;grid-template-columns:repeat(4,1fr);align-content:start;gap:6px}.wall .tile{display:block}.wall .one{display:none}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 60% at 72% 62%,rgba(6,5,4,.6),transparent 72%),linear-gradient(to top,var(--bg) 8%,rgba(13,12,10,.8) 45%,rgba(13,12,10,.52))}
+@media(max-width:760px){.hero::before{background:radial-gradient(90% 55% at 50% 66%,rgba(6,5,4,.6),transparent 75%),linear-gradient(to top,var(--bg) 8%,rgba(13,12,10,.8) 45%,rgba(13,12,10,.52))}}
+.hero-in{position:relative;z-index:2;padding-block:120px clamp(56px,10vh,110px)}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(64px,14vw,150px);line-height:.88;margin:0 0 24px;text-wrap:balance}
+.hero h1 .cine{position:relative;display:block;font-style:normal;font-size:1.75em;line-height:.85;color:transparent;background:url(assets/video/swabson-lugan-poster.jpg) center/cover;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 30px rgba(47,198,194,.35))}
+.hero h1 .cine canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .presents{display:block;font:700 13px var(--f-body);letter-spacing:.08em;color:var(--teal);margin-bottom:14px}
+.hero p{font-size:clamp(18px,2.2vw,22px);color:#E9E1D2;max-width:44ch;margin:0 0 32px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+/* 5.2 עבודות */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 28px}
+/* כפתורי סינון: לכל אחד גוון משלו מהפלטה, נקודת אור קטנה ואור דק שרץ סביב המסגרת */
+.chip{--c:228,190,116;position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(var(--c),.2);background:rgba(var(--c),.03);color:var(--muted);border-radius:99px;padding:9px 20px;font:inherit;font-weight:500;cursor:pointer;transition:color .3s,background .3s,border-color .3s,box-shadow .3s}
+.chip[data-f="biz"]{--c:47,198,194}
+.chip[data-f="event"]{--c:226,150,118}
+.chip .cd{width:6px;height:6px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 8px 1px rgba(var(--c),.7);opacity:.55;transition:opacity .3s,transform .3s}
+.chip::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;z-index:-1;background:conic-gradient(from var(--a,0deg),transparent 0deg 290deg,rgba(var(--c),.9) 330deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;animation:iring 5s linear infinite;transition:opacity .3s}
+.chip[data-f="biz"]::before{animation-delay:-1.7s}
+.chip[data-f="event"]::before{animation-delay:-3.4s}
+.chip:hover{color:var(--fg)}
+.chip:hover::before{opacity:.8}
+.chip[aria-pressed="true"]{color:var(--fg);background:rgba(var(--c),.1);border-color:rgba(var(--c),.45);box-shadow:0 0 22px rgba(var(--c),.18)}
+.chip[aria-pressed="true"]::before{opacity:1}
+.chip[aria-pressed="true"] .cd{opacity:1;transform:scale(1.25)}
+.chip:focus-visible{outline:2px solid rgba(var(--c),.8);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.chip::before{animation:none}}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;grid-auto-flow:dense}
+@media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.work.big{grid-column:span 2}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}.work.big{grid-row:span 2;aspect-ratio:auto}}
+.work{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);aspect-ratio:16/10;text-decoration:none;display:block;border:1px solid var(--line);color:var(--fg)}
+.work .poster,.work video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:linear-gradient(150deg,#16343a,#171512 60%);transition:transform .6s,opacity .3s}
+.work video{opacity:0}
+.work.on video{opacity:1}
+.work:hover .poster,.work:hover video{transform:scale(1.04)}
+.work .info{position:absolute;inset:auto 0 0;padding:16px 18px;background:linear-gradient(to top,rgba(13,12,10,.92),transparent)}
+.work h3{margin:0;font-family:var(--f-display);font-size:24px;font-weight:700;line-height:1.2}
+.work.big h3{font-size:34px}
+.work span{color:var(--muted);font-size:14px}
+.work .play{position:absolute;top:14px;inset-inline-start:14px;width:44px;height:44px;border-radius:50%;background:rgba(13,12,10,.45);backdrop-filter:blur(6px);display:grid;place-items:center;transition:background .2s}
+.work:hover .play{background:var(--grad)}
+.seal{position:absolute;top:12px;inset-inline-end:12px;z-index:3;width:clamp(78px,7vw,100px);aspect-ratio:1;transform:rotate(-14deg);filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));pointer-events:none}
+.seal svg{display:block;width:100%;height:100%}
+.seal.pre{opacity:0;transform:rotate(-24deg) scale(1.9)}
+.seal.on{opacity:1;transform:rotate(-14deg) scale(1);transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+@media(prefers-reduced-motion:reduce){.seal.pre{opacity:1;transform:rotate(-14deg)}}
+.work .award{position:absolute;top:14px;inset-inline-end:14px;padding:7px 14px;border-radius:99px;background:linear-gradient(135deg,#f6d77a,#c9952f);color:#1a1205;font-size:14px;font-weight:800;box-shadow:0 6px 24px rgba(201,149,47,.45)}
+.work .award::before{content:"★ "}
+.work[hidden],.grid:not(.open) .work.x{display:none}
+/* 5.1.5 במת הזוכה */
+.award-s{position:relative;overflow:hidden;padding-block:clamp(72px,10vw,128px);background:radial-gradient(120% 70% at 50% 0,#1c1608 0,var(--bg) 62%);border-block:1px solid #2c2412;--gold:#E8C46A;--gold-g:linear-gradient(135deg,#fbe7a6,#e8c46a 40%,#b98a2c)}
+.award-s::before,.award-s::after{content:"";position:absolute;top:-10%;width:60%;height:120%;pointer-events:none;background:conic-gradient(from 180deg at 50% 0,transparent 42%,rgba(255,226,150,.13) 50%,transparent 58%);filter:blur(6px)}
+.award-s::before{inset-inline-start:-8%;transform:rotate(-14deg)}
+.award-s::after{inset-inline-end:-8%;transform:rotate(14deg)}
+.award-s .wrap{position:relative;z-index:1;display:grid;gap:clamp(32px,5vw,64px);align-items:center}
+@media(min-width:1024px){.award-s .wrap{grid-template-columns:1.15fr 1fr}}
+.aw-screen{position:relative;border-radius:18px;padding:3px;background:var(--gold-g);box-shadow:0 30px 90px rgba(232,196,106,.22),0 0 0 1px rgba(255,230,160,.2)}
+.aw-screen video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:15px;background:#000}
+.aw-screen .aw-tag{position:absolute;top:14px;inset-inline-end:14px;padding:6px 14px;border-radius:99px;background:var(--gold-g);color:#1a1205;font-size:14px;font-weight:800}
+.aw-badge{width:clamp(130px,16vw,170px);color:var(--gold);margin-bottom:18px}
+.aw-badge text{fill:var(--gold);font-family:var(--f-body);font-weight:700;text-anchor:middle}
+.award-s .eyebrow{color:var(--gold)}
+.aw-h{margin:6px 0 4px;font-family:var(--f-display);font-weight:700;font-size:clamp(48px,7vw,84px);line-height:1;background:var(--gold-g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.aw-en{margin:0 0 18px;color:var(--muted);font-size:15px;letter-spacing:.06em;direction:ltr;text-align:right}
+.aw-txt{margin:0 0 26px;max-width:52ch;font-size:clamp(17px,1.4vw,19px)}
+.aw-stats{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 28px;padding:0;list-style:none}
+.aw-stats li{display:flex;flex-direction:column;line-height:1.2}
+.aw-stats b{text-align:right;font-family:var(--f-display);font-size:42px;color:var(--fg)}
+.aw-stats span{color:var(--muted);font-size:14px}
+.aw-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn-gold{background:var(--gold-g);color:#1a1205;border:0}
+.aw-credit{color:var(--muted);font-size:14px}
+.aw-press{grid-column:1/-1;border-top:1px solid #2c2412;padding-top:28px}
+.aw-press h3{margin:0 0 14px;font-size:15px;font-weight:500;color:var(--muted)}
+.aw-press ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+@media(min-width:700px){.aw-press ul{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.aw-press ul{grid-template-columns:repeat(4,1fr)}}
+.aw-press a{display:block;height:100%;padding:16px 18px;border-radius:12px;border:1px solid #2c2412;background:rgba(232,196,106,.04);text-decoration:none;transition:border-color .2s,background .2s}
+.aw-press a:hover{border-color:var(--gold);background:rgba(232,196,106,.09)}
+.aw-press b{display:block;color:var(--gold);font-size:14px;margin-bottom:4px}
+.aw-press span{font-size:15px;line-height:1.45}
+.player{padding:0;border:0;background:#000;width:min(1100px,94vw);max-height:90vh;border-radius:14px;overflow:hidden}
+.player::backdrop{background:rgba(5,5,8,.88)}
+.player video{display:block;width:100%;max-height:90vh;background:#000}
+.player button{position:absolute;top:10px;inset-inline-end:10px;z-index:1;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:20px;cursor:pointer}
+.more{display:inline-block;margin-top:28px;background:none;border:0;font:inherit;font-size:17px;cursor:pointer;padding:0;color:var(--teal);font-weight:700;text-decoration:none}
+
+/* 5.3 אמון */
+.trust{background:var(--surface)}
+.trust-in{display:grid;gap:32px}
+@media(min-width:960px){.trust-in{grid-template-columns:1.3fr 1fr;align-items:center}}
+.client-video{aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(150deg,#16343a,#2A2012);display:grid;place-items:center;text-align:center;border:1px solid var(--line);padding:16px}
+.client-video b{display:block;font-family:var(--f-display);font-size:40px;margin-top:10px}
+.quotes{display:grid;gap:14px}
+blockquote{margin:0;padding:20px;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg)}
+blockquote p{margin:0 0 8px;font-size:18px}
+blockquote cite{color:var(--muted);font-style:normal;font-size:14px}
+
+/* 5.4 שירותים */
+.tracks{display:grid;gap:16px;margin-top:40px}
+@media(min-width:900px){.tracks{grid-template-columns:1fr 1fr}}
+.track{border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,4vw,40px);background:var(--surface);display:flex;flex-direction:column;gap:16px}
+.track h3{font-family:var(--f-display);font-weight:700;font-size:clamp(38px,4vw,52px);margin:0;line-height:1.15}
+.track ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.track li{padding-inline-start:26px;position:relative}
+.track li::before{content:"";position:absolute;inset-inline-start:0;top:.7em;width:12px;height:2px;background:var(--grad)}
+.track .note{color:var(--muted);margin:0}
+.track .btn,.track .tk{align-self:flex-start;margin-top:auto}
+
+/* 5.5 תהליך */
+.steps{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:14px;counter-reset:s}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}}
+.steps li{counter-increment:s;border-top:2px solid var(--line);padding-top:18px}
+.steps li::before{content:"0" counter(s);font-family:var(--f-display);font-weight:700;font-size:64px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.steps h3{margin:10px 0 4px;font-size:22px}
+.steps p{margin:0;color:var(--muted)}
+
+/* 5.6 שאלות */
+.faq{margin-top:32px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-size:19px;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--teal);font-size:26px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--muted);max-width:65ch}
+
+/* 5.7 צור קשר */
+.contact{background:radial-gradient(70% 60% at 50% 0%,rgba(217,162,79,.18),transparent 70%),radial-gradient(60% 50% at 80% 100%,rgba(47,198,194,.12),transparent 70%)}
+.contact-in{display:grid;gap:40px}
+@media(min-width:960px){.contact-in{grid-template-columns:1fr 1fr;align-items:start}}
+.contact .h2 em{font-family:inherit;font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.direct{display:flex;flex-direction:column;gap:12px;margin-top:28px;align-items:flex-start}
+.direct a.tel{color:var(--muted);text-decoration:none;font-size:18px}
+form{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,32px)}
+label{font-weight:500;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-height:50px;width:100%}
+textarea{min-height:100px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:var(--muted);font-size:14px}
+.check input{width:20px;min-height:20px;height:20px;margin-top:3px;flex:none}
+.form-msg{color:var(--teal);margin:0;min-height:1em}
+
+/* 5.8 פוטר */
+footer{border-top:1px solid var(--line);padding-block:40px 120px;color:var(--muted);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+footer nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--fg)}
+@media(min-width:960px){footer{padding-bottom:40px}}
+
+/* קבועים: וואטסאפ צף, בר תחתון, עוגיות */
+.wa-float{position:fixed;bottom:24px;inset-inline-start:24px;z-index:40;width:60px;height:60px;border-radius:50%;background:linear-gradient(#191714,#191714) padding-box,var(--grad) border-box;border:2px solid transparent;display:none;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px rgba(228,190,116,.3)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@media(min-width:960px){.wa-float{display:grid}}
+.wa-float{transition:opacity .35s,transform .35s}.wa-float.away{opacity:0;transform:scale(.6);pointer-events:none}
+.bar{position:fixed;inset:auto 0 0;z-index:40;display:grid;grid-template-columns:2fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(13,12,10,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.bar a{min-height:48px;font-size:16px}
+.bar .wa{background:var(--grad);color:#0B0B10;font-weight:800}
+@media(min-width:960px){.bar{display:none}}
+.cookie{position:fixed;z-index:60;inset:auto 12px calc(84px + env(safe-area-inset-bottom)) 12px;max-width:520px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.5);font-size:15px}
+.cookie p{margin:0 0 12px;color:var(--muted)}
+.cookie div{display:flex;gap:10px;flex-wrap:wrap}
+.cookie .btn{min-height:42px;padding:0 18px;font-size:15px}
+.cookie[hidden]{display:none}
+@media(min-width:960px){.cookie{bottom:24px;inset-inline:auto 24px}}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* ---------- pinned scroll text (jerbi style) ---------- */
+.pin{position:relative;height:165vh}
+.stick{position:sticky;top:0;height:100svh;display:grid;place-items:center;padding:0 16px;overflow:clip}
+.say{max-width:1000px;text-align:center}
+.say .kick{display:block;color:var(--muted);font-size:14px;letter-spacing:.02em;margin-bottom:22px}
+.say p{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(44px,7.4vw,104px);line-height:1;text-wrap:balance}
+.say p .w{opacity:.16;transition:opacity .15s linear}
+.say p .w.hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.say p .w.gd{color:var(--gold)}
+.say .rule{display:block;height:2px;width:min(340px,70%);margin:30px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(var(--p,0));transition:transform .1s linear}
+
+/* ---------- desk (option 5) ---------- */
+.dpin{position:relative;height:220vh}
+.dstick{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px 16px;overflow:clip}
+.dhead{text-align:center;color:var(--muted);font-size:14px;letter-spacing:.04em}
+.dhead b{color:var(--fg);font-weight:500}
+.deskwrap{perspective:1600px;width:min(1200px,100%,(100svh - 110px)*1.6)}
+.desk{position:relative;aspect-ratio:16/10;transform-style:preserve-3d;transition:transform .25s ease-out;
+  transform:rotateX(var(--ty,0deg)) rotateY(var(--tx,0deg));border-radius:18px;
+  background:radial-gradient(70% 60% at 50% 45%,rgba(47,198,194,.08),transparent 70%),
+    linear-gradient(rgba(245,240,230,.04) 1px,transparent 1px) 0 0/40px 40px,
+    linear-gradient(90deg,rgba(245,240,230,.04) 1px,transparent 1px) 0 0/40px 40px,var(--surface);
+  box-shadow:inset 0 0 0 1px var(--line),inset 0 0 120px rgba(0,0,0,.6)}
+.it{position:absolute;opacity:0;transform:translateZ(320px) rotate(calc(var(--r)*3));
+  transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .25s}
+.it.in{opacity:1;transform:translateZ(var(--z,20px)) rotate(var(--r))}
+.clip{display:block;background:#0D0C0A;border-radius:6px;overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.1)}
+.clip img{width:100%;height:auto}
+.tape::before{content:"";position:absolute;z-index:2;width:74px;height:22px;top:-9px;left:50%;margin-left:-37px;
+  background:rgba(47,198,194,.35);backdrop-filter:blur(2px);box-shadow:0 2px 6px rgba(0,0,0,.3);transform:rotate(var(--tr,-4deg))}
+.tape.v::before{background:rgba(217,162,79,.42)}
+.c-ih{--r:4deg;--z:45px;right:2%;top:4%;width:21%}
+.c-ma{--r:-4deg;--z:55px;--tr:6deg;left:2%;top:5%;width:24%}
+.c-card{--r:-3deg;--z:60px;--tr:-8deg;left:5%;bottom:3%;width:12%}
+.c-poster{--r:-1.5deg;--z:80px;left:25%;top:21%;width:50%}
+.c-poster .clip{box-shadow:0 30px 60px rgba(0,0,0,.7),0 0 0 1px rgba(232,196,106,.35),0 0 80px rgba(47,198,194,.18)}
+.c-poster::before,.c-poster::after{content:"";position:absolute;z-index:2;width:90px;height:26px;background:rgba(47,198,194,.35);backdrop-filter:blur(2px);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.c-poster::before{top:-10px;right:-24px;transform:rotate(38deg)}
+.c-poster::after{bottom:-10px;left:-24px;transform:rotate(38deg);background:rgba(217,162,79,.4)}
+/* winner stamp */
+.stamp{--r:-9deg;--z:120px;left:61%;top:50%;width:18%;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;
+  background:radial-gradient(circle at 35% 30%,rgba(232,196,106,.22),rgba(13,12,10,.92) 70%);
+  border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(13,12,10,.7),0 0 0 7px rgba(232,196,106,.5),0 20px 50px rgba(0,0,0,.7),0 0 60px rgba(232,196,106,.25);
+  transform:translateZ(500px) rotate(-40deg) scale(1.8)}
+.stamp.in{transform:translateZ(var(--z)) rotate(var(--r)) scale(1)}
+.stamp small{color:var(--gold);font-size:clamp(9px,1vw,13px);font-weight:700;letter-spacing:.02em}
+.stamp b{font-family:var(--f-display);font-size:clamp(34px,5.4vw,70px);line-height:.85;color:var(--fg)}
+.stamp span{font-size:clamp(9px,1vw,13px);color:var(--muted);line-height:1.25;padding:0 8%}
+.flash{position:absolute;inset:0;border-radius:18px;pointer-events:none;opacity:0;
+  background:radial-gradient(60% 55% at 50% 45%,rgba(232,196,106,.35),rgba(217,162,79,.12) 50%,transparent 75%)}
+.flash.in{animation:flash 1.4s ease-out forwards}
+@keyframes flash{0%{opacity:0}15%{opacity:1}100%{opacity:.35}}
+.dprog{display:flex;gap:6px}
+.dprog i{width:22px;height:3px;border-radius:2px;background:var(--line);transition:background .3s}
+.dprog i.on{background:var(--grad)}
+
+@media (max-width:760px){
+  .deskwrap{width:min(100%,(100svh - 120px)*.5625)}
+  .desk{aspect-ratio:9/16}
+  .c-ih{right:3%;top:3%;width:48%}
+  .c-ma{left:3%;top:7%;width:46%}
+  .c-poster{left:4%;top:41%;width:92%}
+  .c-card{left:auto;right:7%;bottom:2%;width:25%}
+  .stamp{left:5%;top:66%;width:36%}
+  .tape::before{width:54px;height:16px;margin-left:-27px;top:-7px}
+  .c-poster::before,.c-poster::after{width:60px;height:18px}
+}
+
+/* ---------- award reveal ---------- */
+.award{position:relative;padding:56px 16px 64px;overflow:clip}
+.award::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;pointer-events:none;
+  background:radial-gradient(40% 40% at 70% 40%,rgba(47,198,194,.12),transparent 70%),radial-gradient(40% 40% at 25% 60%,rgba(217,162,79,.14),transparent 70%)}
+.aw{position:relative;max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0)*.14s)}
+.go .rv{opacity:1;transform:none}
+.prize{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.02em}
+.prize::before,.prize::after{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.prize::after{transform:scaleX(-1)}
+.aw h2{font-family:var(--f-display);font-weight:700;font-size:clamp(60px,10vw,128px);line-height:.88;margin:14px 0 6px;text-wrap:balance}
+.aw h2 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.aw .en{color:var(--muted);letter-spacing:.08em;margin:0 0 18px;direction:ltr;text-align:right}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin:0 0 26px;padding:18px 0;border-block:1px solid var(--line)}
+.facts div{display:flex;flex-direction:column}
+.facts b{font-family:var(--f-display);font-size:46px;line-height:1;color:var(--fg)}
+.facts span{color:var(--muted);font-size:14px}
+.aw .cr{color:var(--muted);font-size:15px;margin:0 0 24px}
+.aw .cr b{color:var(--fg);font-weight:500}
+/* slot for the real award photo */
+.slot{position:relative;aspect-ratio:4/5;border-radius:22px;padding:2px;background:linear-gradient(140deg,var(--teal),rgba(217,162,79,.6) 50%,var(--gold))}
+.slot .in{height:100%;border-radius:20px;background:radial-gradient(70% 60% at 50% 35%,rgba(232,196,106,.13),transparent 70%),var(--surface);
+  display:grid;place-content:center;text-align:center;gap:10px;padding:24px;color:var(--muted);font-size:15px}
+.slot .in svg{margin:0 auto;opacity:.8}
+.slot .in.pic{padding:0;overflow:hidden;display:block}
+.slot .in.pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.slot::after{content:"";position:absolute;inset:-30px;z-index:-1;border-radius:40px;background:radial-gradient(closest-side,rgba(47,198,194,.25),transparent);filter:blur(20px)}
+@media (max-width:860px){.aw{grid-template-columns:1fr;gap:40px}.slot{max-width:420px;width:100%;margin:0 auto}}
+
+/* ---------- film ---------- */
+.film{padding:16px 16px 80px}
+.fhead{text-align:center;margin:0 auto 26px}
+.fhead h3{font-family:var(--f-display);font-size:clamp(46px,7vw,84px);line-height:.95;margin:0}
+.fhead p{color:var(--muted);margin:6px 0 0}
+.fcard{position:relative;display:block;width:100%;max-width:1100px;margin:0 auto;aspect-ratio:16/9;border-radius:20px;overflow:hidden;cursor:pointer;border:0;padding:0;background:#000;
+  box-shadow:0 0 0 1px var(--line),0 40px 90px rgba(0,0,0,.6),0 0 90px rgba(217,162,79,.15);transition:transform .4s}
+.fcard:hover{transform:scale(1.012)}
+.fcard video{width:100%;height:100%;object-fit:cover;display:block}
+.fcard .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(transparent 40%,rgba(13,12,10,.75))}
+.play{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:rgba(13,12,10,.45);backdrop-filter:blur(6px);
+  box-shadow:0 0 0 2px var(--teal),0 0 40px rgba(47,198,194,.45);transition:transform .2s}
+.fcard:hover .play{transform:scale(1.08)}
+.fcard .ov b{font-size:18px;color:var(--fg)}
+.fcard .tag{position:absolute;top:14px;right:14px;font-size:12px;letter-spacing:.04em;color:var(--fg);background:rgba(13,12,10,.6);padding:5px 12px;border-radius:99px;display:flex;align-items:center;gap:7px}
+.fcard .tag i{width:7px;height:7px;border-radius:50%;background:#ff3b5c;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+@media (max-width:600px){.play{width:68px;height:68px}.fcard{border-radius:14px}}
+
+
+/* award flow inside the site */
+.pin,.dpin{padding:0}
+.award{padding-block:56px 64px}
+.film{padding-block:8px 72px}
+.facts b{font-family:var(--f-display)}
+/* scroll word reveal across the site */
+.w{transition:opacity .15s linear}
+@media (prefers-reduced-motion:reduce){.it,.rv{transition:none}.w{opacity:1!important}}
+
+/* ===== מכל הזכייה: סצנות מתחלפות במקום אחד ===== */
+.stage{position:relative;height:170vh;padding:0}
+.sstick{position:sticky;top:0;height:100svh;overflow:clip}
+.sglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 45% at 72% 40%,rgba(47,198,194,.10),transparent 70%),radial-gradient(40% 45% at 25% 62%,rgba(217,162,79,.12),transparent 70%)}
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:76px 16px 40px;opacity:0;visibility:hidden;transform:translateY(28px) scale(.97);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.7,.2,1),visibility 0s .7s}
+.sc.cur{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease .12s,transform .7s cubic-bezier(.2,.7,.2,1) .12s,visibility 0s}
+.sc.past{transform:translateY(-28px) scale(.97)}
+.sc .w{transition:opacity .35s ease}
+.sc.on{visibility:visible}
+.say.small p{font-size:clamp(22px,3.2vw,40px)}
+.sc .deskwrap{width:min(1100px,100%,(100svh - 160px)*1.6)}
+.sc .aw{width:100%}
+.sc .slot{max-height:calc(100svh - 170px);aspect-ratio:4/5;justify-self:center;width:100%;max-width:420px}
+.sc .fcard{width:min(1000px,100%,(100svh - 260px)*1.7778);height:auto}
+.sdots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.sdots i{width:26px;height:3px;border-radius:2px;background:var(--line);transition:background .3s}
+.sdots i.on{background:var(--grad)}
+@media (min-width:761px) and (max-width:860px){
+  .sc .aw{gap:28px}
+  .sc .slot{aspect-ratio:auto;height:clamp(220px,calc(100svh - 580px),460px)}
+}
+@media (max-width:760px){
+  .sc{padding:70px 16px 96px}
+  .sc .deskwrap{width:min(100%,(100svh - 190px)*.5625)}
+  .sc .aw{gap:18px}
+  .sc .aw h2{font-size:clamp(52px,15vw,72px)}
+  .sc .facts{gap:20px;margin-bottom:14px;padding:12px 0}
+  .sc .facts b{font-size:36px}
+  .sc .slot{aspect-ratio:auto;height:clamp(150px,27svh,260px);max-width:none}
+  .sc .slot .in.pic img{object-position:50% 58%}
+  .sdots{bottom:84px}
+}
+@media (prefers-reduced-motion:reduce){.stage{height:auto}.sstick{position:static;height:auto}.sc{position:relative;opacity:1!important;visibility:visible;transform:none!important;min-height:100svh}.it{opacity:1;transform:none}.sdots{display:none}}
+/* כפתור כרטיס C: ספח ברקוד מלא, הצבע נשפך במעבר עכבר */
+:root{--tn:radial-gradient(circle at 0 50%,transparent 9px,#000 9.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 9px,#000 9.5px) right/51% 100% no-repeat;
+--tni:radial-gradient(circle at -1.5px 50%,transparent 10.5px,#000 11px) left/51% 100% no-repeat,radial-gradient(circle at calc(100% + 1.5px) 50%,transparent 10.5px,#000 11px) right/51% 100% no-repeat;
+--bars:repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 3px,#000 3px 4px,transparent 4px 6px,#000 6px 9px,transparent 9px 10px,#000 10px 11px,transparent 11px 14px)}
+.tk{position:relative;display:inline-flex;align-items:stretch;height:60px;background:var(--grad);border-radius:8px;font-weight:800;font-size:17px;color:var(--fg);text-decoration:none;isolation:isolate;-webkit-mask:var(--tn);mask:var(--tn);transition:color .3s,transform .2s}
+.tk::before{content:"";position:absolute;inset:1.5px;border-radius:7px;background:#191714;z-index:-1;-webkit-mask:var(--tni);mask:var(--tni);clip-path:inset(0 0 0 87px);transition:clip-path .55s cubic-bezier(.7,0,.2,1)}
+.tk span{display:flex;align-items:center;padding:0 26px 0 20px;transition:color .2s}
+.tk b{display:flex;align-items:center;justify-content:center;width:88px;border-inline-start:1.5px dashed rgba(13,12,10,.45)}
+.tk b i{display:block;width:46px;height:26px;background:var(--bg);-webkit-mask:var(--bars);mask:var(--bars)}
+.tk:hover{transform:translateY(-2px)}
+.tk:hover::before{clip-path:inset(0 0 0 100%)}
+.tk:hover span{color:var(--bg);transition:color .2s .25s}
+.tg{position:relative;display:inline-flex;align-items:center;height:60px;padding:0 28px;background:linear-gradient(90deg,rgba(47,198,194,.45),rgba(217,162,79,.45));border-radius:8px;font-weight:700;font-size:17px;color:var(--muted);text-decoration:none;isolation:isolate;-webkit-mask:var(--tn);mask:var(--tn);transition:color .3s,background .3s}
+.tg::before{content:"";position:absolute;inset:1px;border-radius:7px;background:#191714;z-index:-1;-webkit-mask:var(--tni);mask:var(--tni)}
+.tg:hover{color:var(--fg);background:var(--grad)}
+@media (max-width:420px){.tk span{padding:0 18px 0 14px;font-size:16px}.tk b{width:70px}.tk::before{clip-path:inset(0 0 0 69px)}.tk b i{width:38px}.tg{padding:0 20px;font-size:16px}}
+
+/* לוגו תלת-ממדי בתפריט: בלי רקע, עובי צבעוני והטיה במעבר עכבר */
+.logo{gap:10px;font-size:24px;perspective:420px}
+.logo img.lg3{width:auto;height:48px;border-radius:0;filter:drop-shadow(1px 1px 0 #0f6f6c) drop-shadow(1px 1px 0 #155a57) drop-shadow(1px 1px 0 #4A3A1E) drop-shadow(1px 1px 0 #5A4320) drop-shadow(0 8px 16px rgba(217,162,79,.35));transform:rotateY(-16deg) rotateX(6deg);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.logo:hover img.lg3{transform:rotateY(16deg) rotateX(-4deg) scale(1.07)}
+@media(min-width:960px){.nav .wrap{height:84px}.logo{font-size:30px;gap:14px}.logo img.lg3{height:62px}}
+
+/* שובל עכבר */
+.trail{position:fixed;inset:0;width:100%;height:100%;z-index:300;pointer-events:none}
+
+/* מסך פתיחה: כוכבים נדלקים, הלוגו נבנה מתמונות של הסרטים, הסרטים מתנגנים בתוכו, ובכניסה הלוגו עף בסיבוב אל מקומו בתפריט */
+.intro{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2vh,20px);padding:32px 16px;text-align:center;overflow:hidden;color:var(--fg);background:#080706;transition:background-color .9s ease .2s}
+.intro[hidden]{display:none}
+.intro.out{background-color:transparent;pointer-events:none}
+.i-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;transition:opacity .9s ease .15s}
+.i-blob{position:absolute;width:80vmax;aspect-ratio:1;border-radius:50%;will-change:transform}
+.i-blob.b1{left:-34vmax;top:-30vmax;background:radial-gradient(closest-side,rgba(47,198,194,.14),transparent 70%);animation:idrift1 24s ease-in-out infinite alternate}
+.i-blob.b2{right:-34vmax;bottom:-34vmax;background:radial-gradient(closest-side,rgba(217,162,79,.17),transparent 70%);animation:idrift2 28s ease-in-out infinite alternate}
+.i-dust{position:absolute;left:0;top:0;width:1px;height:1px;border-radius:50%}
+/* כוכב: נקודה בוהקת עם קרני אור דקות, נדלק ונכבה לאט */
+.i-star{position:absolute;width:var(--sz);height:var(--sz);margin:calc(var(--sz)/-2) 0 0 calc(var(--sz)/-2);opacity:0;animation:itw var(--du) ease-in-out var(--de) infinite}
+.i-star::before,.i-star::after{content:"";position:absolute;left:50%;top:50%;border-radius:50%}
+.i-star::before{width:100%;height:1px;margin:-.5px 0 0 -50%;background:linear-gradient(90deg,transparent,var(--c),transparent);box-shadow:0 0 0 0 transparent}
+.i-star::after{width:1px;height:100%;margin:-50% 0 0 -.5px;background:linear-gradient(transparent,var(--c),transparent)}
+.i-star i{position:absolute;left:50%;top:50%;width:calc(var(--sz)*.22);height:calc(var(--sz)*.22);transform:translate(-50%,-50%);border-radius:50%;background:#fff;box-shadow:0 0 calc(var(--sz)*.35) calc(var(--sz)*.1) var(--c)}
+.i-beam{position:absolute;left:50%;top:-8%;width:min(130vw,1500px);height:118%;transform:translateX(-50%);background:linear-gradient(180deg,rgba(238,205,138,.16),rgba(238,205,138,.05) 55%,transparent 85%);clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);filter:blur(42px);opacity:0;animation:ifade 2s ease 1.9s forwards,iflick 2.4s steps(24) 4s infinite}
+.i-mote{position:absolute;width:var(--sz);height:var(--sz);border-radius:50%;background:#F3DCA6;box-shadow:0 0 6px rgba(238,205,138,.6);filter:blur(var(--bl));opacity:0;animation:imote var(--du) linear var(--de) infinite}
+@keyframes imote{0%{transform:translate(0,0);opacity:0}12%{opacity:var(--o)}85%{opacity:var(--o)}100%{transform:translate(var(--dx),-38vh);opacity:0}}
+@keyframes iflick{0%,100%{opacity:1}40%{opacity:.88}43%{opacity:.97}70%{opacity:.92}}
+.ia-rays{display:none}
+.i-grain{position:absolute;inset:-50%;opacity:.05;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:igrain .9s steps(5) infinite}
+.i-vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 45%,rgba(0,0,0,.8))}
+.i-word{position:relative;width:min(62vw,300px);height:auto;opacity:0;clip-path:inset(0 50%);animation:iword 1.2s cubic-bezier(.2,.7,.2,1) 2.6s forwards}
+.i-tag{margin:0;color:rgba(228,190,116,.92);font-size:clamp(17px,1.5vw,19px);font-weight:500;letter-spacing:.06em;opacity:0;animation:ifade .9s ease 3.1s forwards}
+/* הכפתור: שחור עם אור קטן בצבעי המותג שרץ סביבו כל הזמן. בלחיצה הוא מתמלא בצבעי המותג */
+.i-enter{position:relative;display:grid;margin-top:clamp(4px,1.6vh,16px);border:0;padding:0;background:none;font:inherit;color:var(--fg);cursor:pointer;opacity:0;animation:ifade .9s ease 3.4s forwards}
+.i-enter>*{grid-area:1/1}
+.i-pill{position:relative;display:flex;align-items:center;justify-content:center;min-width:230px;height:60px;padding:0 34px;border-radius:99px;background:#000 linear-gradient(90deg,var(--teal),#E4BE74,var(--violet)) no-repeat right/0% 100%;font-weight:700;font-size:17px;letter-spacing:.06em;isolation:isolate;transition:background-size .6s cubic-bezier(.7,0,.2,1),color .3s ease .25s,transform .3s ease,box-shadow .4s}
+.i-pill::before,.i-pill::after{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;z-index:-1;background:conic-gradient(from var(--a,0deg),rgba(255,255,255,.08) 0deg,rgba(255,255,255,.08) 250deg,var(--teal) 300deg,#fff 325deg,var(--violet) 345deg,rgba(255,255,255,.08) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:iring 2.6s linear infinite}
+.i-pill::after{inset:-6px;padding:6px;filter:blur(6px);opacity:.75}
+.i-enter:hover .i-pill,.i-enter:focus-visible .i-pill{box-shadow:0 0 28px rgba(228,190,116,.35)}
+.i-enter:focus-visible{outline:none}
+.i-enter.flip .i-pill{background-size:100% 100%;color:var(--bg);transform:scale(1.04);box-shadow:0 0 40px rgba(228,190,116,.55)}
+/* הלוגו */
+.ia-box{position:relative;width:calc(520px*var(--k,.6));height:calc(482px*var(--k,.6))}
+.ia-rays{position:absolute;left:50%;top:50%;width:300%;aspect-ratio:1;margin:-150% 0 0 -150%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(238,205,138,.06) 0deg 3deg,transparent 3deg 15deg);-webkit-mask:radial-gradient(closest-side,#000 15%,transparent 70%);mask:radial-gradient(closest-side,#000 15%,transparent 70%);opacity:0;animation:ifade 2s ease 2s forwards,ispin 80s linear infinite;transition:opacity .4s}
+.ia-halo{position:absolute;inset:-30%;border-radius:50%;background:radial-gradient(closest-side,rgba(228,190,116,.24),transparent);opacity:0;animation:ifade 1.6s ease 1.8s forwards;transition:opacity .4s}
+.ia-mark{position:absolute;left:0;top:0;width:520px;height:482px;transform-origin:0 0;transform:scale(var(--k,.6))}
+.ia-spin{position:absolute;inset:0}
+.ia-film{position:absolute;inset:0;clip-path:polygon(0px 0px,1px 481px,435px 481px,157px 379px,154px 182px,152px 184px,118px 174px,116px 170px,115px 391px,102px 397px,102px 60px,140px 79px,267px 402px,379px 445px,383px 444px,519px 113px,437px 149px,343px 352px,252px 129px);background:#100E0B;opacity:0;animation:ifade 1.1s ease 2.7s forwards;transition:opacity .4s}
+.ia-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+.ia-film video.on{opacity:1}
+.ia-film video{filter:brightness(.82) saturate(1.08) sepia(.14) contrast(1.06)}
+.ia-film::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,rgba(8,6,4,.55))}
+.ia-metal{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(100% 0 0 0);animation:ibuild 2.6s cubic-bezier(.5,0,.2,1) 1.85s forwards;transition:opacity .45s}
+.ia-scanw{position:absolute;inset:0;clip-path:polygon(0px 0px,1px 481px,435px 481px,157px 379px,154px 182px,152px 184px,118px 174px,116px 170px,115px 391px,102px 397px,102px 60px,140px 79px,267px 402px,379px 445px,383px 444px,519px 113px,437px 149px,343px 352px,252px 129px);pointer-events:none}
+.ia-scan{position:absolute;left:-5%;right:-5%;bottom:-4px;height:4px;background:linear-gradient(90deg,transparent,#fff 30%,#bff 50%,#fff 70%,transparent);box-shadow:0 0 18px 6px rgba(238,205,138,.5);opacity:0;animation:iscan 1.05s cubic-bezier(.5,0,.2,1) 1.85s forwards}
+.ia-spark{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(#fff 20%,rgba(47,198,194,.8) 45%,transparent 70%);offset-path:path('M0 0L1 481L435 481L157 379L154 182L152 184L118 174L116 170L115 391L102 397L102 60L140 79L267 402L379 445L383 444L519 113L437 149L343 352L252 129Z');offset-rotate:0deg;opacity:0;animation:ispark 1.6s cubic-bezier(.65,0,.35,1) .55s forwards}
+.ia-pt{position:absolute;left:0;top:0;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;opacity:0}
+.ia-svg{position:absolute;left:-6px;top:-6px;width:532px;height:494px;overflow:visible;transition:opacity .4s}
+.ia-svg path{fill:none;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:idraw 1.6s cubic-bezier(.65,0,.35,1) .55s forwards}
+.ia-svg .g1{stroke:url(#iaG);stroke-width:14;opacity:.14}
+.ia-svg .g2{stroke:url(#iaG);stroke-width:5;opacity:.4}
+.ia-svg .g3{stroke:url(#iaG);stroke-width:2}
+/* כניסה */
+.intro.out .i-bg{opacity:0}
+.i-snd{position:absolute;top:max(18px,env(safe-area-inset-top));inset-inline-end:18px;z-index:3;display:flex;align-items:center;gap:8px;padding:8px 14px;border:0;border-radius:4px;background:transparent;box-shadow:inset 0 0 0 1px rgba(244,237,224,.22);color:rgba(244,237,224,.6);font:500 13px var(--f-body);letter-spacing:.08em;cursor:pointer;opacity:0;animation:ifade .9s ease 1s forwards;transition:color .3s,box-shadow .3s}
+.i-snd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.i-snd svg .w1,.i-snd svg .w2{opacity:.25;transition:opacity .3s}
+.i-snd:hover{color:var(--fg)}
+.i-snd[aria-pressed=true]{color:var(--gold-p);box-shadow:inset 0 0 0 1px rgba(228,190,116,.6)}
+.i-snd[aria-pressed=true] .w1,.i-snd[aria-pressed=true] .w2{opacity:1}
+.intro.out .i-snd{opacity:0;animation:none;transition:opacity .3s}
+/* כניסה בגלילה: עכבר קטן שמרמז לגלול, ובטלפון חץ להחלקה */
+.i-scroll{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:clamp(8px,2.4vh,22px);color:var(--muted);opacity:0;animation:ifade .9s ease 3.4s forwards}
+.i-scroll small{font-size:14px}
+.i-mouse{width:24px;height:38px;border-radius:14px;border:1.5px solid rgba(245,240,230,.55);display:flex;justify-content:center;padding-top:7px}
+.i-mouse i{width:3px;height:8px;border-radius:2px;background:var(--grad);animation:iwheel 1.8s ease-in-out infinite}
+.i-swipe{display:none;width:14px;height:14px;border-top:2px solid rgba(245,240,230,.7);border-left:2px solid rgba(245,240,230,.7);transform:rotate(45deg);animation:iswipe 1.6s ease-in-out infinite}
+.i-hint-m{display:none}
+@media (hover:none){.i-mouse,.i-hint-d{display:none}.i-swipe{display:block}.i-hint-m{display:inline}}
+@keyframes iwheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{opacity:0}}
+@keyframes iswipe{0%,100%{transform:translateY(4px) rotate(45deg);opacity:.4}50%{transform:translateY(-6px) rotate(45deg);opacity:1}}
+.intro.out .i-scroll{opacity:0;animation:none;transition:opacity .3s}
+.intro.out .i-word,.intro.out .i-tag,.intro.out .i-enter{opacity:0;transform:translateY(14px);animation:none;transition:opacity .3s ease,transform .45s ease}
+.intro.out .ia-film,.intro.out .ia-svg,.intro.out .ia-rays,.intro.out .ia-halo,.intro.out .ia-scanw{opacity:0;animation:none}
+.intro.out .ia-metal{opacity:1;clip-path:inset(0);animation:none}
+@keyframes idraw{to{stroke-dashoffset:0}}
+@keyframes ispark{0%{offset-distance:0%;opacity:1}92%{opacity:1}100%{offset-distance:100%;opacity:0}}
+@keyframes ibuild{0%{clip-path:inset(100% 0 0 0);opacity:1}40%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 0);opacity:.18}}
+@keyframes iscan{0%{transform:translateY(0);opacity:1}90%{opacity:1}100%{transform:translateY(-486px);opacity:0}}
+@keyframes itw{0%,100%{opacity:0;transform:scale(.2) rotate(0)}12%{opacity:1;transform:scale(1) rotate(20deg)}30%{opacity:.85;transform:scale(.8) rotate(45deg)}55%{opacity:0;transform:scale(.3) rotate(70deg)}}
+@keyframes ilight{0%{transform:translateX(-130%)}45%,100%{transform:translateX(130%)}}
+@keyframes iword{to{opacity:1;clip-path:inset(0 0)}}
+@keyframes ifade{to{opacity:1}}
+@keyframes ispin{to{transform:rotate(360deg)}}
+@keyframes idrift1{to{transform:translate(18vmax,12vmax) scale(1.15)}}
+@keyframes idrift2{to{transform:translate(-16vmax,-14vmax) scale(1.1)}}
+@keyframes igrain{0%,100%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-6%,-2%)}80%{transform:translate(5%,4%)}}
+@media (min-width:768px){.i-word{width:340px}}
+@media (prefers-reduced-motion:reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01s!important;transition-delay:0s!important}.i-star{opacity:.7}}
+/* 5.2.5 מותגים: באנר לוגואים מתגלגל, מוטה קלות, עם קווי מותג */
+.brands{padding-block:clamp(40px,5vw,72px);overflow:hidden}
+.brands .h2{max-width:24ch}
+.bnd{position:relative;width:112%;margin:clamp(32px,5vw,56px) -6% 0;padding-block:clamp(22px,3vw,34px);background:linear-gradient(90deg,rgba(47,198,194,.05),rgba(217,162,79,.07)),#0F0D0B;transform:rotate(-2deg);-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.bnd::before,.bnd::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--grad);opacity:.7}
+.bnd::before{top:0}.bnd::after{bottom:0}
+.bnd-track{display:flex;width:max-content;direction:ltr;animation:bndmove 120s linear infinite}
+.bnd:hover .bnd-track{animation-play-state:paused}
+.bnd-set{display:flex;align-items:center;gap:clamp(36px,5.5vw,80px);padding-inline:clamp(18px,2.75vw,40px);margin:0;list-style:none}
+.bnd-set li{display:flex;align-items:center;gap:clamp(36px,5.5vw,80px)}
+.bnd-set li::after{content:"";width:7px;height:7px;background:var(--grad);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:.8}
+.bnd-set img{display:block;width:auto;height:calc(var(--h)*.82px);filter:brightness(0) invert(1);opacity:.6;transition:opacity .3s,filter .3s}
+.bnd-set img:hover{opacity:1;filter:brightness(0) invert(1) drop-shadow(0 0 12px rgba(47,198,194,.55))}
+@media(min-width:768px){.bnd-set img{height:calc(var(--h)*1.25px)}}
+@keyframes bndmove{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.bnd-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}.bnd-set[aria-hidden]{display:none}.bnd-set{flex-wrap:wrap;justify-content:center;row-gap:28px}}
+/* רילס: כרטיסים אנכיים בצורת אייפון בגלילה אופקית */
+.reels{margin-top:clamp(40px,5vw,64px)}
+.reels-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.reels-h{font-family:var(--f-display);font-size:clamp(46px,7vw,76px);line-height:.9;margin:0}
+.reels-nav{display:none;gap:10px}
+@media(min-width:768px){.reels-nav{display:flex}}
+.rn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.rn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+.rn::before{content:"";width:9px;height:9px;border-top:1.5px solid var(--fg);border-right:1.5px solid var(--fg)}
+.rn.prev::before{transform:translateX(-2px) rotate(45deg)}
+.rn.next::before{transform:translateX(2px) rotate(-135deg)}
+.reel-track{display:flex;gap:clamp(16px,2.4vw,26px);overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 16px 26px;margin-inline:-16px;scrollbar-width:none;scroll-behavior:smooth}
+.reel-track::-webkit-scrollbar{display:none}
+.reel{flex:none;width:clamp(158px,40vw,226px);scroll-snap-align:start;text-decoration:none;color:var(--fg);display:flex;flex-direction:column;gap:3px}
+.phone{position:relative;display:block;aspect-ratio:9/16;border-radius:30px;overflow:hidden;background:#0F0D0B;isolation:isolate;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 0 6px #191714,0 0 0 7px rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.phone img,.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phone video{opacity:0;transition:opacity .35s}
+.reel.on .phone video{opacity:1}
+.phone::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.35),transparent 35%);pointer-events:none}
+.island{position:absolute;top:10px;left:50%;width:32%;height:17px;transform:translateX(-50%);background:#000;border-radius:99px;z-index:2}
+.reel:hover .phone,.reel:focus-visible .phone{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 0 0 1px rgba(255,255,255,.2),0 0 0 6px #191714,0 0 0 7px rgba(255,255,255,.14),0 26px 50px rgba(0,0,0,.5),0 0 40px rgba(228,190,116,.3)}
+.reel .mp{bottom:14px;inset-inline-start:14px;z-index:2}
+.reel b{margin-top:14px;font-size:15px;font-weight:700;line-height:1.3}
+.reel small{color:var(--muted);font-size:13px}
+.reel:focus-visible{outline:none}
+.reel:focus-visible .phone{outline:2px solid var(--gold-p);outline-offset:5px}
+/* כפתור פליי מינימליסטי בסגנון אייפון */
+.mp,.work .play{position:absolute;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);border:1px solid rgba(255,255,255,.3);box-shadow:none;display:flex;align-items:center;justify-content:center;font-size:0;color:transparent;transition:transform .25s,background .25s}
+.mp::before,.work .play::before{content:"";width:11px;height:13px;margin-left:3px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%)}
+.work:hover .play,.reel:hover .mp{background:rgba(255,255,255,.3);transform:scale(1.08)}
+.fcard .play{width:76px;height:76px;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);border:1px solid rgba(255,255,255,.32);box-shadow:none;font-size:0}
+.fcard .play svg{display:none}
+.fcard .play::before{content:"";width:20px;height:24px;margin-left:5px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%)}
+/* נגן לסרט אנכי */
+.player.vert{width:auto;height:min(88vh,880px);aspect-ratio:9/16;max-width:94vw}
+.player.vert video{width:100%;height:100%;max-height:none;object-fit:contain}
+@media (prefers-reduced-motion:reduce){.phone,.reel-track{transition:none;scroll-behavior:auto}}
+/* במת הזכייה: כפתור הצפייה בפינה התחתונה ולא על שם הסרט */
+.fcard .ov{inset:auto 0 0 0;flex-direction:row;justify-content:flex-start;gap:14px;padding:clamp(14px,2.4vw,26px);background:linear-gradient(to top,rgba(0,0,0,.65),transparent)}
+.fcard .play{width:56px;height:56px}
+.fcard .play::before{width:15px;height:18px;margin-left:4px}
+.fcard .ov b{font-size:16px;font-weight:700}
+.sdots{display:none}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes iring{to{--a:360deg}}
+/* במת הזכייה במסך אחד: עלי דפנה, משפט ברור וטיזר */
+.s0 .say p{font-size:clamp(30px,4.4vw,62px)}
+.s0 .kick{margin-bottom:10px}
+.laurel{display:block;width:clamp(240px,22vw,310px);height:auto;margin:0 auto 4px;overflow:visible;background:radial-gradient(closest-side,rgba(217,162,79,.18),transparent 75%);filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.laurel .lf{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.2);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*55ms)}
+.laurel .ltx{opacity:0;transition:opacity .6s .55s,letter-spacing .9s .55s}
+.laurel .lst{stroke-dasharray:140;stroke-dashoffset:140;transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1)}
+.laurel.on .lf{opacity:1;transform:none}.laurel.on .ltx{opacity:1}.laurel.on .lst{stroke-dashoffset:0}
+@media(prefers-reduced-motion:reduce){.laurel .lf,.laurel .ltx,.laurel .lst{transition:none}}
+.s0 .fcard{width:min(900px,100%,(100svh - 450px)*1.7778);margin-top:6px}
+@media(max-width:760px){.s0 .fcard{width:100%}.s0 .say p{font-size:clamp(28px,8vw,40px)}}
+/* באנר המותגים: ישר, גדול ובהיר יותר; בטלפון גריד קבוע */
+.bnd{transform:none!important}
+.bnd-set img{height:calc(var(--h)*1px)!important;opacity:.88;filter:brightness(0) invert(.94) sepia(.25)}
+@media(min-width:768px){.bnd-set img{height:calc(var(--h)*1.55px)!important}}
+@media(max-width:700px){.bnd{-webkit-mask:none;mask:none;width:100%;margin-inline:0}.bnd-track{animation:none;width:auto;justify-content:center}.bnd-set[aria-hidden]{display:none}.bnd-set{flex-wrap:wrap;justify-content:center;gap:26px 34px;padding-inline:16px}.bnd-set li{gap:0}.bnd-set li::after{display:none}}
+/* צור קשר: וואטסאפ ראשי, הטופס מקופל */
+.direct .btn{min-height:60px;padding:0 34px;font-size:19px}
+.more-form{margin-top:30px;max-width:560px}
+.more-form summary{cursor:pointer;color:var(--teal);font-weight:700;list-style:none;display:inline-flex;align-items:center;gap:8px}
+.more-form summary::-webkit-details-marker{display:none}
+/* מתג שפה: כפתור שנפתח לרשימה */
+.langdd{position:relative}
+.langdd>summary{list-style:none;display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;background:rgba(22,20,17,.72);border:1px solid rgba(244,237,224,.32);color:var(--fg);font-size:15px;font-weight:600;cursor:pointer;user-select:none}
+.langdd>summary::-webkit-details-marker{display:none}
+.langdd>summary::after,.langdd>summary::before{display:none!important;content:none!important}
+.langdd>summary:hover,.langdd[open]>summary{border-color:rgba(244,237,224,.7)}
+.langdd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.langdd .car{width:0;height:0;border-inline:5px solid transparent;border-top:5px solid currentColor;transition:transform .2s}
+.langdd[open] .car{transform:rotate(180deg)}
+.langdd .lang{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:60;flex-direction:column;align-items:stretch;min-width:160px;padding:6px;background:#161411;border:1px solid rgba(244,237,224,.25);border-radius:4px;box-shadow:0 14px 34px rgba(0,0,0,.55);font-size:15px;font-weight:500;letter-spacing:0}
+.langdd .lang a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:3px;color:var(--fg)}
+.langdd .lang a+a::before{display:none}
+.langdd .lang a::after{position:static;order:-1;margin:0;opacity:.35;transform:none}
+.langdd .lang a.on::after{opacity:1}
+.langdd .lang a.on{color:var(--gold-p)}
+.langdd .lang a:hover{background:rgba(255,255,255,.07);color:var(--fg)}
+@media(max-width:480px){.langdd .cur{display:none}.langdd>summary{padding:0 10px}}
+/* כפתורים: צורה אחת לכולם (חוץ מכרטיס הקולנוע של הוואטסאפ). ראשי = זהב מלא, משני = כהה שקוף עם מסגרת דקה. פינות 4px */
+.btn,.tg,.more,.more-form summary,.chip,.rn,.langdd>summary{border-radius:4px!important;font-family:var(--f-body);letter-spacing:0;transition:background-color .2s,border-color .2s,color .2s}
+.btn{font-weight:700;box-shadow:none}
+.btn-primary,.bar .wa{background:#E4BE74;color:#14100A;box-shadow:none;font-weight:700}
+.btn-primary:hover,.bar .wa:hover{background:#EECD8A;transform:none;box-shadow:none}
+.btn-ghost,.tg,.track .btn-primary,.more,.more-form summary,.chip,.rn{background:rgba(22,20,17,.72);color:var(--fg);border:1px solid rgba(244,237,224,.32);box-shadow:none;-webkit-mask:none;mask:none;font-weight:600}
+.btn-ghost:hover,.tg:hover,.track .btn-primary:hover,.more:hover,.more-form summary:hover,.chip:hover,.rn:hover{background:rgba(52,47,40,.8);border-color:rgba(244,237,224,.7);color:var(--fg)}
+.tg::before,.chip::before{display:none}
+.menu-btn{border-radius:4px;height:40px;padding:0 14px;background:rgba(22,20,17,.72);border:1px solid rgba(244,237,224,.32);font-family:var(--f-body);font-weight:600}
+.menu-btn:hover{border-color:rgba(244,237,224,.7)}
+.tg{height:auto;min-height:52px;padding:0 26px}
+.more{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;font-size:16px}
+.more-form summary{min-height:46px;padding:0 18px;font-size:16px}
+.more-form summary::after{color:var(--fg)}
+/* כל כותרת באמצע, והכפתורים שמתחתיה באמצע */
+.hero-in{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero h1{margin-inline:auto}
+.hero p{margin-inline:auto}
+.ctas{justify-content:center}
+.eyebrow{text-align:center}
+.h2{text-align:center;margin-inline:auto}
+.lead{text-align:center;margin-inline:auto}
+.filters{justify-content:center}
+.more{display:flex;width:fit-content;margin:28px auto 0}
+.reels-head{flex-direction:column;align-items:center;text-align:center}
+.direct{align-items:center}
+.more-form{text-align:center}
+.more-form form{text-align:start}
+.chip[aria-pressed="true"]{background:rgba(var(--c),.14);border-color:rgba(var(--c),.75);box-shadow:none;color:var(--fg)}
+.rn{width:44px;height:44px}
+
+.more-form summary::after{content:"";width:8px;height:8px;border-bottom:1.5px solid currentColor;border-left:1.5px solid currentColor;transform:rotate(-45deg) translateY(-2px);transition:transform .3s}
+.more-form[open] summary::after{transform:rotate(135deg) translateY(-2px)}
+.more-form form{margin-top:18px}
+@media(min-width:960px){.contact-in{grid-template-columns:1fr!important}}
+</style>
+<link rel="alternate" hreflang="he" href="https://levikproduction.com/"><link rel="alternate" hreflang="en" href="https://levikproduction.com/en.html"><link rel="alternate" hreflang="fr" href="https://levikproduction.com/fr.html"><link rel="alternate" hreflang="x-default" href="https://levikproduction.com/"><link rel="canonical" href="https://levikproduction.com/fr.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="LEVIK Production"><meta property="og:title" content="LEVIK Production | Films IA de qualité cinéma"><meta property="og:description" content="Des films IA de qualité cinéma pour entreprises, marques et vos moments les plus importants. Sans tournage, sans acteurs."><meta property="og:url" content="https://levikproduction.com/fr.html"><meta property="og:image" content="https://levikproduction.com/assets/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="fr_FR"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "LEVIK Production", "url": "https://levikproduction.com/", "logo": "https://levikproduction.com/assets/img/logo-mark-p.webp", "image": "https://levikproduction.com/assets/img/og.jpg", "description": "Des films IA de qualité cinéma pour entreprises, marques et vos moments les plus importants. Sans tournage, sans acteurs.", "telephone": "+972586255511", "email": "hello@levikproduction.com", "founder": {"@type": "Person", "name": "Levi Itshak Cohen"}, "areaServed": "Worldwide", "address": {"@type": "PostalAddress", "addressCountry": "IL"}, "sameAs": ["https://instagram.com/levikproduction.ai"], "award": "1st Place, Israeli Competition, Tel Aviv AI Film Festival (TLVAIFF) 2026", "inLanguage": "fr"}</script>
+</head>
+<body>
+<!-- מסך פתיחה: מוצג רק כשיש JavaScript -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Bienvenue chez LEVIK Production" hidden>
+  <div class="i-bg" id="iBg" aria-hidden="true"><i class="i-blob b1"></i><i class="i-blob b2"></i><i class="i-dust" id="iDust"></i><i class="i-grain"></i><i class="i-vig"></i></div>
+  <div class="ia-box" id="iaBox" aria-hidden="true"><i class="ia-rays"></i><i class="ia-halo"></i><div class="ia-mark" id="iaMark"><div class="ia-spin" id="iaSpin">
+    <div class="ia-film" id="iaFilm"></div>
+    <img class="ia-metal" id="iaMetal" src="assets/img/logo-mark-p.webp" alt="">
+    <div class="ia-scanw"><i class="ia-scan"></i></div>
+    <svg class="ia-svg" viewBox="-6 -6 532 494"><defs><linearGradient id="iaG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FC6C2"/><stop offset=".55" stop-color="#E4BE74"/><stop offset="1" stop-color="#D9A24F"/></linearGradient></defs>
+      <path class="g1" pathLength="1" d="M0 0L1 481L435 481L157 379L154 182L152 184L118 174L116 170L115 391L102 397L102 60L140 79L267 402L379 445L383 444L519 113L437 149L343 352L252 129Z"/><path class="g2" pathLength="1" d="M0 0L1 481L435 481L157 379L154 182L152 184L118 174L116 170L115 391L102 397L102 60L140 79L267 402L379 445L383 444L519 113L437 149L343 352L252 129Z"/><path class="g3" pathLength="1" d="M0 0L1 481L435 481L157 379L154 182L152 184L118 174L116 170L115 391L102 397L102 60L140 79L267 402L379 445L383 444L519 113L437 149L343 352L252 129Z"/></svg>
+    <i class="ia-spark"></i>
+  </div></div></div>
+  <button type="button" class="i-snd" id="iSnd" aria-pressed="false" aria-label="Activer le son"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="w1" d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path class="w2" d="M18.5 7a7 7 0 0 1 0 10"/></svg><span>Son</span></button>
+  <img class="i-word" src="assets/img/logo-word.webp" alt="LEVIK Production" width="898" height="284">
+  <p class="i-tag">Films IA de qualité cinéma</p>
+  <div class="i-scroll" aria-hidden="true"><span class="i-mouse"><i></i></span><span class="i-swipe"></span><small class="i-hint-d">Faites défiler pour entrer</small><small class="i-hint-m">Glissez vers le haut pour entrer</small></div>
+</div>
+<script>
+(function(){
+  var it=document.getElementById('intro'),calm=matchMedia('(prefers-reduced-motion: reduce)').matches,mob=innerWidth<768;
+  var seen=false;try{seen=sessionStorage.getItem('lvIntro')==='1'}catch(e){}
+  if(seen){it.remove();window.introOpen=false;return}
+  window.introOpen=true;it.hidden=false;document.documentElement.style.overflow='hidden';
+  /* כל עוד המסך פתוח: שאר הסרטונים באתר לא מתנגנים */
+  var held=[];function hold(e){var v=e.target;if(v.tagName==='VIDEO'&&!it.contains(v)){v.pause();if(held.indexOf(v)<0)held.push(v)}}
+  document.addEventListener('play',hold,true);
+  var box=document.getElementById('iaBox'),mark=document.getElementById('iaMark'),k=.6;
+  function fit(){var w=Math.min(innerWidth*(mob?.7:.8),mob?340:440,innerHeight*.46*520/482);k=w/520;box.style.setProperty('--k',k.toFixed(4))}
+  fit();addEventListener('resize',fit);
+  /* רקע: אבק עדין קבוע, וכוכבים שנדלקים בטורקיז, סגול ולבן */
+  var bg=document.getElementById('iBg'),C=['#2FC6C2','#D9A24F','#EECD8A','#ffffff'],dust=[];
+  for(var i=0;i<(mob?60:130);i++)dust.push(Math.round(Math.random()*innerWidth)+'px '+Math.round(Math.random()*innerHeight)+'px rgba(244,237,224,'+(.15+Math.random()*.35).toFixed(2)+')');
+  document.getElementById('iDust').style.boxShadow=dust.join(',');
+  /* אבק של אלומת מקרן: נקודות זהב חמות בשלושה גדלים, מרחפות לאט למעלה, רובן בתוך האלומה */
+  var beam=document.createElement('i');beam.className='i-beam';bg.insertBefore(beam,bg.querySelector('.i-grain'));
+  for(var j=0;j<(mob?34:70);j++){var st=document.createElement('span');st.className='i-mote';var z=Math.random(),inb=Math.random()<.7;
+    var x=inb?50+(Math.random()-.5)*(30+Math.random()*50):Math.random()*100;
+    st.style.cssText='left:'+x.toFixed(1)+'%;top:'+(10+Math.random()*95).toFixed(1)+'%;--sz:'+(z<.6?2:z<.9?3.5:6).toFixed(1)+'px;--bl:'+(z<.6?0:z<.9?.6:2.2)+'px;--o:'+(.25+Math.random()*.55).toFixed(2)+';--du:'+(14+Math.random()*16).toFixed(1)+'s;--de:-'+(Math.random()*20).toFixed(1)+'s;--dx:'+((Math.random()-.5)*60).toFixed(0)+'px';
+    bg.insertBefore(st,bg.querySelector('.i-grain'))}
+  /* חלקיקי אור שמתכנסים לקווי הלוגו */
+  var P=[[0,0],[1,481],[435,481],[157,379],[154,182],[118,174],[115,391],[102,397],[102,60],[140,79],[267,402],[379,445],[519,113],[437,149],[343,352],[252,129]],pts=[];
+  P.forEach(function(p,i){var q=P[(i+1)%P.length];pts.push(p,[(p[0]+q[0])/2,(p[1]+q[1])/2])});
+  var spin=document.getElementById('iaSpin');
+  if(!calm&&mark.animate)pts.forEach(function(p,i){var d=document.createElement('i');d.className='ia-pt';d.style.left=p[0]+'px';d.style.top=p[1]+'px';
+    var col=['#2FC6C2','#D9A24F','#fff'][i%3];d.style.background=col;d.style.boxShadow='0 0 10px '+col;spin.appendChild(d);
+    var ang=Math.random()*6.283,r=380+Math.random()*420;
+    d.animate([{transform:'translate('+(Math.cos(ang)*r).toFixed(0)+'px,'+(Math.sin(ang)*r).toFixed(0)+'px) scale(.4)',opacity:0},{opacity:1,offset:.35},{transform:'translate(0,0) scale(1)',opacity:1,offset:.85},{transform:'translate(0,0) scale(2.2)',opacity:0}],{duration:1500,delay:i*18,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'})});
+  /* הסרטים בתוך הלוגו */
+  var film=document.getElementById('iaFilm'),metal=document.getElementById('iaMetal'),clips=['38','07','23','40','16'],vs=[],cur=0;
+  clips.forEach(function(cl,i){var v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=true;v.preload=i?'none':'auto';v.src='assets/works/'+cl+'.mp4';film.appendChild(v);vs.push(v)});
+  vs[0].classList.add('on');var filmOn=false;
+  setTimeout(function(){vs[0].play().catch(function(){});filmOn=true;vs[1].preload='auto';vs[1].load()},calm?0:2600);
+  var cyc=calm?0:setInterval(function(){if(!document.getElementById('intro')||it.classList.contains('out')){clearInterval(cyc);return}
+    if(!filmOn)return;
+    var nx=(cur+1)%vs.length;vs[nx].play().catch(function(){});vs[nx].classList.add('on');vs[cur].classList.remove('on');
+    var pv=vs[cur];setTimeout(function(){pv.pause()},350);cur=nx;var nn=vs[(cur+1)%vs.length];if(nn.preload==='none'){nn.preload='auto';nn.load()}},3000);
+  /* סאונד: לוגו צלילי שנבנה בקוד (בלי קבצים), כבוי עד שהגולש מדליק. משב אוויר, מכה עמוקה ופעמון חם, ושקט */
+  var AC=null,snd=false,sb=document.getElementById('iSnd');
+  function noise(a,d){var b=a.createBuffer(1,a.sampleRate*d,a.sampleRate),x=b.getChannelData(0);for(var i=0;i<x.length;i++)x[i]=Math.random()*2-1;var n=a.createBufferSource();n.buffer=b;return n}
+  function verb(a){var c=a.createConvolver(),L=a.sampleRate*2.8,b=a.createBuffer(2,L,a.sampleRate);for(var ch=0;ch<2;ch++){var x=b.getChannelData(ch);for(var i=0;i<L;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/L,3.2)}c.buffer=b;return c}
+  function whoosh(a,out,t,d,f0,f1,v){var n=noise(a,d),bp=a.createBiquadFilter(),g=a.createGain();bp.type='bandpass';bp.Q.value=1.2;bp.frequency.setValueAtTime(f0,t);bp.frequency.exponentialRampToValueAtTime(f1,t+d*.85);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+d*.7);g.gain.exponentialRampToValueAtTime(.0001,t+d);n.connect(bp).connect(g).connect(out);n.start(t);n.stop(t+d)}
+  function logo(){var a=AC,t=a.currentTime+.05,m=a.createGain(),r=verb(a),wet=a.createGain();m.gain.value=.4;wet.gain.value=.22;m.connect(a.destination);m.connect(r);r.connect(wet).connect(a.destination);
+    whoosh(a,m,t,1.3,260,2400,.1);
+    var h=t+1.25,o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(120,h);o.frequency.exponentialRampToValueAtTime(42,h+.7);g.gain.setValueAtTime(.0001,h);g.gain.exponentialRampToValueAtTime(.32,h+.03);g.gain.exponentialRampToValueAtTime(.0001,h+1.4);o.connect(g).connect(m);o.start(h);o.stop(h+1.9);
+    [[392,.06],[587.33,.045],[783.99,.03]].forEach(function(p,i){var o=a.createOscillator(),g=a.createGain();o.type=i?'sine':'triangle';o.frequency.value=p[0];o.detune.value=(i%2?4:-3);g.gain.setValueAtTime(.0001,h+.02);g.gain.exponentialRampToValueAtTime(p[1],h+.05);g.gain.exponentialRampToValueAtTime(.0001,h+3.2);o.connect(g).connect(m);o.start(h+.02);o.stop(h+3.3)})}
+  function flyS(){if(!snd||!AC)return;var m=AC.createGain();m.gain.value=.4;m.connect(AC.destination);whoosh(AC,m,AC.currentTime+.2,.9,1600,200,.08)}
+  sb.addEventListener('click',function(e){e.stopPropagation();snd=!snd;sb.setAttribute('aria-pressed',snd);
+    if(snd){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();logo()}catch(err){}}else if(AC){AC.suspend()}});
+  /* כניסה: הלוגו חוזר לצבעים שלו, מתקטן בסיבוב ועף בקשת אל הלוגו שבתפריט, והעמוד נפתח מאחוריו */
+  var done=false,t0=Date.now();it.tabIndex=-1;setTimeout(function(){try{it.focus({preventScroll:true})}catch(e){}},50);
+  function finish(){it.remove();window.introOpen=false;document.removeEventListener('play',hold,true);
+    var ni=document.querySelector('.nav .logo img');if(ni)ni.style.visibility='';
+    held.forEach(function(v){if(v.offsetParent)v.play().catch(function(){})});dispatchEvent(new Event('introdone'))}
+  function enter(){if(done)return;done=true;try{sessionStorage.setItem('lvIntro','1')}catch(e){}
+    it.classList.add('out');document.documentElement.style.overflow='';flyS();
+    vs.forEach(function(v){setTimeout(function(){v.pause()},400)});
+    var ni=document.querySelector('.nav .logo img');
+    if(calm||!ni||!mark.animate){finish();return}
+    var r=box.getBoundingClientRect(),n=ni.getBoundingClientRect(),St=n.height/482,
+        dx=n.left+n.width/2-260*St-r.left,dy=n.top+n.height/2-241*St-r.top,
+        mx=dx*.45,my=dy*.45-Math.min(160,innerHeight*.18),Sm=k*.62;
+    ni.style.visibility='hidden';
+    mark.animate([{transform:'translate(0,0) scale('+k+')'},{transform:'translate('+mx.toFixed(1)+'px,'+my.toFixed(1)+'px) scale('+Sm.toFixed(4)+')',offset:.5},{transform:'translate('+dx.toFixed(1)+'px,'+dy.toFixed(1)+'px) scale('+St.toFixed(4)+')'}],{duration:1400,delay:250,easing:'cubic-bezier(.55,0,.25,1)',fill:'forwards'});
+    document.getElementById('iaSpin').animate([{transform:'rotate(0) rotateY(0)'},{transform:'rotate(-720deg) rotateY(360deg)'}],{duration:1400,delay:250,easing:'cubic-bezier(.55,0,.25,1)',fill:'forwards'});
+    setTimeout(finish,1700)}
+  /* נכנסים לאתר בגלילה: גלגלת למטה, החלקה למעלה בטלפון, או חץ / רווח / Enter במקלדת */
+  function ready(){return Date.now()-t0>(calm?0:900)}
+  it.addEventListener('wheel',function(e){e.preventDefault();if(ready()&&e.deltaY>4)enter()},{passive:false});
+  var ty=null;it.addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+  it.addEventListener('touchmove',function(e){e.preventDefault();if(ty!==null&&ty-e.touches[0].clientY>30&&ready())enter()},{passive:false});
+  it.addEventListener('keydown',function(e){if(e.target&&e.target.id==='iSnd'&&(e.key==='Enter'||e.key===' '))return;if(['ArrowDown','PageDown',' ','Enter','Escape'].indexOf(e.key)>-1){e.preventDefault();enter()}});
+})();
+</script>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<!-- 5.0 תפריט -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="LEVIK Production, retour en haut"><img class="lg3" src="assets/img/logo-mark-p-s.webp" alt="" width="180" height="167">LEVIK</a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#works">Réalisations</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Comment ça marche</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-end">
+      <details class="langdd"><summary aria-label="Langue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.6 3 2.6 5.6 6 7M10 5c-.8 3.6-3.2 6.6-7 8"/><path d="M13 21l4-10 4 10M14.5 17.5h5"/></svg><span class="cur">Français</span><i class="car"></i></summary>
+      <div class="lang" role="navigation" aria-label="Langue"><a href="./" lang="he" hreflang="he" style="--lc:#E4BE74">עברית</a><a href="en.html" lang="en" hreflang="en" style="--lc:#2FC6C2">English</a><a href="fr.html" lang="fr" class="on" aria-current="page" hreflang="fr" style="--lc:#D9A27F">Français</a></div></details>
+      <a class="btn btn-primary nav-cta" href="#contact">Parlons-en</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#works">Réalisations</a><a href="#services">Services</a><a href="#process">Comment ça marche</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- 5.1 Hero: קיר וידאו -->
+<section class="hero" id="top" aria-label="Ouverture">
+  <div class="wall" aria-hidden="true">
+    <div class="tile" data-v="panther"></div><div class="tile" data-v="cave"></div><div class="tile" data-v="horse"></div><div class="tile" data-v="tibet"></div>
+    <div class="tile" data-v="cows"></div><div class="tile" data-v="geisha"></div><div class="tile" data-v="lion"></div><div class="tile" data-v="astro"></div>
+    <div class="tile" data-v="braids"></div><div class="tile" data-v="velvet"></div><div class="tile" data-v="yosele"></div><div class="tile" data-v="pool"></div>
+    <div class="one" data-v="wall-mobile"></div>
+  </div>
+  <div class="wrap hero-in">
+    <span class="presents">LEVIK PRODUCTION présente</span>
+    <h1>Nous transformons votre histoire en <span class="cine" id="cine">CINÉMA.<canvas aria-hidden="true"></canvas></span></h1>
+    <p>Des films IA de qualité cinéma pour entreprises, marques et vos moments les plus importants. Sans tournage, sans acteurs.</p>
+    <div class="ctas">
+      <a class="tk" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27aimerais%20en%20savoir%20plus%20sur%20un%20film%20IA" target="_blank" rel="noopener"><span>Parlons sur WhatsApp</span><b><i></i></b></a>
+      <a class="tg" href="#works">Voir nos réalisations</a>
+    </div>
+  </div>
+  <div class="arc" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><defs><linearGradient id="arcG" x1="0" x2="1"><stop offset="0" stop-color="#2FC6C2" stop-opacity=".2"/><stop offset=".25" stop-color="#2FC6C2"/><stop offset=".5" stop-color="#F3D99A"/><stop offset=".75" stop-color="#D9A24F"/><stop offset="1" stop-color="#D9A24F" stop-opacity=".2"/></linearGradient></defs><path d="M0 120 Q720 -10 1440 120 V120 H0Z" fill="#0D0C0A"/><path d="M0 120 Q720 -10 1440 120" fill="none" stroke="url(#arcG)" stroke-width="3" vector-effect="non-scaling-stroke"/></svg></div>
+</section>
+
+<!-- 5.1.5 במת הזוכה: יוסלה, מקום ראשון -->
+<!-- הזכייה: מכל אחד שנשאר במסך, וכל גלילה מחליפה סצנה -->
+<section class="stage" id="award" aria-label="Le prix">
+ <div class="sstick">
+  <div class="sglow"></div>
+
+  <!-- סצנה 1: הזכייה והטיזר במסך אחד -->
+  <div class="sc s0" data-sc="0" data-say>
+    <div class="say">
+      <svg class="laurel" viewBox="0 0 300 122" role="img" aria-label="Premier prix, TLVAIFF 2026"><defs><linearGradient id="lgG" x1="0" y1="0" x2="0" y2="122" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F8E3AC"/><stop offset=".45" stop-color="#E4BE74"/><stop offset="1" stop-color="#A9772A"/></linearGradient><linearGradient id="lgS" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="translate(-320 0)"><stop offset=".38" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#FFF6DD" stop-opacity=".95"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/><animateTransform id="lgA" attributeName="gradientTransform" type="translate" from="-320 0" to="320 0" dur="1.2s" begin="indefinite" fill="freeze"/></linearGradient><clipPath id="lgC"><ellipse cx="107.8" cy="104.8" rx="11.0" ry="4.2" transform="rotate(-130.8 107.8 104.8)"/><ellipse cx="192.2" cy="104.8" rx="11.0" ry="4.2" transform="rotate(310.8 192.2 104.8)"/><ellipse cx="105.5" cy="116.1" rx="11.0" ry="4.2" transform="rotate(-206.8 105.5 116.1)"/><ellipse cx="194.5" cy="116.1" rx="11.0" ry="4.2" transform="rotate(386.8 194.5 116.1)"/><ellipse cx="92.0" cy="99.8" rx="10.6" ry="4.0" transform="rotate(-122.8 92.0 99.8)"/><ellipse cx="208.0" cy="99.8" rx="10.6" ry="4.0" transform="rotate(302.8 208.0 99.8)"/><ellipse cx="88.4" cy="110.2" rx="10.6" ry="4.0" transform="rotate(-198.8 88.4 110.2)"/><ellipse cx="211.6" cy="110.2" rx="10.6" ry="4.0" transform="rotate(378.8 211.6 110.2)"/><ellipse cx="78.7" cy="92.9" rx="10.1" ry="3.8" transform="rotate(-113.4 78.7 92.9)"/><ellipse cx="221.3" cy="92.9" rx="10.1" ry="3.8" transform="rotate(293.4 221.3 92.9)"/><ellipse cx="73.6" cy="102.2" rx="10.1" ry="3.8" transform="rotate(-189.4 73.6 102.2)"/><ellipse cx="226.4" cy="102.2" rx="10.1" ry="3.8" transform="rotate(369.4 226.4 102.2)"/><ellipse cx="67.7" cy="84.3" rx="9.7" ry="3.7" transform="rotate(-102.6 67.7 84.3)"/><ellipse cx="232.3" cy="84.3" rx="9.7" ry="3.7" transform="rotate(282.6 232.3 84.3)"/><ellipse cx="61.3" cy="92.1" rx="9.7" ry="3.7" transform="rotate(-178.6 61.3 92.1)"/><ellipse cx="238.7" cy="92.1" rx="9.7" ry="3.7" transform="rotate(358.6 238.7 92.1)"/><ellipse cx="59.0" cy="74.1" rx="9.2" ry="3.5" transform="rotate(-91.2 59.0 74.1)"/><ellipse cx="241.0" cy="74.1" rx="9.2" ry="3.5" transform="rotate(271.2 241.0 74.1)"/><ellipse cx="51.5" cy="80.2" rx="9.2" ry="3.5" transform="rotate(-167.2 51.5 80.2)"/><ellipse cx="248.5" cy="80.2" rx="9.2" ry="3.5" transform="rotate(347.2 248.5 80.2)"/><ellipse cx="52.3" cy="62.3" rx="8.8" ry="3.3" transform="rotate(-79.9 52.3 62.3)"/><ellipse cx="247.7" cy="62.3" rx="8.8" ry="3.3" transform="rotate(259.9 247.7 62.3)"/><ellipse cx="44.2" cy="66.6" rx="8.8" ry="3.3" transform="rotate(-155.9 44.2 66.6)"/><ellipse cx="255.8" cy="66.6" rx="8.8" ry="3.3" transform="rotate(335.9 255.8 66.6)"/><ellipse cx="47.5" cy="48.7" rx="8.3" ry="3.2" transform="rotate(-69.5 47.5 48.7)"/><ellipse cx="252.5" cy="48.7" rx="8.3" ry="3.2" transform="rotate(249.5 252.5 48.7)"/><ellipse cx="39.2" cy="51.4" rx="8.3" ry="3.2" transform="rotate(-145.5 39.2 51.4)"/><ellipse cx="260.8" cy="51.4" rx="8.3" ry="3.2" transform="rotate(325.5 260.8 51.4)"/><ellipse cx="44.6" cy="33.3" rx="7.8" ry="3.0" transform="rotate(-60.6 44.6 33.3)"/><ellipse cx="255.4" cy="33.3" rx="7.8" ry="3.0" transform="rotate(240.6 255.4 33.3)"/><ellipse cx="36.5" cy="34.5" rx="7.8" ry="3.0" transform="rotate(-136.6 36.5 34.5)"/><ellipse cx="263.5" cy="34.5" rx="7.8" ry="3.0" transform="rotate(316.6 263.5 34.5)"/><ellipse cx="43.6" cy="15.9" rx="7.4" ry="2.8" transform="rotate(-53.1 43.6 15.9)"/><ellipse cx="256.4" cy="15.9" rx="7.4" ry="2.8" transform="rotate(233.1 256.4 15.9)"/><ellipse cx="35.9" cy="16.1" rx="7.4" ry="2.8" transform="rotate(-129.1 35.9 16.1)"/><ellipse cx="264.1" cy="16.1" rx="7.4" ry="2.8" transform="rotate(309.1 264.1 16.1)"/><ellipse cx="40.3" cy="2.0" rx="10.0" ry="3.8" transform="rotate(-87.6 40.3 2.0)"/><ellipse cx="259.7" cy="2.0" rx="10.0" ry="3.8" transform="rotate(267.6 259.7 2.0)"/><text x="150" y="60" text-anchor="middle" font-size="27" font-weight="900" font-family="Heebo,sans-serif">Premier prix</text><text x="150" y="84" text-anchor="middle" font-size="12.5" font-weight="600" letter-spacing="2.4" font-family="Heebo,sans-serif">TLVAIFF 2026</text></clipPath></defs><g fill="none" stroke="url(#lgG)" stroke-width="1.8" stroke-linecap="round" class="lst"><path d="M128 114Q36 104 40 10"/><path d="M172 114Q264 104 260 10"/></g><g fill="url(#lgG)" stroke="rgba(255,240,205,.35)" stroke-width=".6"><g class="lf" style="--i:0"><ellipse cx="107.8" cy="104.8" rx="11.0" ry="4.2" transform="rotate(-130.8 107.8 104.8)"/></g><g class="lf" style="--i:0"><ellipse cx="192.2" cy="104.8" rx="11.0" ry="4.2" transform="rotate(310.8 192.2 104.8)"/></g><g class="lf" style="--i:0"><ellipse cx="105.5" cy="116.1" rx="11.0" ry="4.2" transform="rotate(-206.8 105.5 116.1)"/></g><g class="lf" style="--i:0"><ellipse cx="194.5" cy="116.1" rx="11.0" ry="4.2" transform="rotate(386.8 194.5 116.1)"/></g><g class="lf" style="--i:1"><ellipse cx="92.0" cy="99.8" rx="10.6" ry="4.0" transform="rotate(-122.8 92.0 99.8)"/></g><g class="lf" style="--i:1"><ellipse cx="208.0" cy="99.8" rx="10.6" ry="4.0" transform="rotate(302.8 208.0 99.8)"/></g><g class="lf" style="--i:1"><ellipse cx="88.4" cy="110.2" rx="10.6" ry="4.0" transform="rotate(-198.8 88.4 110.2)"/></g><g class="lf" style="--i:1"><ellipse cx="211.6" cy="110.2" rx="10.6" ry="4.0" transform="rotate(378.8 211.6 110.2)"/></g><g class="lf" style="--i:2"><ellipse cx="78.7" cy="92.9" rx="10.1" ry="3.8" transform="rotate(-113.4 78.7 92.9)"/></g><g class="lf" style="--i:2"><ellipse cx="221.3" cy="92.9" rx="10.1" ry="3.8" transform="rotate(293.4 221.3 92.9)"/></g><g class="lf" style="--i:2"><ellipse cx="73.6" cy="102.2" rx="10.1" ry="3.8" transform="rotate(-189.4 73.6 102.2)"/></g><g class="lf" style="--i:2"><ellipse cx="226.4" cy="102.2" rx="10.1" ry="3.8" transform="rotate(369.4 226.4 102.2)"/></g><g class="lf" style="--i:3"><ellipse cx="67.7" cy="84.3" rx="9.7" ry="3.7" transform="rotate(-102.6 67.7 84.3)"/></g><g class="lf" style="--i:3"><ellipse cx="232.3" cy="84.3" rx="9.7" ry="3.7" transform="rotate(282.6 232.3 84.3)"/></g><g class="lf" style="--i:3"><ellipse cx="61.3" cy="92.1" rx="9.7" ry="3.7" transform="rotate(-178.6 61.3 92.1)"/></g><g class="lf" style="--i:3"><ellipse cx="238.7" cy="92.1" rx="9.7" ry="3.7" transform="rotate(358.6 238.7 92.1)"/></g><g class="lf" style="--i:4"><ellipse cx="59.0" cy="74.1" rx="9.2" ry="3.5" transform="rotate(-91.2 59.0 74.1)"/></g><g class="lf" style="--i:4"><ellipse cx="241.0" cy="74.1" rx="9.2" ry="3.5" transform="rotate(271.2 241.0 74.1)"/></g><g class="lf" style="--i:4"><ellipse cx="51.5" cy="80.2" rx="9.2" ry="3.5" transform="rotate(-167.2 51.5 80.2)"/></g><g class="lf" style="--i:4"><ellipse cx="248.5" cy="80.2" rx="9.2" ry="3.5" transform="rotate(347.2 248.5 80.2)"/></g><g class="lf" style="--i:5"><ellipse cx="52.3" cy="62.3" rx="8.8" ry="3.3" transform="rotate(-79.9 52.3 62.3)"/></g><g class="lf" style="--i:5"><ellipse cx="247.7" cy="62.3" rx="8.8" ry="3.3" transform="rotate(259.9 247.7 62.3)"/></g><g class="lf" style="--i:5"><ellipse cx="44.2" cy="66.6" rx="8.8" ry="3.3" transform="rotate(-155.9 44.2 66.6)"/></g><g class="lf" style="--i:5"><ellipse cx="255.8" cy="66.6" rx="8.8" ry="3.3" transform="rotate(335.9 255.8 66.6)"/></g><g class="lf" style="--i:6"><ellipse cx="47.5" cy="48.7" rx="8.3" ry="3.2" transform="rotate(-69.5 47.5 48.7)"/></g><g class="lf" style="--i:6"><ellipse cx="252.5" cy="48.7" rx="8.3" ry="3.2" transform="rotate(249.5 252.5 48.7)"/></g><g class="lf" style="--i:6"><ellipse cx="39.2" cy="51.4" rx="8.3" ry="3.2" transform="rotate(-145.5 39.2 51.4)"/></g><g class="lf" style="--i:6"><ellipse cx="260.8" cy="51.4" rx="8.3" ry="3.2" transform="rotate(325.5 260.8 51.4)"/></g><g class="lf" style="--i:7"><ellipse cx="44.6" cy="33.3" rx="7.8" ry="3.0" transform="rotate(-60.6 44.6 33.3)"/></g><g class="lf" style="--i:7"><ellipse cx="255.4" cy="33.3" rx="7.8" ry="3.0" transform="rotate(240.6 255.4 33.3)"/></g><g class="lf" style="--i:7"><ellipse cx="36.5" cy="34.5" rx="7.8" ry="3.0" transform="rotate(-136.6 36.5 34.5)"/></g><g class="lf" style="--i:7"><ellipse cx="263.5" cy="34.5" rx="7.8" ry="3.0" transform="rotate(316.6 263.5 34.5)"/></g><g class="lf" style="--i:8"><ellipse cx="43.6" cy="15.9" rx="7.4" ry="2.8" transform="rotate(-53.1 43.6 15.9)"/></g><g class="lf" style="--i:8"><ellipse cx="256.4" cy="15.9" rx="7.4" ry="2.8" transform="rotate(233.1 256.4 15.9)"/></g><g class="lf" style="--i:8"><ellipse cx="35.9" cy="16.1" rx="7.4" ry="2.8" transform="rotate(-129.1 35.9 16.1)"/></g><g class="lf" style="--i:8"><ellipse cx="264.1" cy="16.1" rx="7.4" ry="2.8" transform="rotate(309.1 264.1 16.1)"/></g><g class="lf" style="--i:9"><ellipse cx="40.3" cy="2.0" rx="10.0" ry="3.8" transform="rotate(-87.6 40.3 2.0)"/></g><g class="lf" style="--i:9"><ellipse cx="259.7" cy="2.0" rx="10.0" ry="3.8" transform="rotate(267.6 259.7 2.0)"/></g></g><g class="ltx" fill="url(#lgG)"><text x="150" y="60" text-anchor="middle" font-size="27" font-weight="900" font-family="Heebo,sans-serif">Premier prix</text><text x="150" y="84" text-anchor="middle" font-size="12.5" font-weight="600" letter-spacing="2.4" font-family="Heebo,sans-serif">TLVAIFF 2026</text></g><rect x="0" y="0" width="300" height="122" fill="url(#lgS)" clip-path="url(#lgC)"/></svg>
+      <span class="kick">Festival du film IA de Tel Aviv · 2026</span>
+      <p>Sur <span class="gd">1,242</span> films venus de <span class="gd">80</span> pays : <span class="hl">Premier&nbsp;prix</span> dans la compétition israélienne.</p>
+    </div>
+    <a class="fcard" data-film href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" aria-label="Voir le film complet">
+      <video src="assets/award/teaser.mp4" poster="assets/award/teaser.jpg" muted loop playsinline preload="none"></video>
+      <span class="tag"><i></i>Teaser</span>
+      <span class="ov">
+        <span class="play"><svg width="34" height="34" viewBox="0 0 24 24" fill="#F5F0E6"><path d="M8 5v14l11-7z"/></svg></span>
+        <b>Voir le film complet · 7 min</b>
+      </span>
+    </a>
+  </div>
+
+  <!-- סצנה 2: שולחן הכתבות -->
+  <div class="sc" data-sc="1" id="desk">
+    <div class="dhead">Israel Hayom · Maariv · <b>tlvaiff.com</b></div>
+    <div class="deskwrap">
+      <div class="desk">
+        <div class="it tape c-ih"><div class="clip"><img src="assets/press/israelhayom.jpg" alt="Israel Hayom : plus de 80 pays, le premier festival de films IA d'Israël" loading="lazy"></div></div>
+        <div class="it tape v c-ma"><div class="clip"><img src="assets/press/maariv.jpg" alt="Maariv : 1 242 films, 80 pays, tous créés par l'IA" loading="lazy"></div></div>
+        <div class="it tape c-card"><div class="clip"><img src="assets/press/w-card.jpg" alt="The Winners – Israeli Competition – Best AI Film: Josalle" loading="lazy"></div></div>
+        <div class="it c-poster"><div class="clip"><img src="assets/award/poster.jpg" alt="Josalle – Le Saint Avare" loading="lazy"></div></div>
+        <div class="flash"></div>
+        <div class="it stamp"><small>Lauréat</small><b>Premier<br>Prix</b><span>Meilleur film<br>Compétition israélienne</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- סצנה 3: הפרס -->
+  <div class="sc" data-sc="2">
+    <div class="aw">
+      <div>
+        <div class="rv prize" style="--d:0">Meilleur film – Compétition israélienne</div>
+        <h2 class="rv" style="--d:1">Josalle – <em>Le Saint Avare</em></h2>
+        <p class="rv en" style="--d:2">Josalle – The Holy Miser</p>
+        <p class="rv cr" style="--d:4">Festival du film IA de Tel Aviv 2026 · <b>Levi Itshak Cohen & Gal Edri</b></p>
+      </div>
+      <div class="rv slot" style="--d:3">
+        <div class="in pic"><img src="assets/award/award-gpt.webp" alt="Le trophée du Festival du film IA de Tel Aviv, avec le logo LEVIK Production" width="1122" height="1402" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+ </div>
+</section>
+
+
+
+<!-- 5.2 עבודות נבחרות -->
+<section id="works">
+  <div class="wrap">
+    <span class="eyebrow">Réalisations</span>
+    <h2 class="h2">De la publicité de marque au film qui émeut toute la salle.</h2>
+    <div class="filters" role="group" aria-label="Filtrer les réalisations">
+      <button class="chip" aria-pressed="true" data-f="all"><span class="cd" aria-hidden="true"></span>Tout</button>
+      <button class="chip" aria-pressed="false" data-f="biz"><span class="cd" aria-hidden="true"></span>Entreprises</button>
+      <button class="chip" aria-pressed="false" data-f="event"><span class="cd" aria-hidden="true"></span>Événements et animation</button>
+    </div>
+    <div class="grid" id="grid">
+      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/36-full.mp4" data-c="biz"><img class="poster" src="assets/works/36.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/36.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEGACY</h3><span dir="ltr">McDonald's · Bell · Maryland</span></div></a>
+      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" data-c="event"><img class="poster" src="assets/works/38.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/38.mp4"></video><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter><path id="sealP" d="M50 50m-35 0a35 35 0 1 1 70 0a35 35 0 1 1-70 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.55)"/><g filter="url(#sealInk)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46" stroke-width="2.4"/><circle cx="50" cy="50" r="41.5" stroke-width=".8"/><circle cx="50" cy="50" r="27" stroke-width=".8"/></g><g filter="url(#sealInk)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.4" font-weight="700" letter-spacing="1.6" direction="ltr"><textPath href="#sealP" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="25" font-weight="700">1</text><text x="50" y="68" text-anchor="middle" font-family="Heebo,sans-serif" font-size="7.6" font-weight="800">Premier prix</text></g></svg></span><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Josalle l'Avare</h3><span>Film d'animation · Premier prix, Festival du film IA de Tel Aviv</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/39.mp4" data-c="event"><img class="poster" src="assets/works/39.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/39.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Montée au mont du Temple</h3><span>Série · Épisode un</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/40.mp4" data-c="event"><img class="poster" src="assets/works/40.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/40.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Viens prier, Hannah</h3><span>Court métrage</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/44.mp4" data-c="biz"><img class="poster" src="assets/works/44.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/44.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEVIK ACTION</h3><span>Film d'action · Cyberpunk</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/49.mp4" data-c="event"><img class="poster" src="assets/works/49.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/49.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Ensemble · La lumière revient</h3><span>Film d'animation · Campagne</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/34.mp4" data-c="biz"><img class="poster" src="assets/works/34.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/34.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson Lugan</h3><span>Film de marque · Version intégrale</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/13.mp4" data-c="event"><img class="poster" src="assets/works/13.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/13.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Délivrance</h3><span>Film d'événement · Le Temple</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/29.mp4" data-c="biz"><img class="poster" src="assets/works/29.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/29.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Terra Energy</h3><span>Film institutionnel · Énergie, Alaska et Corée</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/19.mp4" data-c="biz"><img class="poster" src="assets/works/19.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/19.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEVIK Production</h3><span>Publicité pour le studio</span></div></a>
+      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/35.mp4" data-c="event"><img class="poster" src="assets/works/35.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/35.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Dubi Brod</h3><span>Film personnel</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/33.mp4" data-c="biz"><img class="poster" src="assets/works/33.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/33.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson New York</h3><span>Film de marque</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/03.mp4" data-c="biz"><img class="poster" src="assets/works/03.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/03.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>TITAN</h3><span>Publicité · Technologie et sécurité</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/02-hd.mp4" data-c="event"><img class="poster" src="assets/works/02.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/02.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Le Soldat</h3><span>Animation</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/31.mp4" data-c="biz"><img class="poster" src="assets/works/31.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/31.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Mikve Paris</h3><span>Histoire de marque · France</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/14.mp4" data-c="biz"><img class="poster" src="assets/works/14.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/14.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Afrique</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/28.mp4" data-c="event"><img class="poster" src="assets/works/28.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/28.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Hanoukka</h3><span>Film d'événement</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/37.mp4" data-c="biz"><img class="poster" src="assets/works/37.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/37.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Un appartement à Londres</h3><span>Publicité d'application</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/12.mp4" data-c="event"><img class="poster" src="assets/works/12.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/12.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Braun · Kollel Shlichut</h3><span>Film d'événement</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/21.mp4" data-c="biz"><img class="poster" src="assets/works/21.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/21.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Antarctique</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/01.mp4" data-c="biz"><img class="poster" src="assets/works/01.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/01.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Le Sac de plage</h3><span>Publicité produit</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/09.mp4" data-c="event"><img class="poster" src="assets/works/09.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/09.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Le Temple et le Lion</h3><span>Film d'événement</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/26-hd.mp4" data-c="biz"><img class="poster" src="assets/works/26.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/26.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Pièce d'or</h3><span>Publicité</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/22.mp4" data-c="biz"><img class="poster" src="assets/works/22.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/22.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Tibet</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/10.mp4" data-c="biz"><img class="poster" src="assets/works/10.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/10.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Un seul peuple</h3><span>Film de campagne</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/32.mp4" data-c="event"><img class="poster" src="assets/works/32.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/32.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Les Explorateurs</h3><span>Film d'aventure</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/25.mp4" data-c="biz"><img class="poster" src="assets/works/25.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/25.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Velvet</h3><span>Publicité · Velours</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/23.mp4" data-c="biz"><img class="poster" src="assets/works/23.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/23.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · La Panthère</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/24.mp4" data-c="event"><img class="poster" src="assets/works/24.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/24.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Voyage dans le temps</h3><span>Film d'événement</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/20.mp4" data-c="biz"><img class="poster" src="assets/works/20.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/20.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Clé</h3><span>Histoire de marque · France</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/18.mp4" data-c="biz"><img class="poster" src="assets/works/18.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/18.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Japon</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/06.mp4" data-c="biz"><img class="poster" src="assets/works/06.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/06.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Plein été</h3><span>Film de marque</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/07.mp4" data-c="biz"><img class="poster" src="assets/works/07.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/07.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Vers la Lune</h3><span>Film de marque</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/16.mp4" data-c="biz"><img class="poster" src="assets/works/16.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/16.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Fleurs</h3><span>Série Mondes</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/04.mp4" data-c="biz"><img class="poster" src="assets/works/04.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/04.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Velvet · Le Canapé</h3><span>Publicité</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/17.mp4" data-c="biz"><img class="poster" src="assets/works/17.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/17.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · Chevaux</h3><span>Série Mondes</span></div></a>
+    </div>
+    <button class="more" id="more" type="button">Les 36 films →</button>
+    <div class="reels">
+      <div class="reels-head"><div><span class="eyebrow">Vertical pour les réseaux</span><h3 class="reels-h">Reels</h3></div><div class="reels-nav"><button class="rn prev" type="button" aria-label="Précédent"></button><button class="rn next" type="button" aria-label="Suivant"></button></div></div>
+      <div class="reel-track" id="reels">
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/47d.mp4" data-v="1"><span class="phone"><img src="assets/reels/47.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/47.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Impress · Londres</b><small>Publicité humoristique</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/48c.mp4" data-v="1"><span class="phone"><img src="assets/reels/48.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/48.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Impress · Paris</b><small>Publicité humoristique</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/43.mp4" data-v="1"><span class="phone"><img src="assets/reels/43.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/43.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>LEVIK CINEMA</b><small>Reel du studio</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/27.mp4" data-v="1"><span class="phone"><img src="assets/reels/27.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/27.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Win the Future</b><small>Publicité</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/50.mp4" data-v="1"><span class="phone"><img src="assets/reels/50.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/50.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Win Cryptos · Le Saut</b><small>Publicité · en français</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/51.mp4" data-v="1"><span class="phone"><img src="assets/reels/51.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/51.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Win Cryptos · La Nuit</b><small>Publicité · en français</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/46.mp4" data-v="1"><span class="phone"><img src="assets/reels/46.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/46.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Ben Lankri · UGC</b><small>Vidéo créateur</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/42.mp4" data-v="1"><span class="phone"><img src="assets/reels/42.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/42.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Immobilier à Ashkelon</b><small>Reel · Français</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/08.mp4" data-v="1"><span class="phone"><img src="assets/reels/08.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/08.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>Le Soldat et la Famille</b><small>Court métrage</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/05.mp4" data-v="1"><span class="phone"><img src="assets/reels/05.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/05.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>La Pièce</b><small>Publicité</small></a>
+      <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/11.mp4" data-v="1"><span class="phone"><img src="assets/reels/11.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/11.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>LEVIK Production</b><small>Publicité pour le studio</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5.2.5 מותגים: באנר לוגואים -->
+<section class="brands" aria-labelledby="brands-h">
+  <div class="wrap">
+    <span class="eyebrow">Ils nous ont fait confiance</span>
+    <h2 class="h2" id="brands-h">Des marques qui ont raconté leur histoire avec nous.</h2>
+  </div>
+  <div class="bnd"><div class="bnd-track"><ul class="bnd-set"><li><img src="assets/brands/bell.webp" alt="McDonald's · Bell Restaurant Group" style="--h:46" decoding="async"></li><li><img src="assets/brands/titan.webp" alt="TITAN" style="--h:42" decoding="async"></li><li><img src="assets/brands/swabson.webp" alt="Swabson" style="--h:40" decoding="async"></li><li><img src="assets/brands/win-cryptos.webp" alt="Win Cryptos" style="--h:58" decoding="async"></li><li><img src="assets/brands/hippo.webp" alt="hippo" style="--h:46" decoding="async"></li><li><img src="assets/brands/globus.webp" alt="Globus" style="--h:54" decoding="async"></li><li><img src="assets/brands/impress.webp" alt="Impress" style="--h:40" decoding="async"></li><li><img src="assets/brands/hm-kazia.webp" alt="HM·KAZIA" style="--h:44" decoding="async"></li><li><img src="assets/brands/french-chabad.webp" alt="French Chabad" style="--h:62" decoding="async"></li><li><img src="assets/brands/rocktec.webp" alt="Rocktec Industries" style="--h:34" decoding="async"></li><li><img src="assets/brands/beth-loubavitch.webp" alt="Beth Loubavitch" style="--h:50" decoding="async"></li><li><img src="assets/brands/kolel-shlichut.webp" alt="כולל שליחות" style="--h:60" decoding="async"></li><li><img src="assets/brands/dovi-brod.webp" alt="Dovi Brod" style="--h:56" decoding="async"></li><li><img src="assets/brands/ten-lachayal.webp" alt="תן לחייל" style="--h:50" decoding="async"></li><li><img src="assets/brands/valcare.webp" alt="VALCARE" style="--h:25" decoding="async"></li><li><img src="assets/brands/mikve-paris.webp" alt="Mikve Paris" style="--h:54" decoding="async"></li><li><img src="assets/brands/terra.webp" alt="Terra Energy Center" style="--h:34" decoding="async"></li><li><img src="assets/brands/crown.webp" alt="CROWN" style="--h:35" decoding="async"></li><li><img src="assets/brands/habad-caen.webp" alt="Habad Caen" style="--h:50" decoding="async"></li><li><img src="assets/brands/agada.webp" alt="AGADA AI Film Studio" style="--h:30" decoding="async"></li><li><img src="assets/brands/mikve-tal.webp" alt="Mikvé Tal" style="--h:63" decoding="async"></li></ul><ul class="bnd-set" aria-hidden="true"><li><img src="assets/brands/bell.webp" alt="" style="--h:46" decoding="async"></li><li><img src="assets/brands/titan.webp" alt="" style="--h:42" decoding="async"></li><li><img src="assets/brands/swabson.webp" alt="" style="--h:40" decoding="async"></li><li><img src="assets/brands/win-cryptos.webp" alt="" style="--h:58" decoding="async"></li><li><img src="assets/brands/hippo.webp" alt="" style="--h:46" decoding="async"></li><li><img src="assets/brands/globus.webp" alt="" style="--h:54" decoding="async"></li><li><img src="assets/brands/impress.webp" alt="" style="--h:40" decoding="async"></li><li><img src="assets/brands/hm-kazia.webp" alt="" style="--h:44" decoding="async"></li><li><img src="assets/brands/french-chabad.webp" alt="" style="--h:62" decoding="async"></li><li><img src="assets/brands/rocktec.webp" alt="" style="--h:34" decoding="async"></li><li><img src="assets/brands/beth-loubavitch.webp" alt="" style="--h:50" decoding="async"></li><li><img src="assets/brands/kolel-shlichut.webp" alt="" style="--h:60" decoding="async"></li><li><img src="assets/brands/dovi-brod.webp" alt="" style="--h:56" decoding="async"></li><li><img src="assets/brands/ten-lachayal.webp" alt="" style="--h:50" decoding="async"></li><li><img src="assets/brands/valcare.webp" alt="" style="--h:25" decoding="async"></li><li><img src="assets/brands/mikve-paris.webp" alt="" style="--h:54" decoding="async"></li><li><img src="assets/brands/terra.webp" alt="" style="--h:34" decoding="async"></li><li><img src="assets/brands/crown.webp" alt="" style="--h:35" decoding="async"></li><li><img src="assets/brands/habad-caen.webp" alt="" style="--h:50" decoding="async"></li><li><img src="assets/brands/agada.webp" alt="" style="--h:30" decoding="async"></li><li><img src="assets/brands/mikve-tal.webp" alt="" style="--h:63" decoding="async"></li></ul></div></div>
+</section>
+
+<!-- 5.3 אמון: מוסתר עד שיהיו המלצות אמיתיות -->
+
+<!-- 5.4 שירותים -->
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">Services</span>
+    <h2 class="h2">Ce que nous produisons.</h2>
+    <div class="tracks">
+      <article class="track">
+        <h3>Pour les entreprises et les marques</h3>
+        <ul><li>Publicités IA</li><li>Film institutionnel / Histoire de marque</li><li>Reels et vidéos pour les réseaux</li><li>Animation de logo et génériques</li></ul>
+        <p class="note">Chaque projet est chiffré selon son histoire. Écrivez-nous et recevez un devis.</p>
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20un%20film%20pour%20mon%20entreprise" target="_blank" rel="noopener">Film d'entreprise sur WhatsApp</a>
+      </article>
+      <article class="track">
+        <h3>Pour les événements et les moments personnels</h3>
+        <ul><li>Films de Bar/Bat Mitsva, de mariage et d'hommage</li><li>Animation et personnages</li></ul>
+        <p class="note">Ce que vous recevez : un scénario personnalisé, un film prêt à projeter, une série de retouches.</p>
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20un%20film%20pour%20un%20%C3%A9v%C3%A9nement" target="_blank" rel="noopener">Film d'événement sur WhatsApp</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5.5 איך זה עובד -->
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">Comment ça marche</span>
+    <h2 class="h2">Quatre étapes, de la conversation à l'écran.</h2>
+    <ol class="steps">
+      <li><h3>Conversation</h3><p>Vous nous racontez l'histoire.</p></li>
+      <li><h3>Scénario et look</h3><p>Vous recevez un scénario et des images d'exemple à valider.</p></li>
+      <li><h3>Production</h3><p>Nous produisons le film avec l'IA.</p></li>
+      <li><h3>Livraison</h3><p>Un film prêt, avec une série de retouches.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5.6 שאלות נפוצות -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="h2">Questions fréquentes.</h2>
+    <div class="faq">
+      <details><summary>Combien de temps faut-il ?</summary><p>Cela dépend de la durée et de la complexité. La plupart des projets prennent de quelques jours à quelques semaines. Nous vous donnons un calendrier précis dès le premier échange.</p></details>
+      <details><summary>Combien ça coûte ?</summary><p>Chaque projet est chiffré selon son histoire. Après un court échange, vous recevez un devis clair.</p></details>
+      <details><summary>Que dois-je envoyer ?</summary><p>L'histoire et, si vous en avez : des photos, un logo, des noms et les détails importants. Nous construisons tout le reste.</p></details>
+      <details><summary>Peut-on intégrer de vraies photos de la famille ou de l'entreprise ?</summary><p>Oui. Nous pouvons créer des personnages et des lieux à partir des photos que vous nous envoyez.</p></details>
+      <details><summary>À qui appartiennent les droits ?</summary><p>Le film est à vous. Les conditions exactes sont fixées à l'avance dans le devis.</p></details>
+      <details><summary>Combien de séries de retouches sont incluses ?</summary><p>Chaque projet inclut une série de retouches. Le nombre exact est fixé dans le devis.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 5.7 צור קשר -->
+<section class="contact" id="contact">
+  <div class="wrap contact-in">
+    <div>
+      <span class="eyebrow">Contact</span>
+      <h2 class="h2">Votre prochaine histoire <em>commence par une conversation.</em></h2>
+      <p class="lead">Écrivez-nous sur WhatsApp, appelez-nous, ou laissez vos coordonnées et nous vous recontactons.</p>
+      <div class="direct">
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27aimerais%20en%20savoir%20plus%20sur%20un%20film%20IA" target="_blank" rel="noopener">Parlons sur WhatsApp</a>
+        <a class="tel" href="tel:+972586255511">Ou par téléphone : +972 58-625-5511</a>
+      </div>
+      <details class="more-form"><summary>Ou laissez vos coordonnées et nous vous recontactons</summary>
+    <form id="form" novalidate>
+      <label>Nom<input name="name" autocomplete="name" required></label>
+      <label>Téléphone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      <label>Type de projet<select name="type"><option>Entreprise / Marque</option><option>Événement</option><option>Autre</option></select></label>
+      <label>Message (facultatif)<textarea name="msg"></textarea></label>
+      <label class="check"><input type="checkbox" name="marketing">Je souhaite recevoir des nouveautés et de nouveaux exemples (facultatif)</label>
+      <button class="btn btn-primary" type="submit">Envoyer</button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+      </details>
+    </div>
+    
+  </div>
+</section>
+</main>
+
+<!-- 5.8 פוטר -->
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><img class="lg3" src="assets/img/logo-mark-p-s.webp" alt="" width="180" height="167">LEVIK Production</a>
+    <nav aria-label="Liens du pied de page">
+      <a href="https://instagram.com/levikproduction.ai" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/972586255511" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="accessibility-fr.html">Déclaration d'accessibilité</a>
+      <a href="privacy-fr.html">Politique de confidentialité</a>
+    </nav>
+    <span>© 2026 LEVIK Production</span>
+  </div>
+</footer>
+
+<!-- קבועים -->
+<a class="wa-float" href="https://wa.me/972586255511" target="_blank" rel="noopener" aria-label="Écrivez-nous sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg></a>
+<div class="bar">
+  <a class="btn wa" href="https://wa.me/972586255511" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="btn btn-ghost" href="tel:+972586255511">Appeler</a>
+</div>
+<dialog class="player" id="player" aria-label="Lecteur vidéo"><button type="button" id="playerX" aria-label="Fermer">✕</button><video controls playsinline></video></dialog>
+<div class="cookie" id="cookie" hidden role="dialog" aria-label="Consentement aux cookies">
+  <p>Nous utilisons des cookies pour mesurer et améliorer le site, uniquement avec votre accord. <a href="privacy-fr.html">Politique de confidentialité</a></p>
+  <div><button class="btn btn-primary" data-consent="yes">J'accepte</button><button class="btn btn-ghost" data-consent="no">Essentiels uniquement</button></div>
+</div>
+
+<script>
+(function(){
+  (function(){var f=document.querySelector('footer'),w=document.querySelector('.wa-float');if(f&&w&&'IntersectionObserver' in window){new IntersectionObserver(function(e){w.classList.toggle('away',e[0].isIntersecting)}).observe(f)}})();
+  (function(){var l=document.querySelector('.laurel');if(!l)return;var go=function(){if(l.classList.contains('on'))return;l.classList.add('on');setTimeout(function(){var a=document.getElementById('lgA');try{a&&a.beginElement()}catch(e){}},1150)};if('IntersectionObserver' in window){new IntersectionObserver(function(e){if(e[0].isIntersecting)go()},{threshold:.4}).observe(l)}else go()})();
+  (function(){var d=document.querySelector('.langdd');if(!d)return;document.addEventListener('click',function(e){if(d.open&&!d.contains(e.target))d.open=false});document.addEventListener('keydown',function(e){if(e.key==='Escape')d.open=false})})();
+  (function(){var x=document.querySelector('.seal');if(!x||!('IntersectionObserver' in window))return;x.classList.add('pre');new IntersectionObserver(function(e,o){if(e[0].isIntersecting){x.classList.add('on');o.disconnect()}},{threshold:.6}).observe(x)})();
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var mb=document.getElementById('menuBtn'),mm=document.getElementById('mobileMenu');
+  mb.addEventListener('click',function(){var o=mm.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  mm.addEventListener('click',function(e){if(e.target.tagName==='A'){mm.classList.remove('open');mb.setAttribute('aria-expanded',false)}});
+  // עבודות: סינון, 12 ראשונות ואז "Tous les films", תצוגה שקטה במעבר עכבר, ונגן מלא בלחיצה
+  var grid=document.getElementById('grid'),more=document.getElementById('more'),works=grid.querySelectorAll('.work');
+  var LIM=innerWidth<768?6:12;function cut(){var k=0;works.forEach(function(w){w.classList.toggle('x',!w.hidden&&++k>LIM)});more.hidden=grid.classList.contains('open')||k<=LIM}
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f;works.forEach(function(w){w.hidden=!(f==='all'||w.dataset.c===f)});cut();
+  })});
+  more.addEventListener('click',function(){grid.classList.add('open');cut()});cut();
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  works.forEach(function(w){var v=w.querySelector('video');
+    function on(){if(calm)return;if(!v.src)v.src=v.dataset.src;w.classList.add('on');v.play().catch(function(){})}
+    function off(){w.classList.remove('on');v.pause()}
+    w.addEventListener('mouseenter',on);w.addEventListener('mouseleave',off);
+    w.addEventListener('touchstart',function(){works.forEach(function(o){if(o!==w&&o.classList.contains('on')){o.classList.remove('on');o.querySelector('video').pause()}});on()},{passive:true});
+    w.addEventListener('click',function(e){e.preventDefault();off();var pv=player.querySelector('video');pv.src=w.dataset.full;openP();pv.play().catch(function(){})});
+  });
+  var player=document.getElementById('player');
+  // הנגן נפתח תמיד בתוך הדף. אם החלון לא נפתח בדרך הרגילה, פותחים אותו ידנית
+  function openP(){try{player.showModal()}catch(err){player.setAttribute('open','')}}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-full]');if(a)e.preventDefault()},true);
+
+  function shut(){var pv=player.querySelector('video');pv.pause();pv.removeAttribute('src');pv.load()}
+  document.getElementById('playerX').addEventListener('click',function(){player.close()});
+  player.addEventListener('close',shut);
+  // רילס: תצוגה שקטה במעבר עכבר, ובטלפון כשהכרטיס במרכז המסך; נגן אנכי בלחיצה
+  var rt=document.getElementById('reels');
+  if(rt){var reels=rt.querySelectorAll('.reel');
+    function ron(r){if(calm)return;var v=r.querySelector('video');if(!v.src)v.src=v.dataset.src;r.classList.add('on');v.play().catch(function(){})}
+    function roff(r){r.classList.remove('on');r.querySelector('video').pause()}
+    reels.forEach(function(r){r.addEventListener('mouseenter',function(){ron(r)});r.addEventListener('mouseleave',function(){roff(r)});
+      r.addEventListener('click',function(e){e.preventDefault();roff(r);var pv=player.querySelector('video');player.classList.add('vert');pv.src=r.dataset.full;openP();pv.play().catch(function(){})})});
+    if(!matchMedia('(hover:hover)').matches&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?ron(e.target):roff(e.target)})},{root:rt,threshold:.75});reels.forEach(function(r){io.observe(r)})}
+    var step=function(){return reels[0].getBoundingClientRect().width+24},DIR=document.documentElement.dir==='rtl'?1:-1;
+    document.querySelector('.rn.prev').addEventListener('click',function(){rt.scrollBy({left:DIR*step()*2})});
+    document.querySelector('.rn.next').addEventListener('click',function(){rt.scrollBy({left:-DIR*step()*2})});
+  }
+  player.addEventListener('close',function(){player.classList.remove('vert')});
+  document.querySelectorAll('[data-film]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();var pv=player.querySelector('video');pv.src=b.dataset.full;openP();pv.play().catch(function(){})})});
+  player.addEventListener('click',function(e){if(e.target===player)player.close()});
+  document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();
+    document.getElementById('formMsg').textContent='Le formulaire sera bientôt relié à l\'e-mail et à Google Sheets. En attendant, écrivez-nous sur WhatsApp.';});
+  // Hero: וידאו של ים שמתנגן בתוך המילה "CINÉMA."
+  var cine=document.getElementById('cine'),cv=cine.querySelector('canvas'),cx=cv.getContext('2d');
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Hero: קיר המסכים. מחשב וטאבלט: 12 קטעים קצרים. טלפון: וידאו אחד מוכן מראש. הווידאו נטען רק אחרי שהעמוד עלה, ועוצר כשגוללים מה-Hero.
+  var wall=document.querySelector('.wall'),wide=matchMedia('(min-width:700px)'),heroOn=true,loaded=document.readyState==='complete';
+  function wallPlay(){if(still)return;wall.querySelectorAll('video').forEach(function(v){if(heroOn&&v.src&&v.parentNode.offsetParent)v.play().catch(function(){});else v.pause()})}
+  function wallFill(){
+    wall.querySelectorAll(wide.matches?'.tile':'.one').forEach(function(t){
+      var v=t.firstChild,b='assets/video/wall/'+t.dataset.v;
+      if(!v){v=document.createElement('video');v.poster=b+'.jpg';v.muted=true;v.setAttribute('muted','');v.loop=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='none';t.appendChild(v)}
+      if(loaded&&!still&&!v.src)v.src=b+'.mp4';
+    });
+    wallPlay();
+  }
+  addEventListener('load',function(){loaded=true;if(window.introOpen)addEventListener('introdone',wallFill,{once:true});else wallFill()});
+  wide.addEventListener('change',wallFill);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){heroOn=e[0].isIntersecting;wallPlay()}).observe(document.getElementById('top'));
+  wallFill();
+  if(!still){
+    var vid=document.createElement('video');vid.src='assets/video/swabson-lugan.mp4';vid.muted=true;vid.loop=true;vid.playsInline=true;vid.setAttribute('playsinline','');vid.autoplay=true;
+    var W=0,H=0,fs=0;
+    function size(){var r=cine.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);fs=parseFloat(getComputedStyle(cine).fontSize)}
+    function draw(){
+      if(vid.readyState>=2&&W){
+        cx.globalCompositeOperation='source-over';cx.clearRect(0,0,W,H);
+        var vr=vid.videoWidth/vid.videoHeight,cr=W/H,dw,dh;if(vr>cr){dh=H;dw=H*vr}else{dw=W;dh=W/vr}
+        cx.drawImage(vid,(W-dw)/2,(H-dh)/2,dw,dh);
+        cx.globalCompositeOperation='destination-in';var rtl=document.documentElement.dir!=='ltr';cx.textAlign='center';cx.font=rtl?'700 '+fs+'px Karantina':'400 '+fs+'px "LEVIK Cine"';cx.direction=rtl?'rtl':'ltr';cx.textAlign='center';cx.textBaseline='alphabetic';if('letterSpacing' in cx)cx.letterSpacing=getComputedStyle(cine).letterSpacing;
+        cx.fillText(cine.firstChild.textContent,W/2,H*0.86);
+        cine.style.webkitTextFillColor='transparent';cine.style.backgroundImage='none';
+      }
+      requestAnimationFrame(draw);
+    }
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){size();vid.play().catch(function(){});draw()});
+    addEventListener('resize',size);
+  }
+  var ck=document.getElementById('cookie'),k='levik-consent',v=null;
+  try{v=localStorage.getItem(k)}catch(e){}
+  if(!v)ck.hidden=false;
+  ck.addEventListener('click',function(e){var b=e.target.dataset.consent;if(!b)return;try{localStorage.setItem(k,b)}catch(e){}ck.hidden=true;});
+})();
+</script>
+
+<script>
+/* מכל הזכייה + חשיפת מילים בגלילה בכל האתר */
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function split(el){
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){const f=document.createDocumentFragment();
+      c.textContent.split(/([ \t\n\r]+)/).forEach(t=>{if(!t)return;if(/^[ \t\n\r]+$/.test(t))f.appendChild(document.createTextNode(t));else{const s=document.createElement('span');s.className='w';s.textContent=t;f.appendChild(s)}});
+      c.replaceWith(f)}
+    else if(c.nodeType===1&&!c.classList.contains('w')){
+      if(c.classList.contains('hl')||c.classList.contains('gd')){const k=c.className;walk(c);c.querySelectorAll('.w').forEach(w=>w.classList.add(...k.split(' ')));c.replaceWith(...c.childNodes)}
+      else walk(c)}
+  })};walk(el);return [...el.querySelectorAll('.w')];
+}
+const cl=v=>Math.min(1,Math.max(0,v));
+const light=(words,p)=>{const lit=p*words.length;words.forEach((w,i)=>w.style.opacity=Math.min(1,Math.max(.16,lit-i)))};
+// שאר האתר
+const flow=[...document.querySelectorAll('main .h2')].filter(el=>!el.closest('.stage')).map(el=>({el,words:split(el)}));
+// המכל
+const stage=document.getElementById('award');
+const sc=[...stage.querySelectorAll('.sc')], dots=[...stage.querySelectorAll('.sdots i')];
+const R=[[0,.2],[.2,.56],[.56,.78],[.78,1]];
+const say0=split(sc[0].querySelector('p')), say3=[];
+const its=[...sc[1].querySelectorAll('.it')], flash=sc[1].querySelector('.flash'), TH=[.04,.2,.36,.52,.68];
+const vid=stage.querySelector('.fcard video');
+let counted=false;
+function count(){if(counted)return;counted=true;sc[2].querySelectorAll('[data-count]').forEach(b=>{const to=+b.dataset.count,plus=b.hasAttribute('data-plus'),t0=performance.now();
+  const st=t=>{const k=Math.min(1,(t-t0)/1400),v=Math.round(to*(1-Math.pow(1-k,3)));b.textContent=v.toLocaleString('en-US')+(plus&&k===1?'+':'');if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)})}
+function frame(){
+  flow.forEach(f=>{const r=f.el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight*1.2)return;
+    light(f.words,reduce?1:cl((innerHeight-r.top)/(innerHeight*.3))*1.3)});
+  if(reduce){[...say0,...say3].forEach(w=>w.style.opacity=1);its.forEach(e=>e.classList.add('in'));sc[2].classList.add('go');count();return}
+  const r=stage.getBoundingClientRect(), p=cl(-r.top/(r.height-innerHeight));
+  const k=Math.min(2,Math.floor(p*3.0001));
+  if(k!==cur)go(k);
+  if(k===0&&r.bottom>0&&r.top<innerHeight){if(vid.paused)vid.play().catch(()=>{})}else if(!vid.paused)vid.pause();
+}
+let cur=-1,timers=[];
+function seq(words){words.forEach((w,i)=>timers.push(setTimeout(()=>w.style.opacity=1,120+i*55)))}
+function go(k){
+  timers.forEach(clearTimeout);timers=[];cur=k;
+  sc.forEach((el,i)=>{el.classList.toggle('cur',i===k);el.classList.toggle('past',i<k)});
+  dots.forEach((d,i)=>d.classList.toggle('on',i<=k));
+  if(k===0){say0.forEach(w=>w.style.opacity=.16);seq(say0)}
+  if(k===1){its.forEach(e=>e.classList.remove('in'));flash.classList.remove('in');
+    its.forEach((e,i)=>timers.push(setTimeout(()=>{e.classList.add('in');if(i===its.length-1)flash.classList.add('in')},250+i*380)))}
+  else its.forEach(e=>e.classList.add('in'));
+  if(k===2){sc[2].classList.add('go');count()}
+}
+let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{frame();tick=false})}},{passive:true});
+addEventListener('resize',frame);frame();
+if(matchMedia('(hover:hover)').matches){const d=sc[1].querySelector('.desk');
+  sc[1].addEventListener('mousemove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;d.style.setProperty('--tx',(x*-8)+'deg');d.style.setProperty('--ty',(y*6)+'deg')});
+  sc[1].addEventListener('mouseleave',()=>{d.style.setProperty('--tx','0deg');d.style.setProperty('--ty','0deg')})}
+})();
+</script>
+<script>
+/* שובל עכבר בצבעי המותג, רק בעכבר ובלי העדפת הפחתת תנועה */
+(function(){
+  if(!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=document.createElement('canvas');c.className='trail';c.setAttribute('aria-hidden','true');document.body.appendChild(c);
+  var x=c.getContext('2d'),d=Math.min(window.devicePixelRatio||1,2),W,H,pts=[],sp=[],raf=0,A=[47,198,194],B=[228,190,116];
+  function size(){W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0)}
+  size();addEventListener('resize',size);
+  function col(k,a){return 'rgba('+Math.round(A[0]+(B[0]-A[0])*k)+','+Math.round(A[1]+(B[1]-A[1])*k)+','+Math.round(A[2]+(B[2]-A[2])*k)+','+a.toFixed(3)+')'}
+  addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var t=performance.now();
+    pts.push({x:e.clientX,y:e.clientY,t:t});
+    if(Math.random()<.12)sp.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*.8,vy:(Math.random()-.5)*.8-.25,t:t,r:Math.random()*.8+.4,k:Math.random()});
+    if(!raf)raf=requestAnimationFrame(draw)},{passive:true});
+  function draw(now){
+    var L=650;x.clearRect(0,0,W,H);
+    while(pts.length&&now-pts[0].t>L)pts.shift();
+    x.globalCompositeOperation='lighter';x.lineCap='round';
+    for(var i=1;i<pts.length;i++){var p=pts[i-1],q=pts[i],k=i/pts.length,a=Math.max(0,1-(now-q.t)/L);
+      x.strokeStyle=col(1-k,.8*a);x.lineWidth=.6+1.8*k*a;x.shadowBlur=6;x.shadowColor=col(1-k,.9*a);
+      x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}
+    x.shadowBlur=0;
+    for(var j=sp.length-1;j>=0;j--){var s=sp[j],g=1-(now-s.t)/750;if(g<=0){sp.splice(j,1);continue}
+      s.x+=s.vx;s.y+=s.vy;x.fillStyle=col(s.k,g*.9);x.beginPath();x.arc(s.x,s.y,s.r*g+.3,0,7);x.fill()}
+    raf=(pts.length||sp.length)?requestAnimationFrame(draw):0}
+})();
+</script>
+</body>
+</html>
