@@ -36,7 +36,7 @@ a{color:inherit}
 .btn-ghost:hover{border-color:var(--teal)}
 
 /* כותרות סקשנים */
-section{padding-block:clamp(72px,10vw,128px)}
+section{padding-block:clamp(48px,6vw,84px)}
 .eyebrow{display:block;color:var(--teal);font-weight:700;font-size:14px;letter-spacing:.02em;margin-bottom:12px}
 .h2{font-family:var(--f-display);font-weight:700;font-size:clamp(48px,8vw,92px);line-height:.95;margin:0 0 20px;text-wrap:balance}
 .lead{color:var(--muted);font-size:clamp(17px,2vw,20px);max-width:60ch;margin:0}
@@ -358,7 +358,7 @@ footer a:hover{color:var(--fg)}
 @media (prefers-reduced-motion:reduce){.it,.rv{transition:none}.w{opacity:1!important}}
 
 /* ===== מכל הזכייה: סצנות מתחלפות במקום אחד ===== */
-.stage{position:relative;height:220vh;padding:0}
+.stage{position:relative;height:170vh;padding:0}
 .sstick{position:sticky;top:0;height:100svh;overflow:clip}
 .sglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 45% at 72% 40%,rgba(47,198,194,.10),transparent 70%),radial-gradient(40% 45% at 25% 62%,rgba(217,162,79,.12),transparent 70%)}
 .sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:76px 16px 40px;opacity:0;visibility:hidden;transform:translateY(28px) scale(.97);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.7,.2,1),visibility 0s .7s}
@@ -494,7 +494,7 @@ footer a:hover{color:var(--fg)}
 @media (min-width:768px){.i-word{width:340px}}
 @media (prefers-reduced-motion:reduce){.intro *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01s!important;transition-delay:0s!important}.i-star{opacity:.7}}
 /* 5.2.5 מותגים: באנר לוגואים מתגלגל, מוטה קלות, עם קווי מותג */
-.brands{padding-block:clamp(56px,9vw,110px) clamp(64px,10vw,120px);overflow:hidden}
+.brands{padding-block:clamp(40px,5vw,72px);overflow:hidden}
 .brands .h2{max-width:24ch}
 .bnd{position:relative;width:112%;margin:clamp(32px,5vw,56px) -6% 0;padding-block:clamp(22px,3vw,34px);background:linear-gradient(90deg,rgba(47,198,194,.05),rgba(217,162,79,.07)),#0F0D0B;transform:rotate(-2deg);-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .bnd::before,.bnd::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--grad);opacity:.7}
@@ -510,7 +510,7 @@ footer a:hover{color:var(--fg)}
 @keyframes bndmove{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.bnd-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}.bnd-set[aria-hidden]{display:none}.bnd-set{flex-wrap:wrap;justify-content:center;row-gap:28px}}
 /* רילס: כרטיסים אנכיים בצורת אייפון בגלילה אופקית */
-.reels{margin-top:clamp(56px,8vw,96px)}
+.reels{margin-top:clamp(40px,5vw,64px)}
 .reels-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
 .reels-h{font-family:var(--f-display);font-size:clamp(46px,7vw,76px);line-height:.9;margin:0}
 .reels-nav{display:none;gap:10px}
@@ -553,6 +553,26 @@ footer a:hover{color:var(--fg)}
 .sdots{display:none}
 @property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
 @keyframes iring{to{--a:360deg}}
+/* במת הזכייה במסך אחד: עלי דפנה, משפט ברור וטיזר */
+.s0 .say p{font-size:clamp(30px,4.4vw,62px)}
+.s0 .kick{margin-bottom:10px}
+.laurel{display:block;width:clamp(170px,18vw,230px);height:auto;margin:0 auto 6px;color:var(--gold-p)}
+.s0 .fcard{width:min(900px,100%,(100svh - 380px)*1.7778);margin-top:6px}
+@media(max-width:760px){.s0 .fcard{width:100%}.s0 .say p{font-size:clamp(28px,8vw,40px)}}
+/* באנר המותגים: ישר, גדול ובהיר יותר; בטלפון גריד קבוע */
+.bnd{transform:none!important}
+.bnd-set img{height:calc(var(--h)*1px)!important;opacity:.88;filter:brightness(0) invert(.94) sepia(.25)}
+@media(min-width:768px){.bnd-set img{height:calc(var(--h)*1.55px)!important}}
+@media(max-width:700px){.bnd{-webkit-mask:none;mask:none;width:100%;margin-inline:0}.bnd-track{animation:none;width:auto;justify-content:center}.bnd-set[aria-hidden]{display:none}.bnd-set{flex-wrap:wrap;justify-content:center;gap:26px 34px;padding-inline:16px}.bnd-set li{gap:0}.bnd-set li::after{display:none}}
+/* צור קשר: וואטסאפ ראשי, הטופס מקופל */
+.direct .btn{min-height:60px;padding:0 34px;font-size:19px}
+.more-form{margin-top:30px;max-width:560px}
+.more-form summary{cursor:pointer;color:var(--teal);font-weight:700;list-style:none;display:inline-flex;align-items:center;gap:8px}
+.more-form summary::-webkit-details-marker{display:none}
+.more-form summary::after{content:"";width:8px;height:8px;border-bottom:1.5px solid currentColor;border-left:1.5px solid currentColor;transform:rotate(-45deg) translateY(-2px);transition:transform .3s}
+.more-form[open] summary::after{transform:rotate(135deg) translateY(-2px)}
+.more-form form{margin-top:18px}
+@media(min-width:960px){.contact-in{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -679,13 +699,21 @@ footer a:hover{color:var(--fg)}
  <div class="sstick">
   <div class="sglow"></div>
 
-  <!-- סצנה 1: הטקסט נדלק -->
-  <div class="sc" data-sc="0" data-say>
+  <!-- סצנה 1: הזכייה והטיזר במסך אחד -->
+  <div class="sc s0" data-sc="0" data-say>
     <div class="say">
+      <svg class="laurel" viewBox="0 0 240 70" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M70 62C40 56 22 38 18 10"/><path d="M170 62c30-6 48-24 52-52"/></g><g fill="currentColor"><ellipse cx="22" cy="16" rx="7" ry="3" transform="rotate(-60 22 16)"/><ellipse cx="218" cy="16" rx="7" ry="3" transform="rotate(60 218 16)"/><ellipse cx="27" cy="27" rx="7" ry="3" transform="rotate(-48 27 27)"/><ellipse cx="213" cy="27" rx="7" ry="3" transform="rotate(48 213 27)"/><ellipse cx="34" cy="37" rx="7" ry="3" transform="rotate(-36 34 37)"/><ellipse cx="206" cy="37" rx="7" ry="3" transform="rotate(36 206 37)"/><ellipse cx="43" cy="46" rx="7" ry="3" transform="rotate(-24 43 46)"/><ellipse cx="197" cy="46" rx="7" ry="3" transform="rotate(24 197 46)"/><ellipse cx="54" cy="54" rx="7" ry="3" transform="rotate(-12 54 54)"/><ellipse cx="186" cy="54" rx="7" ry="3" transform="rotate(12 186 54)"/><ellipse cx="65" cy="59" rx="7" ry="3" transform="rotate(0 65 59)"/><ellipse cx="175" cy="59" rx="7" ry="3" transform="rotate(0 175 59)"/></g><text x="120" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="currentColor" font-family="Heebo,sans-serif">מקום ראשון</text><text x="120" y="50" text-anchor="middle" font-size="10.5" fill="currentColor" font-family="Heebo,sans-serif" letter-spacing=".5">TLVAIFF 2026</text></svg>
       <span class="kick">פסטיבל סרטי ה-AI תל אביב · 2026</span>
-      <p>מתוך <span class="gd">1,242</span> סרטים מ-<span class="gd">80</span> מדינות, השופטים בחרו <span class="hl">סרט&nbsp;אחד</span> בתחרות הישראלית.</p>
-      <i class="rule"></i>
+      <p>מתוך <span class="gd">1,242</span> סרטים מ-<span class="gd">80</span> מדינות: <span class="hl">מקום&nbsp;ראשון</span> בתחרות הישראלית.</p>
     </div>
+    <a class="fcard" data-film href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" aria-label="צפו בסרט המלא">
+      <video src="assets/award/teaser.mp4" poster="assets/award/teaser.jpg" muted loop playsinline preload="none"></video>
+      <span class="tag"><i></i>טיזר</span>
+      <span class="ov">
+        <span class="play"><svg width="34" height="34" viewBox="0 0 24 24" fill="#F5F0E6"><path d="M8 5v14l11-7z"/></svg></span>
+        <b>צפו בסרט המלא · 7 דקות</b>
+      </span>
+    </a>
   </div>
 
   <!-- סצנה 2: שולחן הכתבות -->
@@ -710,32 +738,12 @@ footer a:hover{color:var(--fg)}
         <div class="rv prize" style="--d:0">הסרט הטוב ביותר – התחרות הישראלית</div>
         <h2 class="rv" style="--d:1">יוסלה – <em>הקמצן הקדוש</em></h2>
         <p class="rv en" style="--d:2">Josalle – The Holy Miser</p>
-        <div class="rv facts" style="--d:3">
-          <div><b data-count="1242">0</b><span>סרטים הוגשו</span></div>
-          <div><b data-count="80" data-plus>0</b><span>מדינות</span></div>
-          <div><b>#1</b><span>בתחרות הישראלית</span></div>
-        </div>
         <p class="rv cr" style="--d:4">פסטיבל סרטי ה-AI תל אביב 2026 · <b>Levi Izhac Cohen & Gal Edri</b></p>
       </div>
       <div class="rv slot" style="--d:3">
         <div class="in pic"><img src="assets/award/award-gpt.webp" alt="פסל הזכייה בפסטיבל סרטי ה-AI תל אביב, עם הלוגו של LEVIK Production" width="1122" height="1402" loading="lazy" decoding="async"></div>
       </div>
     </div>
-  </div>
-
-  <!-- סצנה 4: הסרט -->
-  <div class="sc" data-sc="3" data-say>
-    <div class="say small">
-      <p>סיפור ישן על <span class="gd">הקמצן הקדוש</span> מקרקוב, נבנה מחדש פריים אחרי פריים.</p>
-    </div>
-    <a class="fcard" data-film href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" aria-label="צפו בסרט המלא">
-      <video src="assets/award/teaser.mp4" poster="assets/award/teaser.jpg" muted loop playsinline preload="none"></video>
-      <span class="tag"><i></i>טיזר</span>
-      <span class="ov">
-        <span class="play"><svg width="34" height="34" viewBox="0 0 24 24" fill="#F5F0E6"><path d="M8 5v14l11-7z"/></svg></span>
-        <b>צפו בסרט המלא · 7 דקות</b>
-      </span>
-    </a>
   </div>
 
   <div class="sdots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -884,7 +892,7 @@ footer a:hover{color:var(--fg)}
         <a class="btn btn-primary" href="https://wa.me/972586255511?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%A1%D7%A8%D7%98%20AI" target="_blank" rel="noopener">בואו נדבר בוואטסאפ</a>
         <a class="tel" href="tel:+972586255511">או בטלפון: 058-625-5511</a>
       </div>
-    </div>
+      <details class="more-form"><summary>או השאירו פרטים ונחזור אליכם</summary>
     <form id="form" novalidate>
       <label>שם<input name="name" autocomplete="name" required></label>
       <label>טלפון<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
@@ -894,6 +902,9 @@ footer a:hover{color:var(--fg)}
       <button class="btn btn-primary" type="submit">שלחו פרטים</button>
       <p class="form-msg" id="formMsg" role="status"></p>
     </form>
+      </details>
+    </div>
+    
   </div>
 </section>
 </main>
@@ -1037,9 +1048,9 @@ const flow=[...document.querySelectorAll('main .h2')].filter(el=>!el.closest('.s
 const stage=document.getElementById('award');
 const sc=[...stage.querySelectorAll('.sc')], dots=[...stage.querySelectorAll('.sdots i')];
 const R=[[0,.2],[.2,.56],[.56,.78],[.78,1]];
-const say0=split(sc[0].querySelector('p')), rule=sc[0].querySelector('.rule'), say3=split(sc[3].querySelector('p'));
+const say0=split(sc[0].querySelector('p')), say3=[];
 const its=[...sc[1].querySelectorAll('.it')], flash=sc[1].querySelector('.flash'), TH=[.04,.2,.36,.52,.68];
-const vid=sc[3].querySelector('video');
+const vid=stage.querySelector('.fcard video');
 let counted=false;
 function count(){if(counted)return;counted=true;sc[2].querySelectorAll('[data-count]').forEach(b=>{const to=+b.dataset.count,plus=b.hasAttribute('data-plus'),t0=performance.now();
   const st=t=>{const k=Math.min(1,(t-t0)/1400),v=Math.round(to*(1-Math.pow(1-k,3)));b.textContent=v.toLocaleString('en-US')+(plus&&k===1?'+':'');if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)})}
@@ -1048,9 +1059,9 @@ function frame(){
     light(f.words,reduce?1:cl((innerHeight-r.top)/(innerHeight*.3))*1.3)});
   if(reduce){[...say0,...say3].forEach(w=>w.style.opacity=1);its.forEach(e=>e.classList.add('in'));sc[2].classList.add('go');count();return}
   const r=stage.getBoundingClientRect(), p=cl(-r.top/(r.height-innerHeight));
-  const k=Math.min(3,Math.floor(p*4.0001));
+  const k=Math.min(2,Math.floor(p*3.0001));
   if(k!==cur)go(k);
-  if(k===3&&r.bottom>0&&r.top<innerHeight){if(vid.paused)vid.play().catch(()=>{})}else if(!vid.paused)vid.pause();
+  if(k===0&&r.bottom>0&&r.top<innerHeight){if(vid.paused)vid.play().catch(()=>{})}else if(!vid.paused)vid.pause();
 }
 let cur=-1,timers=[];
 function seq(words){words.forEach((w,i)=>timers.push(setTimeout(()=>w.style.opacity=1,120+i*55)))}
@@ -1058,12 +1069,11 @@ function go(k){
   timers.forEach(clearTimeout);timers=[];cur=k;
   sc.forEach((el,i)=>{el.classList.toggle('cur',i===k);el.classList.toggle('past',i<k)});
   dots.forEach((d,i)=>d.classList.toggle('on',i<=k));
-  if(k===0){say0.forEach(w=>w.style.opacity=.16);seq(say0);rule.style.setProperty('--p',1)}
+  if(k===0){say0.forEach(w=>w.style.opacity=.16);seq(say0)}
   if(k===1){its.forEach(e=>e.classList.remove('in'));flash.classList.remove('in');
     its.forEach((e,i)=>timers.push(setTimeout(()=>{e.classList.add('in');if(i===its.length-1)flash.classList.add('in')},250+i*380)))}
   else its.forEach(e=>e.classList.add('in'));
   if(k===2){sc[2].classList.add('go');count()}
-  if(k===3){say3.forEach(w=>w.style.opacity=.16);seq(say3)}
 }
 let tick=false;addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(()=>{frame();tick=false})}},{passive:true});
 addEventListener('resize',frame);frame();
