@@ -120,7 +120,10 @@ section{padding-block:clamp(48px,6vw,84px)}
 /* כפתורי סינון: לכל אחד גוון משלו מהפלטה, נקודת אור קטנה ואור דק שרץ סביב המסגרת */
 .chip{--c:228,190,116;position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(var(--c),.2);background:rgba(var(--c),.03);color:var(--muted);border-radius:99px;padding:9px 20px;font:inherit;font-weight:500;cursor:pointer;transition:color .3s,background .3s,border-color .3s,box-shadow .3s}
 .chip[data-f="biz"]{--c:47,198,194}
-.chip[data-f="event"]{--c:226,150,118}
+.chip[data-f="anim"]{--c:226,150,118}
+.chip[data-f="faith"]{--c:150,170,255}
+.chip[data-f="swabson"]{--c:236,228,212}
+.chip[data-f="adv"]{--c:130,200,120}
 .chip .cd{width:6px;height:6px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 8px 1px rgba(var(--c),.7);opacity:.55;transition:opacity .3s,transform .3s}
 .chip::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;z-index:-1;background:conic-gradient(from var(--a,0deg),transparent 0deg 290deg,rgba(var(--c),.9) 330deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;animation:iring 5s linear infinite;transition:opacity .3s}
 .chip[data-f="biz"]::before{animation-delay:-1.7s}
@@ -146,8 +149,10 @@ section{padding-block:clamp(48px,6vw,84px)}
 .work span{color:var(--muted);font-size:14px}
 .work .play{position:absolute;top:14px;inset-inline-start:14px;width:44px;height:44px;border-radius:50%;background:rgba(13,12,10,.45);backdrop-filter:blur(6px);display:grid;place-items:center;transition:background .2s}
 .work:hover .play{background:var(--grad)}
-.seal{position:absolute;top:12px;inset-inline-end:12px;z-index:3;width:clamp(78px,7vw,100px);aspect-ratio:1;transform:rotate(-14deg);filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));pointer-events:none}
+.seal{position:absolute;top:12px;inset-inline-end:12px;z-index:3;width:clamp(96px,9vw,130px);aspect-ratio:1;transform:rotate(-14deg);filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));pointer-events:none}
 .seal svg{display:block;width:100%;height:100%}
+.seal-f{top:auto;bottom:clamp(64px,8vw,96px);inset-inline-end:16px;width:clamp(92px,9vw,128px)}
+@media(max-width:760px){.seal-f{bottom:auto;top:10px;inset-inline-end:auto;left:10px;width:78px}}
 .seal.pre{opacity:0;transform:rotate(-24deg) scale(1.9)}
 .seal.on{opacity:1;transform:rotate(-14deg) scale(1);transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .2s}
 @media(prefers-reduced-motion:reduce){.seal.pre{opacity:1;transform:rotate(-14deg)}}
@@ -631,6 +636,54 @@ footer a:hover{color:var(--fg)}
 .more-form{margin-top:30px;max-width:560px}
 .more-form summary{cursor:pointer;color:var(--teal);font-weight:700;list-style:none;display:inline-flex;align-items:center;gap:8px}
 .more-form summary::-webkit-details-marker{display:none}
+/* תפריט נגישות */
+.a11y-btn{position:fixed;z-index:45;bottom:24px;inset-inline-end:24px;width:52px;height:52px;border-radius:50%;border:2px solid #0D0C0A;background:#2FC6C2;color:#0D0C0A;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.a11y-btn svg{width:28px;height:28px;fill:currentColor}
+.a11y-btn:hover{background:#5FE0DC}
+.a11y-btn:focus-visible{outline:3px solid var(--gold-p);outline-offset:3px}
+@media(max-width:959px){.a11y-btn{bottom:calc(84px + env(safe-area-inset-bottom));inset-inline-end:12px;width:44px;height:44px}.a11y-btn svg{width:24px;height:24px}}
+.a11y-panel{position:fixed;z-index:70;bottom:88px;inset-inline-end:24px;width:min(330px,calc(100vw - 24px));max-height:calc(100svh - 120px);overflow:auto;background:#161411;color:var(--fg);border:1px solid rgba(244,237,224,.3);border-radius:6px;padding:14px;box-shadow:0 18px 44px rgba(0,0,0,.6);font-family:Heebo,Arial,sans-serif;font-size:15px}
+@media(max-width:959px){.a11y-panel{bottom:calc(136px + env(safe-area-inset-bottom));inset-inline-end:12px}}
+.a11y-panel[hidden]{display:none}
+.a11y-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:17px}
+.a11y-panel button{font:inherit;color:inherit;cursor:pointer;border-radius:4px}
+.a11y-x{background:none;border:1px solid rgba(244,237,224,.3);width:34px;height:34px}
+.a11y-size{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.a11y-size span{flex:1}
+.a11y-size button{width:44px;height:40px;background:rgba(255,255,255,.06);border:1px solid rgba(244,237,224,.3);font-weight:700}
+.a11y-size output{min-width:46px;text-align:center}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-grid button{min-height:48px;padding:6px 8px;background:rgba(255,255,255,.05);border:1px solid rgba(244,237,224,.25);text-align:center;line-height:1.25}
+.a11y-grid button[aria-pressed=true]{background:#2FC6C2;color:#0D0C0A;border-color:#2FC6C2;font-weight:700}
+.a11y-f{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+.a11y-f button{background:none;border:1px solid rgba(244,237,224,.3);padding:8px 12px}
+.a11y-f a{color:var(--gold-p)}
+.a11y-panel :focus-visible{outline:2px solid var(--gold-p);outline-offset:2px}
+html.a-contrast{--muted:#F4EDE0;--line:#9C9080;--bg:#000;--surface:#000}
+html.a-contrast body{background:#000}
+html.a-contrast p,html.a-contrast li,html.a-contrast span,html.a-contrast small,html.a-contrast summary{color:#fff!important}
+html.a-contrast .wall{filter:brightness(.25)!important}
+html.a-links a{text-decoration:underline!important;text-underline-offset:3px}
+html.a-links a:not(.btn):not(.tk):not(.tg):not(.work):not(.reel):not(.fcard){color:#FFE08A!important}
+html.a-readable body,html.a-readable p,html.a-readable li,html.a-readable a,html.a-readable button,html.a-readable span,html.a-readable summary{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:normal!important}
+html.a-spacing p,html.a-spacing li,html.a-spacing summary,html.a-spacing .lead{line-height:2!important;letter-spacing:.05em!important;word-spacing:.15em!important}
+html.a-cursor,html.a-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'%3E%3Cpath d='M3 2l7.5 19 2.4-7.6L20.5 11z' fill='%23fff' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") 4 2,auto!important}
+html.a-still *,html.a-still *::before,html.a-still *::after{animation-play-state:paused!important;transition-duration:0s!important}
+/* אודות */
+.about-in{display:grid;gap:clamp(28px,4vw,56px);align-items:center;margin-top:clamp(28px,4vw,48px)}
+@media(min-width:900px){.about-in{grid-template-columns:1fr 1.1fr}}
+.about-pics{position:relative;aspect-ratio:4/3.4}
+.about-pics img{position:absolute;width:62%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid rgba(228,190,116,.35);box-shadow:0 24px 50px rgba(0,0,0,.55)}
+.about-pics img:nth-child(1){top:0;inset-inline-start:0;transform:rotate(-4deg)}
+.about-pics img:nth-child(2){top:30%;inset-inline-end:0;z-index:2;transform:rotate(3deg)}
+.about-pics img:nth-child(3){bottom:0;inset-inline-start:12%;transform:rotate(-1.5deg)}
+.about-txt p{font-size:clamp(17px,1.6vw,19px);color:#E6DECF;margin:0 0 14px;max-width:58ch}
+.about-txt p:first-child{font-size:clamp(20px,2vw,24px);color:var(--fg);font-weight:500}
+.about-stats{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:600px){.about-stats{grid-template-columns:repeat(4,1fr)}}
+.about-stats li{border:1px solid var(--line);border-radius:4px;padding:14px 12px;background:rgba(22,20,17,.6);text-align:center}
+.about-stats b{display:block;font-family:var(--f-display);font-size:clamp(34px,4vw,46px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.about-stats span{display:block;margin-top:6px;font-size:14px;color:var(--muted);line-height:1.35}
 /* מתג שפה: כפתור שנפתח לרשימה */
 .langdd{position:relative}
 .langdd>summary{list-style:none;display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;background:rgba(22,20,17,.72);border:1px solid rgba(244,237,224,.32);color:var(--fg);font-size:15px;font-weight:600;cursor:pointer;user-select:none}
@@ -787,6 +840,7 @@ footer a:hover{color:var(--fg)}
     <nav aria-label="ניווט ראשי">
       <ul>
         <li><a href="#works">עבודות</a></li>
+        <li><a href="#about">אודות</a></li>
         <li><a href="#services">שירותים</a></li>
         <li><a href="#process">איך זה עובד</a></li>
         <li><a href="#faq">שאלות</a></li>
@@ -801,7 +855,7 @@ footer a:hover{color:var(--fg)}
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#works">עבודות</a><a href="#services">שירותים</a><a href="#process">איך זה עובד</a><a href="#faq">שאלות</a><a href="#contact">צור קשר</a>
+    <a href="#works">עבודות</a><a href="#about">אודות</a><a href="#services">שירותים</a><a href="#process">איך זה עובד</a><a href="#faq">שאלות</a><a href="#contact">צור קשר</a>
   </div>
 </header>
 
@@ -839,7 +893,7 @@ footer a:hover{color:var(--fg)}
       <span class="kick">פסטיבל סרטי ה-AI תל אביב · 2026</span>
       <p>מתוך <span class="gd">1,242</span> סרטים מ-<span class="gd">80</span> מדינות: <span class="hl">מקום&nbsp;ראשון</span> בתחרות הישראלית.</p>
     </div>
-    <a class="fcard" data-film href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" aria-label="צפו בסרט המלא">
+    <a class="fcard" data-film href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" aria-label="צפו בסרט המלא"><span class="seal seal-f" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInkF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.4"/></filter><path id="sealPF" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.6)"/><g filter="url(#sealInkF)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46.5" stroke-width="2.4"/><circle cx="50" cy="50" r="42" stroke-width=".8"/><circle cx="50" cy="50" r="28.5" stroke-width=".8"/></g><g filter="url(#sealInkF)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.2" font-weight="700" letter-spacing="1.5" direction="ltr"><textPath href="#sealPF" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="52" text-anchor="middle" direction="ltr" font-family="Georgia,serif" font-size="19" font-weight="700" letter-spacing="-.5">No.1</text><text x="50" y="65" text-anchor="middle" direction="ltr" font-family="Heebo,sans-serif" font-size="7.4" font-weight="800" letter-spacing="1.6">TEL AVIV</text></g></svg></span>
       <video src="assets/award/teaser.mp4" poster="assets/award/teaser.jpg" muted loop playsinline preload="none"></video>
       <span class="tag"><i></i>טיזר</span>
       <span class="ov">
@@ -892,48 +946,51 @@ footer a:hover{color:var(--fg)}
     <h2 class="h2">מפרסומת למותג עד סרט שמרגש את כל האולם.</h2>
     <div class="filters" role="group" aria-label="סינון עבודות">
       <button class="chip" aria-pressed="true" data-f="all"><span class="cd" aria-hidden="true"></span>הכול</button>
-      <button class="chip" aria-pressed="false" data-f="biz"><span class="cd" aria-hidden="true"></span>עסקים</button>
-      <button class="chip" aria-pressed="false" data-f="event"><span class="cd" aria-hidden="true"></span>אירועים ואנימציה</button>
+      <button class="chip" aria-pressed="false" data-f="biz"><span class="cd" aria-hidden="true"></span>פרסומות ומותגים</button>
+      <button class="chip" aria-pressed="false" data-f="anim"><span class="cd" aria-hidden="true"></span>אנימציה</button>
+      <button class="chip" aria-pressed="false" data-f="faith"><span class="cd" aria-hidden="true"></span>דתי וחב״ד</button>
+      <button class="chip" aria-pressed="false" data-f="swabson"><span class="cd" aria-hidden="true"></span>Swabson</button>
+      <button class="chip" aria-pressed="false" data-f="adv"><span class="cd" aria-hidden="true"></span>הרפתקאות</button>
     </div>
     <div class="grid" id="grid">
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/24.mp4" data-c="adv"><img class="poster" src="assets/works/24.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/24.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>מסע בזמן</h3><span>סרט לאירוע</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/32.mp4" data-c="adv"><img class="poster" src="assets/works/32.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/32.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המגלים</h3><span>סרט הרפתקאות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/02-hd.mp4" data-c="anim"><img class="poster" src="assets/works/02.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/02.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>החייל</h3><span>אנימציה</span></div></a>
       <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/36-full.mp4" data-c="biz"><img class="poster" src="assets/works/36.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/36.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEGACY</h3><span dir="ltr">McDonald's · Bell · Maryland</span></div></a>
-      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" data-c="event"><img class="poster" src="assets/works/38.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/38.mp4"></video><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter><path id="sealP" d="M50 50m-35 0a35 35 0 1 1 70 0a35 35 0 1 1-70 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.55)"/><g filter="url(#sealInk)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46" stroke-width="2.4"/><circle cx="50" cy="50" r="41.5" stroke-width=".8"/><circle cx="50" cy="50" r="27" stroke-width=".8"/></g><g filter="url(#sealInk)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.4" font-weight="700" letter-spacing="1.6" direction="ltr"><textPath href="#sealP" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="25" font-weight="700">1</text><text x="50" y="68" text-anchor="middle" font-family="Heebo,sans-serif" font-size="7.6" font-weight="800">מקום ראשון</text></g></svg></span><div class="play" aria-hidden="true">▶</div><div class="info"><h3>יוסלה הקמצן</h3><span>סרט אנימציה · מקום ראשון בפסטיבל סרטי ה-AI תל אביב</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/39.mp4" data-c="event"><img class="poster" src="assets/works/39.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/39.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>עולים להר הבית</h3><span>סדרה · פרק ראשון</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/40.mp4" data-c="event"><img class="poster" src="assets/works/40.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/40.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>בואי תתפללי, חנה</h3><span>סרט קצר</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/44.mp4" data-c="biz"><img class="poster" src="assets/works/44.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/44.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEVIK ACTION</h3><span>סרט אקשן · סייברפאנק</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/49.mp4" data-c="event"><img class="poster" src="assets/works/49.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/49.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>ביחד · אור חוזר</h3><span>סרט אנימציה · קמפיין</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/34.mp4" data-c="biz"><img class="poster" src="assets/works/34.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/34.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson Lugan</h3><span>סרט מותג · הגרסה המלאה</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/13.mp4" data-c="event"><img class="poster" src="assets/works/13.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/13.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>הישועה</h3><span>סרט לאירוע · בית המקדש</span></div></a>
+      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/38.mp4" data-c="anim"><img class="poster" src="assets/works/38.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/38.mp4"></video><span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.4"/></filter><path id="sealP" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.6)"/><g filter="url(#sealInk)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46.5" stroke-width="2.4"/><circle cx="50" cy="50" r="42" stroke-width=".8"/><circle cx="50" cy="50" r="28.5" stroke-width=".8"/></g><g filter="url(#sealInk)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.2" font-weight="700" letter-spacing="1.5" direction="ltr"><textPath href="#sealP" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="52" text-anchor="middle" direction="ltr" font-family="Georgia,serif" font-size="19" font-weight="700" letter-spacing="-.5">No.1</text><text x="50" y="65" text-anchor="middle" direction="ltr" font-family="Heebo,sans-serif" font-size="7.4" font-weight="800" letter-spacing="1.6">TEL AVIV</text></g></svg></span><div class="play" aria-hidden="true">▶</div><div class="info"><h3>יוסלה הקמצן</h3><span>סרט אנימציה · מקום ראשון בפסטיבל סרטי ה-AI תל אביב</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/39.mp4" data-c="faith"><img class="poster" src="assets/works/39.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/39.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>עולים להר הבית</h3><span>סדרה · פרק ראשון</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/40.mp4" data-c="faith"><img class="poster" src="assets/works/40.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/40.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>בואי תתפללי, חנה</h3><span>סרט קצר</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/44.mp4" data-c="adv biz"><img class="poster" src="assets/works/44.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/44.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEVIK ACTION</h3><span>סרט אקשן · סייברפאנק</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/49.mp4" data-c="anim faith"><img class="poster" src="assets/works/49.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/49.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>ביחד · אור חוזר</h3><span>סרט אנימציה · קמפיין</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/13.mp4" data-c="faith"><img class="poster" src="assets/works/13.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/13.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>הישועה</h3><span>סרט לאירוע · בית המקדש</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/26-hd.mp4" data-c="biz"><img class="poster" src="assets/works/26.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/26.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המטבע הזהב</h3><span>פרסומת</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/03.mp4" data-c="biz"><img class="poster" src="assets/works/03.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/03.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>TITAN</h3><span>פרסומת · טכנולוגיה ואבטחה</span></div></a>
       <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/29.mp4" data-c="biz"><img class="poster" src="assets/works/29.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/29.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Terra Energy</h3><span>סרט תדמית · אנרגיה, אלסקה וקוריאה</span></div></a>
       <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/19.mp4" data-c="biz"><img class="poster" src="assets/works/19.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/19.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>LEVIK Production</h3><span>פרסומת לסטודיו</span></div></a>
-      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/35.mp4" data-c="event"><img class="poster" src="assets/works/35.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/35.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>דובי ברוד</h3><span>סרט אישי</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/33.mp4" data-c="biz"><img class="poster" src="assets/works/33.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/33.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson New York</h3><span>סרט מותג</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/03.mp4" data-c="biz"><img class="poster" src="assets/works/03.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/03.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>TITAN</h3><span>פרסומת · טכנולוגיה ואבטחה</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/02-hd.mp4" data-c="event"><img class="poster" src="assets/works/02.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/02.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>החייל</h3><span>אנימציה</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/31.mp4" data-c="biz"><img class="poster" src="assets/works/31.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/31.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Mikve Paris</h3><span>סיפור מותג · צרפת</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/14.mp4" data-c="biz"><img class="poster" src="assets/works/14.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/14.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · אפריקה</h3><span>סדרת עולמות</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/28.mp4" data-c="event"><img class="poster" src="assets/works/28.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/28.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>חנוכה</h3><span>סרט לאירוע</span></div></a>
+      <a class="work big" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/35.mp4" data-c="faith"><img class="poster" src="assets/works/35.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/35.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>דובי ברוד</h3><span>סרט אישי</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/34.mp4" data-c="swabson adv biz"><img class="poster" src="assets/works/34.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/34.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson Lugan</h3><span>סרט מותג · הגרסה המלאה</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/33.mp4" data-c="swabson adv biz"><img class="poster" src="assets/works/33.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/33.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson New York</h3><span>סרט מותג</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/28.mp4" data-c="faith"><img class="poster" src="assets/works/28.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/28.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>חנוכה</h3><span>סרט לאירוע</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/12.mp4" data-c="faith"><img class="poster" src="assets/works/12.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/12.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>בראון · כולל שליחות</h3><span>סרט לאירוע</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/10.mp4" data-c="faith"><img class="poster" src="assets/works/10.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/10.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>שלמות העם</h3><span>סרט קמפיין</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/31.mp4" data-c="faith biz"><img class="poster" src="assets/works/31.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/31.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Mikve Paris</h3><span>סיפור מותג · צרפת</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/20.mp4" data-c="faith biz"><img class="poster" src="assets/works/20.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/20.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Clé</h3><span>סיפור מותג · צרפת</span></div></a>
       <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/37.mp4" data-c="biz"><img class="poster" src="assets/works/37.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/37.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>דירה בלונדון</h3><span>פרסומת לאפליקציה</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/12.mp4" data-c="event"><img class="poster" src="assets/works/12.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/12.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>בראון · כולל שליחות</h3><span>סרט לאירוע</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/21.mp4" data-c="biz"><img class="poster" src="assets/works/21.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/21.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · אנטארקטיקה</h3><span>סדרת עולמות</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/01.mp4" data-c="biz"><img class="poster" src="assets/works/01.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/01.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>תיק החוף</h3><span>פרסומת מוצר</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/09.mp4" data-c="event"><img class="poster" src="assets/works/09.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/09.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המקדש והאריה</h3><span>סרט לאירוע</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/26-hd.mp4" data-c="biz"><img class="poster" src="assets/works/26.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/26.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המטבע הזהב</h3><span>פרסומת</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/22.mp4" data-c="biz"><img class="poster" src="assets/works/22.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/22.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · טיבט</h3><span>סדרת עולמות</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/10.mp4" data-c="biz"><img class="poster" src="assets/works/10.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/10.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>שלמות העם</h3><span>סרט קמפיין</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/32.mp4" data-c="event"><img class="poster" src="assets/works/32.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/32.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המגלים</h3><span>סרט הרפתקאות</span></div></a>
       <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/25.mp4" data-c="biz"><img class="poster" src="assets/works/25.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/25.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Velvet</h3><span>פרסומת · קטיפה</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/23.mp4" data-c="biz"><img class="poster" src="assets/works/23.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/23.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · הפנתר</h3><span>סדרת עולמות</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/24.mp4" data-c="event"><img class="poster" src="assets/works/24.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/24.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>מסע בזמן</h3><span>סרט לאירוע</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/20.mp4" data-c="biz"><img class="poster" src="assets/works/20.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/20.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>La Clé</h3><span>סיפור מותג · צרפת</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/18.mp4" data-c="biz"><img class="poster" src="assets/works/18.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/18.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · יפן</h3><span>סדרת עולמות</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/06.mp4" data-c="biz"><img class="poster" src="assets/works/06.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/06.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>אמצע הקיץ</h3><span>סרט מותג</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/07.mp4" data-c="biz"><img class="poster" src="assets/works/07.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/07.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>אל הירח</h3><span>סרט מותג</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/16.mp4" data-c="biz"><img class="poster" src="assets/works/16.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/16.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · פרחים</h3><span>סדרת עולמות</span></div></a>
       <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/04.mp4" data-c="biz"><img class="poster" src="assets/works/04.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/04.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Velvet · הספה</h3><span>פרסומת</span></div></a>
-      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/17.mp4" data-c="biz"><img class="poster" src="assets/works/17.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/17.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · סוסים</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/21.mp4" data-c="swabson adv"><img class="poster" src="assets/works/21.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/21.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · אנטארקטיקה</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/22.mp4" data-c="swabson adv"><img class="poster" src="assets/works/22.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/22.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · טיבט</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/18.mp4" data-c="swabson adv"><img class="poster" src="assets/works/18.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/18.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · יפן</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/09.mp4" data-m="1" data-c="adv"><img class="poster" src="assets/works/09.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/09.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>המקדש והאריה</h3><span>סרט לאירוע</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/07.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/07.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/07.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>אל הירח</h3><span>סרט מותג</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/06.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/06.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/06.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>אמצע הקיץ</h3><span>סרט מותג</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/14.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/14.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/14.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · אפריקה</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/23.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/23.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/23.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · הפנתר</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/16.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/16.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/16.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · פרחים</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/17.mp4" data-m="1" data-c="swabson adv"><img class="poster" src="assets/works/17.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/17.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>Swabson · סוסים</h3><span>סדרת עולמות</span></div></a>
+      <a class="work" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/01.mp4" data-m="1" data-c="biz"><img class="poster" src="assets/works/01.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/works/01.mp4"></video><div class="play" aria-hidden="true">▶</div><div class="info"><h3>תיק החוף</h3><span>פרסומת מוצר</span></div></a>
     </div>
-    <button class="more" id="more" type="button">לכל 36 הסרטים ←</button>
+    <button class="more" id="more" type="button">עוד סרטים <span class="mc"></span></button>
     <div class="reels">
       <div class="reels-head"><div><span class="eyebrow">אנכי לרשתות</span><h3 class="reels-h">רילס</h3></div><div class="reels-nav"><button class="rn prev" type="button" aria-label="הקודם"></button><button class="rn next" type="button" aria-label="הבא"></button></div></div>
       <div class="reel-track" id="reels">
@@ -963,6 +1020,29 @@ footer a:hover{color:var(--fg)}
 </section>
 
 <!-- 5.3 אמון: מוסתר עד שיהיו המלצות אמיתיות -->
+
+<!-- 5.3.5 אודות -->
+<section class="about" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <span class="eyebrow">אודות</span>
+    <h2 class="h2" id="about-h">קולנוע, בלי מצלמה.</h2>
+    <div class="about-in">
+      <div class="about-pics" aria-hidden="true"><img src="assets/works/24.jpg" alt="" loading="lazy" decoding="async"><img src="assets/works/38.jpg" alt="" loading="lazy" decoding="async"><img src="assets/works/36.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="about-txt">
+        <p>LEVIK Production הוא סטודיו לסרטי AI ברמה קולנועית, שהקים לוי יצחק כהן.</p>
+        <p>אנחנו מתחילים מהסיפור: תסריט, דמויות ובימוי. רק אחר כך מגיעה הטכנולוגיה. כך נוצרים פרסומות, סרטי מותג וסרטים אישיים שנראים כמו קולנוע, בלי צוות צילום, בלי שחקנים ובלי לוקיישן.</p>
+        <p>ב-2026 הסרט "יוסלה – הקמצן הקדוש", שיצרו לוי יצחק כהן וגל אדרי, זכה במקום הראשון בתחרות הישראלית של פסטיבל סרטי ה-AI תל אביב, מתוך 1,242 סרטים מ-80 מדינות.</p>
+        <p>היום אנחנו עובדים עם מותגים, עסקים ומשפחות בישראל, בצרפת, באנגליה ובארצות הברית, בעברית, באנגלית ובצרפתית.</p>
+        <ul class="about-stats">
+          <li><b>No.1</b><span>פסטיבל סרטי ה-AI תל אביב</span></li>
+          <li><b>36</b><span>סרטים</span></li>
+          <li><b>21</b><span>מותגים ולקוחות</span></li>
+          <li><b>3</b><span>שפות</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- 5.4 שירותים -->
 <section id="services">
@@ -1060,6 +1140,21 @@ footer a:hover{color:var(--fg)}
 
 <!-- קבועים -->
 <a class="wa-float" href="https://wa.me/972586255511" target="_blank" rel="noopener" aria-label="שלחו הודעה בוואטסאפ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg></a>
+<!-- תפריט נגישות -->
+<button type="button" class="a11y-btn" id="a11yBtn" aria-expanded="false" aria-controls="a11yPanel" aria-label="תפריט נגישות"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.2" r="2.2"/><path d="M4 8.2c2.7.8 5.3 1.2 8 1.2s5.3-.4 8-1.2l.5 1.9c-2.1.7-4.2 1.1-6.4 1.3v3.4l2.6 6.6-1.9.8L12 15.6l-2.8 6.6-1.9-.8 2.6-6.6v-3.4c-2.2-.2-4.3-.6-6.4-1.3z"/></svg></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-labelledby="a11yTitle" hidden>
+  <div class="a11y-h"><b id="a11yTitle">תפריט נגישות</b><button type="button" class="a11y-x" id="a11yX" aria-label="סגירה">✕</button></div>
+  <div class="a11y-size"><span>גודל טקסט</span><button type="button" data-a="fs-" aria-label="הקטנת טקסט">A−</button><output id="a11yFs">100%</output><button type="button" data-a="fs+" aria-label="הגדלת טקסט">A+</button></div>
+  <div class="a11y-grid">
+    <button type="button" data-t="contrast" aria-pressed="false">ניגודיות גבוהה</button>
+    <button type="button" data-t="links" aria-pressed="false">הדגשת קישורים</button>
+    <button type="button" data-t="readable" aria-pressed="false">גופן קריא</button>
+    <button type="button" data-t="spacing" aria-pressed="false">ריווח טקסט</button>
+    <button type="button" data-t="cursor" aria-pressed="false">סמן גדול</button>
+    <button type="button" data-t="still" aria-pressed="false">עצירת תנועה ווידאו</button>
+  </div>
+  <div class="a11y-f"><button type="button" data-a="reset">איפוס הגדרות</button><a href="accessibility.html">הצהרת נגישות</a></div>
+</div>
 <div class="bar">
   <a class="btn wa" href="https://wa.me/972586255511" target="_blank" rel="noopener">וואטסאפ</a>
   <a class="btn btn-ghost" href="tel:+972586255511">התקשרו</a>
@@ -1075,7 +1170,25 @@ footer a:hover{color:var(--fg)}
   (function(){var f=document.querySelector('footer'),w=document.querySelector('.wa-float');if(f&&w&&'IntersectionObserver' in window){new IntersectionObserver(function(e){w.classList.toggle('away',e[0].isIntersecting)}).observe(f)}})();
   (function(){var l=document.querySelector('.laurel');if(!l)return;var go=function(){if(l.classList.contains('on'))return;l.classList.add('on');setTimeout(function(){var a=document.getElementById('lgA');try{a&&a.beginElement()}catch(e){}},1150)};if('IntersectionObserver' in window){new IntersectionObserver(function(e){if(e[0].isIntersecting)go()},{threshold:.4}).observe(l)}else go()})();
   (function(){var d=document.querySelector('.langdd');if(!d)return;document.addEventListener('click',function(e){if(d.open&&!d.contains(e.target))d.open=false});document.addEventListener('keydown',function(e){if(e.key==='Escape')d.open=false})})();
-  (function(){var x=document.querySelector('.seal');if(!x||!('IntersectionObserver' in window))return;x.classList.add('pre');new IntersectionObserver(function(e,o){if(e[0].isIntersecting){x.classList.add('on');o.disconnect()}},{threshold:.6}).observe(x)})();
+  (function(){if(!('IntersectionObserver' in window))return;document.querySelectorAll('.seal').forEach(function(x){x.classList.add('pre');new IntersectionObserver(function(e,o){if(e[0].isIntersecting){x.classList.add('on');o.disconnect()}},{threshold:.35}).observe(x.parentNode)})})();
+  /* תפריט נגישות: הגדרות נשמרות בדפדפן */
+  (function(){var H=document.documentElement,b=document.getElementById('a11yBtn'),pn=document.getElementById('a11yPanel'),fo=document.getElementById('a11yFs'),K='lv-a11y',st={fs:0,t:{}};
+    try{st=JSON.parse(localStorage.getItem(K))||st}catch(e){}
+    var Z=[1,1.12,1.25,1.4,1.6];
+    function inP(v){return v.closest&&v.closest('#player')}
+    function apply(){H.style.zoom=Z[st.fs]===1?'':Z[st.fs];fo.textContent=Math.round(Z[st.fs]*100)+'%';
+      ['contrast','links','readable','spacing','cursor','still'].forEach(function(k){H.classList.toggle('a-'+k,!!st.t[k]);var x=pn.querySelector('[data-t='+k+']');x&&x.setAttribute('aria-pressed',!!st.t[k])});
+      if(st.t.still)document.querySelectorAll('video').forEach(function(v){if(!inP(v))v.pause()});
+      try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+    document.addEventListener('play',function(e){if(st.t.still&&e.target.tagName==='VIDEO'&&!inP(e.target))e.target.pause()},true);
+    function open(o){pn.hidden=!o;b.setAttribute('aria-expanded',o);if(o){var f=pn.querySelector('button');f&&f.focus()}else b.focus()}
+    b.addEventListener('click',function(){open(pn.hidden)});
+    document.getElementById('a11yX').addEventListener('click',function(){open(false)});
+    pn.addEventListener('keydown',function(e){if(e.key==='Escape')open(false)});
+    document.addEventListener('click',function(e){if(!pn.hidden&&!pn.contains(e.target)&&e.target!==b&&!b.contains(e.target))open(false)});
+    pn.addEventListener('click',function(e){var x=e.target.closest('button');if(!x)return;var a=x.dataset.a,t=x.dataset.t;
+      if(a==='fs+')st.fs=Math.min(Z.length-1,st.fs+1);else if(a==='fs-')st.fs=Math.max(0,st.fs-1);else if(a==='reset'){st={fs:0,t:{}}}else if(t){st.t[t]=!st.t[t];if(t==='still'&&!st.t[t])document.querySelectorAll('.wall video,.s0 video').forEach(function(v){if(v.src&&v.offsetParent)v.play().catch(function(){})})}else return;apply()});
+    apply()})();
   var nav=document.getElementById('nav');
   addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
   var mb=document.getElementById('menuBtn'),mm=document.getElementById('mobileMenu');
@@ -1083,12 +1196,15 @@ footer a:hover{color:var(--fg)}
   mm.addEventListener('click',function(e){if(e.target.tagName==='A'){mm.classList.remove('open');mb.setAttribute('aria-expanded',false)}});
   // עבודות: סינון, 12 ראשונות ואז "לכל הסרטים", תצוגה שקטה במעבר עכבר, ונגן מלא בלחיצה
   var grid=document.getElementById('grid'),more=document.getElementById('more'),works=grid.querySelectorAll('.work');
-  var LIM=innerWidth<768?6:12;function cut(){var k=0;works.forEach(function(w){w.classList.toggle('x',!w.hidden&&++k>LIM)});more.hidden=grid.classList.contains('open')||k<=LIM}
+  /* סרטים לא צנועים (data-m) מופיעים רק בסוף, אחרי לחיצה נוספת על "עוד סרטים", בכל קטגוריה */
+  var STEP=innerWidth<768?6:12,shown=STEP,deep=false,mc=more.querySelector('.mc');
+  function cut(){var k=0,mod=0,imm=0,vis=0;works.forEach(function(w){if(w.hidden)return;var hide;if(w.dataset.m){imm++;hide=!deep}else{mod++;hide=++k>shown}w.classList.toggle('x',hide);if(!hide)vis++});
+    var left=mod+imm-vis;more.hidden=left<=0;if(mc)mc.textContent='('+left+')'}
   document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
     document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
-    var f=c.dataset.f;works.forEach(function(w){w.hidden=!(f==='all'||w.dataset.c===f)});cut();
+    var f=c.dataset.f;works.forEach(function(w){w.hidden=!(f==='all'||(' '+w.dataset.c+' ').indexOf(' '+f+' ')>-1)});shown=STEP;deep=false;cut();
   })});
-  more.addEventListener('click',function(){grid.classList.add('open');cut()});cut();
+  more.addEventListener('click',function(){var m=0;works.forEach(function(w){if(!w.hidden&&!w.dataset.m)m++});if(shown<m)shown+=STEP;else deep=true;cut()});cut();
   var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   works.forEach(function(w){var v=w.querySelector('video');
     function on(){if(calm)return;if(!v.src)v.src=v.dataset.src;w.classList.add('on');v.play().catch(function(){})}
@@ -1145,6 +1261,7 @@ footer a:hover{color:var(--fg)}
     var W=0,H=0,fs=0;
     function size(){var r=cine.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);fs=parseFloat(getComputedStyle(cine).fontSize)}
     function draw(){
+      var stl=document.documentElement.classList.contains('a-still');if(stl&&!vid.paused)vid.pause();else if(!stl&&vid.paused)vid.play().catch(function(){});
       if(vid.readyState>=2&&W){
         cx.globalCompositeOperation='source-over';cx.clearRect(0,0,W,H);
         var vr=vid.videoWidth/vid.videoHeight,cr=W/H,dw,dh;if(vr>cr){dh=H;dw=H*vr}else{dw=W;dh=W/vr}
