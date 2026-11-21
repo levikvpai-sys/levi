@@ -558,6 +558,7 @@ footer a:hover{color:var(--fg)}
 .brands{padding-block:clamp(40px,5vw,72px);overflow:hidden}
 .brands .h2{max-width:24ch}
 .bnd{position:relative;width:112%;margin:clamp(32px,5vw,56px) -6% 0;padding-block:clamp(22px,3vw,34px);background:linear-gradient(90deg,rgba(47,198,194,.05),rgba(217,162,79,.07)),#0F0D0B;transform:rotate(-2deg);-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.bnd{direction:ltr;overflow:hidden}
 .bnd::before,.bnd::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--grad);opacity:.7}
 .bnd::before{top:0}.bnd::after{bottom:0}
 .bnd-track{display:flex;width:max-content;direction:ltr;animation:bndmove 120s linear infinite}
@@ -630,7 +631,7 @@ footer a:hover{color:var(--fg)}
 .bnd{transform:none!important}
 .bnd-set img{height:calc(var(--h)*1px)!important;opacity:.88;filter:brightness(0) invert(.94) sepia(.25)}
 @media(min-width:768px){.bnd-set img{height:calc(var(--h)*1.55px)!important}}
-@media(max-width:700px){.bnd{-webkit-mask:none;mask:none;width:100%;margin-inline:0}.bnd-track{animation:none;width:auto;justify-content:center}.bnd-set[aria-hidden]{display:none}.bnd-set{flex-wrap:wrap;justify-content:center;gap:26px 34px;padding-inline:16px}.bnd-set li{gap:0}.bnd-set li::after{display:none}}
+@media(max-width:700px){.bnd{width:100%;margin-inline:0;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}.bnd-set,.bnd-set li{gap:30px}.bnd-set{padding-inline:15px}.bnd-track{animation-duration:80s}}
 /* צור קשר: וואטסאפ ראשי, הטופס מקופל */
 .direct .btn{min-height:60px;padding:0 34px;font-size:19px}
 .more-form{margin-top:30px;max-width:560px}
@@ -670,19 +671,34 @@ html.a-spacing p,html.a-spacing li,html.a-spacing summary,html.a-spacing .lead{l
 html.a-cursor,html.a-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'%3E%3Cpath d='M3 2l7.5 19 2.4-7.6L20.5 11z' fill='%23fff' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") 4 2,auto!important}
 html.a-still *,html.a-still *::before,html.a-still *::after{animation-play-state:paused!important;transition-duration:0s!important}
 /* אודות */
-.about-in{display:grid;gap:clamp(28px,4vw,56px);align-items:center;margin-top:clamp(28px,4vw,48px)}
-@media(min-width:900px){.about-in{grid-template-columns:1fr 1.1fr}}
-.about-pics{position:relative;aspect-ratio:4/3.4}
-.about-pics img{position:absolute;width:62%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid rgba(228,190,116,.35);box-shadow:0 24px 50px rgba(0,0,0,.55)}
-.about-pics img:nth-child(1){top:0;inset-inline-start:0;transform:rotate(-4deg)}
-.about-pics img:nth-child(2){top:30%;inset-inline-end:0;z-index:2;transform:rotate(3deg)}
-.about-pics img:nth-child(3){bottom:0;inset-inline-start:12%;transform:rotate(-1.5deg)}
-.about-txt p{font-size:clamp(17px,1.6vw,19px);color:#E6DECF;margin:0 0 14px;max-width:58ch}
-.about-txt p:first-child{font-size:clamp(20px,2vw,24px);color:var(--fg);font-weight:500}
-.about-stats{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.about-in{display:grid;gap:clamp(36px,6vw,96px);align-items:center;margin-top:clamp(32px,4vw,56px)}
+@media(min-width:900px){.about-in{grid-template-columns:minmax(340px,.9fr) 1fr}}
+.about-por{position:relative;margin:0 auto;width:min(100%,480px)}
+.por-frame{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#141210;box-shadow:0 50px 100px -20px rgba(0,0,0,.85)}
+.por-frame img{display:block;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) saturate(.96)}
+.por-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,12,10,0) 70%,rgba(13,12,10,.55));box-shadow:inset 0 0 0 1px rgba(228,190,116,.28);pointer-events:none}
+.cn{position:absolute;z-index:2;width:56px;height:56px;pointer-events:none;border:0 solid #E4BE74}
+.cn1{top:0;inset-inline-start:0;border-top-width:2px;border-inline-start-width:2px}
+.cn2{bottom:0;inset-inline-end:0;border-bottom-width:2px;border-inline-end-width:2px}
+.about-por figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font:500 12px/1.3 var(--f-body);letter-spacing:.16em;color:var(--muted)}
+.about-por figcaption b{color:#E4BE74;font-weight:600}
+.seal-a{top:auto;bottom:34px;inset-inline-end:-30px;width:clamp(96px,8.5vw,124px)}
+@media(max-width:600px){.seal-a{inset-inline-end:-8px;bottom:40px;width:92px}}
+.ab-kick{display:inline-flex;align-items:center;gap:12px;font:600 13px/1 var(--f-body);letter-spacing:.28em;color:#E4BE74}
+.ab-kick::before{content:"";width:34px;height:1px;background:#E4BE74}
+.ab-name{font-family:var(--f-display);font-weight:700;font-size:clamp(56px,7vw,104px);line-height:.9;margin:14px 0 8px;color:#F4EDE0;letter-spacing:-.005em}
+.ab-role{font-size:clamp(15px,1.3vw,17px);color:var(--muted);letter-spacing:.04em;margin:0 0 clamp(26px,3vw,38px)!important}
+.ab-quote{position:relative;margin:0 0 clamp(24px,3vw,34px);padding:.55em 0 0;border:0;background:none;border-radius:0;box-shadow:none;font-size:clamp(22px,2.3vw,30px);line-height:1.38;font-weight:500;color:var(--fg);max-width:24ch}
+.ab-quote::before{content:"\201D";position:absolute;top:-.3em;inset-inline-start:-.08em;font-family:Georgia,serif;font-size:3.6em;line-height:1;color:rgba(228,190,116,.22);pointer-events:none}
+html:not([lang=he]) .ab-quote::before{content:"\201C"}
+.ab-quote span{position:relative}
+.about-txt p{font-size:clamp(16px,1.35vw,18px);line-height:1.8;color:#D9D1C2;margin:0 0 14px;max-width:58ch}
+.about-stats{list-style:none;margin:32px 0 0;padding:24px 0 0;border-top:1px solid rgba(228,190,116,.3);display:grid;grid-template-columns:repeat(2,1fr);gap:20px 10px}
 @media(min-width:600px){.about-stats{grid-template-columns:repeat(4,1fr)}}
-.about-stats li{border:1px solid var(--line);border-radius:4px;padding:14px 12px;background:rgba(22,20,17,.6);text-align:center}
-.about-stats b{display:block;font-family:var(--f-display);font-size:clamp(34px,4vw,46px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.about-stats li{text-align:start;padding-inline-start:16px;border-inline-start:1px solid var(--line)}
+.about-stats li:first-child{border-color:transparent;padding-inline-start:0}
+@media(max-width:599px){.about-stats li:nth-child(3){border-color:transparent;padding-inline-start:0}}
+.about-stats b{display:block;font-family:var(--f-display);font-size:clamp(38px,4vw,52px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .about-stats span{display:block;margin-top:6px;font-size:14px;color:var(--muted);line-height:1.35}
 /* מתג שפה: כפתור שנפתח לרשימה */
 .langdd{position:relative}
@@ -1028,9 +1044,9 @@ html.a-still *,html.a-still *::before,html.a-still *::after{animation-play-state
     <span class="eyebrow">About</span>
     <h2 class="h2" id="about-h">Cinema, without a camera.</h2>
     <div class="about-in">
-      <div class="about-pics" aria-hidden="true"><img src="assets/works/24.jpg" alt="" loading="lazy" decoding="async"><img src="assets/works/38.jpg" alt="" loading="lazy" decoding="async"><img src="assets/works/36.jpg" alt="" loading="lazy" decoding="async"></div>
+      <figure class="about-por"><div class="por-frame"><img class="me" src="assets/img/levi.webp" alt="Levi Itshak Cohen, founder and director of LEVIK Production" width="800" height="1000" loading="lazy" decoding="async"><i class="cn cn1"></i><i class="cn cn2"></i></div><span class="seal seal-a" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInkA" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.4"/></filter><path id="sealPA" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.6)"/><g filter="url(#sealInkA)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46.5" stroke-width="2.4"/><circle cx="50" cy="50" r="42" stroke-width=".8"/><circle cx="50" cy="50" r="28.5" stroke-width=".8"/></g><g filter="url(#sealInkA)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.2" font-weight="700" letter-spacing="1.5" direction="ltr"><textPath href="#sealPA" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="52" text-anchor="middle" direction="ltr" font-family="Georgia,serif" font-size="19" font-weight="700" letter-spacing="-.5">No.1</text><text x="50" y="65" text-anchor="middle" direction="ltr" font-family="Heebo,sans-serif" font-size="7.4" font-weight="800" letter-spacing="1.6">TEL AVIV</text></g></svg></span><figcaption><b>LEVIK Production</b><span>AI film studio</span></figcaption></figure>
       <div class="about-txt">
-        <p>LEVIK Production is a cinematic AI film studio founded by Levi Itshak Cohen.</p>
+        <span class="ab-kick">THE FOUNDER</span><h3 class="ab-name">Levi Itshak Cohen</h3><p class="ab-role">Director, screenwriter and founder of LEVIK Production</p><blockquote class="ab-quote"><span>The story is the star. The technology just works for it.</span></blockquote>
         <p>We start with the story: script, characters and direction. The technology comes after. That is how we create commercials, brand films and personal films that look like cinema, with no film crew, no actors and no location.</p>
         <p>In 2026, “Josalle – The Holy Miser”, created by Levi Itshak Cohen and Gal Edri, won first place in the Israeli competition at the Tel Aviv AI Film Festival, out of 1,242 films from 80 countries.</p>
         <p>Today we work with brands, businesses and families in Israel, France, England and the United States, in Hebrew, English and French.</p>
