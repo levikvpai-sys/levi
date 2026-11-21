@@ -506,8 +506,8 @@ footer a:hover{color:var(--fg)}
 .ia-film{position:absolute;inset:0;clip-path:polygon(0px 0px,1px 481px,435px 481px,157px 379px,154px 182px,152px 184px,118px 174px,116px 170px,115px 391px,102px 397px,102px 60px,140px 79px,267px 402px,379px 445px,383px 444px,519px 113px,437px 149px,343px 352px,252px 129px);background:#100E0B;opacity:0;animation:ifade 1.1s ease 2.7s forwards;transition:opacity .4s}
 .ia-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
 .ia-film video.on{opacity:1}
-.ia-film video{filter:brightness(.82) saturate(1.08) sepia(.14) contrast(1.06)}
-.ia-film::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,rgba(8,6,4,.55))}
+.ia-film video{filter:none}
+.ia-film::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 60%,rgba(8,6,4,.25))}
 .ia-metal{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(100% 0 0 0);animation:ibuild 2.6s cubic-bezier(.5,0,.2,1) 1.85s forwards;transition:opacity .45s}
 .ia-scanw{position:absolute;inset:0;clip-path:polygon(0px 0px,1px 481px,435px 481px,157px 379px,154px 182px,152px 184px,118px 174px,116px 170px,115px 391px,102px 397px,102px 60px,140px 79px,267px 402px,379px 445px,383px 444px,519px 113px,437px 149px,343px 352px,252px 129px);pointer-events:none}
 .ia-scan{position:absolute;left:-5%;right:-5%;bottom:-4px;height:4px;background:linear-gradient(90deg,transparent,#fff 30%,#bff 50%,#fff 70%,transparent);box-shadow:0 0 18px 6px rgba(238,205,138,.5);opacity:0;animation:iscan 1.05s cubic-bezier(.5,0,.2,1) 1.85s forwards}
@@ -904,12 +904,12 @@ html:not([lang=he]) .reel-track .reel{direction:ltr}
     var ang=Math.random()*6.283,r=380+Math.random()*420;
     d.animate([{transform:'translate('+(Math.cos(ang)*r).toFixed(0)+'px,'+(Math.sin(ang)*r).toFixed(0)+'px) scale(.4)',opacity:0},{opacity:1,offset:.35},{transform:'translate(0,0) scale(1)',opacity:1,offset:.85},{transform:'translate(0,0) scale(2.2)',opacity:0}],{duration:1500,delay:i*18,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'})});
   /* הסרטים בתוך הלוגו */
-  var film=document.getElementById('iaFilm'),metal=document.getElementById('iaMetal'),clips=['38','07','23','40','16'],vs=[],cur=0;
-  clips.forEach(function(cl,i){var v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=true;v.preload=i?'none':'auto';v.src='assets/works/'+cl+'.mp4';film.appendChild(v);vs.push(v)});
+  var film=document.getElementById('iaFilm'),metal=document.getElementById('iaMetal'),clips=['assets/video/hero-word.mp4'],vs=[],cur=0;
+  clips.forEach(function(cl,i){var v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=true;v.preload=i?'none':'auto';v.src=cl;film.appendChild(v);vs.push(v)});
   vs[0].classList.add('on');var filmOn=false;
-  setTimeout(function(){vs[0].play().catch(function(){});filmOn=true;vs[1].preload='auto';vs[1].load()},calm?0:2600);
+  setTimeout(function(){vs[0].play().catch(function(){});filmOn=true},calm?0:2600);
   var cyc=calm?0:setInterval(function(){if(!document.getElementById('intro')||it.classList.contains('out')){clearInterval(cyc);return}
-    if(!filmOn)return;
+    if(!filmOn||vs.length<2)return;
     var nx=(cur+1)%vs.length;vs[nx].play().catch(function(){});vs[nx].classList.add('on');vs[cur].classList.remove('on');
     var pv=vs[cur];setTimeout(function(){pv.pause()},350);cur=nx;var nn=vs[(cur+1)%vs.length];if(nn.preload==='none'){nn.preload='auto';nn.load()}},3000);
   /* סאונד: לוגו צלילי שנבנה בקוד (בלי קבצים), כבוי עד שהגולש מדליק. משב אוויר, מכה עמוקה ופעמון חם, ושקט */
