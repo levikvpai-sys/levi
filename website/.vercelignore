@@ -1,0 +1,20 @@
+# לא עולה לאתר החי: הסרטים המלאים (נמצאים ב-Vercel Blob), עמודי תצוגה וטיוטות
+films/
+try-*.html
+options-*.html
+assets/award/film-lite.mp4
+assets/award/josalle.mp4
+assets/award/josalle.jpg
+assets/press/tlvaiff.jpg
+assets/press/w-fest.jpg
+assets/press/w-phone.jpg
+assets/press/w-poster.jpg
+assets/press/w-row.jpg
+assets/press/winners-d.jpg
+assets/press/winners-m.jpg
+assets/video/swabson-lugan.mp4
+assets/video/sea.mp4
+assets/video/sea-poster.jpg
+.vercelignore
+.env*
+.vercel
