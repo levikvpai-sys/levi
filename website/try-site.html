@@ -780,6 +780,11 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
 .tg,.btn-ghost,.track .btn-primary,.more,.more-form summary{background:linear-gradient(180deg,#221e19,#141210) padding-box,linear-gradient(115deg,rgba(47,198,194,.85),rgba(228,190,116,.95) 55%,rgba(228,190,116,.55)) border-box!important;border:1px solid transparent!important;color:#F4EDE0!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 26px -8px rgba(0,0,0,.6);transition:box-shadow .25s,transform .25s,background .25s}
 .tg:hover,.btn-ghost:hover,.track .btn-primary:hover,.more:hover,.more-form summary:hover{background:linear-gradient(180deg,#2b2620,#1a1713) padding-box,linear-gradient(115deg,#2FC6C2,#E4BE74 55%,#E4BE74) border-box!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 3px rgba(228,190,116,.10),0 14px 30px -10px rgba(228,190,116,.35);transform:translateY(-1px)}
 @media(prefers-reduced-motion:reduce){.tg:hover,.btn-ghost:hover,.track .btn-primary:hover,.more:hover,.more-form summary:hover{transform:none}}
+/* רילס בטלפון: גלילה לצדדים יציבה. בגלילה מימין לשמאל ספארי באייפון נתקע, לכן המסילה עצמה משמאל לימין, והטקסט בכל רילס נשאר בעברית */
+.reel-track{direction:ltr}
+.reel-track .reel{direction:rtl}
+html:not([lang=he]) .reel-track .reel{direction:ltr}
+@media(hover:none){.reel-track{scroll-snap-type:none;scroll-behavior:auto}}
 /* סטוריבורד */
 .sb-in{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
 @media(min-width:960px){.sb-in{grid-template-columns:1fr 1.05fr}}
@@ -1392,7 +1397,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
     reels.forEach(function(r){r.addEventListener('mouseenter',function(){ron(r)});r.addEventListener('mouseleave',function(){roff(r)});
       r.addEventListener('click',function(e){e.preventDefault();roff(r);var pv=player.querySelector('video');player.classList.add('vert');pv.src=r.dataset.full;openP();pv.play().catch(function(){})})});
     if(!matchMedia('(hover:hover)').matches&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?ron(e.target):roff(e.target)})},{root:rt,threshold:.75});reels.forEach(function(r){io.observe(r)})}
-    var step=function(){return reels[0].getBoundingClientRect().width+24},DIR=document.documentElement.dir==='rtl'?1:-1;
+    var step=function(){return reels[0].getBoundingClientRect().width+24},DIR=getComputedStyle(rt).direction==='rtl'?1:-1;
     document.querySelector('.rn.prev').addEventListener('click',function(){rt.scrollBy({left:DIR*step()*2})});
     document.querySelector('.rn.next').addEventListener('click',function(){rt.scrollBy({left:-DIR*step()*2})});
   }
