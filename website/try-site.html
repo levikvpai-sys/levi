@@ -576,17 +576,18 @@ footer a:hover{color:var(--fg)}
 .reels{margin-top:clamp(40px,5vw,64px)}
 .reels-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
 .reels-h{font-family:var(--f-display);font-size:clamp(46px,7vw,76px);line-height:.9;margin:0}
-.reels-nav{display:flex;gap:10px}
+.reels-nav{display:none;gap:10px}
+@media(hover:hover) and (pointer:fine){.reels-nav{display:flex}}
 .rn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;display:grid;place-items:center;transition:background .2s,border-color .2s}
 .rn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
 .rn::before{content:"";width:9px;height:9px;border-top:1.5px solid var(--fg);border-right:1.5px solid var(--fg)}
 .rn.prev::before{transform:translateX(-2px) rotate(45deg)}
 .rn.next::before{transform:translateX(2px) rotate(-135deg)}
-.reel-track{display:flex;gap:clamp(16px,2.4vw,26px);overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 16px 26px;margin-inline:-16px;scrollbar-width:none;scroll-behavior:smooth}
+.reel-track{display:flex;gap:clamp(16px,2.4vw,26px);overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x proximity;padding:14px 16px 26px;margin-inline:-16px;scrollbar-width:none;scroll-behavior:smooth}
 .reel-track::-webkit-scrollbar{display:none}
 .reel{flex:none;width:clamp(158px,40vw,226px);scroll-snap-align:start;text-decoration:none;color:var(--fg);display:flex;flex-direction:column;gap:3px}
 .phone{position:relative;display:block;aspect-ratio:9/16;border-radius:30px;overflow:hidden;background:#0F0D0B;isolation:isolate;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 0 6px #191714,0 0 0 7px rgba(255,255,255,.1),0 20px 44px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
-.phone img,.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phone img,.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .phone video{opacity:0;transition:opacity .35s}
 .reel.on .phone video{opacity:1}
 .phone::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.35),transparent 35%);pointer-events:none}
