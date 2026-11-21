@@ -1406,6 +1406,8 @@ html:not([lang=he]) .reel-track .reel{direction:ltr}
   player.addEventListener('click',function(e){if(e.target===player)player.close()});
   // מתנת פרידה: המדריך. רק למי שהראה עניין, פעם אחת ל-30 יום, ולא למי שכבר פנה בוואטסאפ
   (function(){var g=document.getElementById('gift');if(!g)return;
+    /* רק במחשב: בטלפון הכרטיס קפץ מעל כפתור הוואטסאפ ואנשים לחצו עליו בטעות */
+    if(!matchMedia('(hover:hover) and (pointer:fine)').matches){g.remove();return}
     var K='lvGift',t0=Date.now(),hot=false,shown=false,last=null,sbSeen=0;
     function get(){try{return +localStorage.getItem(K)||0}catch(e){return 0}}
     function put(){try{localStorage.setItem(K,String(Date.now()))}catch(e){}}
