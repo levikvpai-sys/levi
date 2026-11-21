@@ -2,11 +2,82 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "www.levik.ai" }], "destination": "https://levik.ai/:path*", "permanent": true },
-    { "source": "/:path*", "has": [{ "type": "host", "value": "levikai.com" }], "destination": "https://levik.ai/:path*", "permanent": true },
-    { "source": "/:path*", "has": [{ "type": "host", "value": "www.levikai.com" }], "destination": "https://levik.ai/:path*", "permanent": true }
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.levik.ai"
+        }
+      ],
+      "destination": "https://levik.ai/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.levik.ai"
+        }
+      ],
+      "destination": "https://levik.ai/:path+",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "levikai.com"
+        }
+      ],
+      "destination": "https://levik.ai/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "levikai.com"
+        }
+      ],
+      "destination": "https://levik.ai/:path+",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.levikai.com"
+        }
+      ],
+      "destination": "https://levik.ai/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.levikai.com"
+        }
+      ],
+      "destination": "https://levik.ai/:path+",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
   ]
 }
