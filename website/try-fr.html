@@ -33,12 +33,12 @@ html:not([lang=he]) .h2,html:not([lang=he]) .say p,html:not([lang=he]) .aw h2,ht
 html:not([lang=he]) .hero h1{font-size:clamp(42px,7.6vw,100px);line-height:.96;letter-spacing:-.02em}
 html:not([lang=he]) .hero h1 .cine{font-family:"LEVIK Cine",Impact,sans-serif;font-weight:400;line-height:1.02;letter-spacing:.01em;margin-top:.06em}
 html:not([lang=he]) .s0 .say p{font-weight:900;font-size:clamp(28px,3.8vw,56px);line-height:1.02}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
 img,video{max-width:100%;display:block}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
-.skip{position:absolute;inset-inline-start:-999px;top:8px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100}
-.skip:focus{inset-inline-start:8px}
+.skip{position:absolute;inset-inline-start:8px;top:8px;transform:translateY(-300%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{transform:none}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 
 /* כפתורים */
@@ -752,6 +752,71 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
 .more-form[open] summary::after{transform:rotate(135deg) translateY(-2px)}
 .more-form form{margin-top:18px}
 @media(min-width:960px){.contact-in{grid-template-columns:1fr!important}}
+
+
+/* החותמות לא מרחיבות את הדף בטלפון */
+.about,#works,.stage{overflow-x:clip}
+.direct-q{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(24px,2.6vw,34px);line-height:1.15;color:#F4EDE0}
+/* סטוריבורד */
+.sb-in{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
+@media(min-width:960px){.sb-in{grid-template-columns:1fr 1.05fr}}
+.sb-get{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px}
+.sb-get li{position:relative;padding-inline-start:26px;color:#D9D1C2;font-size:clamp(16px,1.3vw,18px)}
+.sb-get li::before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:12px;height:2px;background:#E4BE74}
+.sb-form label>span{display:flex;gap:8px;align-items:baseline}
+.sb-form label small{color:var(--muted);font-weight:400;font-size:13px}
+.sb-row{display:grid;gap:14px}
+@media(min-width:600px){.sb-row{grid-template-columns:1fr 1fr}}
+.sb-form textarea{min-height:130px}
+.sb-form .btn{width:100%;min-height:56px;font-size:18px}
+.sb-form .cb-s{text-align:center}
+.sb-link{color:#E4BE74;font-weight:600;text-decoration:underline;text-underline-offset:4px;align-self:flex-start}
+.faq a{color:#E4BE74}
+.sb-in>*{min-width:0}.sb-form{min-width:0;width:100%}.sb-form select,.sb-form input{min-width:0;text-overflow:ellipsis}
+.sb-txt{text-align:center}.sb-get{justify-items:center}.sb-get li{text-align:start}
+.sb-steps{list-style:none;margin:0 0 2px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sb-steps li{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:2px solid var(--line);font-size:14px;font-weight:600;color:var(--muted);transition:border-color .4s,color .4s}
+.sb-steps b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1px solid currentColor;font-size:12px}
+.sb-steps li.done{border-color:#E4BE74;color:#E4BE74}
+.sb-steps li.done b{background:#E4BE74;color:#0B0B10;border-color:#E4BE74}
+.sb-intro{margin:0;color:var(--muted);font-size:15px}
+.sb-form .fb{display:block;min-height:0;font-size:14px;font-style:italic;line-height:1.45;color:#D8B56E;opacity:0;transform:translateY(-3px);transition:opacity .45s,transform .45s}
+.sb-form .fb.on{opacity:1;transform:none;margin-top:6px}
+.sb-sum{border:1px solid rgba(228,190,116,.35);border-radius:10px;padding:14px 16px;background:rgba(228,190,116,.05)}
+.sb-sum b{display:block;color:#E4BE74;font-size:15px;margin-bottom:6px}
+.sb-sum ul{margin:0;padding:0;list-style:none;display:grid;gap:3px;font-size:14px;color:#D9D1C2}
+.sb-form .form-msg.ok{color:#E4BE74;font-weight:600;text-align:center}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.sb-form .fb{transition:none}}
+.sb-guide{display:inline-block;margin-top:18px;color:#E4BE74;font-size:15px;text-underline-offset:4px}
+.gift{position:fixed;z-index:60;left:50%;bottom:24px;width:min(420px,calc(100vw - 32px));transform:translate(-50%,24px);opacity:0;transition:opacity .35s,transform .35s;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:26px 24px 16px;background:#141210;border:1px solid rgba(228,190,116,.45);border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 60px rgba(228,190,116,.12)}
+.gift.on{opacity:1;transform:translate(-50%,0)}
+@media(hover:hover) and (pointer:fine){.gift{top:50%;bottom:auto;transform:translate(-50%,-46%)}.gift.on{transform:translate(-50%,-50%)}}
+.gift-x{position:absolute;top:8px;inset-inline-end:8px;width:40px;height:40px;border:0;background:none;color:var(--muted);font-size:18px;cursor:pointer;border-radius:50%}
+.gift-x:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.gift-k{color:#E4BE74;font-size:12px;font-weight:700;letter-spacing:.2em}
+.gift-h{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(28px,3vw,36px);line-height:1.05;color:#F4EDE0}
+.gift-p{margin:0 0 6px;color:#D9D1C2;font-size:15px}
+.gift .btn{width:100%;min-height:52px}
+.gift-no{margin-top:4px;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:8px}
+@media(max-width:767px){.gift{bottom:86px;padding:20px 18px 10px;gap:6px}.gift-h{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.gift{transition:none}}
+/* הנעה לפעולה */
+.cta-band{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;margin:clamp(44px,6vw,72px) auto 0;padding:clamp(28px,4vw,40px) 20px;max-width:760px;border-top:1px solid rgba(228,190,116,.28)}
+.cta-band .cb-t{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(24px,2.6vw,34px);line-height:1.15;color:#F4EDE0}
+.cta-band .btn{min-height:56px;padding:0 30px;font-size:18px}
+.cb-s{display:block;font-size:13px;letter-spacing:.02em;color:var(--muted)}
+.cb-hero{margin-top:12px}
+.cta-band.cb-award{margin-top:0;border-top:0;padding-top:clamp(36px,5vw,56px)}
+.cta-band.cb-start{align-items:flex-start;text-align:start;margin:clamp(28px,3vw,40px) 0 0;padding:clamp(22px,3vw,30px) 0 0;max-width:none}
+.cta-band.cb-start .cb-t{font-size:clamp(22px,2vw,28px)}
+@media(max-width:899px){.cta-band.cb-start{align-items:center;text-align:center}}
+.player{display:none}.player[open]{display:flex;flex-direction:column}
+.player video{max-height:calc(90vh - 72px)}
+.pbar{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 16px;background:#0D0C0A;border-top:1px solid rgba(228,190,116,.25)}
+.pbar span{font-weight:700;color:#F4EDE0}
+.pbar .btn{min-height:44px;padding:0 20px;font-size:15px}
+.player.vert video{flex:1;min-height:0;max-height:none}
 </style>
 <link rel="alternate" hreflang="he" href="index.html"><link rel="alternate" hreflang="en" href="try-en.html"><link rel="alternate" hreflang="fr" href="try-fr.html">
 </head>
@@ -893,6 +958,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
       <a class="tk" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27aimerais%20en%20savoir%20plus%20sur%20un%20film%20IA" target="_blank" rel="noopener"><span>Parlons sur WhatsApp</span><b><i></i></b></a>
       <a class="tg" href="#works">Voir nos réalisations</a>
     </div>
+    <small class="cb-s cb-hero">Un court message WhatsApp · sans engagement</small>
   </div>
   <div class="arc" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><defs><linearGradient id="arcG" x1="0" x2="1"><stop offset="0" stop-color="#2FC6C2" stop-opacity=".2"/><stop offset=".25" stop-color="#2FC6C2"/><stop offset=".5" stop-color="#F3D99A"/><stop offset=".75" stop-color="#D9A24F"/><stop offset="1" stop-color="#D9A24F" stop-opacity=".2"/></linearGradient></defs><path d="M0 120 Q720 -10 1440 120 V120 H0Z" fill="#0D0C0A"/><path d="M0 120 Q720 -10 1440 120" fill="none" stroke="url(#arcG)" stroke-width="3" vector-effect="non-scaling-stroke"/></svg></div>
 </section>
@@ -953,6 +1019,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
   <div class="sdots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
  </div>
 </section>
+<div class="wrap"><div class="cta-band cb-award"><p class="cb-t">Un film digne d'un lauréat de festival ?</p><a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27ai%20vu%20votre%20prix%20au%20festival%20et%20je%20veux%20un%20film%20de%20ce%20niveau" target="_blank" rel="noopener" data-cta="award">Parlez-nous de votre film</a><small class="cb-s">Un court message WhatsApp · sans engagement</small></div></div>
 
 
 
@@ -1024,6 +1091,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
       <a class="reel" href="#works" data-full="https://cy1nhuetm4vtcjam.public.blob.vercel-storage.com/films/11.mp4" data-v="1"><span class="phone"><img src="assets/reels/11.jpg" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="assets/reels/11.mp4"></video><i class="island" aria-hidden="true"></i><span class="mp" aria-hidden="true"></span></span><b>LEVIK Production</b><small>Publicité pour le studio</small></a>
       </div>
     </div>
+    <div class="cta-band"><p class="cb-t">Un film vous a plu ? Faisons-en un pour vous.</p><a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27ai%20vu%20les%20films%20sur%20votre%20site%20et%20j%27en%20veux%20un%20comme%20%C3%A7a" target="_blank" rel="noopener" data-cta="works">Je veux un film comme ça</a><small class="cb-s">Un court message WhatsApp · sans engagement</small></div>
   </div>
 </section>
 
@@ -1042,7 +1110,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
 <section class="about" id="about" aria-labelledby="about-h">
   <div class="wrap">
     <span class="eyebrow">À propos</span>
-    <h2 class="h2" id="about-h">Du cinéma, sans caméra.</h2>
+    <h2 class="h2" id="about-h">Nous faisons de votre histoire du cinéma.</h2>
     <div class="about-in">
       <figure class="about-por"><div class="por-frame"><img class="me" src="assets/img/levi.webp" alt="Levi Itshak Cohen, fondateur et réalisateur de LEVIK Production" width="800" height="1000" loading="lazy" decoding="async"><i class="cn cn1"></i><i class="cn cn2"></i></div><span class="seal seal-a" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="sealInkA" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="1.4"/></filter><path id="sealPA" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><circle cx="50" cy="50" r="48" fill="rgba(13,12,10,.6)"/><g filter="url(#sealInkA)" fill="none" stroke="#E4BE74"><circle cx="50" cy="50" r="46.5" stroke-width="2.4"/><circle cx="50" cy="50" r="42" stroke-width=".8"/><circle cx="50" cy="50" r="28.5" stroke-width=".8"/></g><g filter="url(#sealInkA)" fill="#E4BE74"><text font-family="Heebo,sans-serif" font-size="7.2" font-weight="700" letter-spacing="1.5" direction="ltr"><textPath href="#sealPA" startOffset="0">TLVAIFF 2026 ★ TEL AVIV AI FILM FESTIVAL ★</textPath></text><text x="50" y="52" text-anchor="middle" direction="ltr" font-family="Georgia,serif" font-size="19" font-weight="700" letter-spacing="-.5">No.1</text><text x="50" y="65" text-anchor="middle" direction="ltr" font-family="Heebo,sans-serif" font-size="7.4" font-weight="800" letter-spacing="1.6">TEL AVIV</text></g></svg></span><figcaption><b>LEVIK Production</b><span>Studio de films IA</span></figcaption></figure>
       <div class="about-txt">
@@ -1056,6 +1124,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
           <li><b>21</b><span>marques et clients</span></li>
           <li><b>3</b><span>langues</span></li>
         </ul>
+        <div class="cta-band cb-start"><p class="cb-t">Envie de me parler directement ?</p><a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%20Levi%2C%20j%27aimerais%20vous%20parler%20d%27un%20film" target="_blank" rel="noopener" data-cta="about">Écrivez-moi sur WhatsApp</a><small class="cb-s">Un court message WhatsApp · sans engagement</small></div>
       </div>
     </div>
   </div>
@@ -1071,15 +1140,51 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
         <h3>Pour les entreprises et les marques</h3>
         <ul><li>Publicités IA</li><li>Film institutionnel / Histoire de marque</li><li>Reels et vidéos pour les réseaux</li><li>Animation de logo et génériques</li></ul>
         <p class="note">Chaque projet est chiffré selon son histoire. Écrivez-nous et recevez un devis.</p>
+        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Pas sûr ? Commencez par un storyboard à 90 ₪</a>
         <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20un%20film%20pour%20mon%20entreprise" target="_blank" rel="noopener">Film d'entreprise sur WhatsApp</a>
       </article>
       <article class="track">
         <h3>Pour les événements et les moments personnels</h3>
         <ul><li>Films de Bar/Bat Mitsva, de mariage et d'hommage</li><li>Animation et personnages</li></ul>
         <p class="note">Ce que vous recevez : un scénario personnalisé, un film prêt à projeter, une série de retouches.</p>
+        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Pas sûr ? Commencez par un storyboard à 90 ₪</a>
         <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20un%20film%20pour%20un%20%C3%A9v%C3%A9nement" target="_blank" rel="noopener">Film d'événement sur WhatsApp</a>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- 5.4.5 סטוריבורד ב-90 ש"ח -->
+<section class="sb" id="storyboard" aria-labelledby="sb-h">
+  <div class="wrap sb-in">
+    <div class="sb-txt">
+      <span class="eyebrow">Storyboard · 90 ₪</span>
+      <h2 class="h2" id="sb-h">Voyez votre film avant qu'il n'existe.</h2>
+      <p class="lead">Racontez-nous votre idée et nous vous renvoyons un storyboard : des images clés qui montrent à quoi ressemblera le film. Vous décidez du film complet en le voyant déjà.</p>
+      <ul class="sb-get">
+        <li>Des images clés pour les scènes principales du film</li>
+        <li>Voyez le style, les personnages et l'ambiance avant de commander</li>
+        <li>Une base claire pour parler du film complet</li>
+      </ul>
+      <a class="sb-guide" href="guide-fr.html" data-cta="guide-storyboard-section">Quelques conseils d'abord ? Notre guide gratuit</a>
+    </div>
+    <form class="sb-form" id="sbForm" novalidate>
+      <ol class="sb-steps" aria-label="Progression"><li data-p="1"><b>1</b>Le film</li><li data-p="2"><b>2</b>L'histoire</li><li data-p="3"><b>3</b>L'émotion</li></ol>
+      <p class="sb-intro">3 questions courtes et 3 choix rapides, et Levi reçoit tout bien organisé.</p>
+      <label>Quel type de film ?<select name="type" required><option value="">Choisir</option><option>Publicité pour une entreprise</option><option>Film de marque</option><option>Film d'événement (bar/bat mitzvah, mariage)</option><option>Animation</option><option>Autre</option></select><span class="fb" aria-hidden="true"></span></label>
+      <label>Qui ou quoi le film présente-t-il ?<input name="who" required placeholder="ex. : notre restaurant, Uri pour sa bar mitzvah, notre marque"><span class="fb" aria-hidden="true"></span></label>
+      <label>Racontez-nous votre idée<textarea name="idea" maxlength="800" required placeholder="Que se passe-t-il dans le film et comment se termine-t-il ? Une phrase suffit, ou collez un scénario."></textarea><span class="fb" aria-hidden="true"></span></label>
+      <label><span>À qui le film s'adresse-t-il ? <small>facultatif</small></span><input name="aud" placeholder="ex. : de nouveaux clients en ville, la famille et les amis à l'événement, les jeunes sur Instagram"><span class="fb" aria-hidden="true"></span></label>
+      <div class="sb-row">
+        <label><span>Quelle ambiance ? <small>facultatif</small></span><select name="mood"><option value="">Choisir</option><option>Drôle</option><option>Émouvant</option><option>Cinématographique et dramatique</option><option>Animé et joyeux</option><option>Pas encore décidé</option></select><span class="fb" aria-hidden="true"></span></label>
+        <label><span>Durée approximative <small>facultatif</small></span><select name="len"><option value="">Choisir</option><option>Jusqu'à 30 secondes</option><option>Jusqu'à une minute</option><option>1 à 3 minutes</option><option>Pas encore décidé</option></select><span class="fb" aria-hidden="true"></span></label>
+      </div>
+      <div class="sb-sum" id="sbSum" hidden><b>Presque fini. Voici ce que Levi recevra :</b><ul></ul></div>
+      <p class="sr-only" id="sbLive" aria-live="polite"></p>
+      <button class="btn btn-primary" type="submit" data-cta="storyboard-submit">Envoyer mon idée pour un storyboard</button>
+      <small class="cb-s">WhatsApp s'ouvre avec votre texte · nous vous y enverrons le lien de paiement</small>
+      <p class="form-msg" id="sbMsg" role="status"></p>
+    </form>
   </div>
 </section>
 
@@ -1094,6 +1199,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
       <li><h3>Production</h3><p>Nous produisons le film avec l'IA.</p></li>
       <li><h3>Livraison</h3><p>Un film prêt, avec une série de retouches.</p></li>
     </ol>
+    <div class="cta-band"><p class="cb-t">La première étape, c'est un message.</p><a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20je%20veux%20commencer.%20Voici%20mon%20histoire%20%3A" target="_blank" rel="noopener" data-cta="process">On commence : racontez-nous votre histoire</a><small class="cb-s">Un court message WhatsApp · sans engagement</small></div>
   </div>
 </section>
 
@@ -1104,6 +1210,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
     <h2 class="h2">Questions fréquentes.</h2>
     <div class="faq">
       <details><summary>Combien de temps faut-il ?</summary><p>Cela dépend de la durée et de la complexité. La plupart des projets prennent de quelques jours à quelques semaines. Nous vous donnons un calendrier précis dès le premier échange.</p></details>
+      <details><summary>Puis-je voir à quoi ressemblera le film avant de commander ?</summary><p>Oui. Un storyboard à 90 ₪ : des images clés qui montrent le style, les personnages et l'ambiance. <a href="#storyboard" data-cta="storyboard-faq">Remplir le formulaire</a></p></details>
       <details><summary>Combien ça coûte ?</summary><p>Chaque projet est chiffré selon son histoire. Après un court échange, vous recevez un devis clair.</p></details>
       <details><summary>Que dois-je envoyer ?</summary><p>L'histoire et, si vous en avez : des photos, un logo, des noms et les détails importants. Nous construisons tout le reste.</p></details>
       <details><summary>Peut-on intégrer de vraies photos de la famille ou de l'entreprise ?</summary><p>Oui. Nous pouvons créer des personnages et des lieux à partir des photos que vous nous envoyez.</p></details>
@@ -1121,7 +1228,9 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
       <h2 class="h2">Votre prochaine histoire <em>commence par une conversation.</em></h2>
       <p class="lead">Écrivez-nous sur WhatsApp, appelez-nous, ou laissez vos coordonnées et nous vous recontactons.</p>
       <div class="direct">
-        <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27aimerais%20en%20savoir%20plus%20sur%20un%20film%20IA" target="_blank" rel="noopener">Parlons sur WhatsApp</a>
+        <p class="direct-q">Une question qui n'est pas ici ?</p>
+        <a class="btn btn-primary" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27ai%20une%20question%20%3A" target="_blank" rel="noopener" data-cta="contact">Demandez-nous sur WhatsApp</a>
+        <small class="cb-s">Sans engagement · vous pouvez juste poser une question</small>
         <a class="tel" href="tel:+972586255511">Ou par téléphone : +972 58-625-5511</a>
       </div>
       <details class="more-form"><summary>Ou laissez vos coordonnées et nous vous recontactons</summary>
@@ -1149,6 +1258,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
       <a href="https://instagram.com/levikproduction.ai" target="_blank" rel="noopener">Instagram</a>
       <a href="https://wa.me/972586255511" target="_blank" rel="noopener">WhatsApp</a>
       <a href="accessibility-fr.html">Déclaration d'accessibilité</a>
+      <a href="guide-fr.html">Guide : 7 choses dont toute vidéo a besoin</a>
       <a href="privacy-fr.html">Politique de confidentialité</a>
     </nav>
     <span>© 2026 LEVIK Production</span>
@@ -1176,7 +1286,16 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
   <a class="btn wa" href="https://wa.me/972586255511" target="_blank" rel="noopener">WhatsApp</a>
   <a class="btn btn-ghost" href="tel:+972586255511">Appeler</a>
 </div>
-<dialog class="player" id="player" aria-label="Lecteur vidéo"><button type="button" id="playerX" aria-label="Fermer">✕</button><video controls playsinline></video></dialog>
+<div class="gift" id="gift" role="dialog" aria-modal="false" aria-labelledby="giftH" hidden>
+  <button type="button" class="gift-x" id="giftX" aria-label="Fermer">✕</button>
+  <span class="gift-k">Un petit cadeau de ma part</span>
+  <p class="gift-h" id="giftH">7 choses dont toute vidéo marketing a besoin</p>
+  <p class="gift-p">Mon petit guide, avant de tourner la moindre image. À appliquer dès aujourd'hui.</p>
+  <a class="btn btn-primary" href="guide-fr.html" data-cta="exit-guide-open">Lire le guide gratuit</a>
+  <small class="cb-s">Accès libre, sans inscription · Levi</small>
+  <button type="button" class="gift-no" id="giftNo" data-cta="exit-gift-dismiss">Pas maintenant, merci</button>
+</div>
+<dialog class="player" id="player" aria-label="Lecteur vidéo"><button type="button" id="playerX" aria-label="Fermer">✕</button><video controls playsinline></video><div class="pbar"><span>Envie d'un film comme ça ?</span><a class="btn btn-primary" id="pcta" href="https://wa.me/972586255511?text=Bonjour%2C%20j%27ai%20vu%20un%20film%20sur%20votre%20site%20et%20j%27en%20veux%20un%20comme%20%C3%A7a" target="_blank" rel="noopener" data-cta="player">Écrivez-nous sur WhatsApp</a></div></dialog>
 <div class="cookie" id="cookie" hidden role="dialog" aria-label="Consentement aux cookies">
   <p>Nous utilisons des cookies pour mesurer et améliorer le site, uniquement avec votre accord. <a href="privacy-fr.html">Politique de confidentialité</a></p>
   <div><button class="btn btn-primary" data-consent="yes">J'accepte</button><button class="btn btn-ghost" data-consent="no">Essentiels uniquement</button></div>
@@ -1234,6 +1353,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
   // הנגן נפתח תמיד בתוך הדף. אם החלון לא נפתח בדרך הרגילה, פותחים אותו ידנית
   function openP(){try{player.showModal()}catch(err){player.setAttribute('open','')}}
   document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-full]');if(a)e.preventDefault()},true);
+  var pcta=document.getElementById('pcta');document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-full]');if(!a||!pcta)return;var h=a.querySelector('h3'),t=a.hasAttribute('data-film')?'Josalle':(h?h.textContent.trim():'');var m=t?'Bonjour, j\'ai vu le film « '+t+' » sur votre site et je veux un film comme ça':'Bonjour, j\'ai vu un film sur votre site et j\'en veux un comme ça';pcta.href='https://wa.me/972586255511?text='+encodeURIComponent(m)},true);
 
   function shut(){var pv=player.querySelector('video');pv.pause();pv.removeAttribute('src');pv.load()}
   document.getElementById('playerX').addEventListener('click',function(){player.close()});
@@ -1253,6 +1373,65 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
   player.addEventListener('close',function(){player.classList.remove('vert')});
   document.querySelectorAll('[data-film]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();var pv=player.querySelector('video');pv.src=b.dataset.full;openP();pv.play().catch(function(){})})});
   player.addEventListener('click',function(e){if(e.target===player)player.close()});
+  // מתנת פרידה: המדריך. רק למי שהראה עניין, פעם אחת ל-30 יום, ולא למי שכבר פנה בוואטסאפ
+  (function(){var g=document.getElementById('gift');if(!g)return;
+    var K='lvGift',t0=Date.now(),hot=false,shown=false,last=null,sbSeen=0;
+    function get(){try{return +localStorage.getItem(K)||0}catch(e){return 0}}
+    function put(){try{localStorage.setItem(K,String(Date.now()))}catch(e){}}
+    if(Date.now()-get()<2592e6)return;
+    function ok(){return hot&&!shown&&Date.now()-t0>2e4&&!document.querySelector('dialog[open]')&&!(document.getElementById('cookie')&&!document.getElementById('cookie').hidden)}
+    function show(){if(!ok())return;shown=true;put();last=document.activeElement;g.hidden=false;requestAnimationFrame(function(){g.classList.add('on')});setTimeout(function(){document.getElementById('giftX').focus({preventScroll:true})},50)}
+    function hide(){g.classList.remove('on');setTimeout(function(){g.hidden=true},350);if(last&&last.focus)last.focus({preventScroll:true})}
+    document.getElementById('giftX').addEventListener('click',hide);document.getElementById('giftNo').addEventListener('click',hide);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!g.hidden)hide()});
+    document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');if(a){shown=true;put()}if(e.target.closest&&e.target.closest('[data-full]'))hot=true},true);
+    var sb=document.getElementById('storyboard');
+    if(sb&&'IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){hot=true;if(!sbSeen){sbSeen=Date.now();if(!desk)setTimeout(show,45e3)}}})},{threshold:.3}).observe(sb);
+    var sf=document.getElementById('sbForm');if(sf)sf.addEventListener('focusin',function(){hot=true});
+    var desk=matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(desk){document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<=0)show()})}
+    else{var ly=scrollY,lt=Date.now();addEventListener('scroll',function(){var y=scrollY,n=Date.now();if(sbSeen&&ly-y>500&&n-lt<350)show();if(n-lt>120){ly=y;lt=n}},{passive:true})}
+  })();
+
+  var sbf=document.getElementById('sbForm');
+  if(sbf){
+    var FBT={
+      type:['','Une publicité. Nous trouverons ensemble comment arrêter le défilement dès la première seconde.','Un film de marque. L\'histoire de ceux qui sont derrière l\'entreprise, celle dont on se souvient.','Un film d\'événement. Toute une salle le verra, et nous ferons en sorte qu\'elle le ressente.','Animation. Aucune limite, seulement ce que vous imaginez.','Parfait. Les meilleurs films sont rarement faciles à définir d\'avance.'],
+      mood:['','Drôle. Le rire est ce dont on se souvient le plus.','Émouvant. Nous garderons le cœur au centre.','Cinématographique et dramatique. Lumière, ombre et un moment à couper le souffle.','Animé et joyeux. Couleurs, mouvement et sourire.','Aucun souci. C\'est exactement à ça que sert le storyboard.'],
+      len:['','Court et percutant. Chaque seconde comptera.','Une minute. Assez pour une histoire complète.','De la place pour respirer et construire l\'émotion.','Nous trouverons le rythme ensemble pendant que le film se construit.']};
+    var en=document.documentElement.lang==='en',q=function(t){t=t.trim();return (en?'“':'«')+(t.length>24?t.slice(0,24)+'…':t)+(en?'”':'»')};
+    var live=document.getElementById('sbLive'),lt;
+    function say(el,t){var f=el.parentNode.querySelector('.fb');if(!f)return;f.textContent=t;f.classList.toggle('on',!!t);clearTimeout(lt);if(t)lt=setTimeout(function(){live.textContent=t},500)}
+    function fb(el){var n=el.name,v=el.value.trim(),t='';
+      if(FBT[n])t=FBT[n][el.selectedIndex]||'';
+      else if(n==='who'&&v.length>1)t=q(v)+'. '+'On voit déjà la première image.';
+      else if(n==='aud'&&v.length>1)t=q(v)+'. '+'Maintenant, on sait à qui on s\'adresse.';
+      else if(n==='idea'&&v.length>1)t=v.length<60?'Il y a une direction. Une phrase de plus sur le moment le plus important aiderait, mais vous pouvez aussi continuer.':v.length<400?'Bien reçu. C\'est exactement là que commence un storyboard.':'Bien reçu. Nous lirons chaque mot avant de dessiner la première image.';
+      say(el,t);prog()}
+    function prog(){var f=sbf.elements,ok=function(n){return !!f[n].value.trim()};
+      var p=[ok('type')&&ok('who'),ok('idea'),ok('mood')||ok('len')];
+      sbf.querySelectorAll('.sb-steps li').forEach(function(li,i){li.classList.toggle('done',p[i])});
+      var sum=document.getElementById('sbSum');
+      if(p[0]&&p[1]&&p[2]){var ul=sum.querySelector('ul');ul.textContent='';
+        [['type','Type de film : '],['who','Le film présente : '],['idea','L\'idée : '],['aud','Public : '],['mood','Ambiance : '],['len','Durée : ']].forEach(function(r){var el=f[r[0]],v=el.tagName==='SELECT'?(el.value?el.options[el.selectedIndex].text:''):el.value.trim();if(!v)return;if(v.length>70)v=v.slice(0,70)+'…';var li=document.createElement('li');li.textContent=r[1]+v;ul.appendChild(li)});
+        sum.hidden=false}else sum.hidden=true}
+    sbf.querySelectorAll('select').forEach(function(el){el.addEventListener('change',function(){fb(el)})});
+    sbf.querySelectorAll('input,textarea').forEach(function(el){el.addEventListener('change',function(){fb(el)});el.addEventListener('input',prog)});
+  }
+  if(sbf)sbf.addEventListener('submit',function(e){e.preventDefault();
+    var f=sbf.elements,msg=document.getElementById('sbMsg'),v=function(n){var el=f[n];return el.tagName==='SELECT'?(el.value?el.options[el.selectedIndex].text:''):el.value.trim()};
+    if(!v('type')||!v('who')||!v('idea')){msg.classList.remove('ok');msg.textContent='Merci d\'indiquer le type de film, qui il présente et votre idée.';(!v('type')?f.type:!v('who')?f.who:f.idea).focus();return}
+    msg.textContent='';
+    var L=['Bonjour Levi, je voudrais un storyboard à 90 ₪ (depuis le site)','',
+      'Type de film : '+v('type'),'Le film présente : '+v('who'),'L\'idée : '+v('idea')];
+    if(v('aud'))L.push('Public : '+v('aud'));
+    if(v('mood'))L.push('Ambiance : '+v('mood'));
+    if(v('len'))L.push('Durée : '+v('len'));
+    L.push('','Merci de m\'envoyer le lien de paiement.');
+    var u='https://wa.me/972586255511?text='+encodeURIComponent(L.join('\n'));
+    msg.textContent='Votre première scène est en route. Levi vous répondra personnellement.';msg.classList.add('ok');
+    var w=window.open(u,'_blank','noopener');if(!w)location.href=u;
+  });
   document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();
     document.getElementById('formMsg').textContent='Le formulaire sera bientôt relié à l\'e-mail et à Google Sheets. En attendant, écrivez-nous sur WhatsApp.';});
   // Hero: וידאו של ים שמתנגן בתוך המילה "CINÉMA."
