@@ -4,4 +4,4 @@ Disallow: /try-
 Disallow: /options-
 Disallow: /films/
 
-Sitemap: https://levikproduction.com/sitemap.xml
+Sitemap: https://levik.ai/sitemap.xml
