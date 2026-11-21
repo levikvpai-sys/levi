@@ -95,7 +95,7 @@ section{padding-block:clamp(48px,6vw,84px)}
 /* 5.1 Hero */
 .arc{position:absolute;inset:auto 0 -1px;height:clamp(46px,7vw,110px);z-index:2;pointer-events:none}
 .arc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 -2px 10px rgba(228,190,116,.45))}
-.arc::after{content:"";position:absolute;left:8%;right:8%;top:22%;bottom:0;background:radial-gradient(ellipse 50% 100% at 50% 0,rgba(217,162,79,.22),rgba(47,198,194,.06) 50%,transparent 80%);z-index:1}
+.arc::after{content:none}
 .hero{position:relative;min-height:100svh;display:grid;align-items:end;padding:0;overflow:hidden}
 .wall{position:absolute;inset:-4%;transform:rotate(-4deg) scale(1.1);filter:brightness(.45) saturate(.85)}
 .wall>div{position:relative;overflow:hidden;background:linear-gradient(160deg,#103236,#0D0C0A)}
@@ -484,6 +484,7 @@ footer a:hover{color:var(--fg)}
 @keyframes iflick{0%,100%{opacity:1}40%{opacity:.88}43%{opacity:.97}70%{opacity:.92}}
 .ia-rays{display:none}
 .i-grain{position:absolute;inset:-50%;opacity:.05;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:igrain .9s steps(5) infinite}
+.i-glow{position:absolute;inset:0;opacity:0;animation:ifade 2.4s ease .2s forwards;background:radial-gradient(ellipse 55% 45% at 50% 40%,rgba(244,232,210,.09),transparent 72%),radial-gradient(ellipse 90% 60% at 50% 115%,rgba(217,162,79,.07),transparent 65%),radial-gradient(ellipse 60% 50% at 10% 0%,rgba(47,198,194,.05),transparent 70%)}
 .i-vig{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 45%,rgba(0,0,0,.8))}
 .i-word{position:relative;width:min(62vw,300px);height:auto;opacity:0;clip-path:inset(0 50%);animation:iword 1.2s cubic-bezier(.2,.7,.2,1) 2.6s forwards}
 .i-tag{margin:0;color:rgba(228,190,116,.92);font-size:clamp(17px,1.5vw,19px);font-weight:500;letter-spacing:.06em;opacity:0;animation:ifade .9s ease 3.1s forwards}
@@ -760,6 +761,25 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
 .logo .lw{display:flex;flex-direction:column;align-items:center;line-height:1}
 .logo .lw b{font-family:"LEVIK Display",Georgia,serif;font-weight:500;letter-spacing:.08em}
 .logo .lw small{margin-top:.28em;font-family:var(--f-body);font-weight:500;font-size:.34em;letter-spacing:.42em;margin-inline-end:-.42em;color:#D9D1C2}
+/* כפתורי הפתיח: אותו גובה, ובטלפון מדורגים אחד מתחת לשני באותו רוחב */
+.ctas{align-items:stretch}
+.ctas .tg{height:60px;min-height:60px;justify-content:center}
+@media(max-width:600px){.ctas{flex-direction:column;align-items:center;gap:10px}.ctas .tk,.ctas .tg{width:min(100%,300px)}.ctas .tk span{flex:1;justify-content:center}}
+/* דירוג כפתורים אחיד בכל האתר:
+   1 ראשי: זהב מלא 56px · 2 משני: מסגרת 52px · 3 קישור: טקסט זהב עם קו · קטן: 44px בתפריט, בעוגיות ובנגן */
+.btn-primary,.direct .btn{min-height:56px;padding:0 30px;font-size:17px;font-weight:700}
+.btn-ghost,.track .btn-primary,.more-form summary{min-height:52px;padding:0 26px;font-size:16px;font-weight:600}
+.track .btn{margin-top:auto}
+.track .sb-link{margin-top:-4px}
+.nav .btn,.cookie .btn,.pbar .btn{min-height:44px;padding:0 18px;font-size:15px}
+.sb-link,.sb-guide{font-size:15px;font-weight:600;color:#E4BE74;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.sb-link:hover,.sb-guide:hover{color:#F4EDE0}
+.direct a.tel{font-size:16px}
+.gift-no{font-size:14px}
+/* כפתור משני יוקרתי: רקע כהה עמוק, מסגרת דקה בגרדיאנט טורקיז-זהב, אור עדין במעבר עכבר */
+.tg,.btn-ghost,.track .btn-primary,.more,.more-form summary{background:linear-gradient(180deg,#221e19,#141210) padding-box,linear-gradient(115deg,rgba(47,198,194,.85),rgba(228,190,116,.95) 55%,rgba(228,190,116,.55)) border-box!important;border:1px solid transparent!important;color:#F4EDE0!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 26px -8px rgba(0,0,0,.6);transition:box-shadow .25s,transform .25s,background .25s}
+.tg:hover,.btn-ghost:hover,.track .btn-primary:hover,.more:hover,.more-form summary:hover{background:linear-gradient(180deg,#2b2620,#1a1713) padding-box,linear-gradient(115deg,#2FC6C2,#E4BE74 55%,#E4BE74) border-box!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 3px rgba(228,190,116,.10),0 14px 30px -10px rgba(228,190,116,.35);transform:translateY(-1px)}
+@media(prefers-reduced-motion:reduce){.tg:hover,.btn-ghost:hover,.track .btn-primary:hover,.more:hover,.more-form summary:hover{transform:none}}
 /* סטוריבורד */
 .sb-in{display:grid;gap:clamp(28px,4vw,56px);align-items:start}
 @media(min-width:960px){.sb-in{grid-template-columns:1fr 1.05fr}}
@@ -843,7 +863,7 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
 <script>
 (function(){
   var it=document.getElementById('intro'),calm=matchMedia('(prefers-reduced-motion: reduce)').matches,mob=innerWidth<768;
-  var seen=false;try{seen=sessionStorage.getItem('lvIntro')==='1'}catch(e){}
+  var seen=false;try{seen=sessionStorage.getItem('lvIntroSkip')==='1'}catch(e){}
   if(seen){it.remove();window.introOpen=false;return}
   window.introOpen=true;it.hidden=false;document.documentElement.style.overflow='hidden';
   /* כל עוד המסך פתוח: שאר הסרטונים באתר לא מתנגנים */
@@ -854,11 +874,17 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
   fit();addEventListener('resize',fit);
   /* רקע: אבק עדין קבוע, וכוכבים שנדלקים בטורקיז, סגול ולבן */
   var bg=document.getElementById('iBg'),C=['#2FC6C2','#D9A24F','#EECD8A','#ffffff'],dust=[];
-  for(var i=0;i<(mob?60:130);i++)dust.push(Math.round(Math.random()*innerWidth)+'px '+Math.round(Math.random()*innerHeight)+'px rgba(244,237,224,'+(.15+Math.random()*.35).toFixed(2)+')');
+  for(var i=0;i<(mob?170:380);i++)dust.push(Math.round(Math.random()*innerWidth)+'px '+Math.round(Math.random()*innerHeight)+'px rgba(244,237,224,'+(.15+Math.random()*.35).toFixed(2)+')');
   document.getElementById('iDust').style.boxShadow=dust.join(',');
+  /* כוכבים בהירים יותר, בגדלים שונים, ועוד כוכבים שמנצנצים */
+  var big=[];for(var i=0;i<(mob?40:90);i++){var c=Math.random()<.25?'rgba(47,198,194,':Math.random()<.4?'rgba(238,205,138,':'rgba(255,255,255,';big.push(Math.round(Math.random()*innerWidth)+'px '+Math.round(Math.random()*innerHeight)+'px '+(Math.random()*1.5).toFixed(1)+'px '+(Math.random()<.5?.5:1)+'px '+c+(.35+Math.random()*.5).toFixed(2)+')')}
+  var d2=document.createElement('i');d2.className='i-dust';d2.style.boxShadow=big.join(',');bg.insertBefore(d2,bg.querySelector('.i-grain'));
+  for(var t=0;t<(mob?14:30);t++){var sr=document.createElement('span');sr.className='i-star';sr.appendChild(document.createElement('i'));
+    sr.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;--sz:'+(8+Math.random()*16).toFixed(0)+'px;--c:'+C[t%4]+';--du:'+(3+Math.random()*4).toFixed(1)+'s;--de:'+(Math.random()*5).toFixed(1)+'s';
+    bg.insertBefore(sr,bg.querySelector('.i-grain'))}
   /* אבק של אלומת מקרן: נקודות זהב חמות בשלושה גדלים, מרחפות לאט למעלה, רובן בתוך האלומה */
-  var beam=document.createElement('i');beam.className='i-beam';bg.insertBefore(beam,bg.querySelector('.i-grain'));
-  for(var j=0;j<(mob?34:70);j++){var st=document.createElement('span');st.className='i-mote';var z=Math.random(),inb=Math.random()<.7;
+  var glow=document.createElement('i');glow.className='i-glow';bg.insertBefore(glow,bg.querySelector('.i-grain'));
+  for(var j=0;j<(mob?34:70);j++){var st=document.createElement('span');st.className='i-mote';var z=Math.random(),inb=false;
     var x=inb?50+(Math.random()-.5)*(30+Math.random()*50):Math.random()*100;
     st.style.cssText='left:'+x.toFixed(1)+'%;top:'+(10+Math.random()*95).toFixed(1)+'%;--sz:'+(z<.6?2:z<.9?3.5:6).toFixed(1)+'px;--bl:'+(z<.6?0:z<.9?.6:2.2)+'px;--o:'+(.25+Math.random()*.55).toFixed(2)+';--du:'+(14+Math.random()*16).toFixed(1)+'s;--de:-'+(Math.random()*20).toFixed(1)+'s;--dx:'+((Math.random()-.5)*60).toFixed(0)+'px';
     bg.insertBefore(st,bg.querySelector('.i-grain'))}
@@ -1143,15 +1169,15 @@ html:not([lang=he]) .ab-quote::before{content:"\201C"}
         <h3>For businesses & brands</h3>
         <ul><li>AI commercials</li><li>Brand films & company stories</li><li>Reels & social videos</li><li>Logo animation & intros</li></ul>
         <p class="note">Every story is different, and so is every quote. Send us a message.</p>
-        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Not sure? Start with a ₪90 storyboard</a>
         <a class="btn btn-primary" href="https://wa.me/972586255511?text=Hi%2C%20I%27d%20love%20to%20hear%20about%20a%20film%20for%20my%20business" target="_blank" rel="noopener">Plan a business film on WhatsApp</a>
+        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Not sure? Start with a ₪90 storyboard</a>
       </article>
       <article class="track">
         <h3>For events & personal moments</h3>
         <ul><li>Bar/Bat Mitzvah, wedding and tribute films</li><li>Animation & characters</li></ul>
         <p class="note">What you get: a personal script, a screening-ready film, a round of revisions.</p>
-        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Not sure? Start with a ₪90 storyboard</a>
         <a class="btn btn-primary" href="https://wa.me/972586255511?text=Hi%2C%20I%27d%20love%20to%20hear%20about%20a%20film%20for%20an%20event" target="_blank" rel="noopener">Plan an event film on WhatsApp</a>
+        <a class="sb-link" href="#storyboard" data-cta="storyboard-services">Not sure? Start with a ₪90 storyboard</a>
       </article>
     </div>
   </div>
