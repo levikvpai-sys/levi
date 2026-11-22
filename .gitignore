@@ -4,3 +4,8 @@ node_modules/
 .env.local
 .env.production
 *.log
+
+# full films are too big for git, they need video hosting
+website/films/
+.vercel
+.env*
